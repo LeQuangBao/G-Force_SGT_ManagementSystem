@@ -39,11 +39,12 @@ public class IntakeControllerWS {
 	@RequestMapping(value = "/api/intake", method = RequestMethod.POST)
 	public ResponseEntity<Void> addIntake(@RequestBody Intake intake) {
 		try {
+
 			service.addIntake(intake);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/api/intake/{id}", method = RequestMethod.DELETE)

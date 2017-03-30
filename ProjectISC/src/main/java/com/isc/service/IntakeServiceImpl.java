@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isc.dao.IntakeDao;
-import com.isc.model.Intake;
+import com.isc.model.Intake;;
 
 @Service
 public class IntakeServiceImpl implements IntakeService {

@@ -1,7 +1,5 @@
 package com.isc.model;
-// default package
-
-// Generated Mar 30, 2017 10:10:29 AM by Hibernate Tools 4.3.5.Final
+// Generated Mar 30, 2017 4:35:12 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -33,20 +31,23 @@ public class Intake implements java.io.Serializable {
 	private String intakeName;
 	private Date startDate;
 	private Date endDate;
+	private Boolean active;
 
 	public Intake() {
 	}
 
-	public Intake(String intakeId, String intakeName) {
+	public Intake(String intakeId, String intakeName, Boolean active) {
 		this.intakeId = intakeId;
 		this.intakeName = intakeName;
+		this.active = active;
 	}
 
-	public Intake(String intakeId, String intakeName, Date startDate, Date endDate) {
+	public Intake(String intakeId, String intakeName, Date startDate, Date endDate, Boolean active) {
 		this.intakeId = intakeId;
 		this.intakeName = intakeName;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.active = active;
 	}
 
 	@Id
@@ -97,6 +98,15 @@ public class Intake implements java.io.Serializable {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	@Column(name = "active", nullable = false)
+	public Boolean isActive() {
+		return this.active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 }
