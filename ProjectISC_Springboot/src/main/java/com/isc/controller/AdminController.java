@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminController {
-	
-		@RequestMapping(value = "/Admin")
-		public String index() {
-			return "Admin/_layout";
-		}
-		
+	@RequestMapping(value = "/admin/")
+	public String index() {
+		return "admin/index";
+	}
+	@RequestMapping(value = "/admin/intake")
+	public String intake() {
+		return "admin/intake";
+	}
 }
