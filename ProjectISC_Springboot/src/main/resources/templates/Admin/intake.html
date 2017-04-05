@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Manager Imntake</title>
+<title>Manager Intake</title>
 
 <base href="http://localhost:8080/admin/" />
 
@@ -39,9 +39,11 @@
 
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet" />
+<link href="build/css/style.css"
+	rel="stylesheet" />
 </head>
 
-<body class="nav-md">
+<body data-ng-app="myApp" data-ng-controller="intakeCtrl" class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -150,50 +152,63 @@
 									
 									<div class="clearfix"></div>
 								</div>
+								<div class="col-md-6 pull-right">
+									<input id="filter" type="text" placeholder="Filter Intake Name" class="form-control"
+							 data-ng-model="filterTable"></input>
+								</div>
 								<div class="x_content">
 								
-									<table st-safe-src="rowCollection" st-table="displayCollection" st-set-filter="myStrictFilter" class="table table-striped" id="datatable">
-									    <thead>
-									        <tr>
-									            <th st-sort="firstName">Id</th>
-									            <th st-sort="lastName">Name</th>
-									            <th st-sort="strictSearchValue">Start date</th>
-									            <th st-sort="strictSelectValue">End date</th>
-									            <th>#</th>
-									        </tr>
-									        <tr>
-									            <th>
-									                <input st-search="intake_id" placeholder="search for firstname" class="input-sm form-control" type="search"/>
-									            </th>
-									            <th>
-									                <input st-search="intake_name" placeholder="search for lastname" class="input-sm form-control" type="search"/>
-									            </th>
-									            <th>
-									                <input st-search="start_date" placeholder="search for equal match" class="input-sm form-control" type="search"/>
-									            </th>
-									             <th>
-									                <input st-search="end_date" placeholder="search for equal match" class="input-sm form-control" type="search"/>
-									            </th>
-									            <th>
-									                <select st-search="strictSelectValue">
-									                    <option value="">All</option>
-									                    <option ng-repeat="row in rowCollection | unique:'strictSelectValue'" value="{{row.strictSelectValue}}">{{row.strictSelectValue}}</option>
-									                </select>
-									            </th>
-									        </tr>
-									    </thead>
-									    <tbody>
-									        <tr ng-repeat="row in displayCollection">
-									            <td>{{row.firstName | uppercase}}</td>
-									            <td>{{row.lastName}}</td>
-									            <td>{{row.strictSearchValue}}</td>
-									            <td>{{row.strictSelectValue}}</td>
-									            <td>
-									            <button type="button" style="marigin-left:50px" class="btn btn-primary" data-toggle="modal" data-target="#myModal_sua" >Edit</button>
-									            </td>
-									        </tr>
-									    </tbody>
-									</table>
+									
+									<div class="table-responsive">          
+                                  <table class="table table-condensed table-hover">
+                                    <thead>
+                                      <tr>
+										<th style="width:5%">
+											&#35;
+										</th>
+										<th style="width: 5%">
+											ID
+										</th>
+										<th class="sortable" style="width: 20%"
+												data-ng-click="singleSort('intakeName')">
+											Name
+											<span class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('intakeName'), 'caret-up':sortAscend('intakeName')}">
+											</span>
+										</th>
+										<th class="sortable" style="width: 15%"
+												data-ng-click="singleSort('startDate')"
+												data-uib-tooltip="{{ sortTooltip('startDate') }}"
+												data-tooltip-append-to-body="true">
+											Start Date
+											<span class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('startDate'), 'caret-up':sortAscend('startDate')}">
+											</span>
+										</th>
+										<th class="sortable" style="width: 18%"
+												data-ng-click="singleSort('endDate')">
+											End Date
+											<span class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('endDate'), 'caret-up':sortAscend('endDate')}">
+											</span>
+										</th>
+										<th style="width: 12%">
+											Active
+										</th>
+									</tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr data-ng-repeat="x in list | orderBy:[filterSort, sortType]" data-ng-show="filterSort(x.intakeName) ==1" >
+                                        <td>{{$index+1}}</td>
+                                        <td data-ng-bind="x.intakeId"></td>
+                                        <td data-ng-bind="x.intakeName"></td>
+                                        <td data-ng-bind="x.startDate"></td>
+                                        <td data-ng-bind="x.endDate"></td>
+                                        <td data-ng-bind="x.active"></td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
 								</div>
 							</div>
 						</div>
@@ -226,15 +241,15 @@
 	      		<form class="form-inline">
 					  <div class="form-group">
 					    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-					    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+					    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email"></input>
 					  </div>
 					  <div class="form-group">
 					    <label class="sr-only" for="exampleInputPassword3">Password</label>
-					    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+					    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"></input>
 					  </div>
 					  <div class="checkbox">
 					    <label>
-					      <input type="checkbox"> Remember me
+					      <input type="checkbox"></input> Remember me
 					    </label>
 					  </div>
 					  <button type="submit" class="btn btn-default">Sign in</button>
@@ -268,8 +283,11 @@
 
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/myApp.js"></script>
+	<script type="text/javascript" src="scripts/intakeCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
@@ -302,6 +320,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-
+	
 </body>
 </html>
