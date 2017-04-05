@@ -9,8 +9,14 @@ public class AdminController {
 	public String index() {
 		return "admin/index";
 	}
+
 	@RequestMapping(value = "/admin/intake")
 	public String intake() {
 		return "admin/intake";
+	}
+
+	@RequestMapping(value = "/admin/school")
+	public String school() {
+		return "admin/school";
 	}
 }
