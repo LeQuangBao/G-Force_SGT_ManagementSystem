@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.isc.model.Specialization;
 
 @Repository
-public class SpecializationDaoImpl implements SpecializationDao{
+public class SpecializationDaoImpl implements SpecializationDao {
 
 	@Autowired
-	private SessionFactory session;	
-	
+	private SessionFactory session;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Specialization> getAllSpecializations() {

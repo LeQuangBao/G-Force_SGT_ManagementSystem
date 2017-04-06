@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.isc.dao.SpecializationDao;
 import com.isc.model.Specialization;
@@ -14,27 +15,27 @@ public class SpecializationServiceImpl implements SpecializationService{
 	@Autowired
 	private SpecializationDao specializationDao;
 	
-	@Override
+	@Transactional
 	public List<Specialization> getAllSpecializations() {
 		return specializationDao.getAllSpecializations();
 	}
 
-	@Override
+	@Transactional
 	public Specialization getSpecialization(int id) {
 		return specializationDao.getSpecialization(id);
 	}
 
-	@Override
+	@Transactional
 	public void addSpecialization(Specialization specialization) {
 		specializationDao.addSpecialization(specialization);
 	}
 
-	@Override
+	@Transactional
 	public void deleteSpecialization(int id) {
 		specializationDao.deleteSpecialization(id);		
 	}
 
-	@Override
+	@Transactional
 	public void updateSpecialization(Specialization specialization) {
 		specializationDao.updateSpecialization(specialization);
 	}

@@ -19,4 +19,14 @@ public class AdminController {
 	public String school() {
 		return "admin/school";
 	}
+	
+	@RequestMapping(value = "/admin/specialization")
+	public String specialization() {
+		return "admin/specialization";
+	}
+	
+	@RequestMapping(value = "/admin/subject")
+	public String subject() {
+		return "admin/subject";
+	}
 }
