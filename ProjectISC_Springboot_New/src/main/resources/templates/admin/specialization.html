@@ -39,11 +39,11 @@
 
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet" />
-<link href="build/css/style.css"
-	rel="stylesheet" />
+<link href="build/css/style.css" rel="stylesheet" />
 </head>
 
-<body data-ng-app="myApp" data-ng-controller="specializationCtrl" class="nav-md">
+<body data-ng-app="myApp" data-ng-controller="specializationCtrl"
+	class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -82,16 +82,16 @@
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="index2.html">Dashboard2</a></li>
 										<li><a href="index3.html">Dashboard3</a></li>
-									</ul></li>			
+									</ul></li>
 							</ul>
 						</div>
-					
+
 
 					</div>
 					<!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
-					
+
 					<!-- /menu footer buttons -->
 				</div>
 			</div>
@@ -112,13 +112,13 @@
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
-									
-								
+
+
 									<li><a href="login.html"><i
 											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul></li>
 
-						
+
 						</ul>
 					</nav>
 				</div>
@@ -130,14 +130,15 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>
-								Manager specialization
-							</h3>
+							<h3>Manager specialization</h3>
 						</div>
 
 						<div class="title_right">
-							<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<button style="margin-left:180px" data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg active">Add</button>
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<button style="margin-left: 180px" data-toggle="modal"
+									data-target="#myModal_them" type="button"
+									class="btn btn-primary btn-lg">Add</button>
 							</div>
 						</div>
 					</div>
@@ -148,67 +149,51 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-								
-									
+
+
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter specialization Name" class="form-control"
-							 data-ng-model="filterTable"></input>
+									<input id="filter" type="text"
+										placeholder="Filter specialization Name" class="form-control"
+										data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
-								
-									
-									<div class="table-responsive">          
-                                  <table class="table table-condensed table-hover">
-                                    <thead>
-                                      <tr>
-										<th style="width:5%">
-											&#35;
-										</th>
-										<th style="width: 5%">
-											ID
-										</th>
-										<th class="sortable" style="width: 20%"
-												data-ng-click="singleSort('specializationName')">
-											Name
-											<span class="caret-blank"
+
+
+									<div class="table-responsive">
+										<table class="table table-condensed table-hover">
+											<thead>
+												<tr>
+													<th style="width: 5%">&#35;</th>
+													<th style="width: 5%">ID</th>
+													<th class="sortable" style="width: 20%"
+														data-ng-click="singleSort('specializationName')">
+														Name <span class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('specializationName'), 'caret-up':sortAscend('specializationName')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 15%"
-												data-ng-click="singleSort('startDate')"
-												data-uib-tooltip="{{ sortTooltip('startDate') }}"
-												data-tooltip-append-to-body="true">
-											Start Date
-											<span class="caret-blank"
-														data-ng-class="{'caret-down':sortDescend('startDate'), 'caret-up':sortAscend('startDate')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 18%"
-												data-ng-click="singleSort('endDate')">
-											End Date
-											<span class="caret-blank"
-														data-ng-class="{'caret-down':sortDescend('endDate'), 'caret-up':sortAscend('endDate')}">
-											</span>
-										</th>
-										<th style="width: 12%">
-											Active
-										</th>
-									</tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr data-ng-repeat="x in list | orderBy:[filterSort, sortType]" data-ng-show="filterSort(x.specializationName) ==1" >
-                                        <td>{{$index+1}}</td>
-                                        <td data-ng-bind="x.specializationId"></td>
-                                        <td data-ng-bind="x.specializationName"></td>
-                                        <td data-ng-bind="x.startDate"></td>
-                                        <td data-ng-bind="x.endDate"></td>
-                                        <td data-ng-bind="x.active"></td>
-                                    </tr>
-                                    </tbody>
-                                  </table>
-                            </div>
+
+													</span>
+													<th style="width: 5%">Active</th>
+													</th>
+
+													<th style="width: 12%">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr data-ng-repeat="x in list">
+													<!--                                        <tr data-ng-repeat="x in list | orderBy:[filterSort, sortType]" data-ng-show="filterSort(x.specializationName) == 1" > -->
+													<td>{{$index+1}}</td>
+													<td data-ng-bind="x.specializationId"></td>
+													<td data-ng-bind="x.specializationName"></td>
+													<td data-ng-bind="x.active"></td>
+													<td><button class="btn btn-primary btn-xs"
+															ng-click="editSpecialization()"><span class="glyphicon glyphicon-edit"></span></button>
+														<button class="btn btn-danger btn-xs"
+															ng-click="deleteSpecialization()"><span class="glyphicon glyphicon-remove"></span></button></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -230,56 +215,68 @@
 		</div>
 	</div>
 	<!-- Modal thêm -->
-	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Add specialization</h4>
-	      </div>
-	      <div class="modal-body">
-	      		<form class="form-inline">
-					  <div class="form-group">
-					    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-					    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email"></input>
-					  </div>
-					  <div class="form-group">
-					    <label class="sr-only" for="exampleInputPassword3">Password</label>
-					    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"></input>
-					  </div>
-					  <div class="checkbox">
-					    <label>
-					      <input type="checkbox"></input> Remember me
-					    </label>
-					  </div>
-					  <button type="submit" class="btn btn-default">Sign in</button>
-			 </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	     
-	      </div>
-	    </div>
-	  </div>
-</div>
-<!-- Modal sửa -->
-<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div>
-	      <div class="modal-body">
-	        ...
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-</div>
+	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add specialization</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-sm-2">Id:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control"
+									placeholder="Enter intake id" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Name:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control"
+									placeholder="Enter intake name" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2"></label>
+							<div class="col-sm-10">
+								<button class="btn btn-default">Add</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal sửa -->
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
@@ -287,7 +284,7 @@
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/intakeCtrl.js"></script>
+	<script type="text/javascript" src="scripts/specializationCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
@@ -320,6 +317,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-	
+
 </body>
 </html>
