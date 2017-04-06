@@ -195,16 +195,23 @@
 										<th style="width: 12%">
 											Active
 										</th>
+										<th>
+										
+										</th>
 									</tr>
                                     </thead>
                                     <tbody>
-                                      <tr data-ng-repeat="x in list | orderBy:[filterSort, sortType]" data-ng-show="filterSort(x.intakeName) ==1" >
+                                      <tr data-ng-repeat="x in list_intake">
                                         <td>{{$index+1}}</td>
                                         <td data-ng-bind="x.intakeId"></td>
                                         <td data-ng-bind="x.intakeName"></td>
                                         <td data-ng-bind="x.startDate"></td>
                                         <td data-ng-bind="x.endDate"></td>
                                         <td data-ng-bind="x.active"></td>
+                                        <td>
+                                        <button type="button" ng-click="sua(x)" class="btn btn-primary" data-toggle="modal" data-target="#myModal_sua">Edit</button>
+										<button type="button" ng-click="xoa()" class="btn btn-danger" data-toggle="modal" data-target="#myModal_xoa">Delete</button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                   </table>
@@ -238,21 +245,29 @@
 	        <h4 class="modal-title" id="myModalLabel">Add intake</h4>
 	      </div>
 	      <div class="modal-body">
-	      		<form class="form-inline">
+	      		<form>
 					  <div class="form-group">
-					    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-					    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email"></input>
+					    <label>Intake_id</label>
+					    <input type="text" class="form-control" id="intakeid" placeholder="intakeid"></input>
 					  </div>
 					  <div class="form-group">
-					    <label class="sr-only" for="exampleInputPassword3">Password</label>
-					    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"></input>
+					    <label >Intake_name</label>
+					    <input type="text" class="form-control" id="intakename" placeholder="intakename"></input>
+					  </div>
+					  <div class="form-group">
+					    <label >Start_date</label>
+					    <input type="date" class="form-control" id="startdate"></input>
+					  </div>
+					  <div class="form-group">
+					    <label >End_date</label>
+					    <input type="date" class="form-control" id="enddate"></input>
 					  </div>
 					  <div class="checkbox">
 					    <label>
-					      <input type="checkbox"></input> Remember me
+					      <input type="checkbox" id="actived"></input> Active
 					    </label>
 					  </div>
-					  <button type="submit" class="btn btn-default">Sign in</button>
+					  <button type="button" ng-click="them()" class="btn btn-default">Submit</button>
 			 </form>
 	      </div>
 	      <div class="modal-footer">
@@ -262,8 +277,8 @@
 	    </div>
 	  </div>
 </div>
-<!-- Modal sửa -->
-<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- Modal sửa -->
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -271,7 +286,30 @@
 	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
 	      </div>
 	      <div class="modal-body">
-	        ...
+	        	<form>
+					  <div class="form-group">
+					    <label>Intake_id</label>
+					    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="intake_id"></input>
+					  </div>
+					  <div class="form-group">
+					    <label >Intake_name</label>
+					    <input type="text" class="form-control" id="exampleInputPassword3" placeholder="intake_name"></input>
+					  </div>
+					  <div class="form-group">
+					    <label >Start_date</label>
+					    <input type="date" class="form-control" id="exampleInputPassword3"></input>
+					  </div>
+					  <div class="form-group">
+					    <label >End_date</label>
+					    <input type="date" class="form-control" id="exampleInputPassword3"></input>
+					  </div>
+					  <div class="checkbox">
+					    <label>
+					      <input type="checkbox"></input> Active
+					    </label>
+					  </div>
+					  <button type="submit" class="btn btn-default">Submit</button>
+			 </form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -280,10 +318,12 @@
 	    </div>
 	  </div>
 </div>
-
+	
+	<!-- Angularjs -->
+   <script src="js/angular.min.js"></script>
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="js/angular.min.js"></script>
+	
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
@@ -320,6 +360,89 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
+	<script>
+	var app = angular.module('myApp', []);
+	app.controller('intakeCtrl', function($scope, $http) {
+	    $http.get("/api/intake")
+	    .then(function(response) {	
+	       $scope.list_intake = response.data;
+	    });
+	    
+	    //add intake
+        $scope.them = function () {
+            // mact = document.getElementById("MaCT").value;
+            //console.log(mact);
+            var intake_id = document.getElementById("intakeid").value;        
+            var intake_name = document.getElementById("intakename").value;
+            var start_date=document.getElementById("startdate").value;
+            var end_date = document.getElementById("enddate").value;
+            var active1=document.getElementById("actived");
+            var active="";
+            if(active1.checked==true)
+            	{
+            		active=1;
+            	}
+            else
+            	active=0;
+            	
+            	
+            //var matkhau = $scope.mota;
+          
+            $http({
+                method: "post",
+               url: "/api/intake",
+               data: {
+                   intakeId: intake_id,
+                   intakeName: intake_name,
+                   startDate:start_date,
+                  	endDate:end_date,
+                  	active:active
+                  	
+               },
+                dataType: "json",
+            })
+       .then(function (result) {
+          if (result.status == "201") {
+               //alert(location.href = window.location.host + "/Admin/Loai?message=Thêm thành công");
+               alert("Thêm thành công");
+              location.href = window.location.origin + "/admin/intake";
+              
+          } else {
+               alert("Xảy ra lỗi");
+
+           }
+    
+            });
+	    }   
+        //edit intake
+        $scope.capnhat = function () {
+
+            $http({
+                method: "post",
+                url: "/Loai/capnhat",
+                data: JSON.stringify($scope.list_temp_inf_edit),
+                dataType: "json",
+            })
+               .then(function (result) {
+                   if (result.data == "ok") {
+                       //alert("Cập nhật thành công");
+                       //location.reload();
+                       location.href = window.location.origin + "/Admin/Loai?message=Sửa thành công";
+                   } else {
+                       alert("Xảy ra lỗi");
+
+                   }
+               });
+        }
+        //array did filter
+        $scope.list_temp_inf_edit = [];
+        $scope.sua = function (data) {
+            $scope.list_temp_inf_edit = data;
+        };
+        // delete intake
+
+	});
+	</script>
 	
 </body>
 </html>
