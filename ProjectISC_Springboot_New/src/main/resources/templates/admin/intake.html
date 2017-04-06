@@ -210,7 +210,7 @@
                                         <td data-ng-bind="x.active"></td>
                                         <td>
                                         <button type="button" ng-click="sua(x)" class="btn btn-primary" data-toggle="modal" data-target="#myModal_sua">Edit</button>
-										<button type="button" ng-click="xoa()" class="btn btn-danger" data-toggle="modal" data-target="#myModal_xoa">Delete</button>
+										<button type="button" ng-click="delete1(x)" class="btn btn-danger" data-toggle="modal" data-target="#myModal_xoa">Delete</button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -283,42 +283,64 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	        <h4 class="modal-title" id="myModalLabel">Update intake</h4>
 	      </div>
 	      <div class="modal-body">
 	        	<form>
 					  <div class="form-group">
 					    <label>Intake_id</label>
-					    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="intake_id"></input>
+					    <input type="text" class="form-control" ng-model="list_temp_inf_edit.intakeId" id="exampleInputEmail3" ></input>
 					  </div>
 					  <div class="form-group">
 					    <label >Intake_name</label>
-					    <input type="text" class="form-control" id="exampleInputPassword3" placeholder="intake_name"></input>
+					    <input type="text" class="form-control" ng-model="list_temp_inf_edit.intakeName" id="exampleInputPassword3" ></input>
 					  </div>
 					  <div class="form-group">
 					    <label >Start_date</label>
-					    <input type="date" class="form-control" id="exampleInputPassword3"></input>
+					    <input type="date" class="form-control" id="startdate" ng-model="list_temp_inf_edit.startDate"  value="{{list_temp_inf_edit.startDate  | date: 'yyyy-MM-dd' }}" ></input>
 					  </div>
 					  <div class="form-group">
 					    <label >End_date</label>
-					    <input type="date" class="form-control" id="exampleInputPassword3"></input>
+					    <input type="date" class="form-control" id="enddate" ng-model="list_temp_inf_edit.endDate" value="{{list_temp_inf_edit.endDate  | date: 'yyyy-MM-dd' }}"  ></input>
 					  </div>
 					  <div class="checkbox">
 					    <label>
-					      <input type="checkbox"></input> Active
+					      <input type="checkbox" ng-model="list_temp_inf_edit.active"></input> Active
 					    </label>
 					  </div>
-					  <button type="submit" class="btn btn-default">Submit</button>
+					  <button type="button" ng-click="capnhat()" class="btn btn-primary">Submit</button>
 			 </form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
+	       
 	      </div>
 	    </div>
 	  </div>
 </div>
-	
+	<!-- Modal xóa -->
+	 <div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+
+                <div class="modal-body">
+                <input type="hidden" ng-model="list_temp_inf_delete.id"></input>
+                    <p>Do you want to delete????</p>
+                    <p class="debug-url"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok" ng-click="xoa()">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
 	<!-- Angularjs -->
    <script src="js/angular.min.js"></script>
 	<!-- jQuery -->
@@ -362,7 +384,7 @@
 	<script src="build/js/custom.min.js"></script>
 	<script>
 	var app = angular.module('myApp', []);
-	app.controller('intakeCtrl', function($scope, $http) {
+	app.controller('intakeCtrl', function($scope, $http,dateFilter) {
 	    $http.get("/api/intake")
 	    .then(function(response) {	
 	       $scope.list_intake = response.data;
@@ -413,33 +435,64 @@
            }
     
             });
-	    }   
+	    };  
         //edit intake
         $scope.capnhat = function () {
-
+        	//$scope.list_temp_inf_edit.endDate=document.getElementById("enddate").value;
+        	//$scope.list_temp_inf_edit.startDate=document.getElementById("startdate").value;
+         	var start_date = dateFilter($scope.list_temp_inf_edit.startDate, 'yyyy-MM-dd');
+        	var end_date=dateFilter($scope.list_temp_inf_edit.endDate, 'yyyy-MM-dd');
+        	$scope.list_temp_inf_edit.startDate=start_date;
+        	$scope.list_temp_inf_edit.endDate=end_date;
+        	console.log($scope.list_temp_inf_edit.startDate);
+        	console.log($scope.list_temp_inf_edit.endDate);
             $http({
-                method: "post",
-                url: "/Loai/capnhat",
-                data: JSON.stringify($scope.list_temp_inf_edit),
-                dataType: "json",
+               method: "put",
+              url: "/api/intake",
+               data: JSON.stringify($scope.list_temp_inf_edit),
+               dataType: "json",
             })
                .then(function (result) {
-                   if (result.data == "ok") {
-                       //alert("Cập nhật thành công");
+                  if (result.status != "201") {
+                       alert("Cập nhật thành công");
                        //location.reload();
-                       location.href = window.location.origin + "/Admin/Loai?message=Sửa thành công";
-                   } else {
+                       location.href = window.location.origin + "/admin/intake";
+                  } else {
                        alert("Xảy ra lỗi");
 
                    }
-               });
-        }
+             });
+       }
         //array did filter
         $scope.list_temp_inf_edit = [];
         $scope.sua = function (data) {
             $scope.list_temp_inf_edit = data;
         };
         // delete intake
+        $scope.xoa=function()
+        {
+            $http({
+               method: "delete",
+              url: "/api/intake/" + $scope.list_temp_inf_delete.id,
+              //data: JSON.stringify($scope.list_temp_inf_delete.id),
+              dataType: "json",
+            })
+               .then(function (result) {
+                  if (result.status != "201") {
+                       alert("Xóa thành công");
+                       //location.reload();
+                       location.href = window.location.origin + "/admin/intake";
+                  } else {
+                       alert("Xảy ra lỗi");
+
+                   }
+             });
+        }
+        // get data for delete
+        $scope.list_temp_inf_delete = [];
+        $scope.delete1 = function (data) {
+            $scope.list_temp_inf_delete = data;
+        };
 
 	});
 	</script>
