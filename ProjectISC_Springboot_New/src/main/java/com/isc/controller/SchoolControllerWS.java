@@ -26,7 +26,7 @@ public class SchoolControllerWS {
 	}
 
 	@RequestMapping(value = "/api/school/{id}", method = RequestMethod.GET)
-	public ResponseEntity<School> getIntake(@PathVariable int id) {
+	public ResponseEntity<School> getSchool(@PathVariable int id) {
 		School school;
 		try {
 			school = service.getSchool(id);
@@ -37,7 +37,7 @@ public class SchoolControllerWS {
 	}
 
 	@RequestMapping(value = "/api/school", method = RequestMethod.POST)
-	public ResponseEntity<Void> addIntake(@RequestBody School school) {
+	public ResponseEntity<Void> addSchool(@RequestBody School school) {
 		try {
 			service.addSchool(school);
 		} catch (Exception ex) {
@@ -47,7 +47,7 @@ public class SchoolControllerWS {
 	}
 
 	@RequestMapping(value = "/api/school/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteIntake(@PathVariable int id) {
+	public ResponseEntity<Void> deleteSchool(@PathVariable int id) {
 		try {
 			service.deleteSchool(id);
 		} catch (Exception ex) {
@@ -57,7 +57,7 @@ public class SchoolControllerWS {
 	}
 
 	@RequestMapping(value = "/api/school", method = RequestMethod.PUT)
-	public ResponseEntity<Void> updateIntake(@RequestBody School school) {
+	public ResponseEntity<Void> updateSchool(@RequestBody School school) {
 		try {
 			service.updateSchool(school);
 		} catch (Exception ex) {
