@@ -153,62 +153,59 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter Intake Name"
-										class="form-control" data-ng-model="filterTable"></input>
+
+									<input id="filter" type="text" placeholder="Filter Intake Name" class="form-control" ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
+								
+									
+									<div class="table-responsive">          
+                                  <table class="table table-condensed table-hover">
+                                    <thead>
+                                      <tr>
+										<th style="width:5%" >
+											&#35;
+										</th>
+										<th style="width: 5%" ng-click="orderByMe('intakeId')">
+											ID
+										</th>
+										<th class="sortable" style="width: 20%" ng-click="orderByMe('intakeName')">
+											Name
+											
+										</th>
+										<th class="sortable" style="width: 15%" ng-click="orderByMe('startDate')">
+											Start Date
+											
+										</th>
+										<th class="sortable" style="width: 18%" ng-click="orderByMe('endDate')">
+											End Date
+											
+										</th>
+										<th style="width: 12%" ng-click="orderByMe('active')">
+											Active
+										</th>
+										<th>
+										
+										</th>
+									</tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr data-ng-repeat="x in list_intake| filter:filterTable|orderBy:myOrderBy">
+                                        <td>{{$index+1}}</td>
+                                        <td data-ng-bind="x.intakeId"></td>
+                                        <td data-ng-bind="x.intakeName"></td>
+                                        <td data-ng-bind="x.startDate"></td>
+                                        <td data-ng-bind="x.endDate"></td>
+                                        <td data-ng-bind="x.active"></td>
+                                        <td>
+                                        <button type="button" ng-click="sua(x)" class="btn btn-primary" data-toggle="modal" data-target="#myModal_sua">Edit</button>
+										<button type="button" ng-click="delete1(x)" class="btn btn-danger" data-toggle="modal" data-target="#myModal_xoa">Delete</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
 
-
-									<div class="table-responsive">
-										<table class="table table-condensed table-hover">
-											<thead>
-												<tr>
-													<th style="width: 5%">&#35;</th>
-													<th style="width: 5%">ID</th>
-													<th class="sortable" style="width: 20%"
-														data-ng-click="singleSort('intakeName')">Name <span
-														class="caret-blank"
-														data-ng-class="{'caret-down':sortDescend('intakeName'), 'caret-up':sortAscend('intakeName')}">
-													</span>
-													</th>
-													<th class="sortable" style="width: 15%"
-														data-ng-click="singleSort('startDate')"
-														data-uib-tooltip="{{ sortTooltip('startDate') }}"
-														data-tooltip-append-to-body="true">Start Date <span
-														class="caret-blank"
-														data-ng-class="{'caret-down':sortDescend('startDate'), 'caret-up':sortAscend('startDate')}">
-													</span>
-													</th>
-													<th class="sortable" style="width: 18%"
-														data-ng-click="singleSort('endDate')">End Date <span
-														class="caret-blank"
-														data-ng-class="{'caret-down':sortDescend('endDate'), 'caret-up':sortAscend('endDate')}">
-													</span>
-													</th>
-													<th style="width: 12%">Active</th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr data-ng-repeat="x in list_intake">
-													<td>{{$index+1}}</td>
-													<td data-ng-bind="x.intakeId"></td>
-													<td data-ng-bind="x.intakeName"></td>
-													<td data-ng-bind="x.startDate"></td>
-													<td data-ng-bind="x.endDate"></td>
-													<td data-ng-bind="x.active"></td>
-													<td>
-														<button type="button" ng-click="sua(x)"
-															class="btn btn-primary" data-toggle="modal"
-															data-target="#myModal_sua">Edit</button>
-														<button type="button" ng-click="delete1(x)"
-															class="btn btn-danger" data-toggle="modal"
-															data-target="#myModal_xoa">Delete</button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -390,118 +387,119 @@
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
 	<script>
-		var app = angular.module('myApp', []);
-		app.controller('intakeCtrl', function($scope, $http, dateFilter) {
-			$http.get("/api/intake").then(function(response) {
-				$scope.list_intake = response.data;
-			});
+	var app = angular.module('myApp', []);
+	app.controller('intakeCtrl', function($scope, $http,dateFilter) {
+	    $http.get("/api/intake")
+	    .then(function(response) {	
+	       $scope.list_intake = response.data;
+	    });
+	    
+	    //add intake
+        $scope.them = function () {
+          
+             var intake_id = document.getElementById("intakeid").value;
+             console.log(intake_id);
+             var intake_name = document.getElementById("intakename").value;
+             var start_date=document.getElementById("startdate").value;
+             var end_date=document.getElementById("enddate").value;
+             var active1=document.getElementById("actived");
+             var active=0;
+             if(active1.checked==true)
+            	 {
+            	 	active=1;
+            	 }
+             else
+            	 {
+            	 active=0;
+            	 }
+            	 
+          
+             $http({
+                 method: "post",
+                url: "/api/intake",
+                data: {
+                    intakeId: intake_id,
+                     intakeName: intake_name,
+                    startDate:start_date,
+                    endDate:end_date,
+                    active:active
+               },
+                dataType: "json",
+            })
+        	.then(function (result) {
+            if (result.status == "201") {
+            	alert("Thêm thành công");
+               
+               location.href = window.location.origin + "/admin/intake";
+            } else {
+               alert("Xảy ra lỗi");
 
-			//add intake
-			$scope.them = function() {
-				// mact = document.getElementById("MaCT").value;
-				//console.log(mact);
-				var intake_id = document.getElementById("intakeid").value;
-				var intake_name = document.getElementById("intakename").value;
-				var start_date = document.getElementById("startdate").value;
-				var end_date = document.getElementById("enddate").value;
-				var active1 = document.getElementById("actived");
-				var active = "";
-				if (active1.checked == true) {
-					active = 1;
-				} else
-					active = 0;
+            }
+        });
+	    }
+        //edit intake
+        $scope.capnhat = function () {
+        	//$scope.list_temp_inf_edit.endDate=document.getElementById("enddate").value;
+        	//$scope.list_temp_inf_edit.startDate=document.getElementById("startdate").value;
+         	var start_date = dateFilter($scope.list_temp_inf_edit.startDate, 'yyyy-MM-dd');
+        	var end_date=dateFilter($scope.list_temp_inf_edit.endDate, 'yyyy-MM-dd');
+        	$scope.list_temp_inf_edit.startDate=start_date;
+        	$scope.list_temp_inf_edit.endDate=end_date;
+        	console.log($scope.list_temp_inf_edit.startDate);
+        	console.log($scope.list_temp_inf_edit.endDate);
+            $http({
+               method: "put",
+              url: "/api/intake",
+               data: JSON.stringify($scope.list_temp_inf_edit),
+               dataType: "json",
+            })
+               .then(function (result) {
+                  if (result.status != "201") {
+                       alert("Cập nhật thành công");
+                       //location.reload();
+                       location.href = window.location.origin + "/admin/intake";
+                  } else {
+                       alert("Xảy ra lỗi");
 
-				//var matkhau = $scope.mota;
+                   }
+             });
+       }
+        //array did filter
+        $scope.list_temp_inf_edit = [];
+        $scope.sua = function (data) {
+            $scope.list_temp_inf_edit = data;
+        };
+        // delete intake
+        $scope.xoa=function()
+        {
+            $http({
+               method: "delete",
+              url: "/api/intake/" + $scope.list_temp_inf_delete.id,s
+              //data: JSON.stringify($scope.list_temp_inf_delete.id),
+              dataType: "json",
+            })
+               .then(function (result) {
+                  if (result.status != "201") {
+                       alert("Xóa thành công");
+                       //location.reload();
+                       location.href = window.location.origin + "/admin/intake";
+                  } else {
+                       alert("Xảy ra lỗi");
 
-				$http({
-					method : "post",
-					url : "/api/intake",
-					data : {
-						intakeId : intake_id,
-						intakeName : intake_name,
-						startDate : start_date,
-						endDate : end_date,
-						active : active
+                   }
+             });
+        }
+        $scope.orderByMe = function(x) {
+            $scope.myOrderBy = x;
+          }
+        // get data for delete
+        $scope.list_temp_inf_delete = [];
+        $scope.delete1 = function (data) {
+            $scope.list_temp_inf_delete = data;
+        };
 
-					},
-					dataType : "json",
-				}).then(
-						function(result) {
-							if (result.status == "201") {
-								//alert(location.href = window.location.host + "/Admin/Loai?message=Thêm thành công");
-								alert("Thêm thành công");
-								location.href = window.location.origin
-										+ "/admin/intake";
+	});
 
-							} else {
-								alert("Xảy ra lỗi");
-
-							}
-
-						});
-			};
-			//edit intake
-			$scope.capnhat = function() {
-				//$scope.list_temp_inf_edit.endDate=document.getElementById("enddate").value;
-				//$scope.list_temp_inf_edit.startDate=document.getElementById("startdate").value;
-				var start_date = dateFilter(
-						$scope.list_temp_inf_edit.startDate, 'yyyy-MM-dd');
-				var end_date = dateFilter($scope.list_temp_inf_edit.endDate,
-						'yyyy-MM-dd');
-				$scope.list_temp_inf_edit.startDate = start_date;
-				$scope.list_temp_inf_edit.endDate = end_date;
-				console.log($scope.list_temp_inf_edit.startDate);
-				console.log($scope.list_temp_inf_edit.endDate);
-				$http({
-					method : "put",
-					url : "/api/intake",
-					data : JSON.stringify($scope.list_temp_inf_edit),
-					dataType : "json",
-				}).then(
-						function(result) {
-							if (result.status != "201") {
-								alert("Success");
-								//location.reload();
-								location.href = window.location.origin
-										+ "/admin/intake";
-							} else {
-								alert("Xảy ra lỗi");
-
-							}
-						});
-			}
-			//array did filter
-			$scope.list_temp_inf_edit = [];
-			$scope.sua = function(data) {
-				$scope.list_temp_inf_edit = data;
-			};
-			// delete intake
-			$scope.xoa = function() {
-				$http({
-					method : "delete",
-					url : "/api/intake/" + $scope.list_temp_inf_delete.id,
-					//data: JSON.stringify($scope.list_temp_inf_delete.id),
-					dataType : "json",
-				}).then(
-						function(result) {
-							if (result.status != "201") {
-								alert("Xóa thành công");
-								//location.reload();
-								location.href = window.location.origin
-										+ "/admin/intake";
-							} else {
-								alert("Xảy ra lỗi");
-
-							}
-						});
-			}
-			// get data for delete
-			$scope.list_temp_inf_delete = [];
-			$scope.delete1 = function(data) {
-				$scope.list_temp_inf_delete = data;
-			};
-
-		});
 	</script>
 
 </body>
