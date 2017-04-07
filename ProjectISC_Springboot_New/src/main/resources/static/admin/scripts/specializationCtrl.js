@@ -26,6 +26,7 @@ app.controller('specializationCtrl', function($scope, $http) {
 			},
 			dataType: "json",
 		}).then(function(response) {
+			alert(response.status);
 			if (response.status == "201") {
 				
 			}
