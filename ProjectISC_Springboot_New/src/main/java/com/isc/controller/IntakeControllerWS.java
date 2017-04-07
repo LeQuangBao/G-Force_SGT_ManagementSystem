@@ -58,11 +58,11 @@ public class IntakeControllerWS {
 
 	@RequestMapping(value = "/api/intake", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateIntake(@RequestBody Intake intake) {
-		try {
+		//try {
 			service.updateIntake(intake);
-		} catch (Exception ex) {
-			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}
+		//} catch (Exception ex) {
+			// new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		//}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 

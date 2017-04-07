@@ -30,7 +30,6 @@ public class SchoolDaoImpl implements SchoolDao {
 	@Override
 	public void addSchool(School school) {
 		session.getCurrentSession().save(school);
-
 	}
 
 	@Override
