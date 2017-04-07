@@ -187,11 +187,12 @@
 													<td data-ng-bind="x.specializationName"></td>
 													<td data-ng-bind="x.active"></td>
 													<td><button class="btn btn-primary btn-sm"
-															ng-click="editSpecialization()">
+															ng-click="callEditSpecialization(x)" data-toggle="modal"
+															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
 														<button class="btn btn-danger btn-sm"
-															ng-click="deleteSpecialization()">
+															ng-click="deleteSpecialization(x)">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button></td>
 												</tr>
@@ -278,12 +279,43 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					<h4 class="modal-title" id="myModalLabel">Edit Specialization</h4>
 				</div>
-				<div class="modal-body">...</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+<!-- 					<input type="hidden" id="specializationHiddenId_edit" value="{{info.id}}" -->
+<!-- 									class="form-control" placeholder="Enter intake id" /> -->
+						<div class="form-group">
+							<label class="control-label col-sm-2">Id:</label>
+							<div class="col-sm-10">
+								<input type="text" id="specializationId_edit" ng-model="info.specializationId"
+									class="form-control" placeholder="Enter intake id" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Name:</label>
+							<div class="col-sm-10">
+								<input type="text" id="specializationName_edit" ng-model="info.specializationName"
+									class="form-control" placeholder="Enter intake name" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2"></label>
+							<div class="col-sm-10">
+								<input type="checkbox" id="active_edit" checked="checked" ng-model="info.active"></input>
+								Active
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2"></label>
+							<div class="col-sm-10">
+								<button class="btn btn-default" ng-click="editSpecialization()" data-dismiss="modal">Edit</button>
+							</div>
+						</div>
+					</form>
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>
