@@ -39,6 +39,7 @@
 
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet" />
+<link href="build/css/sweetalert.css" rel="stylesheet" />
 </head>
 
 <body class="nav-md" ng-app="myApp" ng-controller="schoolCtrl">
@@ -432,7 +433,7 @@
 				</form>
 	      </div>
 	      <div class="modal-footer">
-	      <button id="btnSave" name="btnSave" class="btn btn-success" ng-click="save()">Save</button>
+	      <button id="btnSave" name="btnSave" class="btn btn-success" ng-click="save()" onclick="addAlert()">Save</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	     
 	      </div>
@@ -506,7 +507,7 @@
 				</form>
 	      </div>
 	      <div class="modal-footer">
-	      <button type="button" class="btn btn-primary" ng-click="update()">Save</button>
+	      <button type="button" class="btn btn-primary" ng-click="update()" onclick="editAlert()">Save</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        
 	      </div>
@@ -530,7 +531,7 @@
                 </div>
 
                 <div class="modal-footer">
-                	<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+                	<a class="btn btn-danger btn-ok" ng-click="delete()" onclick="JSalert()">Yes</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                     
                 </div>
@@ -539,6 +540,10 @@
     </div>
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
+	<!-- Sweet alert -->
+	
+	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
+	<!-- jQuery -->
 	
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
@@ -618,7 +623,7 @@
        .then(function (result) {
           if (result.status == "201") {
 
-               alert("Add successfully");
+        	  
               location.href = window.location.origin + "/admin/school";
               
           } else {
@@ -640,7 +645,7 @@
             })
                .then(function (result) {
                   if (result.status != "201") {
-                       alert("update successfully");
+                      
                        
                        location.href = window.location.origin + "/admin/school";
                   } else {
@@ -664,7 +669,7 @@
             })
                .then(function (result) {
                   if (result.status != "201") {
-                       alert("Delete successfully");
+                      
                        //location.reload();
                        location.href = window.location.origin + "/admin/school";
                   } else {
@@ -681,6 +686,18 @@
 
 	});
 	</script>
+	<script type="text/javascript">
+        	  function JSalert(){
+        	  	swal("Remove Successfully","","success");
+        	  }
+        	  function editAlert(){
+          	  	swal("Update Successfully","","success");
+          	  }
+        	  function addAlert(){
+            	  	swal("Add Successfully","","success");
+            	  }
+        	  
+        	  </script>
 
 </body>
 </html>
