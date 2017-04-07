@@ -634,7 +634,7 @@
             $http({
                method: "put",
               url: "/api/school",
-               data: JSON.stringify($scope.school),
+               data: JSON.stringify($scope.school_edit),
                contentType: "application/json; charset=utf-8",
                dataType: "json"
             })
@@ -659,7 +659,7 @@
         {
             $http({
                method: "DELETE",
-              url: "/api/school/" + $scope.school.id,
+              url: "/api/school/" + $scope.school_delete.id,
               dataType: "json",
             })
                .then(function (result) {
