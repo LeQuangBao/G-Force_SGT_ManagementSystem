@@ -293,7 +293,7 @@
 								<div class="x_content">
 								
 									
-									<div class="table-responsive">          
+									<div class="table-responsive" ng-model="filterController">          
                                   <table class="table table-condensed table-hover">
                                     <thead>
                                       <tr>
@@ -330,7 +330,7 @@
 									</tr>
                                     </thead>
                                     <tbody>
-                                      <tr data-ng-repeat="x in list " >
+                                      <tr data-ng-repeat="x in list | orderBy:'schoolName':false | filter:filterTable " >
                                         <td>{{$index+1}}</td>
                                         <td data-ng-bind="x.schoolId"></td>
                                         <td data-ng-bind="x.schoolName"></td>
