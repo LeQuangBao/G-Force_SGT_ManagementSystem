@@ -39,8 +39,7 @@
 
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet" />
-<link href="build/css/style.css"
-	rel="stylesheet" />
+<link href="build/css/style.css" rel="stylesheet" />
 </head>
 
 <body data-ng-app="myApp" data-ng-controller="intakeCtrl" class="nav-md">
@@ -82,16 +81,16 @@
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="index2.html">Dashboard2</a></li>
 										<li><a href="/admin/specialization">Specialization</a></li>
-									</ul></li>			
+									</ul></li>
 							</ul>
 						</div>
-					
+
 
 					</div>
 					<!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
-					
+
 					<!-- /menu footer buttons -->
 				</div>
 			</div>
@@ -112,13 +111,13 @@
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
-									
-								
+
+
 									<li><a href="login.html"><i
 											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul></li>
 
-						
+
 						</ul>
 					</nav>
 				</div>
@@ -130,14 +129,15 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>
-								Manager intake
-							</h3>
+							<h3>Manager intake</h3>
 						</div>
 
 						<div class="title_right">
-							<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<button style="margin-left:180px" data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg active">Add</button>
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<button style="margin-left: 180px" data-toggle="modal"
+									data-target="#myModal_them" type="button"
+									class="btn btn-primary btn-lg active">Add</button>
 							</div>
 						</div>
 					</div>
@@ -148,74 +148,67 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-								
-									
+
+
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter Intake Name" class="form-control"
-							 data-ng-model="filterTable"></input>
+									<input id="filter" type="text" placeholder="Filter Intake Name"
+										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
-								
-									
-									<div class="table-responsive">          
-                                  <table class="table table-condensed table-hover">
-                                    <thead>
-                                      <tr>
-										<th style="width:5%">
-											&#35;
-										</th>
-										<th style="width: 5%">
-											ID
-										</th>
-										<th class="sortable" style="width: 20%"
-												data-ng-click="singleSort('intakeName')">
-											Name
-											<span class="caret-blank"
+
+
+									<div class="table-responsive">
+										<table class="table table-condensed table-hover">
+											<thead>
+												<tr>
+													<th style="width: 5%">&#35;</th>
+													<th style="width: 5%">ID</th>
+													<th class="sortable" style="width: 20%"
+														data-ng-click="singleSort('intakeName')">Name <span
+														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('intakeName'), 'caret-up':sortAscend('intakeName')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 15%"
-												data-ng-click="singleSort('startDate')"
-												data-uib-tooltip="{{ sortTooltip('startDate') }}"
-												data-tooltip-append-to-body="true">
-											Start Date
-											<span class="caret-blank"
+													</span>
+													</th>
+													<th class="sortable" style="width: 15%"
+														data-ng-click="singleSort('startDate')"
+														data-uib-tooltip="{{ sortTooltip('startDate') }}"
+														data-tooltip-append-to-body="true">Start Date <span
+														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('startDate'), 'caret-up':sortAscend('startDate')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 18%"
-												data-ng-click="singleSort('endDate')">
-											End Date
-											<span class="caret-blank"
+													</span>
+													</th>
+													<th class="sortable" style="width: 18%"
+														data-ng-click="singleSort('endDate')">End Date <span
+														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('endDate'), 'caret-up':sortAscend('endDate')}">
-											</span>
-										</th>
-										<th style="width: 12%">
-											Active
-										</th>
-										<th>
-										
-										</th>
-									</tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr data-ng-repeat="x in list_intake">
-                                        <td>{{$index+1}}</td>
-                                        <td data-ng-bind="x.intakeId"></td>
-                                        <td data-ng-bind="x.intakeName"></td>
-                                        <td data-ng-bind="x.startDate"></td>
-                                        <td data-ng-bind="x.endDate"></td>
-                                        <td data-ng-bind="x.active"></td>
-                                        <td>
-                                        <button type="button" ng-click="sua(x)" class="btn btn-primary" data-toggle="modal" data-target="#myModal_sua">Edit</button>
-										<button type="button" ng-click="delete1(x)" class="btn btn-danger" data-toggle="modal" data-target="#myModal_xoa">Delete</button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                  </table>
-                            </div>
+													</span>
+													</th>
+													<th style="width: 12%">Active</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr data-ng-repeat="x in list_intake">
+													<td>{{$index+1}}</td>
+													<td data-ng-bind="x.intakeId"></td>
+													<td data-ng-bind="x.intakeName"></td>
+													<td data-ng-bind="x.startDate"></td>
+													<td data-ng-bind="x.endDate"></td>
+													<td data-ng-bind="x.active"></td>
+													<td>
+														<button type="button" ng-click="sua(x)"
+															class="btn btn-primary" data-toggle="modal"
+															data-target="#myModal_sua">Edit</button>
+														<button type="button" ng-click="delete1(x)"
+															class="btn btn-danger" data-toggle="modal"
+															data-target="#myModal_xoa">Delete</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -237,115 +230,129 @@
 		</div>
 	</div>
 	<!-- Modal thêm -->
-	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Add intake</h4>
-	      </div>
-	      <div class="modal-body">
-	      		<form>
-					  <div class="form-group">
-					    <label>Intake_id</label>
-					    <input type="text" class="form-control" id="intakeid" placeholder="intakeid"></input>
-					  </div>
-					  <div class="form-group">
-					    <label >Intake_name</label>
-					    <input type="text" class="form-control" id="intakename" placeholder="intakename"></input>
-					  </div>
-					  <div class="form-group">
-					    <label >Start_date</label>
-					    <input type="date" class="form-control" id="startdate"></input>
-					  </div>
-					  <div class="form-group">
-					    <label >End_date</label>
-					    <input type="date" class="form-control" id="enddate"></input>
-					  </div>
-					  <div class="checkbox">
-					    <label>
-					      <input type="checkbox" id="actived"></input> Active
-					    </label>
-					  </div>
-					  <button type="button" ng-click="them()" class="btn btn-default">Submit</button>
-			 </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	     
-	      </div>
-	    </div>
-	  </div>
-</div>
+	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add intake</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label>Intake_id</label> <input type="text" class="form-control"
+								id="intakeid" placeholder="intakeid"></input>
+						</div>
+						<div class="form-group">
+							<label>Intake_name</label> <input type="text"
+								class="form-control" id="intakename" placeholder="intakename"></input>
+						</div>
+						<div class="form-group">
+							<label>Start_date</label> <input type="date"
+								class="form-control" id="startdate"></input>
+						</div>
+						<div class="form-group">
+							<label>End_date</label> <input type="date" class="form-control"
+								id="enddate"></input>
+						</div>
+						<div class="checkbox">
+							<label> <input type="checkbox" id="actived"
+								checked="checked"></input> Active
+							</label>
+						</div>
+						<button type="button" ng-click="them()" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Modal sửa -->
-	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Update intake</h4>
-	      </div>
-	      <div class="modal-body">
-	        	<form>
-					  <div class="form-group">
-					    <label>Intake_id</label>
-					    <input type="text" class="form-control" ng-model="list_temp_inf_edit.intakeId" id="exampleInputEmail3" ></input>
-					  </div>
-					  <div class="form-group">
-					    <label >Intake_name</label>
-					    <input type="text" class="form-control" ng-model="list_temp_inf_edit.intakeName" id="exampleInputPassword3" ></input>
-					  </div>
-					  <div class="form-group">
-					    <label >Start_date</label>
-					    <input type="date" class="form-control" id="startdate" ng-model="list_temp_inf_edit.startDate"  value="{{list_temp_inf_edit.startDate  | date: 'yyyy-MM-dd' }}" ></input>
-					  </div>
-					  <div class="form-group">
-					    <label >End_date</label>
-					    <input type="date" class="form-control" id="enddate" ng-model="list_temp_inf_edit.endDate" value="{{list_temp_inf_edit.endDate  | date: 'yyyy-MM-dd' }}"  ></input>
-					  </div>
-					  <div class="checkbox">
-					    <label>
-					      <input type="checkbox" ng-model="list_temp_inf_edit.active"></input> Active
-					    </label>
-					  </div>
-					  <button type="button" ng-click="capnhat()" class="btn btn-primary">Submit</button>
-			 </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	       
-	      </div>
-	    </div>
-	  </div>
-</div>
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Update intake</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label>Intake_id</label> <input type="text" class="form-control"
+								ng-model="list_temp_inf_edit.intakeId" id="exampleInputEmail3"></input>
+						</div>
+						<div class="form-group">
+							<label>Intake_name</label> <input type="text"
+								class="form-control" ng-model="list_temp_inf_edit.intakeName"
+								id="exampleInputPassword3"></input>
+						</div>
+						<div class="form-group">
+							<label>Start_date</label> <input type="date"
+								class="form-control" id="startdate"
+								ng-model="list_temp_inf_edit.startDate"
+								value="{{list_temp_inf_edit.startDate  | date: 'yyyy-MM-dd' }}"></input>
+						</div>
+						<div class="form-group">
+							<label>End_date</label> <input type="date" class="form-control"
+								id="enddate" ng-model="list_temp_inf_edit.endDate"
+								value="{{list_temp_inf_edit.endDate  | date: 'yyyy-MM-dd' }}"></input>
+						</div>
+						<div class="checkbox">
+							<label> <input type="checkbox"
+								ng-model="list_temp_inf_edit.active"></input> Active
+							</label>
+						</div>
+						<button type="button" ng-click="capnhat()" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Modal xóa -->
-	 <div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
+	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+				</div>
 
-                <div class="modal-body">
-                <input type="hidden" ng-model="list_temp_inf_delete.id"></input>
-                    <p>Do you want to delete????</p>
-                    <p class="debug-url"></p>
-                </div>
+				<div class="modal-body">
+					<input type="hidden" ng-model="list_temp_inf_delete.id"></input>
+					<p>Do you want to delete????</p>
+					<p class="debug-url"></p>
+				</div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok" ng-click="xoa()">OK</a>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-danger btn-ok" ng-click="xoa()">OK</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Angularjs -->
-   <script src="js/angular.min.js"></script>
+	<script src="js/angular.min.js"></script>
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
-	
+
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
@@ -383,119 +390,119 @@
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
 	<script>
-	var app = angular.module('myApp', []);
-	app.controller('intakeCtrl', function($scope, $http,dateFilter) {
-	    $http.get("/api/intake")
-	    .then(function(response) {	
-	       $scope.list_intake = response.data;
-	    });
-	    
-	    //add intake
-        $scope.them = function () {
-            // mact = document.getElementById("MaCT").value;
-            //console.log(mact);
-            var intake_id = document.getElementById("intakeid").value;        
-            var intake_name = document.getElementById("intakename").value;
-            var start_date=document.getElementById("startdate").value;
-            var end_date = document.getElementById("enddate").value;
-            var active1=document.getElementById("actived");
-            var active="";
-            if(active1.checked==true)
-            	{
-            		active=1;
-            	}
-            else
-            	active=0;
-            	
-            	
-            //var matkhau = $scope.mota;
-          
-            $http({
-                method: "post",
-               url: "/api/intake",
-               data: {
-                   intakeId: intake_id,
-                   intakeName: intake_name,
-                   startDate:start_date,
-                  	endDate:end_date,
-                  	active:active
-                  	
-               },
-                dataType: "json",
-            })
-       .then(function (result) {
-          if (result.status == "201") {
-               //alert(location.href = window.location.host + "/Admin/Loai?message=Thêm thành công");
-               alert("Thêm thành công");
-              location.href = window.location.origin + "/admin/intake";
-              
-          } else {
-               alert("Xảy ra lỗi");
+		var app = angular.module('myApp', []);
+		app.controller('intakeCtrl', function($scope, $http, dateFilter) {
+			$http.get("/api/intake").then(function(response) {
+				$scope.list_intake = response.data;
+			});
 
-           }
-    
-            });
-	    };  
-        //edit intake
-        $scope.capnhat = function () {
-        	//$scope.list_temp_inf_edit.endDate=document.getElementById("enddate").value;
-        	//$scope.list_temp_inf_edit.startDate=document.getElementById("startdate").value;
-         	var start_date = dateFilter($scope.list_temp_inf_edit.startDate, 'yyyy-MM-dd');
-        	var end_date=dateFilter($scope.list_temp_inf_edit.endDate, 'yyyy-MM-dd');
-        	$scope.list_temp_inf_edit.startDate=start_date;
-        	$scope.list_temp_inf_edit.endDate=end_date;
-        	console.log($scope.list_temp_inf_edit.startDate);
-        	console.log($scope.list_temp_inf_edit.endDate);
-            $http({
-               method: "put",
-              url: "/api/intake",
-               data: JSON.stringify($scope.list_temp_inf_edit),
-               dataType: "json",
-            })
-               .then(function (result) {
-                  if (result.status != "201") {
-                       alert("Cập nhật thành công");
-                       //location.reload();
-                       location.href = window.location.origin + "/admin/intake";
-                  } else {
-                       alert("Xảy ra lỗi");
+			//add intake
+			$scope.them = function() {
+				// mact = document.getElementById("MaCT").value;
+				//console.log(mact);
+				var intake_id = document.getElementById("intakeid").value;
+				var intake_name = document.getElementById("intakename").value;
+				var start_date = document.getElementById("startdate").value;
+				var end_date = document.getElementById("enddate").value;
+				var active1 = document.getElementById("actived");
+				var active = "";
+				if (active1.checked == true) {
+					active = 1;
+				} else
+					active = 0;
 
-                   }
-             });
-       }
-        //array did filter
-        $scope.list_temp_inf_edit = [];
-        $scope.sua = function (data) {
-            $scope.list_temp_inf_edit = data;
-        };
-        // delete intake
-        $scope.xoa=function()
-        {
-            $http({
-               method: "delete",
-              url: "/api/intake/" + $scope.list_temp_inf_delete.id,
-              //data: JSON.stringify($scope.list_temp_inf_delete.id),
-              dataType: "json",
-            })
-               .then(function (result) {
-                  if (result.status != "201") {
-                       alert("Xóa thành công");
-                       //location.reload();
-                       location.href = window.location.origin + "/admin/intake";
-                  } else {
-                       alert("Xảy ra lỗi");
+				//var matkhau = $scope.mota;
 
-                   }
-             });
-        }
-        // get data for delete
-        $scope.list_temp_inf_delete = [];
-        $scope.delete1 = function (data) {
-            $scope.list_temp_inf_delete = data;
-        };
+				$http({
+					method : "post",
+					url : "/api/intake",
+					data : {
+						intakeId : intake_id,
+						intakeName : intake_name,
+						startDate : start_date,
+						endDate : end_date,
+						active : active
 
-	});
+					},
+					dataType : "json",
+				}).then(
+						function(result) {
+							if (result.status == "201") {
+								//alert(location.href = window.location.host + "/Admin/Loai?message=Thêm thành công");
+								alert("Thêm thành công");
+								location.href = window.location.origin
+										+ "/admin/intake";
+
+							} else {
+								alert("Xảy ra lỗi");
+
+							}
+
+						});
+			};
+			//edit intake
+			$scope.capnhat = function() {
+				//$scope.list_temp_inf_edit.endDate=document.getElementById("enddate").value;
+				//$scope.list_temp_inf_edit.startDate=document.getElementById("startdate").value;
+				var start_date = dateFilter(
+						$scope.list_temp_inf_edit.startDate, 'yyyy-MM-dd');
+				var end_date = dateFilter($scope.list_temp_inf_edit.endDate,
+						'yyyy-MM-dd');
+				$scope.list_temp_inf_edit.startDate = start_date;
+				$scope.list_temp_inf_edit.endDate = end_date;
+				console.log($scope.list_temp_inf_edit.startDate);
+				console.log($scope.list_temp_inf_edit.endDate);
+				$http({
+					method : "put",
+					url : "/api/intake",
+					data : JSON.stringify($scope.list_temp_inf_edit),
+					dataType : "json",
+				}).then(
+						function(result) {
+							if (result.status != "201") {
+								alert("Success");
+								//location.reload();
+								location.href = window.location.origin
+										+ "/admin/intake";
+							} else {
+								alert("Xảy ra lỗi");
+
+							}
+						});
+			}
+			//array did filter
+			$scope.list_temp_inf_edit = [];
+			$scope.sua = function(data) {
+				$scope.list_temp_inf_edit = data;
+			};
+			// delete intake
+			$scope.xoa = function() {
+				$http({
+					method : "delete",
+					url : "/api/intake/" + $scope.list_temp_inf_delete.id,
+					//data: JSON.stringify($scope.list_temp_inf_delete.id),
+					dataType : "json",
+				}).then(
+						function(result) {
+							if (result.status != "201") {
+								alert("Xóa thành công");
+								//location.reload();
+								location.href = window.location.origin
+										+ "/admin/intake";
+							} else {
+								alert("Xảy ra lỗi");
+
+							}
+						});
+			}
+			// get data for delete
+			$scope.list_temp_inf_delete = [];
+			$scope.delete1 = function(data) {
+				$scope.list_temp_inf_delete = data;
+			};
+
+		});
 	</script>
-	
+
 </body>
 </html>
