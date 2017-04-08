@@ -272,7 +272,7 @@
 						</div>
 						<div class="title_right">
 							<div class=" form-group pull-right top_search">
-								<button data-toggle="modal" ng-click="modal()" data-target="#myModal" type="button" class="btn btn-primary btn-lg active">Add</button>
+								<button data-toggle="modal" ng-click="modal()" data-target="#myModal" type="button" class="btn btn-primary btn-lg active" >Add</button>
 							</div>
 						</div>
 					
@@ -430,7 +430,7 @@
 				</form>
 	      </div>
 	      <div class="modal-footer">
-	      <button id="btnSave" name="btnSave" class="btn btn-primary" ng-click="save()" onclick="addAlert()">Save</button>
+	      <button id="btnSave" name="btnSave" class="btn btn-primary" ng-click="save()" onclick="addAlert()" ng-disabled="frmSchoolAdd.schoolId.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Save</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	     
 	      </div>
@@ -454,8 +454,8 @@
 												<div class="form-group">
 													  <label class="col-md-4 control-label" for="schoolID">School ID</label>  
 													  <div class="col-md-8">
-													  <input id="schoolID" name="schoolID" placeholder="Enter school id" class="form-control input-md" type="text" ng-model="school_edit.schoolId" ng-required="true"/>
-													   		 													    <span id="helpBlock" style="color:red" class="help-block" ng-show="frmSchool.schoolID.$error.required">Please enter school id</span>
+													  <input id="schoolId" name="schoolId" placeholder="Enter school id" class="form-control input-md" type="text" ng-model="school_edit.schoolId" ng-required="true"/>
+													   		 													    <span id="helpBlock" style="color:red" class="help-block" ng-show="frmSchool.schoolId.$error.required">Please enter school id</span>
 
 													  </div>
 												</div>
@@ -505,7 +505,7 @@
 				</form>
 	      </div>
 	      <div class="modal-footer">
-	      <button type="button" class="btn btn-primary" ng-click="update()" onclick="editAlert()">Save</button>
+	      <button type="button" class="btn btn-primary" ng-click="update()" onclick="editAlert()" ng-disabled="frmSchool.schoolId.$error.required || frmSchool.schoolName.$error.required || frmSchool.address.$error.required|| frmSchool.contact.$error.required">Save</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        
 	      </div>
@@ -584,11 +584,12 @@
 	<script>
 	var app = angular.module('myApp', []);
 	app.controller('schoolCtrl', function($scope, $http) {
-	    $http.get("/api/school")
+	    function getAllSchools(){ $http.get("/api/school")
 	    .then(function(response) {	
 	       $scope.list = response.data;
 	    });
-	    
+	    }
+	    getAllSchools();
 	    //add school
         $scope.save = function () {
            
@@ -619,16 +620,13 @@
                
                dataType: "json"
             })
-       .then(function (result) {
-          if (result.status == "201") {
-
-        	  
-              location.href = window.location.origin + "/admin/school";
+       .then(function (result) {	
+          if (result.status == 201) {
+			
+        	  $("#myModal").modal("hide");
+        	  getAllSchools();
               
-          } else {
-               alert("Something wrong");
-
-           }
+          } 
     
             });
 	    };  
@@ -643,14 +641,10 @@
                dataType: "json"
             })
                .then(function (result) {
-                  if (result.status != "201") {
-                      
-                       
-                       location.href = window.location.origin + "/admin/school";
-                  } else {
-                       alert("Something wrong");
-
-                   }
+                  if (result.status == 202) {
+                	  $("#myModal_sua").modal("hide");
+                	  getAllSchools();
+                  } 
              });
        }
         
@@ -667,14 +661,13 @@
               dataType: "json",
             })
                .then(function (result) {
-                  if (result.status != "201") {
+                  if (result.status == 202) {
                       
                        //location.reload();
-                       location.href = window.location.origin + "/admin/school";
-                  } else {
-                       alert("Something wrong");
-
-                   }
+                       
+                	  $("#myModal_xoa").modal("hide");
+                	  getAllSchools();
+                  } 
              });
         }
         // get data for delete
