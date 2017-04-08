@@ -338,7 +338,7 @@
                                         <td data-ng-bind="x.schoolName"></td>
                                         <td data-ng-bind="x.address"></td>
                                         <td data-ng-bind="x.contact"></td>
-                                        <td data-ng-bind="x.active"></td>
+                                        <td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
                                         <td>
                               <button type="button" ng-click="editSchool(x)" class="btn btn-primary active btn-sm" data-toggle="modal"  data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>|  
                               <button type="button" ng-click="deleteSchool(x)" data-toggle="modal" class="btn btn-danger btn-sm active" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>
@@ -663,7 +663,7 @@
         
         $scope.school_edit = [];
         $scope.editSchool = function (data) {
-            $scope.school_edit = data;
+            $scope.school_edit = {"id" : data.id, 	"schoolId" :data.schoolId, "schoolName" : data.schoolName, "address" : data.address, "contact" : data.contact, "active" : data.active};
         };
         // delete school
          $scope.delete=function()
