@@ -276,13 +276,31 @@ app.controller('intakeCtrl', function($scope, $filter,$resource) {
 	$scope.minDate=new Date();
 	
 	function deleteAlert(){
-	  	swal("","Remove Successfully","success");
+	  	swal({
+	  	  title:"",
+	  	  text: "Delete Successfully",
+	  	  type: "success",
+	  	  timer: 2000,
+	  	  showConfirmButton: false
+	  	});
 	  }
 	  function editAlert(){
-  	  	swal("","Update Successfully","success");
+		  swal({
+		  	  title:"",
+		  	  text: "Edit Successfully",
+		  	  type: "success",
+		  	  timer: 2000,
+		  	  showConfirmButton: false
+		  	});
   	  }
 	  function addAlert(){
-    	  	swal("","Add Successfully","success");
+		  swal({
+		  	  title:"",
+		  	  text: "Add Successfully",
+		  	  type: "success",
+		  	  timer: 2000,
+		  	  showConfirmButton: false
+		  	});
 	  }
 	  
 });
