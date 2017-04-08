@@ -378,16 +378,14 @@
 	        <h4 class="modal-title" id="myModalLabel">Add School</h4>
 	      </div>
 	      <div class="modal-body">
-					      		<form class="form-horizontal">
-										
-									
-												
+					      		<form class="form-horizontal" name="frmSchoolAdd">
 												<!-- Text input-->
 												<div class="form-group">
 													  <label class="col-md-4 control-label" for="schoolID">School ID</label>  
 													  <div class="col-md-8">
-													  <input id="schoolID" name="schoolID" placeholder="Enter school id" class="form-control input-md" type="text" ng-model="school.schoolID"/>
-													    
+													  <input id="schoolID" name="schoolID" placeholder="Enter school id" class="form-control input-md" type="text" ng-model="school.schoolId" ng-required="true"/>
+													   		 													    <span id="helpBlock" style="color:red" class="help-block" ng-show="frmSchoolAdd.schoolID.$error.required">Please enter school id</span>
+
 													  </div>
 												</div>
 												
@@ -395,8 +393,8 @@
 												<div class="form-group">
 													  <label class="col-md-4 control-label" for="schoolName">School Name</label>  
 													  <div class="col-md-8">
-													  <input id="schoolName" name="schoolName" placeholder="Enter school name" class="form-control input-md" type="text" ng-model="school.schoolName"/>
-													    
+													  <input id="schoolName" name="schoolName" placeholder="Enter school name" class="form-control input-md" type="text" ng-model="school.schoolName" ng-required="true"/>
+													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchoolAdd.schoolName.$error.required">Please enter school name</span>
 													  </div>
 												</div>
 												
@@ -404,8 +402,8 @@
 												<div class="form-group">
 													  <label class="col-md-4 control-label" for="address">Address</label>  
 													  <div class="col-md-8">
-													  <input id="address" name="address" placeholder="Enter address" class="form-control input-md" type="text" ng-model="school.address"/>
-													    
+													  <input id="address" name="address" placeholder="Enter address" class="form-control input-md" type="text" ng-required="true" ng-model="school.address"/>
+													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchoolAdd.address.$error.required">Please enter address</span>
 													  </div>
 												</div>
 												
@@ -413,8 +411,8 @@
 												<div class="form-group">
 												  <label class="col-md-4 control-label" for="contact">Contact</label>  
 												  <div class="col-md-8">
-												  <input id="contact" name="contact" placeholder="Enter contact information" ng-model="school.contact" class="form-control input-md" type="text"/>
-												    
+												  <input id="contact" name="contact" placeholder="Enter contact information" class="form-control input-md" type="text" ng-required="true" ng-model="school.contact"/>
+												    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchoolAdd.contact.$error.required">Please enter contact</span>
 												  </div>
 												</div>
 												
@@ -422,18 +420,13 @@
 														<div class="form-group">
 														  <label class="col-md-4 control-label" for="status">Status</label>
 														  <div class="col-md-8">
-															  <div class="checkbox">
+														 		<div class="checkbox">
 																    <label>
-																      <input type="checkbox" id="actived"></input> Active
+																      <input type="checkbox" id="actived" required="required"></input> Active
 																    </label>
 																  </div>
-														  
 														  </div>
-														</div>
-												
-														
-												
-								
+														</div>						
 				</form>
 	      </div>
 	      <div class="modal-footer">
