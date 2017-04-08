@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Manage Specialization</title>
+
+<base href="http://localhost:8080/admin/" />
+
+<!-- Bootstrap -->
+<link href="vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<!-- Font Awesome -->
+<link href="vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" />
+<!-- NProgress -->
+<link href="vendors/nprogress/nprogress.css" rel="stylesheet" />
+<!-- iCheck -->
+<link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+<!-- Datatables -->
+<link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link href="build/css/custom.min.css" rel="stylesheet" />
+<link href="build/css/style.css" rel="stylesheet" />
+</head>
+
+<body data-ng-app="myApp" data-ng-controller="specializationCtrl"
+	class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div class="left_col scroll-view">
+					<div class="navbar nav_title" style="border: 0;">
+						<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
+							<span>Admin-Management imformation of Student!</span></a>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<!-- menu profile quick info -->
+					<div class="profile clearfix">
+						<div class="profile_pic">
+							<img src="production/images/img.jpg" alt="..."
+								class="img-circle profile_img" />
+						</div>
+						<div class="profile_info">
+							<span>Hi,</span>
+							<h2>Admin</h2>
+						</div>
+					</div>
+					<!-- /menu profile quick info -->
+
+					<br />
+
+					<!-- sidebar menu -->
+					<div id="sidebar-menu"
+						class="main_menu_side hidden-print main_menu">
+						<div class="menu_section">
+							<h3>General</h3>
+							<ul class="nav side-menu">
+								<li><a><i class="fa fa-home"></i>Manager <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/intake">Intake</a></li>
+										<li><a href="index2.html">Dashboard2</a></li>
+										<li><a href="index3.html">Dashboard3</a></li>
+									</ul></li>
+							</ul>
+						</div>
+
+
+					</div>
+					<!-- /sidebar menu -->
+
+					<!-- /menu footer buttons -->
+
+					<!-- /menu footer buttons -->
+				</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div class="nav_menu">
+					<nav>
+						<div class="nav toggle">
+							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+						</div>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class=""><a href="javascript:;"
+								class="user-profile dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"> <img src="production/images/img.jpg"
+									alt="" />Admin <span class=" fa fa-angle-down"></span>
+							</a>
+								<ul class="dropdown-menu dropdown-usermenu pull-right">
+									<li><a href="javascript:;"> Profile</a></li>
+
+
+									<li><a href="login.html"><i
+											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+								</ul></li>
+
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Manager specialization</h3>
+						</div>
+
+						<div class="title_right">
+							<div
+								class="form-group pull-right top_search">
+								<button  data-toggle="modal"
+									data-target="#myModal_them" type="button"
+									class="btn btn-primary btn-lg">Add</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+
+
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-md-6 pull-right">
+									<input id="filter" type="text"
+										placeholder="Filter specialization Name" class="form-control"
+										data-ng-model="filterTable"></input>
+								</div>
+								<div class="x_content">
+
+
+									<div class="table-responsive">
+										<table class="table table-condensed table-hover">
+											<thead>
+												<tr>
+													<th style="width: 5%">&#35;</th>
+													<th style="width: 5%">ID</th>
+													<th class="sortable" style="width: 20%"
+														data-ng-click="singleSort('specializationName')">
+														Name <span class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('specializationName'), 'caret-up':sortAscend('specializationName')}">
+
+													</span>
+													<th style="width: 5%">Active</th>
+													</th>
+
+													<th style="width: 12%">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr data-ng-repeat="x in list">
+													<!--                                        <tr data-ng-repeat="x in list | orderBy:[filterSort, sortType]" data-ng-show="filterSort(x.specializationName) == 1" > -->
+													<td>{{$index+1}}</td>
+													<td data-ng-bind="x.specializationId"></td>
+													<td data-ng-bind="x.specializationName"></td>
+													<td data-ng-bind="x.active"></td>
+													<td><button class="btn btn-primary btn-sm"
+															ng-click="callEditSpecialization(x)" data-toggle="modal"
+															data-target="#myModal_sua">
+															<span class="glyphicon glyphicon-edit"></span>
+														</button>|
+														<button class="btn btn-danger btn-sm" data-target="#myModal_xoa" href="#myModal_xoa"
+															ng-click="deleteSpecialization(x)" data-toggle="modal">
+															<span class="glyphicon glyphicon-remove"></span>
+														</button></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Gentelella - Bootstrap Admin Template by <a
+						href="https://colorlib.com">Colorlib</a>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+	<!-- Modal thêm -->
+	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add specialization</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-sm-2">Id:</label>
+							<div class="col-sm-10">
+								<input type="text" id="specializationId_add"
+									class="form-control" placeholder="Enter intake id" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Name:</label>
+							<div class="col-sm-10">
+								<input type="text" id="specializationName_add"
+									class="form-control" placeholder="Enter intake name" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2"></label>
+							<div class="col-sm-10">
+								<input type="checkbox" id="active_add" checked="checked"></input>
+								Active
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2"></label>
+							<div class="col-sm-10">
+								
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="addSpecialization()">Add</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal sửa -->
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Edit Specialization</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+<!-- 					<input type="hidden" id="specializationHiddenId_edit" value="{{info.id}}" -->
+<!-- 									class="form-control" placeholder="Enter intake id" /> -->
+						<div class="form-group">
+							<label class="control-label col-sm-2">Id:</label>
+							<div class="col-sm-10">
+								<input type="text" id="specializationId_edit" ng-model="info.specializationId"
+									class="form-control" placeholder="Enter intake id" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Name:</label>
+							<div class="col-sm-10">
+								<input type="text" id="specializationName_edit" ng-model="info.specializationName"
+									class="form-control" placeholder="Enter intake name" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2"></label>
+							<div class="col-sm-10">
+								<input type="checkbox" id="active_edit" checked="checked" ng-model="info.active"></input>
+								Active
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2"></label>
+							<div class="col-sm-10">
+								
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="editSpecialization()" data-dismiss="modal">Edit</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Modal xóa -->
+	 <div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+
+                <div class="modal-body">
+                <input type="hidden" ng-model="school_delete.id"></input>
+                    <p>Do you want to delete?</p>
+                    <p class="debug-url"></p>
+                </div>
+
+                <div class="modal-footer">
+                	<a class="btn btn-danger btn-ok" ng-click="delete()" onclick="JSalert()">Yes</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- jQuery -->
+	<script src="vendors/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/myApp.js"></script>
+	<script type="text/javascript" src="scripts/specializationCtrl.js"></script>
+	<!-- FastClick -->
+	<script src="vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="vendors/nprogress/nprogress.js"></script>
+	<!-- iCheck -->
+	<script src="vendors/iCheck/icheck.min.js"></script>
+	<!-- Datatables -->
+	<script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script
+		src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script
+		src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+	<script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+	<script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+	<script
+		src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+	<script
+		src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+	<script
+		src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script
+		src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+	<script
+		src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+	<script src="vendors/jszip/dist/jszip.min.js"></script>
+	<script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+	<script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="build/js/custom.min.js"></script>
+
+</body>
+</html>
