@@ -136,8 +136,8 @@
 						</div>
 
 						<div class="title_right">
-							<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<button style="margin-left:180px" data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg active">Add</button>
+							<div class=" pull-right top_search">
+								<button  data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg active">Add</button>
 							</div>
 						</div>
 					</div>
@@ -210,12 +210,16 @@
                                         <td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
                                         <td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
                                         <td data-ng-bind="x.active"></td>
-                                        <td><a data-target="#myModal_sua" data-toggle="modal" href="#myModal_sua" data-ng-click="GetIntake(x)">
-									          <span class="glyphicon glyphicon-edit"></span>
-									        </a> | <a data-target="#myModal_xoa" data-toggle="modal" href="#myModal_xoa" data-ng-click="GetIntakeObj(x)">
-									          <span class="glyphicon glyphicon-remove"></span>
-									        </a>
+                                        <td>
+                                        <button class="btn btn-primary btn-sm" data-ng-click="GetIntake(x)" data-toggle="modal" data-target="#myModal_sua" href="#myModal_sua">
+															<span class="glyphicon glyphicon-edit"></span></button>|
+															<button class="btn btn-danger btn-sm" data-target="#myModal_xoa" href="#myModal_xoa"
+															data-ng-click="GetIntakeObj(x)" data-toggle="modal">
+															<span class="glyphicon glyphicon-remove"></span>
+														</button>
+									        
 									    </td>
+									     
                                     </tr>
                                     </tbody>
                                   </table>
@@ -317,6 +321,18 @@
                          <input type="checkbox" id="active" name="active" data-ng-model="active" required="required" class="form-control col-md-6 col-xs-12"/>
                      </div>
                  </div>
+               <!--  <!-- Multiple Radios -->
+														<div class="form-group">
+														  <label class="col-md-4 control-label" for="status">Status</label>
+														  <div class="col-md-8">
+															  <div class="checkbox">
+																    <label>
+																      <input type="checkbox" id="active" name="active"></input> Active
+																    </label>
+																  </div>
+														  
+														  </div>
+														</div> -->
              </form>
 	      </div>
 	      <div class="modal-footer">

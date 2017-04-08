@@ -135,8 +135,8 @@
 
 						<div class="title_right">
 							<div
-								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<button style="margin-left: 180px" data-toggle="modal"
+								class="form-group pull-right top_search">
+								<button  data-toggle="modal"
 									data-target="#myModal_them" type="button"
 									class="btn btn-primary btn-lg">Add</button>
 							</div>
@@ -190,9 +190,9 @@
 															ng-click="callEditSpecialization(x)" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
-														</button>
-														<button class="btn btn-danger btn-sm"
-															ng-click="deleteSpecialization(x)">
+														</button>|
+														<button class="btn btn-danger btn-sm" data-target="#myModal_xoa" href="#myModal_xoa"
+															ng-click="deleteSpecialization(x)" data-toggle="modal">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button></td>
 												</tr>
@@ -257,12 +257,13 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2"></label>
 							<div class="col-sm-10">
-								<button class="btn btn-default" ng-click="addSpecialization()">Add</button>
+								
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="addSpecialization()">Add</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -309,17 +310,42 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2"></label>
 							<div class="col-sm-10">
-								<button class="btn btn-default" ng-click="editSpecialization()" data-dismiss="modal">Edit</button>
+								
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="editSpecialization()" data-dismiss="modal">Edit</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
+<!-- Modal xóa -->
+	 <div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+
+                <div class="modal-body">
+                <input type="hidden" ng-model="school_delete.id"></input>
+                    <p>Do you want to delete?</p>
+                    <p class="debug-url"></p>
+                </div>
+
+                <div class="modal-footer">
+                	<a class="btn btn-danger btn-ok" ng-click="delete()" onclick="JSalert()">Yes</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>

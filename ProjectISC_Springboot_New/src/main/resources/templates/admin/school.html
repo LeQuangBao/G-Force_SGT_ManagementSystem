@@ -36,6 +36,7 @@
 <link
 	href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
 	rel="stylesheet" />
+	
 
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet" />
@@ -270,8 +271,8 @@
 							</h3>
 						</div>
 						<div class="title_right">
-							<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<button style="margin-left:180px" data-toggle="modal" ng-click="modal()" data-target="#myModal" type="button" class="btn btn-primary btn-lg active">Add</button>
+							<div class=" form-group pull-right top_search">
+								<button data-toggle="modal" ng-click="modal()" data-target="#myModal" type="button" class="btn btn-primary btn-lg active">Add</button>
 							</div>
 						</div>
 					
@@ -339,8 +340,9 @@
                                         <td data-ng-bind="x.contact"></td>
                                         <td data-ng-bind="x.active"></td>
                                         <td>
-                              <button type="button" ng-click="editSchool(x)" class="btn btn-primary custom-width active" data-toggle="modal" data-target="#myModal_sua">Edit</button>  
-                              <button type="button" ng-click="deleteSchool(x)" data-toggle="modal" class="btn btn-danger custom-width active" data-target="#myModal_xoa">Remove</button>
+                              <button type="button" ng-click="editSchool(x)" class="btn btn-primary active btn-sm" data-toggle="modal"  data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>|  
+                              <button type="button" ng-click="deleteSchool(x)" data-toggle="modal" class="btn btn-danger btn-sm active" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>
+                             
                               </td>
                                     </tr>
                                     </tbody>
@@ -479,7 +481,7 @@
 													  <label class="col-md-4 control-label" for="address">Address</label>  
 													  <div class="col-md-8">
 													  <input id="address" name="address" placeholder="Enter address" class="form-control input-md" type="text" ng-required="true" ng-model="school_edit.address"/>
-													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchool.address.$error.required">More detailed more information</span>
+													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchool.address.$error.required">Please enter address</span>
 													  </div>
 												</div>
 												
@@ -488,7 +490,7 @@
 												  <label class="col-md-4 control-label" for="contact">Contact</label>  
 												  <div class="col-md-8">
 												  <input id="contact" name="contact" placeholder="Enter contact information" class="form-control input-md" type="text" ng-required="true" ng-model="school_edit.contact"/>
-												    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchool.contact.$error.required">More detailed more information</span>
+												    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchool.contact.$error.required">Please enter contact</span>
 												  </div>
 												</div>
 												
@@ -519,7 +521,7 @@
 </div>
 <!-- Modal xóa -->
 	 <div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -541,6 +543,7 @@
             </div>
         </div>
     </div>
+
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<!-- Sweet alert -->
@@ -691,13 +694,13 @@
 	</script>
 	<script type="text/javascript">
         	  function JSalert(){
-        	  	swal("Remove Successfully","","success");
+        	  	swal("","Remove Successfully","success");
         	  }
         	  function editAlert(){
-          	  	swal("Update Successfully","","success");
+          	  	swal("","Update Successfully","success");
           	  }
         	  function addAlert(){
-            	  	swal("Add Successfully","","success");
+            	  	swal("","Add Successfully","success");
             	  }
         	  
         	  </script>
