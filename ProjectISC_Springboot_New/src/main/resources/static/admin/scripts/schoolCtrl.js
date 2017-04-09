@@ -40,18 +40,18 @@ app.controller('schoolCtrl', function($scope, $http) {
 			
         	  $("#myModal").modal("hide");
         	  getAllSchools();
-              
+        	  addAlert();
           } 
     
             });
 	    };  
         //edit school
         $scope.update = function () {
-        	
+        	var schoolObj={id:$scope.school_edit.id,schoolId:$scope.school_edit.schoolId, schoolName: $scope.school_edit.schoolName, address:$scope.school_edit.address, contact:$scope.school_edit.contact, active:($scope.school_edit.active==null?false:($scope.school_edit.active==false?false:true))};
             $http({
                method: "put",
               url: "/api/school",
-               data: JSON.stringify($scope.school_edit),
+               data: schoolObj,
                contentType: "application/json; charset=utf-8",
                dataType: "json"
             })
@@ -59,13 +59,22 @@ app.controller('schoolCtrl', function($scope, $http) {
                   if (result.status == 202) {
                 	  $("#myModal_sua").modal("hide");
                 	  getAllSchools();
+                	  editAlert();
                   } 
              });
        }
         
         $scope.school_edit = [];
         $scope.editSchool = function (data) {
-            $scope.school_edit = {"id" : data.id, 	"schoolId" :data.schoolId, "schoolName" : data.schoolName, "address" : data.address, "contact" : data.contact, "active" : data.active};
+        	$http.get("/api/school/"+data.id)
+            .then(function (response) {
+            	$scope.school_edit.schoolId=response.data.schoolId;
+       			$scope.school_edit.schoolName=response.data.schoolName;
+       			$scope.school_edit.address=response.data.address; 
+       			$scope.school_edit.contact=response.data.contact;
+       			$scope.school_edit.active=response.data.active;
+	       		$scope.school_edit.id=data.id;	
+          });
         };
         // delete school
          $scope.delete=function()
@@ -82,6 +91,7 @@ app.controller('schoolCtrl', function($scope, $http) {
                        
                 	  $("#myModal_xoa").modal("hide");
                 	  getAllSchools();
+                	  deleteAlert();
                   } 
              });
         }
@@ -90,5 +100,32 @@ app.controller('schoolCtrl', function($scope, $http) {
         $scope.deleteSchool = function (data) {
             $scope.school_delete = data;
         }; 
-
+        function deleteAlert(){
+    	  	swal({
+    	  	  title:"",
+    	  	  text: "Delete Successfully",
+    	  	  type: "success",
+    	  	  timer: 2000,
+    	  	  showConfirmButton: false
+    	  	});
+    	  }
+    	  function editAlert(){
+    		  swal({
+    		  	  title:"",
+    		  	  text: "Edit Successfully",
+    		  	  type: "success",
+    		  	  timer: 2000,
+    		  	  showConfirmButton: false
+    		  	});
+      	  }
+    	  function addAlert(){
+    		  swal({
+    		  	  title:"",
+    		  	  text: "Add Successfully",
+    		  	  type: "success",
+    		  	  timer: 2000,
+    		  	  showConfirmButton: false
+    		  	});
+    	  }
+       
 	});
