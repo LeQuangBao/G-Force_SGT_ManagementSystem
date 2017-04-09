@@ -40,7 +40,7 @@ app.controller('schoolCtrl', function($scope, $http) {
 			
         	  $("#myModal").modal("hide");
         	  getAllSchools();
-              
+        	  addAlert();
           } 
     
             });
@@ -59,6 +59,7 @@ app.controller('schoolCtrl', function($scope, $http) {
                   if (result.status == 202) {
                 	  $("#myModal_sua").modal("hide");
                 	  getAllSchools();
+                	  editAlert();
                   } 
              });
        }
@@ -82,6 +83,7 @@ app.controller('schoolCtrl', function($scope, $http) {
                        
                 	  $("#myModal_xoa").modal("hide");
                 	  getAllSchools();
+                	  deleteAlert();
                   } 
              });
         }
@@ -90,5 +92,32 @@ app.controller('schoolCtrl', function($scope, $http) {
         $scope.deleteSchool = function (data) {
             $scope.school_delete = data;
         }; 
-
+        function deleteAlert(){
+    	  	swal({
+    	  	  title:"",
+    	  	  text: "Delete Successfully",
+    	  	  type: "success",
+    	  	  timer: 2000,
+    	  	  showConfirmButton: false
+    	  	});
+    	  }
+    	  function editAlert(){
+    		  swal({
+    		  	  title:"",
+    		  	  text: "Edit Successfully",
+    		  	  type: "success",
+    		  	  timer: 2000,
+    		  	  showConfirmButton: false
+    		  	});
+      	  }
+    	  function addAlert(){
+    		  swal({
+    		  	  title:"",
+    		  	  text: "Add Successfully",
+    		  	  type: "success",
+    		  	  timer: 2000,
+    		  	  showConfirmButton: false
+    		  	});
+    	  }
+       
 	});
