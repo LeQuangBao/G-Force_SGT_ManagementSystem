@@ -75,7 +75,7 @@ app.controller('subjectCtrl', function($scope, $http) {
        			$scope.subject_edit.subjectName=response.data.subjectName;
        			$scope.subject_edit.credit=response.data.credit; 
        			$scope.subject_edit.hour=response.data.hour;
-       			$scope.subject_edit.hour=response.data.description;
+       			$scope.subject_edit.description=response.data.description;
        			$scope.subject_edit.active=response.data.active;
           });
         };

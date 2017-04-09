@@ -1,7 +1,8 @@
 app.controller('specializationCtrl',
 		function($scope, $http) {
 			var deleteSpecialization = "";
-			var alertDuration = 1500;
+			var alertDuration = 1800;
+
 			// get list specializations
 			function getListSpecializations() {
 				$http.get("http://localhost:8080/api/specialization").then(
@@ -10,7 +11,12 @@ app.controller('specializationCtrl',
 						})
 			}
 			getListSpecializations();
+			// refresh list (call get list)
+			$scope.refreshList = function() {
+				getListSpecializations();
+			}
 
+			// add specialization
 			$scope.addSpecialization = function() {
 				var specializationId = document
 						.getElementById("specializationId_add").value;
@@ -28,16 +34,16 @@ app.controller('specializationCtrl',
 					data : {
 						specializationId : specializationId,
 						specializationName : specializationName,
-						active: active
+						active : active
 					},
 					dataType : "json"
-				}).then(function(response){
-//					$("#myModal_them").modal("hide");
+				}).then(function(response) {
+					// $("#myModal_them").modal("hide");
 					getListSpecializations();
 					alertAddSucess();
-				},function(response){
+				}, function(response) {
 					alertFailMessage("Oops! Duplicate ID is not allowed.");
-				});				
+				});
 			}
 
 			$scope.callEditSpecialization = function(data) {
