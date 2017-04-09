@@ -45,7 +45,7 @@ public class SubjectControllerWS {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "api/subject", method = RequestMethod.DELETE)
+	@RequestMapping(value = "api/subject/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteSubject(@PathVariable int id) {
 		try {
 			service.deleteSubject(id);

@@ -1,5 +1,6 @@
 app.controller('specializationCtrl',
 		function($scope, $http) {
+			var deleteSpecialization = "";
 			// get list specializations
 			function getListSpecializations() {
 				$http.get("http://localhost:8080/api/specialization").then(
@@ -18,9 +19,8 @@ app.controller('specializationCtrl',
 				var active = "";
 				if (activeElement.checked == true) {
 					active = 1;
-				}
-				else
-	            	active=0;
+				} else
+					active = 0;
 				$http({
 					method : "POST",
 					url : "/api/specialization",
@@ -31,12 +31,14 @@ app.controller('specializationCtrl',
 					},
 					dataType : "json",
 				}).then(function(response) {
-					
+
 					if (response.status == "201") {
 						$("#myModal_them").modal("hide");
 						getListSpecializations();
-						addAlert();
+						alertAddSucess();
 					}
+				}, function(response) {
+					alertFail();
 				})
 			}
 
@@ -51,61 +53,74 @@ app.controller('specializationCtrl',
 					data : JSON.stringify($scope.info),
 					dataType : "json",
 				}).then(function(response) {
-					editAlert();
+					alertEditSucess();
 				}, function(response) {
-					
+
 				});
 			}
-			// delete school
-	         $scope.deleteS=function()
-	        {
-	            $http({
-	               method: "DELETE",
-	              url: "/api/specialization/" + $scope.specialization_delete.id,
-	              dataType: "json",
-	            })
-	               .then(function (result) {
-	                  if (result.status == 202) {
-	                      
-	                       //location.reload();
-	                       
-	                	  $("#myModal_xoa").modal("hide");
-	                	  getListSpecializations();
-	                	  deleteAlert();
-	                  } 
-	             });
-	        }
-	        // get data for delete
-	        $scope.specialization_delete = [];
-	        $scope.deleteSpecialization = function (data) {
-	            $scope.specialization_delete = data;
-	        }; 
-	        
-	        function deleteAlert(){
-	    	  	swal({
-	    	  	  title:"",
-	    	  	  text: "Delete Successfully",
-	    	  	  type: "success",
-	    	  	  timer: 2000,
-	    	  	  showConfirmButton: false
-	    	  	});
-	    	  }
-	    	  function editAlert(){
-	    		  swal({
-	    		  	  title:"",
-	    		  	  text: "Edit Successfully",
-	    		  	  type: "success",
-	    		  	  timer: 2000,
-	    		  	  showConfirmButton: false
-	    		  	});
-	      	  }
-	    	  function addAlert(){
-	    		  swal({
-	    		  	  title:"",
-	    		  	  text: "Add Successfully",
-	    		  	  type: "success",
-	    		  	  timer: 2000,
-	    		  	  showConfirmButton: false
-	    		  	});
-	    	  }
+
+			$scope.callDeleteSpecialization = function(data) {
+				deleteSpecialization = data;
+			}
+			// delete specialization
+			$scope.deleteSpecialization = function() {
+				alert("");
+				$http({
+					method : "DELETE",
+					url : "/api/specialization/" + deleteSpecialization.id,
+					dataType : "json",
+				}).then(function(result) {
+					if (result.status == 202) {
+
+						// location.reload();
+
+						$("#myModal_xoa").modal("hide");
+						getListSpecializations();
+						alertDeleteSucess();
+					}
+				}, function(response) {
+				});
+			}
+			// get data for delete
+//			$scope.specialization_delete = [];
+//			$scope.deleteSpecialization = function(data) {
+//				$scope.specialization_delete = data;
+//			};
+
+			function alertDeleteSucess() {
+				swal({
+					title : "",
+					text : "Delete Successfully",
+					type : "success",
+					timer : 2000,
+					showConfirmButton : false
+				});
+			}
+			function alertEditSucess() {
+				swal({
+					title : "",
+					text : "Edit Successfully",
+					type : "success",
+					timer : 2000,
+					showConfirmButton : false
+				});
+			}
+			function alertAddSucess() {
+				swal({
+					title : "",
+					text : "Add Successfully",
+					type : "success",
+					timer : 2000,
+					showConfirmButton : false
+				});
+			}
+			function alertFail() {
+				swal({
+					title : "",
+					text : "Opps! Something went wrong.",
+					type : "Error",
+					timer : 2000,
+					showConfirmButton : false
+				})
+			}
 		});

@@ -45,7 +45,7 @@ public class SpecializationControllerWS {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "api/specialization", method = RequestMethod.DELETE)
+	@RequestMapping(value = "api/specialization/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteSpecialization(@PathVariable int id) {
 		try {
 			service.deleteSpecialization(id);
