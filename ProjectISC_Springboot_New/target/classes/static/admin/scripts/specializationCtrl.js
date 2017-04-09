@@ -1,6 +1,7 @@
 app.controller('specializationCtrl',
 		function($scope, $http) {
 			var deleteSpecialization = "";
+			var alertDuration = 1500;
 			// get list specializations
 			function getListSpecializations() {
 				$http.get("http://localhost:8080/api/specialization").then(
@@ -27,19 +28,16 @@ app.controller('specializationCtrl',
 					data : {
 						specializationId : specializationId,
 						specializationName : specializationName,
-						active : active
+						active: active
 					},
-					dataType : "json",
-				}).then(function(response) {
-
-					if (response.status == "201") {
-						$("#myModal_them").modal("hide");
-						getListSpecializations();
-						alertAddSucess();
-					}
-				}, function(response) {
-					alertFail();
-				})
+					dataType : "json"
+				}).then(function(response){
+//					$("#myModal_them").modal("hide");
+					getListSpecializations();
+					alertAddSucess();
+				},function(response){
+					alertFailMessage("Oops! Duplicate ID is not allowed.");
+				});				
 			}
 
 			$scope.callEditSpecialization = function(data) {
@@ -55,7 +53,7 @@ app.controller('specializationCtrl',
 				}).then(function(response) {
 					alertEditSucess();
 				}, function(response) {
-
+					alertFailMessage("Oops! Duplicate ID is not allowed.");
 				});
 			}
 
@@ -64,35 +62,32 @@ app.controller('specializationCtrl',
 			}
 			// delete specialization
 			$scope.deleteSpecialization = function() {
-				alert("");
 				$http({
 					method : "DELETE",
 					url : "/api/specialization/" + deleteSpecialization.id,
 					dataType : "json",
 				}).then(function(result) {
 					if (result.status == 202) {
-
-						// location.reload();
-
 						$("#myModal_xoa").modal("hide");
 						getListSpecializations();
 						alertDeleteSucess();
 					}
 				}, function(response) {
+					alertFail();
 				});
 			}
 			// get data for delete
-//			$scope.specialization_delete = [];
-//			$scope.deleteSpecialization = function(data) {
-//				$scope.specialization_delete = data;
-//			};
+			// $scope.specialization_delete = [];
+			// $scope.deleteSpecialization = function(data) {
+			// $scope.specialization_delete = data;
+			// };
 
 			function alertDeleteSucess() {
 				swal({
 					title : "",
 					text : "Delete Successfully",
 					type : "success",
-					timer : 2000,
+					timer : alertDuration,
 					showConfirmButton : false
 				});
 			}
@@ -101,7 +96,7 @@ app.controller('specializationCtrl',
 					title : "",
 					text : "Edit Successfully",
 					type : "success",
-					timer : 2000,
+					timer : alertDuration,
 					showConfirmButton : false
 				});
 			}
@@ -110,7 +105,7 @@ app.controller('specializationCtrl',
 					title : "",
 					text : "Add Successfully",
 					type : "success",
-					timer : 2000,
+					timer : alertDuration,
 					showConfirmButton : false
 				});
 			}
@@ -118,8 +113,17 @@ app.controller('specializationCtrl',
 				swal({
 					title : "",
 					text : "Opps! Something went wrong.",
-					type : "Error",
-					timer : 2000,
+					type : "error",
+					timer : alertDuration,
+					showConfirmButton : false
+				})
+			}
+			function alertFailMessage(message) {
+				swal({
+					title : "",
+					text : message,
+					type : "error",
+					timer : alertDuration,
 					showConfirmButton : false
 				})
 			}
