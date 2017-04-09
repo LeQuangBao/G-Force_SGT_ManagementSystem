@@ -41,6 +41,7 @@
 <link href="build/css/custom.min.css" rel="stylesheet" />
 <link href="build/css/style.css"
 	rel="stylesheet" />
+<link href="js/sweetalert.css" rel="stylesheet" />
 </head>
 
 <body data-ng-app="myApp" data-ng-controller="intakeCtrl" class="nav-md">
@@ -138,7 +139,7 @@
 
 						<div class="title_right">
 							<div class=" pull-right top_search">
-								<button  data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg active">Add</button>
+								<button  data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg active" ng-click="ResetForm_Add()">Add</button>
 							</div>
 						</div>
 					</div>
@@ -180,7 +181,6 @@
 										</th>
 										<th class="sortable" style="width: 20%"
 												data-ng-click="singleSort('startDate')"
-												data-uib-tooltip="{{ sortTooltip('startDate') }}"
 												data-tooltip-append-to-body="true">
 											Start Date
 											<span class="caret-blank"
@@ -196,7 +196,7 @@
 										</th>
 										<th class="sortable" style="width: 15%"
 												data-ng-click="singleSort('active')">
-											Active
+											Status
 											<span class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('active'), 'caret-up':sortAscend('active')}">
 											</span>
@@ -211,7 +211,7 @@
                                         <td data-ng-bind="x.intakeName"></td>
                                         <td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
                                         <td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
-                                        <td data-ng-bind="x.active"></td>
+                                        <td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
                                         <td>
                                         <button class="btn btn-primary btn-sm" data-ng-click="GetIntake(x)" data-toggle="modal" data-target="#myModal_sua" href="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span></button>|
@@ -278,7 +278,8 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="text" id="id" name="id" data-ng-model="id" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.id.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.id.$touched"><p style="color:red">This field is required</p></div>
+					      <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div>
 					    </div>
                      </div>
                  </div>
@@ -289,7 +290,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="text" id="name" name="name" data-ng-model="name" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.name.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.name.$touched"><p style="color:red">This field is required</p></div>
 					    </div>
                      </div>
                  </div>
@@ -300,7 +301,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="date" id="startdate" name="startdate" data-ng-model="startdate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.startdate.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.startdate.$touched"><p style="color:red">This field is required</p></div>
 					    </div>
                      </div>
                  </div>
@@ -311,7 +312,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="date" id="enddate" name="enddate" data-ng-model="enddate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.enddate.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.enddate.$touched"><p style="color:red">This field is required</p></div>
 					      <div ng-message="validationError"><p style="color:red">The End date must be greater than the Start date </p></div>
 					    </div>
                      </div>
@@ -322,7 +323,7 @@
 							<div class="col-md-8">
 								<div class="checkbox">
 									<label> <input type="checkbox" id="active"
-										name="active" data-ng-model="active" required="required"></input>
+										name="active" data-ng-model="active"></input>
 										Active
 									</label>
 								</div>
@@ -334,7 +335,7 @@
 					</form>
 	      </div>
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-primary" id="them" data-ng-click="Them()">Add</button>
+	      	<button type="button" class="btn btn-primary" id="them" data-ng-click="Them()" ng-disabled="formThem.$invalid">Add</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="ResetForm()">Close</button>
 	     
 	      </div>
@@ -359,6 +360,7 @@
                          <input type="text" id="id" name="_id" data-ng-model="_id" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formSua._id.$error">
 					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div>
 					    </div>
                      </div>
                  </div>
@@ -401,7 +403,7 @@
 							<div class="col-md-8">
 								<div class="checkbox">
 									<label> <input type="checkbox" id="active"
-										name="active" data-ng-model="_active" required="required"></input>
+										name="active" data-ng-model="_active"></input>
 										Active
 									</label>
 								</div>
@@ -411,8 +413,8 @@
 					</form>
 	      </div>
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-primary" id="sua" data-ng-click="Sua()">Edit</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      	<button type="button" class="btn btn-primary" id="sua" data-ng-click="Sua()" ng-disabled="formSua.$invalid">Edit</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="ResetValidation_Edit()">Close</button>
 	      </div>
 	    </div>
 	  </div>
@@ -439,6 +441,7 @@
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
 	<script src="js/angular-ui.min.js"></script>
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>

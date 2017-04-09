@@ -15,10 +15,12 @@ app.controller('specializationCtrl',
 				var specializationName = document
 						.getElementById("specializationName_add").value;
 				var activeElement = document.getElementById("active_add");
-				var active = 0;
+				var active = "";
 				if (activeElement.checked == true) {
 					active = 1;
 				}
+				else
+	            	active=0;
 				$http({
 					method : "POST",
 					url : "/api/specialization",
@@ -29,9 +31,11 @@ app.controller('specializationCtrl',
 					},
 					dataType : "json",
 				}).then(function(response) {
-					alert(response.status);
+					
 					if (response.status == "201") {
-
+						$("#myModal_them").modal("hide");
+						getListSpecializations();
+						addAlert();
 					}
 				})
 			}
@@ -47,9 +51,61 @@ app.controller('specializationCtrl',
 					data : JSON.stringify($scope.info),
 					dataType : "json",
 				}).then(function(response) {
-					
+					editAlert();
 				}, function(response) {
 					
-				})
+				});
 			}
+			// delete school
+	         $scope.deleteS=function()
+	        {
+	            $http({
+	               method: "DELETE",
+	              url: "/api/specialization/" + $scope.specialization_delete.id,
+	              dataType: "json",
+	            })
+	               .then(function (result) {
+	                  if (result.status == 202) {
+	                      
+	                       //location.reload();
+	                       
+	                	  $("#myModal_xoa").modal("hide");
+	                	  getListSpecializations();
+	                	  deleteAlert();
+	                  } 
+	             });
+	        }
+	        // get data for delete
+	        $scope.specialization_delete = [];
+	        $scope.deleteSpecialization = function (data) {
+	            $scope.specialization_delete = data;
+	        }; 
+	        
+	        function deleteAlert(){
+	    	  	swal({
+	    	  	  title:"",
+	    	  	  text: "Delete Successfully",
+	    	  	  type: "success",
+	    	  	  timer: 2000,
+	    	  	  showConfirmButton: false
+	    	  	});
+	    	  }
+	    	  function editAlert(){
+	    		  swal({
+	    		  	  title:"",
+	    		  	  text: "Edit Successfully",
+	    		  	  type: "success",
+	    		  	  timer: 2000,
+	    		  	  showConfirmButton: false
+	    		  	});
+	      	  }
+	    	  function addAlert(){
+	    		  swal({
+	    		  	  title:"",
+	    		  	  text: "Add Successfully",
+	    		  	  type: "success",
+	    		  	  timer: 2000,
+	    		  	  showConfirmButton: false
+	    		  	});
+	    	  }
 		});

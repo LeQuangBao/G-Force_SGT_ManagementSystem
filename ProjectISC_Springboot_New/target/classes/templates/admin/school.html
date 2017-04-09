@@ -245,7 +245,7 @@
 											</span>
 										</th>
 										<th style="width: 12%">
-											Active
+											Status
 										</th>
 									</tr>
                                     </thead>
@@ -298,31 +298,57 @@
 	      <div class="modal-body">
 					      		<form class="form-horizontal" name="frmSchoolAdd">
 												<!-- Text input-->
-												<div class="form-group">
-													  <label class="col-md-4 control-label" for="schoolID">School ID</label>  
-													  <div class="col-md-8">
-													  <input id="schoolID" name="schoolID" placeholder="Enter school id" class="form-control input-md" type="text" ng-model="school.schoolId" ng-required="true"/>
-													   		 													    <span id="helpBlock" style="color:red" class="help-block" ng-show="frmSchoolAdd.schoolID.$error.required">Please enter school id</span>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="schoolID">School
+								ID</label>
+							<div class="col-md-8">
+								<input id="schoolID" name="schoolID"
+									placeholder="Enter school id" class="form-control input-md"
+									type="text" ng-model="schoolId" ng-required="true" />
+								<div ng-messages="frmSchoolAdd.schoolID.$error">
+									<div ng-message="required" ng-show="frmSchoolAdd.schoolID.$touched">
+										<p style="color: red">Please enter School Id</p>
+									</div>
+									<div ng-message="validationError">
+										<p style="color: red">School ID is already exists. Please
+											enter another ID.</p>
+									</div>
+								</div>
 
-													  </div>
-												</div>
-												
-												<!-- Text input-->
+							</div>
+						</div>
+
+						<!-- Text input-->
 												<div class="form-group">
 													  <label class="col-md-4 control-label" for="schoolName">School Name</label>  
 													  <div class="col-md-8">
-													  <input id="schoolName" name="schoolName" placeholder="Enter school name" class="form-control input-md" type="text" ng-model="school.schoolName" ng-required="true"/>
-													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchoolAdd.schoolName.$error.required">Please enter school name</span>
-													  </div>
+																 <input id="schoolName" name="schoolName" placeholder="Enter school name" class="form-control input-md" type="text" ng-model="school.schoolName" ng-required="true"/>
+																	<div ng-messages="frmSchoolAdd.schoolName.$error">
+																		<div ng-message="required"
+																			ng-show="frmSchoolAdd.schoolName.$touched">
+																			<p style="color: red">Please enter School Name</p>
+																		</div>
+																		<div ng-message="validationError">
+																			<p style="color: red">School Name is already exists. Please
+																				enter another School Name.</p>
+																		</div>
+																	</div>
+													</div>
 												</div>
 												
 												<!-- Text input-->
 												<div class="form-group">
 													  <label class="col-md-4 control-label" for="address">Address</label>  
 													  <div class="col-md-8">
-													  <input id="address" name="address" placeholder="Enter address" class="form-control input-md" type="text" ng-required="true" ng-model="school.address"/>
-													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchoolAdd.address.$error.required">Please enter address</span>
-													  </div>
+															  <input id="address" name="address" placeholder="Enter address" class="form-control input-md" type="text" ng-required="true" ng-model="school.address"/>
+																		<div ng-messages="frmSchoolAdd.address.$error">
+																			<div ng-message="required"
+																				ng-show="frmSchoolAdd.address.$touched">
+																				<p style="color: red">Please enter School Address</p>
+																			</div>
+																			
+																		</div>
+									</div>
 												</div>
 												
 												<!-- Text input-->
@@ -330,7 +356,13 @@
 												  <label class="col-md-4 control-label" for="contact">Contact</label>  
 												  <div class="col-md-8">
 												  <input id="contact" name="contact" placeholder="Enter contact information" class="form-control input-md" type="text" ng-required="true" ng-model="school.contact"/>
-												    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmSchoolAdd.contact.$error.required">Please enter contact</span>
+												    		<div ng-messages="frmSchoolAdd.contact.$error">
+																			<div ng-message="required"
+																				ng-show="frmSchoolAdd.contact.$touched">
+																				<p style="color: red">Please enter School Contact</p>
+																			</div>
+																			
+																		</div>
 												  </div>
 												</div>
 												
@@ -447,7 +479,7 @@
                 </div>
 
                 <div class="modal-footer">
-                	<a class="btn btn-danger btn-ok" ng-click="delete()" onclick="JSalert()">Yes</a>
+                	<a class="btn btn-danger btn-ok" ng-click="delete()" onclick="deleteAlert()">Yes</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                     
                 </div>
@@ -503,18 +535,7 @@
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
 	
-	<script type="text/javascript">
-        	  function JSalert(){
-        	  	swal("","Remove Successfully","success");
-        	  }
-        	  function editAlert(){
-          	  	swal("","Update Successfully","success");
-          	  }
-        	  function addAlert(){
-            	  	swal("","Add Successfully","success");
-            	  }
-        	  
-        	  </script>
+	
 
 </body>
 </html>

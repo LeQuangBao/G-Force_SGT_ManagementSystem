@@ -211,7 +211,7 @@
                                         <td data-ng-bind="x.intakeName"></td>
                                         <td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
                                         <td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
-                                        <td data-ng-bind="x.active"></td>
+                                        <td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
                                         <td>
                                         <button class="btn btn-primary btn-sm" data-ng-click="GetIntake(x)" data-toggle="modal" data-target="#myModal_sua" href="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span></button>|

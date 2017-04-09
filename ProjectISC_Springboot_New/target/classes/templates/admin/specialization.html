@@ -41,6 +41,7 @@
 <link href="build/css/custom.min.css" rel="stylesheet" />
 <link href="build/css/style.css"
 	rel="stylesheet" />
+	<link href="js/sweetalert.css" rel="stylesheet" />
 </head>
 
 <body data-ng-app="myApp" data-ng-controller="specializationCtrl"
@@ -184,14 +185,14 @@
 													<td>{{$index+1}}</td>
 													<td data-ng-bind="x.specializationId"></td>
 													<td data-ng-bind="x.specializationName"></td>
-													<td data-ng-bind="x.active"></td>
+													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td><button class="btn btn-primary btn-sm"
 															ng-click="callEditSpecialization(x)" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 
 														</button>
-														<button class="btn btn-danger btn-sm"
+														<button data-toggle="modal" class="btn btn-danger btn-sm active" data-target="#myModal_xoa"
 															ng-click="deleteSpecialization(x)">
 
 															<span class="glyphicon glyphicon-remove"></span>
@@ -262,7 +263,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="addSpecialization()">Add</button>
+					<button class="btn btn-primary" ng-click="addSpecialization()" onclick="addAlert()">Add</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -312,8 +313,7 @@
 							<label class="control-label col-sm-2"></label>
 							<div class="col-sm-10">
 
-								<button class="btn btn-default" ng-click="editSpecialization()"
-									data-dismiss="modal">Edit</button>
+								
 
 							</div>
 						</div>
@@ -321,7 +321,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="editSpecialization()"
-						data-dismiss="modal">Edit</button>
+									data-dismiss="modal" onclick="editAlert()">Edit</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -340,13 +340,13 @@
 				</div>
 
 				<div class="modal-body">
-					<input type="hidden" ng-model="school_delete.id"></input>
+					<input type="hidden" ng-model="specialization_delete.id"></input>
 					<p>Do you want to delete?</p>
 					<p class="debug-url"></p>
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="delete()"
+					<a class="btn btn-danger btn-ok" ng-click="deleteS()"
 						onclick="JSalert()">Yes</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
@@ -362,10 +362,13 @@
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
+	<!-- Sweet alert -->
+	
+	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/intakeCtrl.js"></script>
+	<script type="text/javascript" src="scripts/specializationCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
@@ -398,6 +401,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-
+		
 </body>
 </html>
