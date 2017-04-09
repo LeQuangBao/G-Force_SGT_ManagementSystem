@@ -47,11 +47,11 @@ app.controller('schoolCtrl', function($scope, $http) {
 	    };  
         //edit school
         $scope.update = function () {
-        	
+        	var schoolObj={id:$scope.school_edit.id,schoolId:$scope.school_edit.schoolId, schoolName: $scope.school_edit.schoolName, address:$scope.school_edit.address, contact:$scope.school_edit.contact, active:($scope.school_edit.active==null?false:($scope.school_edit.active==false?false:true))};
             $http({
                method: "put",
               url: "/api/school",
-               data: JSON.stringify($scope.school_edit),
+               data: schoolObj,
                contentType: "application/json; charset=utf-8",
                dataType: "json"
             })
@@ -66,7 +66,15 @@ app.controller('schoolCtrl', function($scope, $http) {
         
         $scope.school_edit = [];
         $scope.editSchool = function (data) {
-            $scope.school_edit = {"id" : data.id, 	"schoolId" :data.schoolId, "schoolName" : data.schoolName, "address" : data.address, "contact" : data.contact, "active" : data.active};
+        	$http.get("/api/school/"+data.id)
+            .then(function (response) {
+            	$scope.school_edit.schoolId=response.data.schoolId;
+       			$scope.school_edit.schoolName=response.data.schoolName;
+       			$scope.school_edit.address=response.data.address; 
+       			$scope.school_edit.contact=response.data.contact;
+       			$scope.school_edit.active=response.data.active;
+	       		$scope.school_edit.id=data.id;	
+          });
         };
         // delete school
          $scope.delete=function()

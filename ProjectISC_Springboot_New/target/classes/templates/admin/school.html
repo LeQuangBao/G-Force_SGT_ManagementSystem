@@ -380,7 +380,7 @@
 				</form>
 	      </div>
 	      <div class="modal-footer">
-	      <button id="btnSave" name="btnSave" class="btn btn-primary" ng-click="save()" onclick="addAlert()" ng-disabled="frmSchoolAdd.schoolId.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Save</button>
+	      <button id="btnSave" name="btnSave" class="btn btn-primary" ng-click="save()" ng-disabled="frmSchoolAdd.schoolId.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Save</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	     
 	      </div>
@@ -397,7 +397,7 @@
 	      </div>
 	      <div class="modal-body">
 	        		<form class="form-horizontal" name="frmSchool">
-										
+										<input type="hidden" name="id" ng-model="school_edit.id"/>
 									
 												
 												<!-- Text input-->
@@ -443,7 +443,7 @@
 														  <div class="col-md-8">
 														 		<div class="checkbox">
 																    <label>
-																      <input type="checkbox" id="actived" required="required"></input> Active
+																      <input type="checkbox" id="actived" required="required" ng-model="school_edit.active"></input> Active
 																    </label>
 																  </div>
 														  </div>
@@ -455,7 +455,7 @@
 				</form>
 	      </div>
 	      <div class="modal-footer">
-	      <button type="button" class="btn btn-primary" ng-click="update()" onclick="editAlert()" ng-disabled="frmSchool.schoolId.$error.required || frmSchool.schoolName.$error.required || frmSchool.address.$error.required|| frmSchool.contact.$error.required">Save</button>
+	      <button type="button" class="btn btn-primary" ng-click="update()" ng-disabled="frmSchool.schoolId.$error.required || frmSchool.schoolName.$error.required || frmSchool.address.$error.required|| frmSchool.contact.$error.required">Save</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        
 	      </div>
@@ -479,7 +479,8 @@
                 </div>
 
                 <div class="modal-footer">
-                	<a class="btn btn-danger btn-ok" ng-click="delete()" onclick="deleteAlert()">Yes</a>
+                	<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                     
                 </div>

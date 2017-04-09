@@ -89,8 +89,7 @@ app.controller('intakeCtrl', function($scope, $filter,$resource) {
 	};
 	
 	// show a tooltip displaying how a column is sorted
-	$scope.sortTooltip = function(label1, label2) {
-		label2 = label2 || '';
+	$scope.sortTooltip = function(label1) {
 		
 		var order = 'descending';
 		if (matchFirstChar('-', $scope.sortType)) {
@@ -98,11 +97,11 @@ app.controller('intakeCtrl', function($scope, $filter,$resource) {
 		}
 		
 		var baseSortType = removeDash($scope.sortType);
-		if (label1 == baseSortType || label2 == baseSortType) {
+		if (label1 == baseSortType) {
 			return capitalizeFirstLetter((makeReadableLabel(baseSortType)) + ' ' + order);
 		}
-		return 'Sort by ' + makeReadableLabel(label1) + ' or ' + makeReadableLabel(label2);
-	};
+		return 'Sort by ' + makeReadableLabel(label1) 
+		};
 	
 	//Phân trang
 	$scope.currentPage = 1;
@@ -119,24 +118,22 @@ app.controller('intakeCtrl', function($scope, $filter,$resource) {
 		return (($scope.filterSort(name) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
 	}
 	
+	
 	//Thêm mới intake
 	$scope.Them=function(){
 		if(Check_Add()){
 			var startdate=new Date($scope.startdate);
 			var enddate=new Date($scope.enddate);
-			$scope.list.push({ 'intakeId':$scope.id, 'intakeName': $scope.name, 'startDate':startdate, 'endDate':enddate, 'active':($scope.active==null?false:true) });
+			$scope.list.push({ 'intakeId':$scope.id, 'intakeName': $scope.name, 'startDate':startdate, 'endDate':enddate, 'active':($scope.active==null?false:($scope.active==false?false:true)) });
 			var Intake = $resource('/api/intake');
 			// Call action method (save) on the class 
 			//
-			Intake.save({intakeId:$scope.id, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:($scope.active==null?false:true)}, function(response){
+			Intake.save({intakeId:$scope.id, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:($scope.active==null?false:($scope.active==false?false:true))}, function(response){
 				console.log(response.message);
 			});		
-			$scope.id='';
-			$scope.name='';
-			$scope.startdate='';
-			$scope.enddate='';
-			$scope.active=false;
+			
 			$('#myModal_them').modal('hide');
+			addAlert();
 		}
 	}
 	
@@ -173,8 +170,9 @@ app.controller('intakeCtrl', function($scope, $filter,$resource) {
 			$scope._name='';
 			$scope._startdate='';
 			$scope._enddate='';
-			$scope._active=false;	
+			$scope._active=false;
 			$('#myModal_sua').modal('hide');
+			editAlert();
 		}
 	}  
 	
@@ -188,44 +186,121 @@ app.controller('intakeCtrl', function($scope, $filter,$resource) {
 		Intake.delete({id:intakeObj.id});
 		var idx = $scope.list.indexOf(intakeObj);
 	    $scope.list.splice(idx, 1); //Xóa 1 intake vị trí idx
+	    deleteAlert();
 	}
-	
-	$scope.ResetForm=function(){
+
+	$scope.ResetForm_Add=function(){
 		$scope.id='';
 		$scope.name='';
 		$scope.startdate='';
 		$scope.enddate='';
 		$scope.active=false;
+		$scope.formThem.id.$setUntouched();
+		$scope.formThem.name.$setUntouched();
+		$scope.formThem.startdate.$setUntouched();
+		$scope.formThem.enddate.$setUntouched();
+		$scope.formThem.id.$error.validationError=false;
+		$scope.formThem.enddate.$error.validationError=false;
 	}
 	
-	//Kiểm tra form thêm trước khi thêm
+	$scope.ResetValidation_Edit=function(){
+		$scope.formSua._id.$error.validationError=false;
+		$scope.formSua._enddate.$error.validationError=false;
+	}
+	
+	//Kiểm tra form Thêm có trùng intakeId, endDate < startDate
 	function Check_Add(){
-		if(!($scope.formThem.id.$valid) || !($scope.formThem.name.$valid) || !($scope.formThem.startdate.$valid) || !($scope.formThem.enddate.$valid))
-			return false;
+		var flag=true;
+		angular.forEach($scope.list,function(value,key){
+			if(value.intakeId==$scope.id)
+			{
+				$scope.formThem.id.$error.validationError=true;
+				$scope.formThem.id.$valid=false;
+				flag=false;
+			}
+		});
+		if(flag){
+			$scope.formThem.enddate.$error.validationError=false;
+			$scope.formThem.id.$valid=true;
+		}
+		flag=true;	
 		if($scope.startdate > $scope.enddate)
 		{			
 			$scope.formThem.enddate.$error.validationError=true;
-			return false;
+			$scope.formThem.enddate.$valid=false;
+			flag= false;
 		}
-		else
+		if(flag){
 			$scope.formThem.enddate.$error.validationError=false;
+			$scope.formThem.enddate.$valid=true;
+		}
+		if(!($scope.formThem.id.$valid) || !($scope.formThem.enddate.$valid))
+			return false;
 		return true;
 	}
 	
-	//Kiểm tra form sửa trước khi sửa
+	//Kiểm tra form Sửa có trùng intakeId, endDate < startDate
 	function Check_Edit(){
-		if(!($scope.formSua._id.$valid) || !($scope.formSua._name.$valid) || !($scope.formSua._startdate.$valid) /*|| !($scope.formSua._enddate.$valid)*/)
-			return false;
+		var flag=true;
+		angular.forEach($scope.list,function(value,key){
+			if($scope._id!=intakeObj.intakeId){
+				if(value.intakeId==$scope._id)
+				{
+					$scope.formSua._id.$error.validationError=true;
+					$scope.formSua._id.$valid=false;
+					flag=false;
+				}
+			}
+		});
+		if(flag){
+			$scope.formSua._enddate.$error.validationError=false;
+			$scope.formSua._id.$valid=true;
+		}
+		flag=true;	
 		if($scope._startdate > $scope._enddate)
 		{			
 			$scope.formSua._enddate.$error.validationError=true;
-			return false;
+			$scope.formSua._enddate.$valid=false;
+			flag= false;
 		}
-		else
+		if(flag){
 			$scope.formSua._enddate.$error.validationError=false;
+			$scope.formSua._enddate.$valid=true;
+		}
+		if(!($scope.formSua._id.$valid) || !($scope.formSua._enddate.$valid))
+			return false;
 		return true;
 	}
 	
 	//Đặt mindate là ngày hiện tại
 	$scope.minDate=new Date();
+	
+	function deleteAlert(){
+	  	swal({
+	  	  title:"",
+	  	  text: "Delete Successfully",
+	  	  type: "success",
+	  	  timer: 2000,
+	  	  showConfirmButton: false
+	  	});
+	  }
+	  function editAlert(){
+		  swal({
+		  	  title:"",
+		  	  text: "Edit Successfully",
+		  	  type: "success",
+		  	  timer: 2000,
+		  	  showConfirmButton: false
+		  	});
+  	  }
+	  function addAlert(){
+		  swal({
+		  	  title:"",
+		  	  text: "Add Successfully",
+		  	  type: "success",
+		  	  timer: 2000,
+		  	  showConfirmButton: false
+		  	});
+	  }
+	  
 });
