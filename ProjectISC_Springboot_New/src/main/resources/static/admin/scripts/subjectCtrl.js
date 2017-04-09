@@ -30,7 +30,7 @@ app.controller('subjectCtrl', function($scope, $http) {
             	   subjectName: subject_name,
             	   credit : credit,
                   	hour:hour,
-                  	description:descriptipn,
+                  	description:description,
                   	active:active
                   	
                },
@@ -49,7 +49,7 @@ app.controller('subjectCtrl', function($scope, $http) {
 	    };  
         //edit subject
         $scope.update = function () {
-        	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,hour:$scope.subject_edit.description ,active:($scope.subject_edit.active==null?false:($scope.subject_edit.active==false?false:true))};
+        	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,description:$scope.subject_edit.description ,active:($scope.subject_edit.active==null?false:($scope.subject_edit.active==false?false:true))};
             $http({
                method: "put",
               url: "/api/subject",
@@ -70,13 +70,13 @@ app.controller('subjectCtrl', function($scope, $http) {
         $scope.editsubject = function (data) {
         	$http.get("/api/subject/"+data.id)
             .then(function (response) {
+            	$scope.subject_edit.id=data.id;	
             	$scope.subject_edit.subjectId=response.data.subjectId;
        			$scope.subject_edit.subjectName=response.data.subjectName;
        			$scope.subject_edit.credit=response.data.credit; 
        			$scope.subject_edit.hour=response.data.hour;
        			$scope.subject_edit.hour=response.data.description;
        			$scope.subject_edit.active=response.data.active;
-	       		$scope.subject_edit.id=data.id;	
           });
         };
         // delete subject
@@ -84,7 +84,7 @@ app.controller('subjectCtrl', function($scope, $http) {
         {
             $http({
                method: "DELETE",
-              url: "/api/subject/" + $scope.subject_delete.id,
+              url: "/api/subject/" +  $scope.subject_delete.id,
               dataType: "json",
             })
                .then(function (result) {

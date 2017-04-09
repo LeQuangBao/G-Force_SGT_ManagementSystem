@@ -207,7 +207,7 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter subject Name" class="form-control"
+									<input id="filter" type="text" placeholder="Filter (ID, Name)" class="form-control"
 							 data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
@@ -217,8 +217,12 @@
                                   <table class="table table-condensed table-hover">
                                     <thead>
                                       <tr>
-										<th style="width:5%">
+										<th class="sortable" style="width:5%"
+												data-ng-click="singleSort('id')">
 											&#35;
+											<span class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('id'), 'caret-up':sortAscend('id')}">
+											</span>
 										</th>
 										<th class="sortable" style="width: 10%"
 												data-ng-click="singleSort('subjectID')">
@@ -261,8 +265,8 @@
 									</tr>
                                     </thead>
                                     <tbody>
-                                      <tr data-ng-repeat="x in list | orderBy:'subjectName':false | filter:filterTable " >
-                                        <td>{{$index+1}}</td>
+                                      <tr data-ng-repeat="x in list | orderBy:'id':false | filter:filterTable " >
+                                        <td data-ng-bind="x.id"></td>
                                         <td data-ng-bind="x.subjectId"></td>
                                         <td data-ng-bind="x.subjectName"></td>
                                         <td data-ng-bind="x.credit"></td>
@@ -426,20 +430,19 @@
 												
 												<!-- Text input-->
 												<div class="form-group">
-													  <label class="col-md-4 control-label" for="subjectID">subject ID</label>  
+													  <label class="col-md-4 control-label" for="subjectID">ID</label>  
 													  <div class="col-md-8">
 													  <input id="subjectId" name="subjectId" placeholder="Enter subject id" class="form-control input-md" type="text" ng-model="subject_edit.subjectId" ng-required="true"/>
-													   		 													    <span id="helpBlock" style="color:red" class="help-block" ng-show="frmsubject.subjectId.$error.required">Please enter subject id</span>
-
+													   		 	 <span id="helpBlock" style="color:red" class="help-block" ng-show="frmsubject.subjectId.$error.required">Please enter Id</span>
 													  </div>
 												</div>
 												
 												<!-- Text input-->
 												<div class="form-group">
-													  <label class="col-md-4 control-label" for="subjectName">subject Name</label>  
+													  <label class="col-md-4 control-label" for="subjectName">Name</label>  
 													  <div class="col-md-8">
 													  <input id="subjectName" name="subjectName" placeholder="Enter subject name" class="form-control input-md" type="text" ng-model="subject_edit.subjectName" ng-required="true"/>
-													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.subjectName.$error.required">Please enter subject name</span>
+													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.subjectName.$error.required">Please enter Name</span>
 													  </div>
 												</div>
 												
@@ -447,7 +450,7 @@
 												<div class="form-group">
 													  <label class="col-md-4 control-label" for="credit">Credit</label>  
 													  <div class="col-md-8">
-													  <input id="credit" name="credit" placeholder="Enter credit" class="form-control input-md" type="text" ng-required="true" ng-model="subject_edit.credit"/>
+													  <input id="credit" name="credit" placeholder="Enter credit" class="form-control input-md" type="text" ng-required="true" ng-model="subject_edit.credit" />
 													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.credit.$error.required">Please enter Credit</span>
 													  </div>
 												</div>
@@ -463,7 +466,7 @@
 												<div class="form-group">
 												  <label class="col-md-4 control-label" for="description">Description</label>  
 												  <div class="col-md-8">
-												  <input id="description" name="description" placeholder="Enter description information" class="form-control input-md" type="text" ng-required="true" ng-model="subject_edit.description"/>
+												  <input id="description" name="description" placeholder="Enter description information" class="form-control input-md" type="text" ng-required="true" ng-model="subject_edit.description" />
 												    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.description.$error.required">Please enter Description</span>
 												  </div>
 												</div>
@@ -505,7 +508,7 @@
 
                 <div class="modal-body">
                 <input type="hidden" ng-model="subject_delete.id"></input>
-                    <p>Do you want to delete?</p>
+                    <p>Do you want to delete ID:  <span data-ng-bind="subject_delete.subjectId"></span> ? </p>
                     <p class="debug-url"></p>
                 </div>
 
