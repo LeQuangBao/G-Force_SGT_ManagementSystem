@@ -49,11 +49,10 @@ app.controller('specializationCtrl',
 
 			// update specialization
 			var specializationObj=null;
-			
-			//Lấy intake theo id
-			$scope.GetIntake=function(x){ 
-				var Intake = $resource('/api/intake/:id',{id:'@id'});
-				Intake.get({id:x.id}).$promise.then(function(specialization){
+
+			$scope.GetSpecialization=function(x){ 
+				var Specialization = $resource('/api/specialization/:id',{id:'@id'});
+				Specialization.get({id:x.id}).$promise.then(function(specialization){
 					$scope.info = specialization;
 				});		
 				specializationObj=x;
