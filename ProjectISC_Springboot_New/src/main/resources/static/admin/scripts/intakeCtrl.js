@@ -1,6 +1,6 @@
 app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	
-	//Lấy danh sách Intake
+	// Lấy danh sách Intake
 	function GetListIntake(){
 		$scope.list=[];
 		var Intake=$resource('/api/intake');
@@ -10,7 +10,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	
 	$scope.sortType = 'intakeName';
 	$scope.filterTable = '';
-	//Tìm kiếm theo tên
+	// Tìm kiếm theo tên
 	$scope.filterSort = function(element) {
 		if ($filter('filter')([element], $scope.filterTable).length > 0) {
 			return 1;
@@ -100,7 +100,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		return 'Sort by ' + makeReadableLabel(label1) 
 		};
 	
-	//Phân trang
+	// Phân trang
 	$scope.currentPage = 1;
 	// max size of the pagination bar
 	$scope.maxPaginationSize = 100;
@@ -116,14 +116,14 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	}
 	
 	
-	//Thêm mới intake
+	// Thêm mới intake
 	$scope.Them=function(){
 		if(Check_Add()){
 			var startdate=new Date($scope.startdate);
 			var enddate=new Date($scope.enddate);
 			
 			var Intake = $resource('/api/intake');
-			// Call action method (save) on the class 
+			// Call action method (save) on the class
 			//
 			Intake.save({intakeId:$scope.intakeid, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:($scope.active==null?false:($scope.active==false?false:true))})
 				.$promise.then(function(){
@@ -145,7 +145,8 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		Intake.get({id:x.id}).$promise.then(function(intake){
 			$scope._id=intake.intakeId;
 			$scope._name=intake.intakeName;
-			$scope._intakeName=intake.intakeName; //Tên intake trong modal Sửa
+			$scope._intakeName=intake.intakeName; // Tên intake trong modal
+													// Sửa
 			$scope._startdate=new Date(intake.startDate);
 			$scope._enddate=new Date(intake.endDate);
 			$scope._active=intake.active;
@@ -153,7 +154,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		intakeObj=x;
 	}
 	
-	//Sửa intake
+	// Sửa intake
 	$scope.Sua=function(){
 		if(Check_Edit()){
 			var Intake = $resource('/api/intake/',{},{'update': { method:'PUT',headers: { 'Content-Type': 'application/json' }}});
@@ -176,7 +177,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		}
 	}  
 	
-	//Lấy đối tượng intake
+	// Lấy đối tượng intake
 	$scope.GetIntakeObj=function(intake){
 		intakeObj=intake;
 		$scope._name=intake.intakeName;
@@ -186,7 +187,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		var Intake = $resource('/api/intake/:id',{id:'@id'});
 		Intake.delete({id:intakeObj.id});
 		var idx = $scope.list.indexOf(intakeObj);
-	    $scope.list.splice(idx, 1); //Xóa 1 intake vị trí idx
+	    $scope.list.splice(idx, 1); // Xóa 1 intake vị trí idx
 	    deleteAlert();
 	}
 
@@ -218,7 +219,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		$scope.formSua._enddate.$error.validationError=false;
 	}
 	
-	//Kiểm tra form Thêm có trùng intakeId, endDate < startDate
+	// Kiểm tra form Thêm có trùng intakeId, endDate < startDate
 	function Check_Add(){
 		var flag=true;
 		angular.forEach($scope.list,function(value,key){
@@ -249,7 +250,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		return true;
 	}
 	
-	//Kiểm tra form Sửa có trùng intakeId, endDate < startDate
+	// Kiểm tra form Sửa có trùng intakeId, endDate < startDate
 	function Check_Edit(){
 		var flag=true;
 		angular.forEach($scope.list,function(value,key){
@@ -282,7 +283,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		return true;
 	}
 	
-	//Đặt mindate là ngày hiện tại
+	// Đặt mindate là ngày hiện tại
 	$scope.minDate=new Date();
 	
 	function deleteAlert(){

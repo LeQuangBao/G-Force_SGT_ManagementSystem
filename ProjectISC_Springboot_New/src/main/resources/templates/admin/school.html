@@ -207,7 +207,7 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter School Name" class="form-control"
+									<input id="filter" type="text" placeholder="Filter" class="form-control"
 							 data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
@@ -251,7 +251,7 @@
                                     </thead>
                                     <tbody>
                                       <tr data-ng-repeat="x in list | orderBy:'schoolName':false | filter:filterTable " >
-                                        <td>{{$index+1}}</td>
+                                        <td ng-bind="$index+1"></td>
                                         <td data-ng-bind="x.schoolId"></td>
                                         <td data-ng-bind="x.schoolName"></td>
                                         <td data-ng-bind="x.address"></td>

@@ -36,7 +36,7 @@
 <link
 	href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
 	rel="stylesheet" />
-	
+
 
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet" />
@@ -49,8 +49,8 @@
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="/admin/intake" class="site_title"><i class="fa fa-paw"></i>
-							<span>Administration</span></a>
+						<a href="/admin/intake" class="site_title"><i
+							class="fa fa-paw"></i> <span>Administration</span></a>
 					</div>
 
 					<div class="clearfix"></div>
@@ -62,8 +62,10 @@
 								class="img-circle profile_img" />
 						</div>
 						<div class="profile_info">
-							
-							<h2><span>Welcome, </span>John Doe</h2>
+
+							<h2>
+								<span>Welcome, </span>John Doe
+							</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
@@ -80,15 +82,16 @@
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a href="/admin/intake">Intake management</a></li>
-										<li><a href="/admin/subject">School Management</a></li>
-										<li><a href="/admin/specialization">Specialization Management</a></li>
+										<li><a href="/admin/school">School Management</a></li>
+										<li><a href="/admin/specialization">Specialization
+												Management</a></li>
 										<li><a href="/admin/subject">Subject Management</a></li>
 									</ul></li>
-								
-								
+
+
 							</ul>
 						</div>
-						
+
 
 					</div>
 					<!-- /sidebar menu -->
@@ -184,102 +187,107 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>
-								subject Management
-							</h3>
+							<h3>subject Management</h3>
 						</div>
 						<div class="title_right">
 							<div class=" form-group pull-right top_search">
-								<button data-toggle="modal" ng-click="modal()" data-target="#myModal" type="button" class="btn btn-primary btn-lg active" >Add</button>
+								<button data-toggle="modal" ng-click="modal()"
+									data-target="#myModal" type="button"
+									class="btn btn-primary btn-lg active">Add</button>
 							</div>
 						</div>
-					
+
 					</div>
 
 					<div class="clearfix"></div>
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="x_panel">
+							<div class="x_panel">
 								<div class="x_title">
-								
-									
+
+
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter subject Name" class="form-control"
-							 data-ng-model="filterTable"></input>
+									<input id="filter" type="text" placeholder="Filter"
+										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
-								
-									
-									<div class="table-responsive" ng-model="filterController">          
-                                  <table class="table table-condensed table-hover">
-                                    <thead>
-                                      <tr>
-										<th style="width:5%">
-											&#35;
-										</th>
-										<th class="sortable" style="width: 10%"
-												data-ng-click="singleSort('subjectID')">
-											ID
-											<span class="caret-blank"
+
+
+									<div class="table-responsive" ng-model="filterController">
+										<table class="table table-condensed table-hover">
+											<thead>
+												<tr>
+													<th class="sortable" style="width: 5%"
+														data-ng-click="singleSort('id')">&#35; <span
+														class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('id'), 'caret-up':sortAscend('id')}">
+													</span>
+													</th>
+													<th class="sortable" style="width: 10%"
+														data-ng-click="singleSort('subjectID')">ID <span
+														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('subjectID'), 'caret-up':sortAscend('subjectID')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 20%"
-												data-ng-click="singleSort('subjectName')">
-											Name
-											<span class="caret-blank"
+													</span>
+													</th>
+													<th class="sortable" style="width: 20%"
+														data-ng-click="singleSort('subjectName')">Name <span
+														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('subjectName'), 'caret-up':sortAscend('subjectName')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 5%"
-												data-ng-click="singleSort('credit')">
-											Credit
-											<span class="caret-blank"
+													</span>
+													</th>
+													<th class="sortable" style="width: 5%"
+														data-ng-click="singleSort('credit')">Credit <span
+														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('credit'), 'caret-up':sortAscend('credit')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 10%"
-												data-ng-click="singleSort('hour')">
-											Hour
-											<span class="caret-blank"
+													</span>
+													</th>
+													<th class="sortable" style="width: 10%"
+														data-ng-click="singleSort('hour')">Hour <span
+														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('hour'), 'caret-up':sortAscend('hour')}">
-											</span>
-										</th>
-										<th class="sortable" style="width: 25%"
-												data-ng-click="singleSort('description')">
-											Description
-											<span class="caret-blank"
+													</span>
+													</th>
+													<th class="sortable" style="width: 25%"
+														data-ng-click="singleSort('description')">
+														Description <span class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('description'), 'caret-up':sortAscend('description')}">
-											</span>
-										</th>
-										<th style="width: 12%">
-											Status
-										</th>
-									</tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr data-ng-repeat="x in list | orderBy:'subjectName':false | filter:filterTable " >
-                                        <td>{{$index+1}}</td>
-                                        <td data-ng-bind="x.subjectId"></td>
-                                        <td data-ng-bind="x.subjectName"></td>
-                                        <td data-ng-bind="x.credit"></td>
-                                        <td data-ng-bind="x.hour"></td>
-                                        <td data-ng-bind="x.description"></td>
-                                        <td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
-                                        <td>
-                              <button type="button" ng-click="editsubject(x)" class="btn btn-primary active btn-sm" data-toggle="modal"  data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>|  
-                              <button type="button" ng-click="deletesubject(x)" data-toggle="modal" class="btn btn-danger btn-sm active" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>
-                             
-                              </td>
-                                    </tr>
-                                    </tbody>
-                                  </table>
-                                  
-                            </div>
-		                           		
+													</span>
+													</th>
+													<th style="width: 12%">Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													data-ng-repeat="x in list | orderBy:'id':false | filter:filterTable ">
+													<td ng-bind="$index+1"></td>
+													<td data-ng-bind="x.subjectId"></td>
+													<td data-ng-bind="x.subjectName"></td>
+													<td data-ng-bind="x.credit"></td>
+													<td data-ng-bind="x.hour"></td>
+													<td data-ng-bind="x.description"></td>
+													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
+													<td>
+														<button type="button" ng-click="editsubject(x)"
+															class="btn btn-primary active btn-sm" data-toggle="modal"
+															data-target="#myModal_sua">
+															<span class="glyphicon glyphicon-edit"></span>
+														</button>|
+														<button type="button" ng-click="deletesubject(x)"
+															data-toggle="modal" class="btn btn-danger btn-sm active"
+															data-target="#myModal_xoa">
+															<span class="glyphicon glyphicon-remove"></span>
+														</button>
+
+													</td>
+												</tr>
+											</tbody>
+										</table>
+
+									</div>
+
 								</div>
 							</div>
 						</div>
@@ -301,15 +309,18 @@
 	</div>
 	<!-- Modal thêm -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Add subject</h4>
-	      </div>
-	      <div class="modal-body">
-					      		<form class="form-horizontal" name="frmsubjectAdd">
-												<!-- Text input-->
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add subject</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" name="frmsubjectAdd">
+						<!-- Text input-->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="subjectID">subject
 								ID</label>
@@ -318,7 +329,8 @@
 									placeholder="Enter subject id" class="form-control input-md"
 									type="text" ng-model="subjectId" ng-required="true" />
 								<div ng-messages="frmsubjectAdd.subjectID.$error">
-									<div ng-message="required" ng-show="frmsubjectAdd.subjectID.$touched">
+									<div ng-message="required"
+										ng-show="frmsubjectAdd.subjectID.$touched">
 										<p style="color: red">Please enter subject Id</p>
 									</div>
 									<div ng-message="validationError">
@@ -331,193 +343,241 @@
 						</div>
 
 						<!-- Text input-->
-												<div class="form-group">
-													  <label class="col-md-4 control-label" for="subjectName">subject Name</label>  
-													  <div class="col-md-8">
-																 <input id="subjectName" name="subjectName" placeholder="Enter subject name" class="form-control input-md" type="text" ng-model="subject.subjectName" ng-required="true"/>
-																	<div ng-messages="frmsubjectAdd.subjectName.$error">
-																		<div ng-message="required"
-																			ng-show="frmsubjectAdd.subjectName.$touched">
-																			<p style="color: red">Please enter subject Name</p>
-																		</div>
-																		<div ng-message="validationError">
-																			<p style="color: red">subject Name is already exists. Please
-																				enter another subject Name.</p>
-																		</div>
-																	</div>
-													</div>
-												</div>
-												
-												<!-- Text input-->
-												<div class="form-group">
-													  <label class="col-md-4 control-label" for="credit">Credit</label>  
-													  <div class="col-md-8">
-															  <input id="credit" name="credit" placeholder="Enter credit" class="form-control input-md" type="text" ng-required="true" ng-model="subject.credit"/>
-																		<div ng-messages="frmsubjectAdd.credit.$error">
-																			<div ng-message="required"
-																				ng-show="frmsubjectAdd.credit.$touched">
-																				<p style="color: red">Please enter subject Credit</p>
-																			</div>
-																			
-																		</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="subjectName">subject
+								Name</label>
+							<div class="col-md-8">
+								<input id="subjectName" name="subjectName"
+									placeholder="Enter subject name" class="form-control input-md"
+									type="text" ng-model="subject.subjectName" ng-required="true" />
+								<div ng-messages="frmsubjectAdd.subjectName.$error">
+									<div ng-message="required"
+										ng-show="frmsubjectAdd.subjectName.$touched">
+										<p style="color: red">Please enter subject Name</p>
 									</div>
-												</div>
-												
-												<!-- Text input-->
-												<div class="form-group">
-												  <label class="col-md-4 control-label" for="hour">Hour</label>  
-												  <div class="col-md-8">
-												  <input id="hour" name="hour" placeholder="Enter hour information" class="form-control input-md" type="text" ng-required="true" ng-model="subject.hour"/>
-												    		<div ng-messages="frmsubjectAdd.hour.$error">
-																			<div ng-message="required"
-																				ng-show="frmsubjectAdd.hour.$touched">
-																				<p style="color: red">Please enter subject Hour</p>
-																			</div>
-																			
-																		</div>
-												  </div>
-												</div>
-												<div class="form-group">
-												  <label class="col-md-4 control-label" for="description">Description</label>  
-												  <div class="col-md-8">
-												  <input id="description" name="description" placeholder="Enter description information" class="form-control input-md" type="text" ng-required="true" ng-model="subject.description"/>
-												    		<div ng-messages="frmsubjectAdd.description.$error">
-																			<div ng-message="required"
-																				ng-show="frmsubjectAdd.description.$touched">
-																				<p style="color: red">Please enter subject Description</p>
-																			</div>
-																			
-																		</div>
-												  </div>
-												</div>
-														<!-- Multiple Radios -->
-														<div class="form-group">
-														  <label class="col-md-4 control-label" for="status">Status</label>
-														  <div class="col-md-8">
-														 		<div class="checkbox">
-																    <label>
-																      <input type="checkbox" id="actived" required="required"></input> Active
-																    </label>
-																  </div>
-														  </div>
-														</div>						
-				</form>
-	      </div>
-	      <div class="modal-footer">
-	      <button id="btnSave" name="btnSave" class="btn btn-primary" ng-click="save()" ng-disabled="frmsubjectAdd.subjectId.$error.required || frmsubjectAdd.subjectName.$error.required || frmsubjectAdd.credit.$error.required|| frmsubjectAdd.hour.$error.required|| frmsubjectAdd.description.$error.required">Save</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	     
-	      </div>
-	    </div>
-	  </div>
-</div>
-<!-- Modal sửa -->
-<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Edit subject Information</h4>
-	      </div>
-	      <div class="modal-body">
-	        		<form class="form-horizontal" name="frmsubject">
-										<input type="hidden" name="id" ng-model="subject_edit.id"/>
-									
-												
-												<!-- Text input-->
-												<div class="form-group">
-													  <label class="col-md-4 control-label" for="subjectID">subject ID</label>  
-													  <div class="col-md-8">
-													  <input id="subjectId" name="subjectId" placeholder="Enter subject id" class="form-control input-md" type="text" ng-model="subject_edit.subjectId" ng-required="true"/>
-													   		 													    <span id="helpBlock" style="color:red" class="help-block" ng-show="frmsubject.subjectId.$error.required">Please enter subject id</span>
+									<div ng-message="validationError">
+										<p style="color: red">subject Name is already exists.
+											Please enter another subject Name.</p>
+									</div>
+								</div>
+							</div>
+						</div>
 
-													  </div>
-												</div>
-												
-												<!-- Text input-->
-												<div class="form-group">
-													  <label class="col-md-4 control-label" for="subjectName">subject Name</label>  
-													  <div class="col-md-8">
-													  <input id="subjectName" name="subjectName" placeholder="Enter subject name" class="form-control input-md" type="text" ng-model="subject_edit.subjectName" ng-required="true"/>
-													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.subjectName.$error.required">Please enter subject name</span>
-													  </div>
-												</div>
-												
-												<!-- Text input-->
-												<div class="form-group">
-													  <label class="col-md-4 control-label" for="credit">Credit</label>  
-													  <div class="col-md-8">
-													  <input id="credit" name="credit" placeholder="Enter credit" class="form-control input-md" type="text" ng-required="true" ng-model="subject_edit.credit"/>
-													    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.credit.$error.required">Please enter Credit</span>
-													  </div>
-												</div>
-												
-												<!-- Text input-->
-												<div class="form-group">
-												  <label class="col-md-4 control-label" for="hour">Hour</label>  
-												  <div class="col-md-8">
-												  <input id="hour" name="hour" placeholder="Enter hour information" class="form-control input-md" type="text" ng-required="true" ng-model="subject_edit.hour"/>
-												    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.hour.$error.required">Please enter Hour</span>
-												  </div>
-												</div>
-												<div class="form-group">
-												  <label class="col-md-4 control-label" for="description">Description</label>  
-												  <div class="col-md-8">
-												  <input id="description" name="description" placeholder="Enter description information" class="form-control input-md" type="text" ng-required="true" ng-model="subject_edit.description"/>
-												    <span id="helpBlock" class="help-block" style="color:red" ng-show="frmsubject.description.$error.required">Please enter Description</span>
-												  </div>
-												</div>
-												
-														<!-- Multiple Radios -->
-														<div class="form-group">
-														  <label class="col-md-4 control-label" for="status">Status</label>
-														  <div class="col-md-8">
-														 		<div class="checkbox">
-																    <label>
-																      <input type="checkbox" id="actived" required="required" ng-model="subject_edit.active"></input> Active
-																    </label>
-																  </div>
-														  </div>
-														</div>
-												
-														
-												
-								
-				</form>
-	      </div>
-	      <div class="modal-footer">
-	      <button type="button" class="btn btn-primary" ng-click="update()" ng-disabled="frmsubject.subjectId.$error.required || frmsubject.subjectName.$error.required || frmsubject.credit.$error.required|| frmsubject.hour.$error.required|| frmsubject.description.$error.required">Save</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        
-	      </div>
-	    </div>
-	  </div>
-</div>
-<!-- Modal xóa -->
-	 <div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog">
-            <div class="modal-content">
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="credit">Credit</label>
+							<div class="col-md-8">
+								<input id="credit" name="credit" placeholder="Enter credit"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="subject.credit" />
+								<div ng-messages="frmsubjectAdd.credit.$error">
+									<div ng-message="required"
+										ng-show="frmsubjectAdd.credit.$touched">
+										<p style="color: red">Please enter subject Credit</p>
+									</div>
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
+								</div>
+							</div>
+						</div>
 
-                <div class="modal-body">
-                <input type="hidden" ng-model="subject_delete.id"></input>
-                    <p>Do you want to delete?</p>
-                    <p class="debug-url"></p>
-                </div>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="hour">Hour</label>
+							<div class="col-md-8">
+								<input id="hour" name="hour"
+									placeholder="Enter hour information"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="subject.hour" />
+								<div ng-messages="frmsubjectAdd.hour.$error">
+									<div ng-message="required"
+										ng-show="frmsubjectAdd.hour.$touched">
+										<p style="color: red">Please enter subject Hour</p>
+									</div>
 
-                <div class="modal-footer">
-                	<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="description">Description</label>
+							<div class="col-md-8">
+								<input id="description" name="description"
+									placeholder="Enter description information"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="subject.description" />
+								<div ng-messages="frmsubjectAdd.description.$error">
+									<div ng-message="required"
+										ng-show="frmsubjectAdd.description.$touched">
+										<p style="color: red">Please enter subject Description</p>
+									</div>
 
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+								</div>
+							</div>
+						</div>
+						<!-- Multiple Radios -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="status">Status</label>
+							<div class="col-md-8">
+								<div class="checkbox">
+									<label> <input type="checkbox" id="actived"
+										required="required"></input> Active
+									</label>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="save()"
+						ng-disabled="frmsubjectAdd.subjectId.$error.required || frmsubjectAdd.subjectName.$error.required || frmsubjectAdd.credit.$error.required|| frmsubjectAdd.hour.$error.required|| frmsubjectAdd.description.$error.required">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal sửa -->
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Edit subject
+						Information</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" name="frmsubject">
+						<input type="hidden" name="id" ng-model="subject_edit.id" />
+
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="subjectID">ID</label>
+							<div class="col-md-8">
+								<input id="subjectId" name="subjectId"
+									placeholder="Enter subject id" class="form-control input-md"
+									type="text" ng-model="subject_edit.subjectId"
+									ng-required="true" /> <span id="helpBlock" style="color: red"
+									class="help-block"
+									ng-show="frmsubject.subjectId.$error.required">Please
+									enter Id</span>
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="subjectName">Name</label>
+							<div class="col-md-8">
+								<input id="subjectName" name="subjectName"
+									placeholder="Enter subject name" class="form-control input-md"
+									type="text" ng-model="subject_edit.subjectName"
+									ng-required="true" /> <span id="helpBlock" class="help-block"
+									style="color: red"
+									ng-show="frmsubject.subjectName.$error.required">Please
+									enter Name</span>
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="credit">Credit</label>
+							<div class="col-md-8">
+								<input id="credit" name="credit" placeholder="Enter credit"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="subject_edit.credit" /> <span id="helpBlock"
+									class="help-block" style="color: red"
+									ng-show="frmsubject.credit.$error.required">Please enter
+									Credit</span>
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="hour">Hour</label>
+							<div class="col-md-8">
+								<input id="hour" name="hour"
+									placeholder="Enter hour information"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="subject_edit.hour" /> <span id="helpBlock"
+									class="help-block" style="color: red"
+									ng-show="frmsubject.hour.$error.required">Please enter
+									Hour</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="description">Description</label>
+							<div class="col-md-8">
+								<input id="description" name="description"
+									placeholder="Enter description information"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="subject_edit.description" /> <span id="helpBlock"
+									class="help-block" style="color: red"
+									ng-show="frmsubject.description.$error.required">Please
+									enter Description</span>
+							</div>
+						</div>
+
+						<!-- Multiple Radios -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="status">Status</label>
+							<div class="col-md-8">
+								<div class="checkbox">
+									<label> <input type="checkbox" id="actived"
+										required="required" ng-model="subject_edit.active"></input>
+										Active
+									</label>
+								</div>
+							</div>
+						</div>
+
+
+
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="update()"
+						ng-disabled="frmsubject.subjectId.$error.required || frmsubject.subjectName.$error.required || frmsubject.credit.$error.required|| frmsubject.hour.$error.required|| frmsubject.description.$error.required">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal xóa -->
+	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+				</div>
+
+				<div class="modal-body">
+					<input type="hidden" ng-model="subject_delete.id"></input>
+					<p>
+						Do you want to delete ID: <span
+							data-ng-bind="subject_delete.subjectId"></span> ?
+					</p>
+					<p class="debug-url"></p>
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
@@ -525,10 +585,10 @@
 	<script type="text/javascript" src="js/angular-resource.min.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
 	<!-- Sweet alert -->
-	
+
 	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
 	<!-- jQuery -->
-	
+
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -566,8 +626,8 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-	
-	
+
+
 
 </body>
 </html>
