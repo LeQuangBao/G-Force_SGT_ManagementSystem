@@ -195,7 +195,7 @@
 														data-ng-class="{'caret-down':sortDescend('active'), 'caret-up':sortAscend('active')}">
 													</span>
 													</th>
-													<th style="width: 15%">#</th>
+													<th style="width: 15%">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -269,7 +269,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add New Intake</h4>
+					<h4 class="modal-title" id="myModalLabel">Add Intake</h4>
 				</div>
 				<div class="modal-body">
 					<form id="formThem" name="formThem" class="form-horizontal"
@@ -474,11 +474,11 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Delete {{_name}}</h4>
+					<h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
 				</div>
 				<div class="modal-body">
 					<p>
-						Are you sure you want to delete this ?
+						Are you sure you want to delete {{_name}} ?
 					</p>
 				</div>
 				<div class="modal-footer">
