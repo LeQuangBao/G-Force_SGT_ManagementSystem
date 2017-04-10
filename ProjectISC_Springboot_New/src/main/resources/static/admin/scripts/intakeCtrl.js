@@ -103,8 +103,8 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	// Phân trang
 	$scope.currentPage = 1;
 	// max size of the pagination bar
-	$scope.maxPaginationSize = 100;
-	$scope.itemsPerPage = 10;
+	$scope.maxPaginationSize = 50;
+	$scope.itemsPerPage = 5;
 	$scope.updatePageIndexes = function () {
 		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
 		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
