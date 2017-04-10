@@ -1,18 +1,19 @@
-app.controller('schoolCtrl', function($scope, $http) {
+app.controller('subjectCtrl', function($scope, $http) {
 		var alertDuration = 1800;
-	    function getAllSchools(){ $http.get("/api/school")
+	    function getAllsubjects(){ $http.get("/api/subject")
 	    .then(function(response) {	
 	       $scope.list = response.data;
 	    });
 	    }
-	    getAllSchools();
-	    // add school
+	    getAllsubjects();
+	    //add subject
         $scope.save = function () {
            
-            var school_id = document.getElementById("schoolID").value;        
-            var school_name = document.getElementById("schoolName").value;
-            var address=document.getElementById("address").value;
-            var contact = document.getElementById("contact").value;
+            var subject_id = document.getElementById("subjectID").value;        
+            var subject_name = document.getElementById("subjectName").value;
+            var credit=document.getElementById("credit").value;
+            var hour = document.getElementById("hour").value;
+            var description = document.getElementById("description").value;
             var active1=document.getElementById("actived");
             var active="";
             if(active1.checked==true)
@@ -24,12 +25,13 @@ app.controller('schoolCtrl', function($scope, $http) {
           
             $http({
                 method: "POST",
-               url: "/api/school",
+               url: "/api/subject",
                data: {
-            	   schoolId: school_id,
-            	   schoolName: school_name,
-            	   address : address,
-                  	contact:contact,
+            	   subjectId: subject_id,
+            	   subjectName: subject_name,
+            	   credit : credit,
+                  	hour:hour,
+                  	description:description,
                   	active:active
                   	
                },
@@ -40,28 +42,28 @@ app.controller('schoolCtrl', function($scope, $http) {
           if (result.status == 201) {
 			
         	  $("#myModal").modal("hide");
-        	  getAllSchools();
+        	  getAllsubjects();
         	  addAlert();
           } 
     
             }, function(response) {
-    			alertFailMessage("Oops! Duplicate ID is not allowed.");
-    	    });
-	    }
-        // edit school
+				alertFailMessage("Oops! Duplicate ID is not allowed.");
+			});
+	    };  
+        //edit subject
         $scope.update = function () {
-        	var schoolObj={id:$scope.school_edit.id,schoolId:$scope.school_edit.schoolId, schoolName: $scope.school_edit.schoolName, address:$scope.school_edit.address, contact:$scope.school_edit.contact, active:($scope.school_edit.active==null?false:($scope.school_edit.active==false?false:true))};
+        	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,description:$scope.subject_edit.description ,active:($scope.subject_edit.active==null?false:($scope.subject_edit.active==false?false:true))};
             $http({
                method: "put",
-              url: "/api/school",
-               data: schoolObj,
+              url: "/api/subject",
+               data: subjectObj,
                contentType: "application/json; charset=utf-8",
                dataType: "json"
             })
                .then(function (result) {
                   if (result.status == 202) {
                 	  $("#myModal_sua").modal("hide");
-                	  getAllSchools();
+                	  getAllsubjects();
                 	  editAlert();
                   } 
              }, function(response) {
@@ -72,48 +74,43 @@ app.controller('schoolCtrl', function($scope, $http) {
              });
        }
         
-        $scope.school_edit = [];
-        $scope.editSchool = function (data) {
-        	$http.get("/api/school/"+data.id)
+        $scope.subject_edit = [];
+        $scope.editsubject = function (data) {
+        	$http.get("/api/subject/"+data.id)
             .then(function (response) {
-            	$scope.school_edit.schoolId=response.data.schoolId;
-       			$scope.school_edit.schoolName=response.data.schoolName;
-       			$scope.school_edit.address=response.data.address; 
-       			$scope.school_edit.contact=response.data.contact;
-       			$scope.school_edit.active=response.data.active;
-	       		$scope.school_edit.id=data.id;	
+            	$scope.subject_edit.id=data.id;	
+            	$scope.subject_edit.subjectId=response.data.subjectId;
+       			$scope.subject_edit.subjectName=response.data.subjectName;
+       			$scope.subject_edit.credit=response.data.credit; 
+       			$scope.subject_edit.hour=response.data.hour;
+       			$scope.subject_edit.description=response.data.description;
+       			$scope.subject_edit.active=response.data.active;
           });
         };
-        // delete school
+        // delete subject
          $scope.delete=function()
         {
             $http({
                method: "DELETE",
-              url: "/api/school/" + $scope.school_delete.id,
+              url: "/api/subject/" +  $scope.subject_delete.id,
               dataType: "json",
             })
                .then(function (result) {
                   if (result.status == 202) {
                       
-                       // location.reload();
+                       //location.reload();
                        
                 	  $("#myModal_xoa").modal("hide");
-                	  getAllSchools();
+                	  getAllsubjects();
                 	  deleteAlert();
                   } 
              });
         }
         // get data for delete
-        $scope.school_delete = [];
-        $scope.deleteSchool = function (data) {
-            $scope.school_delete = data;
+        $scope.subject_delete = [];
+        $scope.deletesubject = function (data) {
+            $scope.subject_delete = data;
         }; 
-        
-     // Sort and filter
-		$scope.sortType = 'schoolName';
-		$scope.sortReverse = false;
-		$scope.searchName = '';        
-        
         function deleteAlert(){
     	  	swal({
     	  	  title:"",
