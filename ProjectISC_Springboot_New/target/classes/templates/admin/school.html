@@ -191,7 +191,7 @@
 						</div>
 						<div class="title_right">
 							<div class=" form-group pull-right top_search">
-								<button data-toggle="modal" ng-click="modal()"
+								<button data-toggle="modal" ng-click="ResetForm_Add()"
 									data-target="#myModal" type="button"
 									class="btn btn-primary btn-lg">Add</button>
 							</div>
@@ -430,7 +430,7 @@
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()"
 						ng-disabled="frmSchoolAdd.schoolId.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Save</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="ResetForm()">Cancel</button>
 
 				</div>
 			</div>

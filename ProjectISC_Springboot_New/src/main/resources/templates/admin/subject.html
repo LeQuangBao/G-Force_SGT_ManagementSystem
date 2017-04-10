@@ -187,7 +187,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>subject Management</h3>
+							<h3>Subject Management</h3>
 						</div>
 						<div class="title_right">
 							<div class=" form-group pull-right top_search">
@@ -254,7 +254,7 @@
 														data-ng-click="singleSort('description')">
 														Description <span class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('description'), 'caret-up':sortAscend('description')}">
-													</span>s
+													</span>
 													</th>
 													<th style="width: 12%">Status</th>
 												</tr>
@@ -334,7 +334,7 @@
 					<form class="form-horizontal" name="frmsubjectAdd">
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="subjectID">subject
+							<label class="col-md-4 control-label" for="subjectID">Subject
 								ID</label>
 							<div class="col-md-8">
 								<input id="subjectID" name="subjectID"
@@ -343,10 +343,10 @@
 								<div ng-messages="frmsubjectAdd.subjectID.$error">
 									<div ng-message="required"
 										ng-show="frmsubjectAdd.subjectID.$touched">
-										<p style="color: red">Please enter subject Id</p>
+										<p style="color: red">Please enter Subject Id</p>
 									</div>
 									<div ng-message="validationError">
-										<p style="color: red">subject ID is already exists. Please
+										<p style="color: red">Subject ID is already exists. Please
 											enter another ID.</p>
 									</div>
 								</div>
@@ -356,7 +356,7 @@
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="subjectName">subject
+							<label class="col-md-4 control-label" for="subjectName">Subject
 								Name</label>
 							<div class="col-md-8">
 								<input id="subjectName" name="subjectName"
@@ -368,7 +368,7 @@
 										<p style="color: red">Please enter subject Name</p>
 									</div>
 									<div ng-message="validationError">
-										<p style="color: red">subject Name is already exists.
+										<p style="color: red">Subject Name is already exists.
 											Please enter another subject Name.</p>
 									</div>
 								</div>
@@ -379,13 +379,13 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
-								<input id="credit" name="credit" placeholder="Enter credit"
-									class="form-control input-md" type="number" ng-required="true"
+								<input id="credit" name="credit" placeholder="Enter Subject Credit"
+									class="form-control input-md" type="number" ng-required="true" min="0"
 									ng-model="subject.credit" />
 								<div ng-messages="frmsubjectAdd.credit.$error">
 									<div ng-message="required"
 										ng-show="frmsubjectAdd.credit.$touched">
-										<p style="color: red">Please enter subject Credit</p>
+										<p style="color: red">Please enter Subject Credit</p>
 									</div>
 
 								</div>
@@ -398,7 +398,7 @@
 							<div class="col-md-8">
 								<input id="hour" name="hour"
 									placeholder="Enter hour information"
-									class="form-control input-md" type="number" ng-required="true"
+									class="form-control input-md" type="number" min="0" ng-required="true"
 									ng-model="subject.hour" />
 								<div ng-messages="frmsubjectAdd.hour.$error">
 									<div ng-message="required"
@@ -471,7 +471,7 @@
 							<label class="col-md-4 control-label" for="subjectID">ID</label>
 							<div class="col-md-8">
 								<input id="subjectId" name="subjectId"
-									placeholder="Enter subject id" class="form-control input-md"
+									placeholder="Enter Subject Id" class="form-control input-md"
 									type="text" ng-model="subject_edit.subjectId"
 									ng-required="true" /> <span id="helpBlock" style="color: red"
 									class="help-block"
@@ -498,7 +498,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
-								<input id="credit" name="credit" placeholder="Enter credit"
+								<input id="credit" name="credit"  min="0" placeholder="Example: 1"
 									class="form-control input-md" type="number" ng-required="true"
 									ng-model="subject_edit.credit" /> <span id="helpBlock"
 									class="help-block" style="color: red"
@@ -512,8 +512,8 @@
 							<label class="col-md-4 control-label" for="hour">Hour</label>
 							<div class="col-md-8">
 								<input id="hour" name="hour"
-									placeholder="Enter hour information"
-									class="form-control input-md" type="number" ng-required="true"
+									placeholder="Example :1 "
+									class="form-control input-md" min="0" type="number" ng-required="true"
 									ng-model="subject_edit.hour" /> <span id="helpBlock"
 									class="help-block" style="color: red"
 									ng-show="frmsubject.hour.$error.required">Please enter
