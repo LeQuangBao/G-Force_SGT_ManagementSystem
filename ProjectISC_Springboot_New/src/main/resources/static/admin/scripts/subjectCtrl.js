@@ -1,4 +1,5 @@
 app.controller('subjectCtrl', function($scope, $http) {
+		var alertDuration = 1800;
 	    function getAllsubjects(){ $http.get("/api/subject")
 	    .then(function(response) {	
 	       $scope.list = response.data;
@@ -45,7 +46,9 @@ app.controller('subjectCtrl', function($scope, $http) {
         	  addAlert();
           } 
     
-            });
+            }, function(response) {
+				alertFailMessage("Oops! Duplicate ID is not allowed.");
+			});
 	    };  
         //edit subject
         $scope.update = function () {
@@ -63,6 +66,11 @@ app.controller('subjectCtrl', function($scope, $http) {
                 	  getAllsubjects();
                 	  editAlert();
                   } 
+             }, function(response) {
+					alertFailMessage("Oops! Duplicate ID is not allowed.");
+					setTimeout(function() {
+						location.reload();
+					}, alertDuration);
              });
        }
         
@@ -130,5 +138,14 @@ app.controller('subjectCtrl', function($scope, $http) {
     		  	  showConfirmButton: false
     		  	});
     	  }
+    	  function alertFailMessage(message) {
+				swal({
+					title : "",
+					text : message,
+					type : "error",
+					timer : alertDuration,
+					showConfirmButton : false
+				});
+			}
        
 	});

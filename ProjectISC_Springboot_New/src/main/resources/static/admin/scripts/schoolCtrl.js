@@ -1,4 +1,5 @@
 app.controller('schoolCtrl', function($scope, $http) {
+		var alertDuration = 1800;
 	    function getAllSchools(){ $http.get("/api/school")
 	    .then(function(response) {	
 	       $scope.list = response.data;
@@ -43,8 +44,10 @@ app.controller('schoolCtrl', function($scope, $http) {
         	  addAlert();
           } 
     
-            });
-	    };  
+            }, function(response) {
+    			alertFailMessage("Oops! Duplicate ID is not allowed.");
+    	    });
+	    }
         // edit school
         $scope.update = function () {
         	var schoolObj={id:$scope.school_edit.id,schoolId:$scope.school_edit.schoolId, schoolName: $scope.school_edit.schoolName, address:$scope.school_edit.address, contact:$scope.school_edit.contact, active:($scope.school_edit.active==null?false:($scope.school_edit.active==false?false:true))};
@@ -61,6 +64,11 @@ app.controller('schoolCtrl', function($scope, $http) {
                 	  getAllSchools();
                 	  editAlert();
                   } 
+             }, function(response) {
+					alertFailMessage("Oops! Duplicate ID is not allowed.");
+					setTimeout(function() {
+						location.reload();
+					}, alertDuration);
              });
        }
         
@@ -133,5 +141,14 @@ app.controller('schoolCtrl', function($scope, $http) {
     		  	  showConfirmButton: false
     		  	});
     	  }
+    	  function alertFailMessage(message) {
+				swal({
+					title : "",
+					text : message,
+					type : "error",
+					timer : alertDuration,
+					showConfirmButton : false
+				});
+			}
        
 	});
