@@ -48,19 +48,6 @@ app.controller('specializationCtrl',
 			}
 
 			// update specialization
-//			var specializationObj = null;
-//
-//			$scope.GetSpecialization = function(x) {
-//				var Specialization = $resource('/api/specialization/:id', {
-//					id : '@id'
-//				});
-//				Specialization.get({
-//					id : x.id
-//				}).$promise.then(function(specialization) {
-//					$scope.info = specialization;
-//				});
-//				specializationObj = x;
-//			}
 			$scope.callEditSpecialization = function(data) {
 				$scope.info = data;
 			}
