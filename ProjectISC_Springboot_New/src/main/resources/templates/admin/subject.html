@@ -193,7 +193,7 @@
 							<div class=" form-group pull-right top_search">
 								<button data-toggle="modal" ng-click="modal()"
 									data-target="#myModal" type="button"
-									class="btn btn-primary btn-lg active">Add</button>
+									class="btn btn-primary btn-lg">Add</button>
 							</div>
 						</div>
 
@@ -271,7 +271,7 @@
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button type="button" ng-click="editsubject(x)"
-															class="btn btn-primary active btn-sm" data-toggle="modal"
+															class="btn btn-primary btn-sm" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>|
@@ -368,7 +368,7 @@
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
 								<input id="credit" name="credit" placeholder="Enter credit"
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="number" ng-required="true"
 									ng-model="subject.credit" />
 								<div ng-messages="frmsubjectAdd.credit.$error">
 									<div ng-message="required"
@@ -386,7 +386,7 @@
 							<div class="col-md-8">
 								<input id="hour" name="hour"
 									placeholder="Enter hour information"
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="number" ng-required="true"
 									ng-model="subject.hour" />
 								<div ng-messages="frmsubjectAdd.hour.$error">
 									<div ng-message="required"
@@ -487,7 +487,7 @@
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
 								<input id="credit" name="credit" placeholder="Enter credit"
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="number" ng-required="true"
 									ng-model="subject_edit.credit" /> <span id="helpBlock"
 									class="help-block" style="color: red"
 									ng-show="frmsubject.credit.$error.required">Please enter
@@ -501,7 +501,7 @@
 							<div class="col-md-8">
 								<input id="hour" name="hour"
 									placeholder="Enter hour information"
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="number" ng-required="true"
 									ng-model="subject_edit.hour" /> <span id="helpBlock"
 									class="help-block" style="color: red"
 									ng-show="frmsubject.hour.$error.required">Please enter
