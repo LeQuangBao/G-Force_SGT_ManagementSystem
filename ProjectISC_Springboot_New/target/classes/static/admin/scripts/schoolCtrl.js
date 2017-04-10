@@ -33,6 +33,7 @@ app.controller('schoolCtrl', function($scope, $http) {
                   	
                },
                
+               contentType: "application/json; charset=utf-8",
                dataType: "json"
             })
        .then(function (result) {	
@@ -52,6 +53,7 @@ app.controller('schoolCtrl', function($scope, $http) {
                method: "put",
               url: "/api/school",
                data: schoolObj,
+              
                contentType: "application/json; charset=utf-8",
                dataType: "json"
             })
