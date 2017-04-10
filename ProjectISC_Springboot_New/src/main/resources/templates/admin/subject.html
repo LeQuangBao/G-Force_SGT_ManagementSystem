@@ -187,7 +187,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>subject Management</h3>
+							<h3>Subject Management</h3>
 						</div>
 						<div class="title_right">
 							<div class=" form-group pull-right top_search">
@@ -322,7 +322,7 @@
 					<form class="form-horizontal" name="frmsubjectAdd">
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="subjectID">subject
+							<label class="col-md-4 control-label" for="subjectID">Subject
 								ID</label>
 							<div class="col-md-8">
 								<input id="subjectID" name="subjectID"
@@ -344,7 +344,7 @@
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="subjectName">subject
+							<label class="col-md-4 control-label" for="subjectName">Subject
 								Name</label>
 							<div class="col-md-8">
 								<input id="subjectName" name="subjectName"
@@ -367,8 +367,8 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
-								<input id="credit" name="credit" placeholder="Enter credit"
-									class="form-control input-md" type="text" ng-required="true"
+								<input id="credit" name="credit" placeholder="Enter Number of Credit "
+									class="form-control input-md" type="number" min="0" ng-required="true"
 									ng-model="subject.credit" />
 								<div ng-messages="frmsubjectAdd.credit.$error">
 									<div ng-message="required"
@@ -385,8 +385,8 @@
 							<label class="col-md-4 control-label" for="hour">Hour</label>
 							<div class="col-md-8">
 								<input id="hour" name="hour"
-									placeholder="Enter hour information"
-									class="form-control input-md" type="text" ng-required="true"
+									placeholder="Enter Number of Hour"
+									class="form-control input-md" type="number" min="0" ng-required="true"
 									ng-model="subject.hour" />
 								<div ng-messages="frmsubjectAdd.hour.$error">
 									<div ng-message="required"
@@ -407,7 +407,7 @@
 								<div ng-messages="frmsubjectAdd.description.$error">
 									<div ng-message="required"
 										ng-show="frmsubjectAdd.description.$touched">
-										<p style="color: red">Please enter subject Description</p>
+										<p style="color: red">Please enter Subject Description</p>
 									</div>
 
 								</div>
@@ -486,8 +486,8 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
-								<input id="credit" name="credit" placeholder="Enter credit"
-									class="form-control input-md" type="text" ng-required="true"
+								<input id="credit" name="credit" placeholder="Example: 1"
+									class="form-control input-md" type="number" min="0" ng-required="true"
 									ng-model="subject_edit.credit" /> <span id="helpBlock"
 									class="help-block" style="color: red"
 									ng-show="frmsubject.credit.$error.required">Please enter
@@ -500,8 +500,8 @@
 							<label class="col-md-4 control-label" for="hour">Hour</label>
 							<div class="col-md-8">
 								<input id="hour" name="hour"
-									placeholder="Enter hour information"
-									class="form-control input-md" type="text" ng-required="true"
+									placeholder="Example: 1"
+									class="form-control input-md" type="number" min="0" ng-required="true"
 									ng-model="subject_edit.hour" /> <span id="helpBlock"
 									class="help-block" style="color: red"
 									ng-show="frmsubject.hour.$error.required">Please enter
@@ -563,8 +563,8 @@
 				<div class="modal-body">
 					<input type="hidden" ng-model="subject_delete.id"></input>
 					<p>
-						Do you want to delete ID: <span
-							data-ng-bind="subject_delete.subjectId"></span> ?
+						Are you sure you want to delete this <strong
+							data-ng-bind="subject_delete.subjectName"></strong> ?
 					</p>
 					<p class="debug-url"></p>
 				</div>
