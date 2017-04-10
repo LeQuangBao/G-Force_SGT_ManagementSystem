@@ -5,7 +5,7 @@ app.controller('schoolCtrl', function($scope, $http) {
 	    });
 	    }
 	    getAllSchools();
-	    //add school
+	    // add school
         $scope.save = function () {
            
             var school_id = document.getElementById("schoolID").value;        
@@ -45,7 +45,7 @@ app.controller('schoolCtrl', function($scope, $http) {
     
             });
 	    };  
-        //edit school
+        // edit school
         $scope.update = function () {
         	var schoolObj={id:$scope.school_edit.id,schoolId:$scope.school_edit.schoolId, schoolName: $scope.school_edit.schoolName, address:$scope.school_edit.address, contact:$scope.school_edit.contact, active:($scope.school_edit.active==null?false:($scope.school_edit.active==false?false:true))};
             $http({
@@ -87,7 +87,7 @@ app.controller('schoolCtrl', function($scope, $http) {
                .then(function (result) {
                   if (result.status == 202) {
                       
-                       //location.reload();
+                       // location.reload();
                        
                 	  $("#myModal_xoa").modal("hide");
                 	  getAllSchools();
@@ -100,6 +100,12 @@ app.controller('schoolCtrl', function($scope, $http) {
         $scope.deleteSchool = function (data) {
             $scope.school_delete = data;
         }; 
+        
+     // Sort and filter
+		$scope.sortType = 'schoolName';
+		$scope.sortReverse = false;
+		$scope.searchName = '';        
+        
         function deleteAlert(){
     	  	swal({
     	  	  title:"",
