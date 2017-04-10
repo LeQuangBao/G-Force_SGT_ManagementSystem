@@ -262,7 +262,7 @@
 											<tbody>
 												<tr
 													data-ng-repeat="x in list | orderBy:'id':false | filter:filterTable ">
-													<td data-ng-bind="x.id"></td>
+													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.subjectId"></td>
 													<td data-ng-bind="x.subjectName"></td>
 													<td data-ng-bind="x.credit"></td>

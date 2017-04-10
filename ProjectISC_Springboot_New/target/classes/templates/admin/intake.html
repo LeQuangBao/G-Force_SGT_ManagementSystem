@@ -202,7 +202,7 @@
 												<tr
 													data-ng-repeat="x in list | orderBy:[filterSort, sortType]"
 													data-ng-show="showList(x.intakeName,$index)">
-													<td class="table-row-index">{{$index+1}}</td>
+													<td class="table-row-index" ng-bind="$index+1"></td>
 													<td data-ng-bind="x.intakeId"></td>
 													<td data-ng-bind="x.intakeName"></td>
 													<td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
