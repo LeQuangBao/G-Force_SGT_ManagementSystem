@@ -6,7 +6,7 @@ app.controller('subjectCtrl', function($scope, $http) {
 	    });
 	    }
 	    getAllsubjects();
-	    //add subject
+	    // add subject
         $scope.save = function () {
            
             var subject_id = document.getElementById("subjectID").value;        
@@ -27,9 +27,9 @@ app.controller('subjectCtrl', function($scope, $http) {
                 method: "POST",
                url: "/api/subject",
                data: {
-            	   subjectId: subject_id,
-            	   subjectName: subject_name,
-            	   credit : credit,
+            	   	subjectId: subject_id,
+            	    subjectName: subject_name,
+            	    credit : credit,
                   	hour:hour,
                   	description:description,
                   	active:active
@@ -47,10 +47,12 @@ app.controller('subjectCtrl', function($scope, $http) {
           } 
     
             }, function(response) {
-				alertFailMessage("Oops! Duplicate ID is not allowed.");
+            	if(response.status == 406) {            		
+            		alertFailMessage("Oops! Duplicate ID is not allowed.");
+            	}
 			});
 	    };  
-        //edit subject
+        // edit subject
         $scope.update = function () {
         	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,description:$scope.subject_edit.description ,active:($scope.subject_edit.active==null?false:($scope.subject_edit.active==false?false:true))};
             $http({
@@ -98,7 +100,7 @@ app.controller('subjectCtrl', function($scope, $http) {
                .then(function (result) {
                   if (result.status == 202) {
                       
-                       //location.reload();
+                       // location.reload();
                        
                 	  $("#myModal_xoa").modal("hide");
                 	  getAllsubjects();

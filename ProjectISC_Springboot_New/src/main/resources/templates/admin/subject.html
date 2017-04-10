@@ -368,7 +368,7 @@
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
 								<input id="credit" name="credit" placeholder="Enter credit"
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="number" ng-required="true"
 									ng-model="subject.credit" />
 								<div ng-messages="frmsubjectAdd.credit.$error">
 									<div ng-message="required"
@@ -386,7 +386,7 @@
 							<div class="col-md-8">
 								<input id="hour" name="hour"
 									placeholder="Enter hour information"
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="number" ng-required="true"
 									ng-model="subject.hour" />
 								<div ng-messages="frmsubjectAdd.hour.$error">
 									<div ng-message="required"
