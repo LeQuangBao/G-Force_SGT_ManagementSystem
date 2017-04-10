@@ -269,7 +269,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="text" id="intakeid" name="intakeid" data-ng-model="intakeid" required="required" ng-click="ResetValidation1_Add()" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.intakeid.$error">
-					      <div ng-message="required" ng-show="formThem.intakeid.$touched"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.intakeid.$touched"><p style="color:red">Please enter intake id</p></div>
 					      <!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
 					    </div>
                      </div>
@@ -281,7 +281,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="text" id="name" name="name" data-ng-model="name" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.name.$error">
-					      <div ng-message="required" ng-show="formThem.name.$touched"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.name.$touched"><p style="color:red">Please enter intake name</p></div>
 					    </div>
                      </div>
                  </div>
@@ -292,7 +292,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="date" id="startdate" name="startdate" data-ng-model="startdate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.startdate.$error">
-					      <div ng-message="required" ng-show="formThem.startdate.$touched"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.startdate.$touched"><p style="color:red">Please pick a start date</p></div>
 					    </div>
                      </div>
                  </div>
@@ -303,7 +303,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="date" id="enddate" name="enddate" data-ng-model="enddate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" ng-click="ResetValidation2_Add()" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formThem.enddate.$error">
-					      <div ng-message="required" ng-show="formThem.enddate.$touched"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required" ng-show="formThem.enddate.$touched"><p style="color:red">Please pick an end date</p></div>
 					      <div ng-message="validationError"><p style="color:red">The End date must be greater than the Start date </p></div>
 					    </div>
                      </div>
@@ -350,7 +350,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="text" id="id" name="_id" data-ng-model="_id" required="required" ng-click="ResetValidation1_Edit()" class="form-control col-md-7 col-xs-12" />
                          <div ng-messages="formSua._id.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required"><p style="color:red">Please enter intake id</p></div>
 					      <!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
 					    </div>
                      </div>
@@ -362,7 +362,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="text" id="name" name="_name" data-ng-model="_name" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formSua._name.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required"><p style="color:red">Please enter intake name</p></div>
 					    </div>
                      </div>
                  </div>
@@ -373,7 +373,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="date" id="startdate" name="_startdate" data-ng-model="_startdate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formSua._startdate.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required"><p style="color:red">Please pick a start date</p></div>
 					    </div>
                      </div>
                  </div>
@@ -384,7 +384,7 @@
                      <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="date" id="enddate" name="_enddate" data-ng-model="_enddate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" ng-click="ResetValidation2_Edit()" class="form-control col-md-7 col-xs-12"/>
                          <div ng-messages="formSua._enddate.$error">
-					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="required"><p style="color:red">Please pick an end date</p></div>
 					      <div ng-message="validationError"><p style="color:red">The End date must be greater than the Start date </p></div>
 					    </div>
                      </div>
