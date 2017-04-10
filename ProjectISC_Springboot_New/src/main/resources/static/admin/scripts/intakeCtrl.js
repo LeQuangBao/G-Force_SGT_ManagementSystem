@@ -1,5 +1,5 @@
 app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
-	
+	var alertDuration = 1800;
 	// Lấy danh sách Intake
 	function GetListIntake(){
 		$scope.list=[];
@@ -128,10 +128,13 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			Intake.save({intakeId:$scope.intakeid, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:($scope.active==null?false:($scope.active==false?false:true))})
 				.$promise.then(function(){
 					GetListIntake();
-				});
+					$('#myModal_them').modal('hide');
+					addAlert();
+				}, function(response) {
+	    			alertFailMessage("Oops! Duplicate ID is not allowed.");
+	    	    });
 			$scope.ResetForm_Add();
-			$('#myModal_them').modal('hide');
-			addAlert();
+			
 		}		
 	}
 	
@@ -158,7 +161,16 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	$scope.Sua=function(){
 		if(Check_Edit()){
 			var Intake = $resource('/api/intake/',{},{'update': { method:'PUT',headers: { 'Content-Type': 'application/json' }}});
-			Intake.update({id:intakeObj.id,intakeId:$scope._id, intakeName: $scope._name, startDate:$scope._startdate, endDate:$scope._enddate, active:($scope._active==null?false:($scope._active==false?false:true))});
+			Intake.update({id:intakeObj.id,intakeId:$scope._id, intakeName: $scope._name, startDate:$scope._startdate, endDate:$scope._enddate, active:($scope._active==null?false:($scope._active==false?false:true))})
+				.$promise.then(function(){
+					$('#myModal_sua').modal('hide');
+					editAlert();
+					}, function(response) {
+						alertFailMessage("Oops! Duplicate ID is not allowed.");
+						setTimeout(function() {
+							location.reload();
+						}, alertDuration);
+				});
 			
 			var idx = $scope.list.indexOf(intakeObj);
 			$scope.list[idx].intakeId=$scope._id;
@@ -172,9 +184,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			$scope._startdate='';
 			$scope._enddate='';
 			$scope._active=false;
-			$('#myModal_sua').modal('hide');
-			editAlert();
-		}
+		}	
 	}  
 	
 	// Lấy đối tượng intake
@@ -245,7 +255,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			$scope.formThem.enddate.$error.validationError=false;
 			$scope.formThem.enddate.$valid=true;
 		}
-		if(!($scope.formThem.intakeid.$valid) || !($scope.formThem.enddate.$valid))
+		if(/*!($scope.formThem.intakeid.$valid) ||*/ !($scope.formThem.enddate.$valid))
 			return false;
 		return true;
 	}
@@ -278,7 +288,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			$scope.formSua._enddate.$error.validationError=false;
 			$scope.formSua._enddate.$valid=true;
 		}
-		if(!($scope.formSua._id.$valid) || !($scope.formSua._enddate.$valid))
+		if(/*!($scope.formSua._id.$valid) ||*/ !($scope.formSua._enddate.$valid))
 			return false;
 		return true;
 	}
@@ -313,5 +323,13 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		  	  showConfirmButton: false
 		  	});
 	  }
-	  
+	  function alertFailMessage(message) {
+			swal({
+				title : "",
+				text : message,
+				type : "error",
+				timer : alertDuration,
+				showConfirmButton : false
+			})
+		}
 });

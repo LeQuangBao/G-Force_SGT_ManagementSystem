@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>School Management</title>
+<title>Manage School</title>
 
 <base href="http://localhost:8080/admin/" />
 
@@ -49,8 +49,8 @@
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="/admin/intake" class="site_title"><i
-							class="fa fa-paw"></i> <span>Administration</span></a>
+						<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
+							<span>Gentelella Alela!</span></a>
 					</div>
 
 					<div class="clearfix"></div>
@@ -62,10 +62,8 @@
 								class="img-circle profile_img" />
 						</div>
 						<div class="profile_info">
-
-							<h2>
-								<span>Welcome, </span>John Doe
-							</h2>
+							<span>Hi,</span>
+							<h2>Admin</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
@@ -78,37 +76,22 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a><i class="fa fa-home"></i>Manage<span
+								<li><a><i class="fa fa-home"></i>Manager <span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="/admin/intake">Intake management</a></li>
-										<li><a href="/admin/school">School Management</a></li>
-										<li><a href="/admin/specialization">Specialization
-												Management</a></li>
-										<li><a href="/admin/subject">Subject Management</a></li>
-									</ul></li>
-
-
+										<li><a href="/admin/intake">Intake</a></li>
+										<li><a href="/admin/school">School</a></li>
+										<li><a href="/admin/specialization">Specialization</a></li>
+									</ul></li>			
 							</ul>
 						</div>
-
+					
 
 					</div>
 					<!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
-					<div class="sidebar-footer hidden-small">
-						<a data-toggle="tooltip" data-placement="top" title="Settings">
-							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
-							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Logout"
-							href="login.html"> <span class="glyphicon glyphicon-off"
-							aria-hidden="true"></span>
-						</a>
-					</div>
+
 					<!-- /menu footer buttons -->
 				</div>
 			</div>
@@ -125,57 +108,15 @@
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
 								aria-expanded="false"> <img src="production/images/img.jpg"
-									alt="" />John Doe <span class=" fa fa-angle-down"></span>
+									alt="" />Admin <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
-									<li><a href="javascript:;"> <span
-											class="badge bg-red pull-right">50%</span> <span>Settings</span>
-									</a></li>
-									<li><a href="javascript:;">Help</a></li>
 									<li><a href="login.html"><i
 											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul></li>
 
-							<li role="presentation" class="dropdown"><a
-								href="javascript:;" class="dropdown-toggle info-number"
-								data-toggle="dropdown" aria-expanded="false"> <i
-									class="fa fa-envelope-o"></i> <span class="badge bg-green">6</span>
-							</a>
-								<ul id="menu1" class="dropdown-menu list-unstyled msg_list"
-									role="menu">
-									<li><a> <span class="image"><img
-												src="production/images/img.jpg" alt="Profile Image" /></span> <span>
-												<span>John Smith</span> <span class="time">3 mins ago</span>
-										</span> <span class="message"> Film festivals used to be
-												do-or-die moments for movie makers. They were where... </span>
-									</a></li>
-									<li><a> <span class="image"><img
-												src="production/images/img.jpg" alt="Profile Image" /></span> <span>
-												<span>John Smith</span> <span class="time">3 mins ago</span>
-										</span> <span class="message"> Film festivals used to be
-												do-or-die moments for movie makers. They were where... </span>
-									</a></li>
-									<li><a> <span class="image"><img
-												src="production/images/img.jpg" alt="Profile Image" /></span> <span>
-												<span>John Smith</span> <span class="time">3 mins ago</span>
-										</span> <span class="message"> Film festivals used to be
-												do-or-die moments for movie makers. They were where... </span>
-									</a></li>
-									<li><a> <span class="image"><img
-												src="production/images/img.jpg" alt="Profile Image" /></span> <span>
-												<span>John Smith</span> <span class="time">3 mins ago</span>
-										</span> <span class="message"> Film festivals used to be
-												do-or-die moments for movie makers. They were where... </span>
-									</a></li>
-									<li>
-										<div class="text-center">
-											<a> <strong>See All Alerts</strong> <i
-												class="fa fa-angle-right"></i>
-											</a>
-										</div>
-									</li>
-								</ul></li>
+
 						</ul>
 					</nav>
 				</div>
@@ -210,68 +151,48 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter"
+									<input id="filter" type="text" placeholder="Filter School Name"
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
 
 
-									<div class="table-responsive">
+									<div class="table-responsive" ng-model="filterController">
 										<table class="table table-condensed table-hover">
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-													<th class="sortable" style="width: 5%"
-														ng-click="sortType = 'schoolId';sortReverse = !sortReverse">ID
-														<span
-														ng-show="sortType == 'schoolId' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'schoolId' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
+													<th style="width: 5%">ID</th>
+													<th class="sortable" style="width: 20%"
+														data-ng-click="singleSort('schoolName')">School Name
+														<span class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('schoolName'), 'caret-up':sortAscend('schoolName')}">
+													</span>
 													</th>
-													<th class="sortable" style="width: 10%"
-														ng-click="sortType = 'schoolName';sortReverse = !sortReverse">Name
-														<span
-														ng-show="sortType == 'schoolName' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'schoolName' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
+													<th class="sortable" style="width: 15%"
+														data-ng-click="singleSort('address')">Address <span
+														class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('address'), 'caret-up':sortAscend('address')}">
+													</span>
 													</th>
-													<th class="sortable" style="width: 25%"
-														ng-click="sortType = 'address';sortReverse = !sortReverse">Address
-														<span
-														ng-show="sortType == 'address' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'address' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
+													<th class="sortable" style="width: 18%"
+														data-ng-click="singleSort('contact')">Contact <span
+														class="caret-blank"
+														data-ng-class="{'caret-down':sortDescend('contact'), 'caret-up':sortAscend('contact')}">
+													</span>
 													</th>
-													<th class="sortable" style="width: 25%"
-														ng-click="sortType = 'contact';sortReverse = !sortReverse">Contact
-														<span
-														ng-show="sortType == 'contact' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'contact' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 6%"
-														ng-click="sortType = 'active';sortReverse = !sortReverse">Status
-														<span
-														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'active' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
+													<th style="width: 12%">Active</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list |  orderBy:sortType:sortReverse | filter:filterTable ">
-													<td ng-bind="$index+1"></td>
+													data-ng-repeat="x in list | orderBy:'schoolName':false | filter:filterTable ">
+													<td>{{$index+1}}</td>
 													<td data-ng-bind="x.schoolId"></td>
 													<td data-ng-bind="x.schoolName"></td>
 													<td data-ng-bind="x.address"></td>
 													<td data-ng-bind="x.contact"></td>
-													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
+													<td data-ng-bind="x.active"></td>
 													<td>
 														<button type="button" ng-click="editSchool(x)"
 															class="btn btn-primary active btn-sm" data-toggle="modal"
@@ -322,7 +243,10 @@
 					<h4 class="modal-title" id="myModalLabel">Add School</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" name="frmSchoolAdd">
+					<form class="form-horizontal">
+
+
+
 						<!-- Text input-->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="schoolID">School
@@ -330,17 +254,7 @@
 							<div class="col-md-8">
 								<input id="schoolID" name="schoolID"
 									placeholder="Enter school id" class="form-control input-md"
-									type="text" ng-model="schoolId" ng-required="true" />
-								<div ng-messages="frmSchoolAdd.schoolID.$error">
-									<div ng-message="required"
-										ng-show="frmSchoolAdd.schoolID.$touched">
-										<p style="color: red">Please enter School Id</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">School ID is already exists. Please
-											enter another ID.</p>
-									</div>
-								</div>
+									type="text" ng-model="school.schoolID" />
 
 							</div>
 						</div>
@@ -352,17 +266,8 @@
 							<div class="col-md-8">
 								<input id="schoolName" name="schoolName"
 									placeholder="Enter school name" class="form-control input-md"
-									type="text" ng-model="school.schoolName" ng-required="true" />
-								<div ng-messages="frmSchoolAdd.schoolName.$error">
-									<div ng-message="required"
-										ng-show="frmSchoolAdd.schoolName.$touched">
-										<p style="color: red">Please enter School Name</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">School Name is already exists.
-											Please enter another School Name.</p>
-									</div>
-								</div>
+									type="text" ng-model="school.schoolName" />
+
 							</div>
 						</div>
 
@@ -371,15 +276,9 @@
 							<label class="col-md-4 control-label" for="address">Address</label>
 							<div class="col-md-8">
 								<input id="address" name="address" placeholder="Enter address"
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="text"
 									ng-model="school.address" />
-								<div ng-messages="frmSchoolAdd.address.$error">
-									<div ng-message="required"
-										ng-show="frmSchoolAdd.address.$touched">
-										<p style="color: red">Please enter School Address</p>
-									</div>
 
-								</div>
 							</div>
 						</div>
 
@@ -389,15 +288,9 @@
 							<div class="col-md-8">
 								<input id="contact" name="contact"
 									placeholder="Enter contact information"
-									class="form-control input-md" type="text" ng-required="true"
-									ng-model="school.contact" />
-								<div ng-messages="frmSchoolAdd.contact.$error">
-									<div ng-message="required"
-										ng-show="frmSchoolAdd.contact.$touched">
-										<p style="color: red">Please enter School Contact</p>
-									</div>
+									ng-model="school.contact" class="form-control input-md"
+									type="text" />
 
-								</div>
 							</div>
 						</div>
 
@@ -406,18 +299,22 @@
 							<label class="col-md-4 control-label" for="status">Status</label>
 							<div class="col-md-8">
 								<div class="checkbox">
-									<label> <input type="checkbox" id="actived"
-										required="required"></input> Active
+									<label> <input type="checkbox" id="actived"></input>
+										Active
 									</label>
 								</div>
+
 							</div>
 						</div>
+
+
+
+
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="save()"
-						ng-disabled="frmSchoolAdd.schoolId.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Save</button>
+						ng-click="save()" onclick="addAlert()">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 
 				</div>
@@ -439,7 +336,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="frmSchool">
-						<input type="hidden" name="id" ng-model="school_edit.id" />
+
 
 
 						<!-- Text input-->
@@ -447,11 +344,11 @@
 							<label class="col-md-4 control-label" for="schoolID">School
 								ID</label>
 							<div class="col-md-8">
-								<input id="schoolId" name="schoolId"
+								<input id="schoolID" name="schoolID"
 									placeholder="Enter school id" class="form-control input-md"
 									type="text" ng-model="school_edit.schoolId" ng-required="true" />
 								<span id="helpBlock" style="color: red" class="help-block"
-									ng-show="frmSchool.schoolId.$error.required">Please
+									ng-show="frmSchool.schoolID.$error.required">Please
 									enter school id</span>
 
 							</div>
@@ -505,8 +402,7 @@
 							<div class="col-md-8">
 								<div class="checkbox">
 									<label> <input type="checkbox" id="actived"
-										required="required" ng-model="school_edit.active"></input>
-										Active
+										required="required"></input> Active
 									</label>
 								</div>
 							</div>
@@ -519,7 +415,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" ng-click="update()"
-						ng-disabled="frmSchool.schoolId.$error.required || frmSchool.schoolName.$error.required || frmSchool.address.$error.required|| frmSchool.contact.$error.required">Save</button>
+						onclick="editAlert()">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -545,8 +441,8 @@
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
-
+					<a class="btn btn-danger btn-ok" ng-click="delete()"
+						onclick="JSalert()">Yes</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
 				</div>
@@ -556,9 +452,6 @@
 
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/angular-messages.min.js"></script>
-	<script type="text/javascript" src="js/angular-resource.min.js"></script>
-	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
 	<!-- Sweet alert -->
 
 	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
@@ -600,8 +493,122 @@
 	<script src="vendors/pdfmake/build/vfs_fonts.js"></script>
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
+	<script>
+	var app = angular.module('myApp', []);
+	app.controller('schoolCtrl', function($scope, $http) {
+	    $http.get("/api/school")
+	    .then(function(response) {	
+	       $scope.list = response.data;
+	    });
+	    
+	    //add school
+        $scope.save = function () {
+           
+            var school_id = document.getElementById("schoolID").value;        
+            var school_name = document.getElementById("schoolName").value;
+            var address=document.getElementById("address").value;
+            var contact = document.getElementById("contact").value;
+            var active1=document.getElementById("actived");
+            var active="";
+            if(active1.checked==true)
+            	{
+            		active=1;
+            	}
+            else
+            	active=0;
+          
+            $http({
+                method: "POST",
+               url: "/api/school",
+               data: {
+            	   schoolId: school_id,
+            	   schoolName: school_name,
+            	   address : address,
+                  	contact:contact,
+                  	active:active
+                  	
+               },
+               
+               dataType: "json"
+            })
+       .then(function (result) {
+          if (result.status == "201") {
 
+        	  
+              location.href = window.location.origin + "/admin/school";
+              
+          } else {
+               alert("Something wrong");
 
+           }
+    
+            });
+	    };  
+        //edit school
+        $scope.update = function () {
+        	
+            $http({
+               method: "put",
+              url: "/api/school",
+               data: JSON.stringify($scope.school_edit),
+               contentType: "application/json; charset=utf-8",
+               dataType: "json"
+            })
+               .then(function (result) {
+                  if (result.status != "201") {
+                      
+                       
+                       location.href = window.location.origin + "/admin/school";
+                  } else {
+                       alert("Something wrong");
+
+                   }
+             });
+       }
+        
+        $scope.school_edit = [];
+        $scope.editSchool = function (data) {
+            $scope.school_edit = data;
+        };
+        // delete school
+         $scope.delete=function()
+        {
+            $http({
+               method: "DELETE",
+              url: "/api/school/" + $scope.school_delete.id,
+              dataType: "json",
+            })
+               .then(function (result) {
+                  if (result.status != "201") {
+                      
+                       //location.reload();
+                       location.href = window.location.origin + "/admin/school";
+                  } else {
+                       alert("Something wrong");
+
+                   }
+             });
+        }
+        // get data for delete
+        $scope.school_delete = [];
+        $scope.deleteSchool = function (data) {
+            $scope.school_delete = data;
+        }; 
+
+	});
+	</script>
+	<script type="text/javascript">
+        	  function JSalert(){
+        	  	swal("","Remove Successfully","success");
+        	  }
+        	  function editAlert(){
+          	  	swal("","Update Successfully","success");
+          	  }
+        	  function addAlert(){
+            	  	swal("","Add Successfully","success");
+            	  }
+        	  
+        	  </script>
 
 </body>
 </html>
