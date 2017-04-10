@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Manage Specialization</title>
+<title>Specialization Management</title>
 
 <base href="http://localhost:8080/admin/" />
 
@@ -134,7 +134,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Manager specialization</h3>
+							<h3>Specialization Management</h3>
 						</div>
 
 						<div class="title_right">
@@ -144,46 +144,53 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="clearfix"></div>
-
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-
-
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
 									<input id="filter" type="text"
 										placeholder="Filter specialization Name" class="form-control"
-										data-ng-model="filterTable"></input>
+										data-ng-model="searchName"></input>
 								</div>
 								<div class="x_content">
-
-
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover">
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-													<th style="width: 5%">ID</th>
+													<th class="sortable" style="width: 5%"
+														ng-click="sortType = 'specializationId';sortReverse = !sortReverse">ID
+														<span ng-show="sortType == 'specializationId' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'specializationId' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
 													<th class="sortable" style="width: 20%"
-														data-ng-click="singleSort('specializationName')">
-														Name <span class="caret-blank"
-														data-ng-class="{'caret-down':sortDescend('specializationName'), 'caret-up':sortAscend('specializationName')}">
-
-													</span>
-													<th style="width: 5%">Active</th>
+														ng-click="sortType = 'specializationName';sortReverse = !sortReverse">Name
+														<span ng-show="sortType == 'specializationName' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'specializationName' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													<th class="sortable" style="width: 5%"
+														ng-click="sortType = 'active';sortReverse = !sortReverse">
+														Active <span
+														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'active' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
 													</th>
 
 													<th style="width: 12%">Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr data-ng-repeat="x in list">
-													<!--                                        <tr data-ng-repeat="x in list | orderBy:[filterSort, sortType]" data-ng-show="filterSort(x.specializationName) == 1" > -->
+												<tr
+													data-ng-repeat="x in list | orderBy:sortType:sortReverse | filter:searchName">
 													<td>{{$index+1}}</td>
 													<td data-ng-bind="x.specializationId"></td>
 													<td data-ng-bind="x.specializationName"></td>
@@ -193,7 +200,7 @@
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 
-														</button>
+														</button>|
 														<button data-toggle="modal"
 															class="btn btn-danger btn-sm active"
 															data-target="#myModal_xoa"
@@ -268,7 +275,8 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="addSpecialization()">Add</button>
-					<button class="btn btn-default" ng-click="addSpecialization()" data-dismiss="modal">Add and Close</button>
+					<button class="btn btn-default" ng-click="addSpecialization()"
+						data-dismiss="modal">Add and Close</button>
 					<button class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -323,7 +331,7 @@
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="editSpecialization()"
 						data-dismiss="modal">Edit</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="refreshList()">Close</button>
 				</div>
 			</div>
 		</div>

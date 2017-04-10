@@ -11,6 +11,7 @@ app.controller('specializationCtrl',
 						})
 			}
 			getListSpecializations();
+			
 			// refresh list (call get list)
 			$scope.refreshList = function() {
 				getListSpecializations();
@@ -46,6 +47,17 @@ app.controller('specializationCtrl',
 				});
 			}
 
+			// update specialization
+			var specializationObj=null;
+			
+			//Lấy intake theo id
+			$scope.GetIntake=function(x){ 
+				var Intake = $resource('/api/intake/:id',{id:'@id'});
+				Intake.get({id:x.id}).$promise.then(function(specialization){
+					$scope.info = specialization;
+				});		
+				specializationObj=x;
+			}
 			$scope.callEditSpecialization = function(data) {
 				$scope.info = data;
 			}
@@ -58,11 +70,12 @@ app.controller('specializationCtrl',
 					dataType : "json",
 				}).then(function(response) {
 					alertEditSucess();
-				}, function(response) {
+				}, function(response) {					
 					alertFailMessage("Oops! Duplicate ID is not allowed.");
 				});
 			}
-
+			
+			// call for data first, then delete specialization
 			$scope.callDeleteSpecialization = function(data) {
 				deleteSpecialization = data;
 			}
@@ -82,11 +95,11 @@ app.controller('specializationCtrl',
 					alertFail();
 				});
 			}
-			// get data for delete
-			// $scope.specialization_delete = [];
-			// $scope.deleteSpecialization = function(data) {
-			// $scope.specialization_delete = data;
-			// };
+			
+			// Sort and filter
+			$scope.sortType = 'specializationName';
+			$scope.sortReverse = false;
+			$scope.searchName = '';
 
 			function alertDeleteSucess() {
 				swal({
@@ -123,6 +136,7 @@ app.controller('specializationCtrl',
 					timer : alertDuration,
 					showConfirmButton : false
 				})
+				getListSpecialization();
 			}
 			function alertFailMessage(message) {
 				swal({
@@ -132,5 +146,6 @@ app.controller('specializationCtrl',
 					timer : alertDuration,
 					showConfirmButton : false
 				})
+				getListSpecialization();
 			}
 		});
