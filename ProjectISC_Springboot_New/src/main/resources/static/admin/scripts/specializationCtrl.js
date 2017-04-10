@@ -16,7 +16,8 @@ app.controller('specializationCtrl',
 			$scope.refreshList = function() {
 				getListSpecializations();
 			}
-			 $scope.sortType = 'specializationName';
+			
+//			 $scope.sortType = 'specializationName';
 		    	$scope.filterTable = '';
 		    	// Tìm kiếm theo tên
 		    	$scope.filterSort = function(element) {

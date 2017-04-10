@@ -258,7 +258,7 @@
 					<h4 class="modal-title" id="myModalLabel">Add specialization</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" name="addForm">
+					<form class="form-horizontal" name="formAdd">
 						<div class="form-group">
 							<label class="control-label col-sm-2">Id:</label>
 							<div class="col-sm-10">
@@ -266,7 +266,7 @@
 									name="specializationId_add" class="form-control"
 									placeholder="Enter intake id" ng-model="specializationId_add"
 									required="required" /> <span
-									ng-show="addForm.specializationId_add.$touched &amp;&amp; addForm.specializationId_add.$invalid"><p
+									ng-show="formAdd.specializationId_add.$touched &amp;&amp; formAdd.specializationId_add.$invalid"><p
 										style="color: red">Please enter specialization id</p></span>
 							</div>
 						</div>
@@ -277,7 +277,7 @@
 									name="specializationName_add" ng-model="specializationName_add"
 									class="form-control" placeholder="Enter intake name"
 									required="required" /> <span
-									ng-show="addForm.specializationName_add.$touched &amp;&amp; addForm.specializationName_add.$invalid"><p
+									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
 										style="color: red">Please enter specialization name</p></span>
 							</div>
 						</div>
@@ -296,9 +296,9 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="addSpecialization()"
-						ng-disabled="addForm.specializationName_add.$dirty &amp;&amp; addForm.specializationName_add.$invalid || addForm.specializationId_add.$dirty &amp;&amp; addForm.specializationId_add.$invalid">Add</button>
+						ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add</button>
 					<button class="btn btn-default" ng-click="addSpecialization()"
-						data-dismiss="modal">Add and Close</button>
+						data-dismiss="modal" ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add and Close</button>
 					<button class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -318,23 +318,25 @@
 					<h4 class="modal-title" id="myModalLabel">Edit Specialization</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
-						<!-- 					<input type="hidden" id="specializationHiddenId_edit" value="{{info.id}}" -->
-						<!-- 									class="form-control" placeholder="Enter intake id" /> -->
+					<form class="form-horizontal" name="editForm">
 						<div class="form-group">
 							<label class="control-label col-sm-2">Id:</label>
 							<div class="col-sm-10">
-								<input type="text" id="specializationId_edit"
+								<input type="text" id="specializationId_edit" name="specializationId_edit"
 									ng-model="info.specializationId" class="form-control"
-									placeholder="Enter intake id" />
+									placeholder="Enter intake id" required="required"/><span
+									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
+										style="color: red">Please enter specialization id</p></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2">Name:</label>
 							<div class="col-sm-10">
-								<input type="text" id="specializationName_edit"
+								<input type="text" id="specializationName_edit" name="specializationName_edit"
 									ng-model="info.specializationName" class="form-control"
-									placeholder="Enter intake name" />
+									placeholder="Enter intake name" required="required"/><span
+									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
+										style="color: red">Please enter specialization name</p></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -352,7 +354,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="editSpecialization()"
-						data-dismiss="modal">Edit</button>
+						data-dismiss="modal" ng-disabled="editForm.specializationName_edit.$error.required || editForm.specializationId_edit.$error.required">Edit</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="refreshList()">Close</button>
 				</div>
