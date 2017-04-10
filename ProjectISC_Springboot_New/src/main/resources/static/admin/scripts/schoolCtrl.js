@@ -6,6 +6,32 @@ app.controller('schoolCtrl', function($scope, $http) {
 	    });
 	    }
 	    getAllSchools();
+	    $scope.sortType = 'schoolName';
+    	$scope.filterTable = '';
+    	// Tìm kiếm theo tên
+    	$scope.filterSort = function(element) {
+    		if ($filter('filter')([element], $scope.filterTable).length > 0) {
+    			return 1;
+    		}
+    		return 2;
+    	};
+    	
+    	// Phân trang
+    	$scope.currentPage = 1;
+    	// max size of the pagination bar
+    	$scope.maxPaginationSize = 50;
+    	$scope.itemsPerPage = 5;
+    	$scope.updatePageIndexes = function () {
+    		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+    		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
+    	};
+    	$scope.updatePageIndexes();
+    	
+    	$scope.showList=function(name,index){
+    		return (($scope.filterSort(name) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+    	}
+    	
+    	
 	    // add school
         $scope.save = function () {
            

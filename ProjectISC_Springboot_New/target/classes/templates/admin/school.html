@@ -265,7 +265,7 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list |  orderBy:sortType:sortReverse | filter:filterTable ">
+													data-ng-repeat="x in list |  orderBy:sortType:sortReverse | filter:filterTable " data-ng-show="showList(x.intakeName,$index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.schoolId"></td>
 													<td data-ng-bind="x.schoolName"></td>
@@ -289,6 +289,17 @@
 											</tbody>
 										</table>
 
+									</div>
+									<div class='pull-right'>
+										<uib-pagination
+											data-total-items="(list | filter:filterTable).length"
+											data-ng-model="currentPage"
+											data-ng-change="updatePageIndexes()"
+											data-max-size="maxPaginationSize"
+											data-items-per-page="itemsPerPage" data-boundary-links="true"
+											data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
+											data-first-text="&laquo;" data-last-text="&raquo;">
+										</uib-pagination>
 									</div>
 
 								</div>

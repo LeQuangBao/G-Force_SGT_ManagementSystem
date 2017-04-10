@@ -193,29 +193,23 @@
 														data-ng-click="singleSort('active')">Status <span
 														class="caret-blank"
 														data-ng-class="{'caret-down':sortDescend('active'), 'caret-up':sortAscend('active')}">
-													</span>
-													</th>
-													<th style="width: 15%">#</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr
-													data-ng-repeat="x in list | orderBy:[filterSort, sortType]"
-													data-ng-show="showList(x.intakeName,$index)">
-													<td class="table-row-index" ng-bind="$index+1"></td>
-													<td data-ng-bind="x.intakeId"></td>
-													<td data-ng-bind="x.intakeName"></td>
-													<td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
-													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
-													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
-													<td>
-														<button class="btn btn-primary btn-sm"
-															data-ng-click="GetIntake(x)" data-toggle="modal"
-															data-target="#myModal_sua" href="#myModal_sua">
-															<span class="glyphicon glyphicon-edit"></span>
-														</button>|
-														<button class="btn btn-danger btn-sm"
-															data-target="#myModal_xoa" href="#myModal_xoa"
+											</span>
+										</th>
+										<th style="width: 15%">#</th>
+									</tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr data-ng-repeat="x in list | orderBy:[filterSort, sortType]" data-ng-show="showList(x.intakeName,$index)">
+                                        <td class="table-row-index" ng-bind="$index+1"><input type="hidden" data-ng-model="x.id"/></td>
+                                        <td data-ng-bind="x.intakeId"></td>
+                                        <td data-ng-bind="x.intakeName"></td>
+                                        <td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
+                                        <td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
+                                        <td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
+                                        <td>
+                                        <button class="btn btn-primary btn-sm" data-ng-click="GetIntake(x)" data-toggle="modal" data-target="#myModal_sua" href="#myModal_sua">
+															<span class="glyphicon glyphicon-edit"></span></button>|
+															<button class="btn btn-danger btn-sm" data-target="#myModal_xoa" href="#myModal_xoa"
 															data-ng-click="GetIntakeObj(x)" data-toggle="modal">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button>
@@ -259,83 +253,61 @@
 		</div>
 	</div>
 	<!-- Modal thêm -->
-	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Add New Intake</h4>
-				</div>
-				<div class="modal-body">
-					<form id="formThem" name="formThem" class="form-horizontal"
-						role="form" method="post">
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">
-								ID </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" id="id" name="id" data-ng-model="id"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formThem.id.$error">
-									<div ng-message="required" ng-show="formThem.id.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">Intake ID is already exists. Please
-											enter another ID.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> Name </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" id="name" name="name" data-ng-model="name"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formThem.name.$error">
-									<div ng-message="required" ng-show="formThem.name.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> Start Date </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="date" id="startdate" name="startdate"
-									data-ng-model="startdate" min="{{minDate | date:'yyyy-MM-dd'}}"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formThem.startdate.$error">
-									<div ng-message="required"
-										ng-show="formThem.startdate.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> End Date </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="date" id="enddate" name="enddate"
-									data-ng-model="enddate" min="{{minDate | date:'yyyy-MM-dd'}}"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formThem.enddate.$error">
-									<div ng-message="required" ng-show="formThem.enddate.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">The End date must be greater than
-											the Start date</p>
-									</div>
-								</div>
-							</div>
-						</div>
+	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Add New Intake</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<form id="formThem" name="formThem" class="form-horizontal" role="form" method="post">
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">
+                         ID
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="intakeid" name="intakeid" data-ng-model="intakeid" required="required" ng-click="ResetValidation1_Add()" class="form-control col-md-7 col-xs-12"/>
+                         <div ng-messages="formThem.intakeid.$error">
+					      <div ng-message="required" ng-show="formThem.intakeid.$touched"><p style="color:red">This field is required</p></div>
+					      <!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
+					    </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                         Name
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="name" name="name" data-ng-model="name" required="required" class="form-control col-md-7 col-xs-12"/>
+                         <div ng-messages="formThem.name.$error">
+					      <div ng-message="required" ng-show="formThem.name.$touched"><p style="color:red">This field is required</p></div>
+					    </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                         Start Date
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="date" id="startdate" name="startdate" data-ng-model="startdate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" class="form-control col-md-7 col-xs-12"/>
+                         <div ng-messages="formThem.startdate.$error">
+					      <div ng-message="required" ng-show="formThem.startdate.$touched"><p style="color:red">This field is required</p></div>
+					    </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                         End Date
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="date" id="enddate" name="enddate" data-ng-model="enddate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" ng-click="ResetValidation2_Add()" class="form-control col-md-7 col-xs-12"/>
+                         <div ng-messages="formThem.enddate.$error">
+					      <div ng-message="required" ng-show="formThem.enddate.$touched"><p style="color:red">This field is required</p></div>
+					      <div ng-message="validationError"><p style="color:red">The End date must be greater than the Start date </p></div>
+					    </div>
+                     </div>
+                 </div>
 						<div class="form-group">
 
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -352,96 +324,71 @@
 						</div>
 
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="them"
-						data-ng-click="Them()" ng-disabled="formThem.$invalid">Add</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						data-ng-click="ResetForm()">Close</button>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal sửa -->
-	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Edit Intake
-						{{intakeName}}</h4>
-				</div>
-				<div class="modal-body">
-					<form id="formSua" name="formSua" class="form-horizontal"
-						role="form" method="post">
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> ID </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" id="id" name="_id" data-ng-model="_id"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._id.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">Intake ID is already exists. Please
-											enter another ID.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> Name </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" id="name" name="_name" data-ng-model="_name"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._name.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> Start Date </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="date" id="startdate" name="_startdate"
-									data-ng-model="_startdate"
-									min="{{minDate | date:'yyyy-MM-dd'}}" required="required"
-									class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._startdate.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> End Date </label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="date" id="enddate" name="_enddate"
-									data-ng-model="_enddate" min="{{minDate | date:'yyyy-MM-dd'}}"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._enddate.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">The End date must be greater than
-											the Start date</p>
-									</div>
-								</div>
-							</div>
-						</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="them" data-ng-click="Them()" ng-disabled="formThem.$invalid">Add</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="ResetForm()">Close</button>
+	     
+	      </div>
+	    </div>
+	  </div>
+</div>
+<!-- Modal sửa -->
+<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Edit Intake {{_name}}</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form id="formSua" name="formSua" class="form-horizontal" role="form" method="post">
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                         ID
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="id" name="_id" data-ng-model="_id" required="required" ng-click="ResetValidation1_Edit()" class="form-control col-md-7 col-xs-12" />
+                         <div ng-messages="formSua._id.$error">
+					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
+					    </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                         Name
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="name" name="_name" data-ng-model="_name" required="required" class="form-control col-md-7 col-xs-12"/>
+                         <div ng-messages="formSua._name.$error">
+					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					    </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                         Start Date
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="date" id="startdate" name="_startdate" data-ng-model="_startdate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" class="form-control col-md-7 col-xs-12"/>
+                         <div ng-messages="formSua._startdate.$error">
+					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					    </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                         End Date
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="date" id="enddate" name="_enddate" data-ng-model="_enddate" min="{{minDate | date:'yyyy-MM-dd'}}" required="required" ng-click="ResetValidation2_Edit()" class="form-control col-md-7 col-xs-12"/>
+                         <div ng-messages="formSua._enddate.$error">
+					      <div ng-message="required"><p style="color:red">This field is required</p></div>
+					      <div ng-message="validationError"><p style="color:red">The End date must be greater than the Start date </p></div>
+					    </div>
+                     </div>
+                 </div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
 							<div class="col-md-8">
@@ -454,40 +401,32 @@
 							</div>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="sua"
-						data-ng-click="Sua()" ng-disabled="formSua.$invalid">Edit</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						data-ng-click="ResetValidation_Edit()">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="sua" data-ng-click="Sua()" ng-disabled="formSua.$invalid">Edit</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="ResetValidation_Edit()">Close</button>
+	      </div>
+	    </div>
+	  </div>
+</div>
 
-	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Delete Intake
-						{{name}}</h4>
-				</div>
-				<div class="modal-body">
-					<p>Are you sure to delete this intake?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-ng-click="Xoa()"
-						data-dismiss="modal">Delete</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Delete {{_name}}</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Are you sure to delete this intake?</p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger" data-ng-click="Xoa()" data-dismiss="modal">Delete</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+</div>
 
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
