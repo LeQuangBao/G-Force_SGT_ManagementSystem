@@ -111,8 +111,11 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	};
 	$scope.updatePageIndexes();
 	
-	$scope.showList=function(name,index){
-		return (($scope.filterSort(name) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+	$scope.showList=function(intake,index){
+		var filter=intake;
+		filter.startDate=$filter('date')(intake.startDate, "MM/dd/yyyy");
+		filter.endDate=$filter('date')(intake.endDate, "MM/dd/yyyy");
+		return (($scope.filterSort(filter) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
 	}
 	
 	

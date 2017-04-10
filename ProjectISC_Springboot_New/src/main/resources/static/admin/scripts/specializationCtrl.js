@@ -1,5 +1,5 @@
 app.controller('specializationCtrl',
-		function($scope, $http) {
+		function($scope, $http, $filter) {
 			var deleteSpecialization = "";
 			var alertDuration = 1800;
 
@@ -38,8 +38,8 @@ app.controller('specializationCtrl',
 		    	};
 		    	$scope.updatePageIndexes();
 		    	
-		    	$scope.showList=function(name,index){
-		    		return (($scope.filterSort(name) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+		    	$scope.showList=function(spec,index){
+		    		return (($scope.filterSort(spec) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
 		    	}
 		    	
 			// add specialization

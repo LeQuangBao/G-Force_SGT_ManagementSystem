@@ -153,7 +153,7 @@
 								</div>
 								<div class="col-md-6 pull-right">
 									<input id="filter" type="text" placeholder="Filter"
-										class="form-control" data-ng-model="searchName"></input>
+										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
 									<div class="table-responsive">
@@ -191,8 +191,8 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list | orderBy:sortType:sortReverse | filter:searchName"
-													data-ng-show="showList(x.intakeName,$index)">
+													data-ng-repeat="x in list | orderBy:sortType:sortReverse"
+													data-ng-show="showList(x,$index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.specializationId"></td>
 													<td data-ng-bind="x.specializationName"></td>

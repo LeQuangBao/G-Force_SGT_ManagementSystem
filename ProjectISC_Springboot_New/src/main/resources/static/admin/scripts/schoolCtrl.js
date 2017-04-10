@@ -1,4 +1,4 @@
-app.controller('schoolCtrl', function($scope, $http) {
+app.controller('schoolCtrl', function($scope, $http, $filter) {
 		var alertDuration = 1800;
 	    function getAllSchools(){ $http.get("/api/school")
 	    .then(function(response) {	
@@ -27,8 +27,8 @@ app.controller('schoolCtrl', function($scope, $http) {
     	};
     	$scope.updatePageIndexes();
     	
-    	$scope.showList=function(name,index){
-    		return (($scope.filterSort(name) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+    	$scope.showList=function(school,index){
+    		return (($scope.filterSort(school) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
     	}
     	
     	

@@ -229,8 +229,8 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list | orderBy:sortType:sortReverse | filter:filterTable "
-													data-ng-show="showList(x.intakeName,$index)">
+													data-ng-repeat="x in list | orderBy:sortType:sortReverse"
+													data-ng-show="showList(x,$index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.subjectId"></td>
 													<td data-ng-bind="x.subjectName"></td>

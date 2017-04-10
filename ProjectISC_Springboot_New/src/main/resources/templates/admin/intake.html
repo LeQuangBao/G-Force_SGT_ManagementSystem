@@ -201,7 +201,7 @@
 											<tbody>
 												<tr
 													data-ng-repeat="x in list | orderBy:[filterSort, sortType]"
-													data-ng-show="showList(x.intakeName,$index)">
+													data-ng-show="showList(x,$index)">
 													<td class="table-row-index" ng-bind="$index+1"><input
 														type="hidden" data-ng-model="x.id" /></td>
 													<td data-ng-bind="x.intakeId"></td>
