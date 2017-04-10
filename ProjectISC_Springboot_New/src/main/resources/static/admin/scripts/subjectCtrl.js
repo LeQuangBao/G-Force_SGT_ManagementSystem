@@ -69,6 +69,7 @@ app.controller('subjectCtrl', function($scope, $http) {
         	  $("#myModal").modal("hide");
         	  getAllsubjects();
         	  addAlert();
+        	
           } 
     
             }, function(response) {
@@ -76,7 +77,20 @@ app.controller('subjectCtrl', function($scope, $http) {
             		alertFailMessage("Oops! Duplicate ID is not allowed.");
             	}
 			});
+            $scope.ResetForm_Add();
 	    };  
+	    $scope.ResetForm_Add=function(){
+	    	 $scope.subjectId="";
+        	 $scope.subject.subjectName="";
+        	 $scope.subject.credit="";
+        	 $scope.subject.hour="";
+        	 $scope.subject.description="";
+        	 $scope.frmsubjectAdd.subjectID.$setUntouched();
+        	 $scope.frmsubjectAdd.subjectName.$setUntouched();
+        	 $scope.frmsubjectAdd.credit.$setUntouched();
+        	 $scope.frmsubjectAdd.hour.$setUntouched();
+        	 $scope.frmsubjectAdd.description.$setUntouched();
+	    }
         // edit subject
         $scope.update = function () {
         	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,description:$scope.subject_edit.description ,active:($scope.subject_edit.active==null?false:($scope.subject_edit.active==false?false:true))};

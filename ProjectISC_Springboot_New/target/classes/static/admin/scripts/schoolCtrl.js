@@ -68,12 +68,26 @@ app.controller('schoolCtrl', function($scope, $http) {
         	  $("#myModal").modal("hide");
         	  getAllSchools();
         	  addAlert();
+        	 
           } 
     
             }, function(response) {
     			alertFailMessage("Oops! Duplicate ID is not allowed.");
     	    });
+            $scope.ResetForm_Add();
 	    }
+        
+        //reset form add
+        $scope.ResetForm_Add=function(){
+        	 $scope.schoolId="";
+       	  $scope.school.schoolName="";
+       	  $scope.school.contact="";
+       	  $scope.school.address="";
+       	  $scope.frmSchoolAdd.schoolID.$setUntouched();
+     		$scope.frmSchoolAdd.schoolName.$setUntouched();
+     		$scope.frmSchoolAdd.address.$setUntouched();
+     		$scope.frmSchoolAdd.contact.$setUntouched();
+        }
         // edit school
         $scope.update = function () {
         	var schoolObj={id:$scope.school_edit.id,schoolId:$scope.school_edit.schoolId, schoolName: $scope.school_edit.schoolName, address:$scope.school_edit.address, contact:$scope.school_edit.contact, active:($scope.school_edit.active==null?false:($scope.school_edit.active==false?false:true))};

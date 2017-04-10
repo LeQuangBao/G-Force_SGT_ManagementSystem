@@ -67,9 +67,11 @@ app.controller('specializationCtrl',
 					// $("#myModal_them").modal("hide");
 					getListSpecializations();
 					alertAddSucess();
+					$scope.ResetForm_Add();
 				}, function(response) {
 					alertFailMessage("Oops! Duplicate ID is not allowed.");
 				});
+				 
 			}
 
 			// update specialization
@@ -166,5 +168,13 @@ app.controller('specializationCtrl',
 					timer : alertDuration,
 					showConfirmButton : false
 				})
+			}
+			//reset form add
+			$scope.ResetForm_Add=function(){
+				 $scope.specializationId_add="";
+	        	 $scope.specializationName_add="";
+	        	 $scope.formAdd.specializationId_add.$setUntouched();
+	        	 $scope.formAdd.specializationName_add.$setUntouched();
+	        	
 			}
 		});
