@@ -20,7 +20,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	$scope.currentPage = 1;
     	// max size of the pagination bar
     	$scope.maxPaginationSize = 50;
-    	$scope.itemsPerPage = 5;
+    	$scope.itemsPerPage = 15;
     	$scope.updatePageIndexes = function () {
     		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
     		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
@@ -33,21 +33,13 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	
 	    // add subject
         $scope.save = function () {
-           
             var subject_id = document.getElementById("subjectID").value;        
-            var subject_name = document.getElementById("subjectName").value;
+            var subject_name = $scope.subjectName;
             var credit=document.getElementById("credit").value;
             var hour = document.getElementById("hour").value;
             var description = document.getElementById("description").value;
-            var active1=document.getElementById("actived");
-            var active="";
-            if(active1.checked==true)
-            	{
-            		active=1;
-            	}
-            else
-            	active=0;
-          
+            var active=$scope.active;
+            
             $http({
                 method: "POST",
                url: "/api/subject",
@@ -69,7 +61,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
         	  $("#myModal").modal("hide");
         	  getAllsubjects();
         	  addAlert();
-        	
+        	  $scope.ResetForm_Add();
           } 
     
             }, function(response) {
@@ -77,14 +69,15 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
             		alertFailMessage("Oops! Duplicate ID is not allowed.");
             	}
 			});
-            $scope.ResetForm_Add();
-	    };  
+            
+        }
 	    $scope.ResetForm_Add=function(){
 	    	 $scope.subjectId="";
-        	 $scope.subject.subjectName="";
-        	 $scope.subject.credit="";
-        	 $scope.subject.hour="";
-        	 $scope.subject.description="";
+        	 $scope.subjectName="";
+        	 $scope.credit="";
+        	 $scope.hour="";
+        	 $scope.description="";
+        	 $scope.active=true;
         	 $scope.frmsubjectAdd.subjectID.$setUntouched();
         	 $scope.frmsubjectAdd.subjectName.$setUntouched();
         	 $scope.frmsubjectAdd.credit.$setUntouched();
@@ -93,7 +86,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 	    }
         // edit subject
         $scope.update = function () {
-        	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,description:$scope.subject_edit.description ,active:($scope.subject_edit.active==null?false:($scope.subject_edit.active==false?false:true))};
+        	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,description:$scope.subject_edit.description ,active:$scope.subject_edit.active};
             $http({
                method: "put",
               url: "/api/subject",

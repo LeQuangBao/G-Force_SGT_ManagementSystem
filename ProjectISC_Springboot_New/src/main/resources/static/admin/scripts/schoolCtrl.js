@@ -20,7 +20,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
     	$scope.currentPage = 1;
     	// max size of the pagination bar
     	$scope.maxPaginationSize = 50;
-    	$scope.itemsPerPage = 5;
+    	$scope.itemsPerPage = 15;
     	$scope.updatePageIndexes = function () {
     		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
     		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
@@ -40,13 +40,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
             var address=document.getElementById("address").value;
             var contact = document.getElementById("contact").value;
             var active1=document.getElementById("actived");
-            var active="";
-            if(active1.checked==true)
-            	{
-            		active=1;
-            	}
-            else
-            	active=0;
+            var active=$scope.active;
           
             $http({
                 method: "POST",
@@ -68,21 +62,21 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
         	  $("#myModal").modal("hide");
         	  getAllSchools();
         	  addAlert();
-        	 
+        	  $scope.ResetForm_Add();
           } 
     
             }, function(response) {
     			alertFailMessage("Oops! Duplicate ID is not allowed.");
     	    });
-            $scope.ResetForm_Add();
 	    }
         
         //reset form add
         $scope.ResetForm_Add=function(){
         	 $scope.schoolId="";
-       	  $scope.school.schoolName="";
-       	  $scope.school.contact="";
-       	  $scope.school.address="";
+       	  $scope.schoolName="";
+       	  $scope.contact="";
+       	  $scope.address="";
+       	  $scope.active=true;
        	  $scope.frmSchoolAdd.schoolID.$setUntouched();
      		$scope.frmSchoolAdd.schoolName.$setUntouched();
      		$scope.frmSchoolAdd.address.$setUntouched();

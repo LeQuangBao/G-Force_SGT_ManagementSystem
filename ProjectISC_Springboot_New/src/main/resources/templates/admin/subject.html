@@ -329,7 +329,7 @@
 							<div class="col-md-8">
 								<input id="subjectName" name="subjectName"
 									placeholder="Enter subject name" class="form-control input-md"
-									type="text" ng-model="subject.subjectName" ng-required="true" />
+									type="text" ng-model="subjectName" ng-required="true" />
 								<div ng-messages="frmsubjectAdd.subjectName.$error">
 									<div ng-message="required"
 										ng-show="frmsubjectAdd.subjectName.$touched">
@@ -348,14 +348,17 @@
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
 								<input id="credit" name="credit" placeholder="Enter Subject Credit"
-									class="form-control input-md" type="number" ng-required="true" min="0"
-									ng-model="subject.credit" />
+									class="form-control input-md" type="number" ng-required="true" min="1"
+									ng-model="credit" />
 								<div ng-messages="frmsubjectAdd.credit.$error">
 									<div ng-message="required"
 										ng-show="frmsubjectAdd.credit.$touched">
 										<p style="color: red">Please enter Subject Credit</p>
 									</div>
-
+									<div ng-message="min"
+										ng-show="frmsubjectAdd.credit.$touched">
+										<p style="color: red">Must be more than 0</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -366,14 +369,17 @@
 							<div class="col-md-8">
 								<input id="hour" name="hour"
 									placeholder="Enter hour information"
-									class="form-control input-md" type="number" min="0" ng-required="true"
-									ng-model="subject.hour" />
+									class="form-control input-md" type="number" min="1" ng-required="true"
+									ng-model="hour" />
 								<div ng-messages="frmsubjectAdd.hour.$error">
 									<div ng-message="required"
 										ng-show="frmsubjectAdd.hour.$touched">
 										<p style="color: red">Please enter subject Hour</p>
 									</div>
-
+									<div ng-message="min"
+										ng-show="frmsubjectAdd.credit.$touched">
+										<p style="color: red">Must be more than 0</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -383,7 +389,7 @@
 								<input id="description" name="description"
 									placeholder="Enter description information"
 									class="form-control input-md" type="text" ng-required="true"
-									ng-model="subject.description" />
+									ng-model="description" />
 								<div ng-messages="frmsubjectAdd.description.$error">
 									<div ng-message="required"
 										ng-show="frmsubjectAdd.description.$touched">
@@ -398,9 +404,14 @@
 							<label class="col-md-4 control-label" for="status">Status</label>
 							<div class="col-md-8">
 								<div class="checkbox">
-									<label> <input type="checkbox" id="actived"
-										required="required"></input> Active
-									</label>
+									<label>
+								    <input type="radio" ng-model="active" ng-value="true" ng-checked="true"/>
+								    Active
+								  </label><br/>
+								  <label>
+								    <input type="radio" ng-model="active" ng-value="false"/>
+								    Inactive
+								  </label>
 								</div>
 							</div>
 						</div>
@@ -409,7 +420,7 @@
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()"
-						ng-disabled="frmsubjectAdd.subjectId.$error.required || frmsubjectAdd.subjectName.$error.required || frmsubjectAdd.credit.$error.required|| frmsubjectAdd.hour.$error.required|| frmsubjectAdd.description.$error.required">Save</button>
+						ng-disabled="frmsubjectAdd.$invalid">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 
 				</div>
@@ -441,10 +452,16 @@
 								<input id="subjectId" name="subjectId"
 									placeholder="Enter Subject Id" class="form-control input-md"
 									type="text" ng-model="subject_edit.subjectId"
-									ng-required="true" /> <span id="helpBlock" style="color: red"
-									class="help-block"
-									ng-show="frmsubject.subjectId.$error.required">Please
-									enter Id</span>
+									ng-required="true" /> 
+									<div ng-messages="frmsubject.subjectID.$error">
+										<div ng-message="required">
+											<p style="color: red">Please enter Subject Id</p>
+										</div>
+										<div ng-message="validationError">
+											<p style="color: red">Subject ID is already exists. Please
+												enter another ID.</p>
+										</div>
+								</div>
 							</div>
 						</div>
 
@@ -455,10 +472,16 @@
 								<input id="subjectName" name="subjectName"
 									placeholder="Enter subject name" class="form-control input-md"
 									type="text" ng-model="subject_edit.subjectName"
-									ng-required="true" /> <span id="helpBlock" class="help-block"
-									style="color: red"
-									ng-show="frmsubject.subjectName.$error.required">Please
-									enter Name</span>
+									ng-required="true" />
+									<div ng-messages="frmsubject.subjectName.$error">
+									<div ng-message="required">
+										<p style="color: red">Please enter subject Name</p>
+									</div>
+									<div ng-message="validationError">
+										<p style="color: red">Subject Name is already exists.
+											Please enter another subject Name.</p>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -466,12 +489,17 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="credit">Credit</label>
 							<div class="col-md-8">
-								<input id="credit" name="credit"  min="0" placeholder="Example: 1"
+								<input id="credit" name="credit"  min="1" placeholder="Example: 1"
 									class="form-control input-md" type="number" ng-required="true"
-									ng-model="subject_edit.credit" /> <span id="helpBlock"
-									class="help-block" style="color: red"
-									ng-show="frmsubject.credit.$error.required">Please enter
-									Credit</span>
+									ng-model="subject_edit.credit" step="1" />
+									<div ng-messages="frmsubject.credit.$error">
+									<div ng-message="required">
+										<p style="color: red">Please enter Subject Credit</p>
+									</div>
+									<div ng-message="min">
+										<p style="color: red">Must be more than 0</p>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -481,11 +509,16 @@
 							<div class="col-md-8">
 								<input id="hour" name="hour"
 									placeholder="Example :1 "
-									class="form-control input-md" min="0" type="number" ng-required="true"
-									ng-model="subject_edit.hour" /> <span id="helpBlock"
-									class="help-block" style="color: red"
-									ng-show="frmsubject.hour.$error.required">Please enter
-									Hour</span>
+									class="form-control input-md" min="1" type="number" ng-required="true"
+									ng-model="subject_edit.hour" />
+									<div ng-messages="frmsubject.hour.$error">
+									<div ng-message="required">
+										<p style="color: red">Please enter subject Hour</p>
+									</div>
+									<div ng-message="min">
+										<p style="color: red">Must be more than 0</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -494,10 +527,13 @@
 								<input id="description" name="description"
 									placeholder="Enter description information"
 									class="form-control input-md" type="text" ng-required="true"
-									ng-model="subject_edit.description" /> <span id="helpBlock"
-									class="help-block" style="color: red"
-									ng-show="frmsubject.description.$error.required">Please
-									enter Description</span>
+									ng-model="subject_edit.description" />
+									<div ng-messages="frmsubject.description.$error">
+									<div ng-message="required">
+										<p style="color: red">Please enter subject Description</p>
+									</div>
+
+								</div>
 							</div>
 						</div>
 
@@ -506,10 +542,14 @@
 							<label class="col-md-4 control-label" for="status">Status</label>
 							<div class="col-md-8">
 								<div class="checkbox">
-									<label> <input type="checkbox" id="actived"
-										required="required" ng-model="subject_edit.active"></input>
-										Active
-									</label>
+									<label>
+								    <input type="radio" ng-model="subject_edit.active" ng-value="true"/>
+								    Active
+								  </label><br/>
+								  <label>
+								    <input type="radio" ng-model="subject_edit.active" ng-value="false"/>
+								    Inactive
+								  </label>
 								</div>
 							</div>
 						</div>
@@ -521,7 +561,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" ng-click="update()"
-						ng-disabled="frmsubject.subjectId.$error.required || frmsubject.subjectName.$error.required || frmsubject.credit.$error.required|| frmsubject.hour.$error.required|| frmsubject.description.$error.required">Save</button>
+						ng-disabled="frmsubject.$invalid">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>

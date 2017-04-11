@@ -31,7 +31,7 @@ app.controller('specializationCtrl',
 		    	$scope.currentPage = 1;
 		    	// max size of the pagination bar
 		    	$scope.maxPaginationSize = 50;
-		    	$scope.itemsPerPage = 5;
+		    	$scope.itemsPerPage = 15;
 		    	$scope.updatePageIndexes = function () {
 		    		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
 		    		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
@@ -48,19 +48,14 @@ app.controller('specializationCtrl',
 						.getElementById("specializationId_add").value;
 				var specializationName = document
 						.getElementById("specializationName_add").value;
-				var activeElement = document.getElementById("active_add");
-				var active = "";
-				if (activeElement.checked == true) {
-					active = 1;
-				} else
-					active = 0;
+				var activeElement = $scope.active_add;
 				$http({
 					method : "POST",
 					url : "/api/specialization",
 					data : {
 						specializationId : specializationId,
 						specializationName : specializationName,
-						active : active
+						active : activeElement
 					},
 					dataType : "json"
 				}).then(function(response) {
@@ -173,6 +168,7 @@ app.controller('specializationCtrl',
 			$scope.ResetForm_Add=function(){
 				 $scope.specializationId_add="";
 	        	 $scope.specializationName_add="";
+	        	 $scope.active_add=true;
 	        	 $scope.formAdd.specializationId_add.$setUntouched();
 	        	 $scope.formAdd.specializationName_add.$setUntouched();
 	        	

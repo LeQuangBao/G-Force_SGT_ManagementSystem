@@ -284,8 +284,15 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2"></label>
 							<div class="col-sm-10">
-								<input type="checkbox" id="active_add" checked="checked"></input>
-								Active
+								<label>
+								    <input type="radio" ng-model="active_add" ng-value="true" ng-checked="true"/>
+								    Active
+								  </label><br/>
+								  <label>
+								    <input type="radio" ng-model="active_add" ng-value="false"/>
+								    Inactive
+								  </label>
+								
 							</div>
 						</div>
 						<div class="form-group">
@@ -342,8 +349,14 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2"></label>
 							<div class="col-sm-10">
-								<input type="checkbox" id="active_edit" checked="checked"
-									ng-model="info.active"></input> Active
+									<label>
+								    <input type="radio" ng-model="info.active" ng-value="true"/>
+								    Active
+								  </label><br/>
+								  <label>
+								    <input type="radio" ng-model="info.active" ng-value="false"/>
+								    Inactive
+								  </label>
 							</div>
 						</div>
 						<div class="form-group">
