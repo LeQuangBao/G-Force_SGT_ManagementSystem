@@ -56,36 +56,23 @@
 
 					<div class="clearfix"></div>
 
-					<!-- menu profile quick info -->
-					<div class="profile clearfix">
-						<div class="profile_pic">
-							<img src="production/images/img.jpg" alt="..."
-								class="img-circle profile_img" />
-						</div>
-						<div class="profile_info">
-							<h2>
-								<span>Welcome, </span>John Doe
-							</h2>
-						</div>
-					</div>
-					<!-- /menu profile quick info -->
-
+					
 					<br />
 
 					<!-- sidebar menu -->
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
 						<div class="menu_section">
-							<h3>General</h3>
+							
 							<ul class="nav side-menu">
 								<li><a><i class="fa fa-home"></i>Manage <span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="/admin/intake">Intake Management</a></li>
-										<li><a href="/admin/school">School Management</a></li>
+										<li><a href="/admin/intake">Intake</a></li>
+										<li><a href="/admin/school">School</a></li>
 										<li><a href="/admin/specialization">Specialization
-												Management</a></li>
-										<li><a href="/admin/subject">Subject Management</a></li>
+												</a></li>
+										<li><a href="/admin/subject">Subject</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -265,14 +252,14 @@
 				<div class="modal-body">
 					<form class="form-horizontal" name="formAdd">
 						<div class="form-group">
-							<label class="control-label col-sm-2">Id</label>
+							<label class="control-label col-sm-2">ID</label>
 							<div class="col-sm-10">
 								<input type="text" id="specializationId_add"
 									name="specializationId_add" class="form-control"
-									placeholder="Enter intake id" ng-model="specializationId_add"
+									placeholder="" ng-model="specializationId_add"
 									required="required" /> <span
 									ng-show="formAdd.specializationId_add.$touched &amp;&amp; formAdd.specializationId_add.$invalid"><p
-										style="color: red">Please enter specialization id</p></span>
+										style="color: red">This field is required</p></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -280,15 +267,15 @@
 							<div class="col-sm-10">
 								<input type="text" id="specializationName_add"
 									name="specializationName_add" ng-model="specializationName_add"
-									class="form-control" placeholder="Enter intake name"
+									class="form-control" placeholder=""
 									required="required" /> <span
 									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
-										style="color: red">Please enter specialization name</p></span>
+										style="color: red">This field is required</p></span>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2"></label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-2 col-md-2">Status</label>
+							<div class="col-sm-9 col-md-9">
 								<label>
 								    <input type="radio" ng-model="active_add" ng-value="true" ng-checked="true"/>
 								    Active
@@ -299,6 +286,7 @@
 								  </label>
 								
 							</div>
+							
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2"></label>
@@ -336,9 +324,9 @@
 							<div class="col-sm-10">
 								<input type="text" id="specializationId_edit" name="specializationId_edit"
 									ng-model="info.specializationId" class="form-control"
-									placeholder="Enter intake id" required="required"/><span
+									placeholder="" required="required"/><span
 									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
-										style="color: red">Please enter specialization id</p></span>
+										style="color: red">This field is required</p></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -346,9 +334,9 @@
 							<div class="col-sm-10">
 								<input type="text" id="specializationName_edit" name="specializationName_edit"
 									ng-model="info.specializationName" class="form-control"
-									placeholder="Enter intake name" required="required"/><span
+									placeholder="" required="required"/><span
 									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
-										style="color: red">Please enter specialization name</p></span>
+										style="color: red">This field is required</p></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -394,7 +382,7 @@
 				<div class="modal-body">
 					<!-- 					<input type="hidden" ng-model="specialization_delete.id"></input> -->
 					<p>
-						Are you sure you want to delete this ?
+						Are you sure you want to delete this?
 					</p>
 				</div>
 
