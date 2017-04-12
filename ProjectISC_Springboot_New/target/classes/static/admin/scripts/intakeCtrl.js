@@ -1,4 +1,17 @@
 app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
+	$scope.rowdata = {
+		     availableOptions: [
+		       {id: '15', name: '15 rows'},
+		       {id: '30', name: '30 rows'},
+		       {id: '50', name: '50 rows'},
+		       {id: '100', name: '100 rows'}
+		     ],
+		     selectedOption: {id: '15', name: '15 rows'}
+		    };
+	$scope.ChangeRow=function(index){
+		$scope.itemsPerPage = index;
+		$scope.updatePageIndexes();
+	}
 	var alertDuration = 1800;
 	// Lấy danh sách Intake
 	function GetListIntake(){
@@ -103,8 +116,8 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	// Phân trang
 	$scope.currentPage = 1;
 	// max size of the pagination bar
-	$scope.maxPaginationSize = 50;
-	$scope.itemsPerPage = 5;
+	//$scope.maxPaginationSize = 50;
+	$scope.itemsPerPage = $scope.rowdata.selectedOption.id;
 	$scope.updatePageIndexes = function () {
 		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
 		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
@@ -128,7 +141,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			var Intake = $resource('/api/intake');
 			// Call action method (save) on the class
 			//
-			Intake.save({intakeId:$scope.intakeid, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:($scope.active==null?false:($scope.active==false?false:true))})
+			Intake.save({intakeId:$scope.intakeid, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:$scope.active})
 				.$promise.then(function(){
 					GetListIntake();
 					$('#myModal_them').modal('hide');
@@ -136,7 +149,6 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 				}, function(response) {
 	    			alertFailMessage("Oops! Duplicate ID is not allowed.");
 	    	    });
-			$scope.ResetForm_Add();
 			
 		}		
 	}
@@ -158,6 +170,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			$scope._active=intake.active;
 		});		
 		intakeObj=x;
+		$scope.name1=x.intakeName;
 	}
 	
 	// Sửa intake
@@ -170,10 +183,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 					editAlert();
 					}, function(response) {
 						alertFailMessage("Oops! Duplicate ID is not allowed.");
-						setTimeout(function() {
-							location.reload();
-						}, alertDuration);
-				});
+					});
 			
 			var idx = $scope.list.indexOf(intakeObj);
 			$scope.list[idx].intakeId=$scope._id;
@@ -181,19 +191,12 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			$scope.list[idx].startDate=new Date($scope._startdate);
 			$scope.list[idx].endDate=new Date($scope._enddate);
 			$scope.list[idx].active=($scope._active==null?false:($scope._active==false?false:true));
-		    	
-			$scope._id='';
-			$scope._name='';
-			$scope._startdate='';
-			$scope._enddate='';
-			$scope._active=false;
 		}	
 	}  
 	
 	// Lấy đối tượng intake
 	$scope.GetIntakeObj=function(intake){
 		intakeObj=intake;
-		$scope._name=intake.intakeName;
 	}
 	
 	$scope.Xoa=function(){
@@ -209,7 +212,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 		$scope.name='';
 		$scope.startdate='';
 		$scope.enddate='';
-		$scope.active=false;
+		$scope.active=true;
 		$scope.formThem.intakeid.$setUntouched();
 		$scope.formThem.name.$setUntouched();
 		$scope.formThem.startdate.$setUntouched();
