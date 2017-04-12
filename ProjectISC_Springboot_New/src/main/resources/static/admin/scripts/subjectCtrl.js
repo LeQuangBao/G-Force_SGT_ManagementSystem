@@ -71,7 +71,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
        .then(function (result) {	
           if (result.status == 201) {
 			
-        	  $("#myModal").modal("hide");
+//        	  $("#myModal").modal("hide");
         	  getAllsubjects();
         	  addAlert();
         	  $scope.ResetForm_Add();

@@ -222,7 +222,7 @@
 															class="btn btn-primary btn-sm" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
-														</button>|
+														</button>
 														<button type="button" ng-click="deletesubject(x)"
 															data-toggle="modal" class="btn btn-danger btn-sm"
 															data-target="#myModal_xoa">
@@ -400,6 +400,9 @@
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()"
 						ng-disabled="frmsubjectAdd.$invalid">Save</button>
+						<button id="btnSave" name="btnSave" class="btn btn-default"
+						ng-click="save()"
+						ng-disabled="frmsubjectAdd.$invalid" data-dismiss="modal">Save and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>

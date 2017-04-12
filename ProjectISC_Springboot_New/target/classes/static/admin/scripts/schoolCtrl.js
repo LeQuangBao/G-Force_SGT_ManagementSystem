@@ -72,7 +72,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
        .then(function (result) {	
           if (result.status == 201) {
 			
-        	  $("#myModal").modal("hide");
+//        	  $("#myModal").modal("hide");
         	  getAllSchools();
         	  addAlert();
         	  $scope.ResetForm_Add();

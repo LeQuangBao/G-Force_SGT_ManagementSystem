@@ -144,7 +144,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			Intake.save({intakeId:$scope.intakeid, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:$scope.active})
 				.$promise.then(function(){
 					GetListIntake();
-					$('#myModal_them').modal('hide');
+//					$('#myModal_them').modal('hide');
 					addAlert();
 				}, function(response) {
 	    			alertFailMessage("Oops! Duplicate ID is not allowed.");
