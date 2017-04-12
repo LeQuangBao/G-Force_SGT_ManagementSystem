@@ -103,7 +103,10 @@ app
 
 					// update specialization
 					$scope.callEditSpecialization = function(data) {
-						$scope.info = data;
+						$http.get("/api/specialization/"+data.id)
+			            .then(function (response) {
+			            	$scope.info=response.data;
+			            });
 					}
 
 					$scope.editSpecialization = function() {
@@ -115,6 +118,7 @@ app
 						})
 								.then(
 										function(response) {
+											getListSpecializations();
 											alertEditSucess();
 										},
 										function(response) {
