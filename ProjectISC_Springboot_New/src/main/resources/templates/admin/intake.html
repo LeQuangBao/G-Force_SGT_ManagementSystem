@@ -163,7 +163,11 @@
 								</div>
 								<div class="x_content">
 
-
+									<label for="mySelect">Make a choice:</label>
+								    <select name="mySelect" id="mySelect"
+								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
+								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
+								      </select>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover ">
 											<thead>
@@ -380,7 +384,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">Edit Intake
-						{{_name}}</h4>
+						{{name1}}</h4>
 				</div>
 				<div class="modal-body">
 					<form id="formSua" name="formSua" class="form-horizontal"

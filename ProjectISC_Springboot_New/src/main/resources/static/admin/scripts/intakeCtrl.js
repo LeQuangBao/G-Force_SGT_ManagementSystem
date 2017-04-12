@@ -1,4 +1,17 @@
 app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
+	$scope.rowdata = {
+		     availableOptions: [
+		       {id: '15', name: '15 rows'},
+		       {id: '30', name: '30 rows'},
+		       {id: '50', name: '50 rows'},
+		       {id: '100', name: '100 rows'}
+		     ],
+		     selectedOption: {id: '15', name: '15 rows'}
+		    };
+	$scope.ChangeRow=function(index){
+		$scope.itemsPerPage = index;
+		$scope.updatePageIndexes();
+	}
 	var alertDuration = 1800;
 	// Lấy danh sách Intake
 	function GetListIntake(){
@@ -103,8 +116,8 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	// Phân trang
 	$scope.currentPage = 1;
 	// max size of the pagination bar
-	$scope.maxPaginationSize = 50;
-	$scope.itemsPerPage = 15;
+	//$scope.maxPaginationSize = 50;
+	$scope.itemsPerPage = $scope.rowdata.selectedOption.id;
 	$scope.updatePageIndexes = function () {
 		$scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
 		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
@@ -157,6 +170,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			$scope._active=intake.active;
 		});		
 		intakeObj=x;
+		$scope.name1=x.intakeName;
 	}
 	
 	// Sửa intake
@@ -183,7 +197,6 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	// Lấy đối tượng intake
 	$scope.GetIntakeObj=function(intake){
 		intakeObj=intake;
-		$scope._name=intake.intakeName;
 	}
 	
 	$scope.Xoa=function(){

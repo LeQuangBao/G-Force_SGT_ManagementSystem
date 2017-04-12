@@ -1,5 +1,18 @@
 app.controller('specializationCtrl',
 		function($scope, $http, $filter) {
+			$scope.rowdata = {
+				     availableOptions: [
+				       {id: '15', name: '15 rows'},
+				       {id: '30', name: '30 rows'},
+				       {id: '50', name: '50 rows'},
+				       {id: '100', name: '100 rows'}
+				     ],
+				     selectedOption: {id: '15', name: '15 rows'}
+				    };
+			$scope.ChangeRow=function(index){
+				$scope.itemsPerPage = index;
+				$scope.updatePageIndexes();
+			}
 			var deleteSpecialization = "";
 			var alertDuration = 1800;
 
@@ -84,9 +97,6 @@ app.controller('specializationCtrl',
 					alertEditSucess();
 				}, function(response) {
 					alertFailMessage("Oops! Duplicate ID is not allowed.");
-					setTimeout(function() {
-						location.reload();
-					}, alertDuration);
 				});
 			}
 
