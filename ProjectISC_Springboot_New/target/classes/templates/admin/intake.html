@@ -55,23 +55,7 @@
 
 					<div class="clearfix"></div>
 
-					<!-- menu profile quick info -->
-					<div class="profile clearfix">
-						<div class="profile_pic">
-							<img src="production/images/img.jpg" alt="..."
-								class="img-circle profile_img" />
-						</div>
-						<div class="profile_info">
-
-							<h2>
-								<span>Welcome, </span>John Doe
-							</h2>
-						</div>
-					</div>
-					<!-- /menu profile quick info -->
-
-					<br />
-
+					
 					<!-- sidebar menu -->
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
@@ -163,7 +147,11 @@
 								</div>
 								<div class="x_content">
 
-
+									<label for="mySelect">Make a choice:</label>
+								    <select name="mySelect" id="mySelect"
+								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
+								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
+								      </select>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover ">
 											<thead>
@@ -308,7 +296,7 @@
 								for="last-name"> Start Date </label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="date" id="startdate" name="startdate"
-									data-ng-model="startdate" min="{{minDate | date:'yyyy-MM-dd'}}"
+									data-ng-model="startdate"
 									required="required" class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formThem.startdate.$error">
 									<div ng-message="required"
@@ -323,7 +311,7 @@
 								for="last-name"> End Date </label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="date" id="enddate" name="enddate"
-									data-ng-model="enddate" min="{{minDate | date:'yyyy-MM-dd'}}"
+									data-ng-model="enddate" 
 									required="required" ng-click="ResetValidation2_Add()"
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formThem.enddate.$error">
@@ -343,9 +331,14 @@
 								for="last-name">Status</label>
 							<div class="col-md-8">
 								<div class="checkbox">
-									<label> <input type="checkbox" id="active"
-										name="active" data-ng-model="active"></input> Active
-									</label>
+									<label>
+								    <input type="radio" ng-model="active" ng-value="true" ng-checked="true"/>
+								    Active
+								  </label><br/>
+								  <label>
+								    <input type="radio" ng-model="active" ng-value="false"/>
+								    Inactive
+								  </label>
 								</div>
 
 							</div>
@@ -375,7 +368,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">Edit Intake
-						{{_name}}</h4>
+						{{name1}}</h4>
 				</div>
 				<div class="modal-body">
 					<form id="formSua" name="formSua" class="form-horizontal"
@@ -414,7 +407,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="date" id="startdate" name="_startdate"
 									data-ng-model="_startdate"
-									min="{{minDate | date:'yyyy-MM-dd'}}" required="required"
+									required="required"
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formSua._startdate.$error">
 									<div ng-message="required">
@@ -428,7 +421,7 @@
 								for="last-name"> End Date </label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="date" id="enddate" name="_enddate"
-									data-ng-model="_enddate" min="{{minDate | date:'yyyy-MM-dd'}}"
+									data-ng-model="_enddate"
 									required="required" ng-click="ResetValidation2_Edit()"
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formSua._enddate.$error">
@@ -446,9 +439,14 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
 							<div class="col-md-8">
 								<div class="checkbox">
-									<label> <input type="checkbox" id="active"
-										name="active" data-ng-model="_active"></input> Active
-									</label>
+									<label>
+								    <input type="radio" ng-model="_active" ng-value="true"/>
+								    Active
+								  </label><br/>
+								  <label>
+								    <input type="radio" ng-model="_active" ng-value="false"/>
+								    Inactive
+								  </label>
 								</div>
 
 							</div>
