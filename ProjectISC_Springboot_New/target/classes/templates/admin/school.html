@@ -298,7 +298,7 @@
 					<form class="form-horizontal" name="frmSchoolAdd">
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="schoolID">School
+							<label class="col-md-4 control-label" for="schoolID">
 								ID</label>
 							<div class="col-md-8">
 								<input id="schoolID" name="schoolID"
@@ -307,7 +307,7 @@
 								<div ng-messages="frmSchoolAdd.schoolID.$error">
 									<div ng-message="required"
 										ng-show="frmSchoolAdd.schoolID.$touched">
-										<p style="color: red">Please enter School Id</p>
+										<p style="color: red">This field is required</p>
 									</div>
 									<div ng-message="validationError">
 										<p style="color: red">School ID is already exists. Please
@@ -320,7 +320,7 @@
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="schoolName">School
+							<label class="col-md-4 control-label" for="schoolName">
 								Name</label>
 							<div class="col-md-8">
 								<input id="schoolName" name="schoolName"
@@ -329,7 +329,7 @@
 								<div ng-messages="frmSchoolAdd.schoolName.$error">
 									<div ng-message="required"
 										ng-show="frmSchoolAdd.schoolName.$touched">
-										<p style="color: red">Please enter School Name</p>
+										<p style="color: red">This field is required</p>
 									</div>
 									<div ng-message="validationError">
 										<p style="color: red">School Name is already exists.
@@ -349,7 +349,7 @@
 								<div ng-messages="frmSchoolAdd.address.$error">
 									<div ng-message="required"
 										ng-show="frmSchoolAdd.address.$touched">
-										<p style="color: red">Please enter School Address</p>
+										<p style="color: red">This field is required</p>
 									</div>
 
 								</div>
@@ -367,7 +367,7 @@
 								<div ng-messages="frmSchoolAdd.contact.$error">
 									<div ng-message="required"
 										ng-show="frmSchoolAdd.contact.$touched">
-										<p style="color: red">Please enter School Contact</p>
+										<p style="color: red">This field is required</p>
 									</div>
 
 								</div>
@@ -396,7 +396,7 @@
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()"
 						ng-disabled="frmSchoolAdd.schoolId.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Save</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
 			</div>
@@ -422,22 +422,21 @@
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="schoolID">School
+							<label class="col-md-4 control-label" for="schoolID">
 								ID</label>
 							<div class="col-md-8">
 								<input id="schoolId" name="schoolId"
 									placeholder="Enter school id" class="form-control input-md"
 									type="text" ng-model="school_edit.schoolId" ng-required="true" />
 								<span id="helpBlock" style="color: red" class="help-block"
-									ng-show="frmSchool.schoolId.$error.required">Please
-									enter school id</span>
+									ng-show="frmSchool.schoolId.$error.required">This field is required</span>
 
 							</div>
 						</div>
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="schoolName">School
+							<label class="col-md-4 control-label" for="schoolName">
 								Name</label>
 							<div class="col-md-8">
 								<input id="schoolName" name="schoolName"
@@ -445,8 +444,7 @@
 									type="text" ng-model="school_edit.schoolName"
 									ng-required="true" /> <span id="helpBlock" class="help-block"
 									style="color: red"
-									ng-show="frmSchool.schoolName.$error.required">Please
-									enter school name</span>
+									ng-show="frmSchool.schoolName.$error.required">This field is required</span>
 							</div>
 						</div>
 
@@ -458,8 +456,7 @@
 									class="form-control input-md" type="text" ng-required="true"
 									ng-model="school_edit.address" /> <span id="helpBlock"
 									class="help-block" style="color: red"
-									ng-show="frmSchool.address.$error.required">Please enter
-									address</span>
+									ng-show="frmSchool.address.$error.required">This field is required</span>
 							</div>
 						</div>
 
@@ -472,8 +469,7 @@
 									class="form-control input-md" type="text" ng-required="true"
 									ng-model="school_edit.contact" /> <span id="helpBlock"
 									class="help-block" style="color: red"
-									ng-show="frmSchool.contact.$error.required">Please enter
-									contact</span>
+									ng-show="frmSchool.contact.$error.required">This field is required</span>
 							</div>
 						</div>
 

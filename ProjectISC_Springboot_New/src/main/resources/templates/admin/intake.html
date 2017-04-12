@@ -55,23 +55,7 @@
 
 					<div class="clearfix"></div>
 
-					<!-- menu profile quick info -->
-					<div class="profile clearfix">
-						<div class="profile_pic">
-							<img src="production/images/img.jpg" alt="..."
-								class="img-circle profile_img" />
-						</div>
-						<div class="profile_info">
-
-							<h2>
-								<span>Welcome, </span>John Doe
-							</h2>
-						</div>
-					</div>
-					<!-- /menu profile quick info -->
-
-					<br />
-
+					
 					<!-- sidebar menu -->
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
@@ -158,7 +142,7 @@
 								</div>
 								<div class="col-md-6 pull-right">
 
-									<input id="filter" type="text" placeholder="Filter"
+									<input id="filter" type="text" placeholder="Filter"  
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
@@ -288,7 +272,7 @@
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formThem.intakeid.$error">
 									<div ng-message="required" ng-show="formThem.intakeid.$touched">
-										<p style="color: red">Please enter intake id</p>
+										<p style="color: red">This field is required</p>
 									</div>
 									<!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
 								</div>
@@ -302,7 +286,7 @@
 									required="required" class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formThem.name.$error">
 									<div ng-message="required" ng-show="formThem.name.$touched">
-										<p style="color: red">Please enter intake name</p>
+										<p style="color: red">This field is required</p>
 									</div>
 								</div>
 							</div>
@@ -317,7 +301,7 @@
 								<div ng-messages="formThem.startdate.$error">
 									<div ng-message="required"
 										ng-show="formThem.startdate.$touched">
-										<p style="color: red">Please pick a start date</p>
+										<p style="color: red">This field is required</p>
 									</div>
 								</div>
 							</div>
@@ -332,7 +316,7 @@
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formThem.enddate.$error">
 									<div ng-message="required" ng-show="formThem.enddate.$touched">
-										<p style="color: red">Please pick an end date</p>
+										<p style="color: red">This field is required</p>
 									</div>
 									<div ng-message="validationError">
 										<p style="color: red">The End date must be greater than
@@ -398,7 +382,7 @@
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formSua._id.$error">
 									<div ng-message="required">
-										<p style="color: red">Please enter intake id</p>
+										<p style="color: red">This field is required</p>
 									</div>
 									<!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
 								</div>
@@ -412,7 +396,7 @@
 									required="required" class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formSua._name.$error">
 									<div ng-message="required">
-										<p style="color: red">Please enter intake name</p>
+										<p style="color: red">This field is required</p>
 									</div>
 								</div>
 							</div>
@@ -427,7 +411,7 @@
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formSua._startdate.$error">
 									<div ng-message="required">
-										<p style="color: red">Please pick a start date</p>
+										<p style="color: red">This field is required</p>
 									</div>
 								</div>
 							</div>
@@ -442,7 +426,7 @@
 									class="form-control col-md-7 col-xs-12" />
 								<div ng-messages="formSua._enddate.$error">
 									<div ng-message="required">
-										<p style="color: red">Please pick an end date</p>
+										<p style="color: red">This field is required</p>
 									</div>
 									<div ng-message="validationError">
 										<p style="color: red">The End date must be greater than
@@ -492,7 +476,7 @@
 				</div>
 				<div class="modal-body">
 					<p>
-						Are you sure you want to delete {{_name}} ?
+						Are you sure you want to delete it ?
 					</p>
 				</div>
 				<div class="modal-footer">
