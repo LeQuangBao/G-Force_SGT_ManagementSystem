@@ -2,7 +2,7 @@ app
 		.controller(
 				'specializationCtrl',
 				function($scope, $http, $filter) {
-					
+
 					$scope.rowdata = {
 						availableOptions : [ {
 							id : '15',
@@ -147,35 +147,36 @@ app
 
 					// update relevant subject
 					$scope.currentSubjects = [];
+					$scope.filterSubject = '';
 					$scope.callEditRelevantSubject = function(data) {
 						$scope.info = data;
 						getAllSubjects();
-						
+
 					}
 					function getAllSubjects() {
 						$http.get("/api/subject").then(function(response) {
 							$scope.listSubject = response.data;
 						});
 					}
-					
+
 					$scope.addSubject = function(subject) {
 						$scope.currentSubjects.push(subject);
-						filterSubject();
 					}
-					
+
 					$scope.deleteSubject = function(subject) {
 						var index = $scope.currentSubjects.indexOf(subject);
-						  $scope.currentSubjects.splice(index, 1);  
+						$scope.currentSubjects.splice(index, 1);
 					}
-					
-					function filterSubject() {
-						angular.forEach($scope.currentSubjects, function(value1, key1){
-							angular.forEach($scope.listSubject, function(value2, key2){
-								if (value1.id === value2.id){
-									
-								}
-							});
-						});
+
+					$scope.checkDuplicateSubject = function(id) {
+						var flag = false;
+						angular.forEach($scope.currentSubjects,
+								function(value, key) {
+									if (value.id === id) {
+										flag = true;
+									}
+								});
+						return flag;
 					}
 
 					$scope.editRelevantSubject = function() {
@@ -184,14 +185,11 @@ app
 							url : "/api/specialization",
 							data : JSON.stringify($scope.info),
 							dataType : "json",
-						})
-								.then(
-										function(response) {
-											alertEditSucess();
-										},
-										function(response) {
-											alertFailMessage("Oops! Something went wrong.");
-										});
+						}).then(function(response) {
+							alertEditSucess();
+						}, function(response) {
+							alertFailMessage("Oops! Something went wrong.");
+						});
 					}
 
 					// call for data first, then delete specialization

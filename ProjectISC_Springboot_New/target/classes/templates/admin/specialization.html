@@ -387,6 +387,7 @@
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm">
 						<h5>Available subject</h5>
+						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
 						<div class="well">
 							<div class="table-responsive" ng-model="filterController">
 								<table class="table table-condensed table-hover">
@@ -399,13 +400,13 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr data-ng-repeat="x in listSubject">
+										<tr data-ng-repeat="x in listSubject | filter:filterSubject">
 											<td ng-bind="$index+1"></td>
 											<td data-ng-bind="x.subjectId"></td>
 											<td data-ng-bind="x.subjectName"></td>
 											<td>
 												<button
-													ng-disabled="x.subjectId == currentSubjects.subjectId"
+													ng-disabled="checkDuplicateSubject(x.id)"
 													type="button" ng-click="addSubject(x)"
 													class="btn btn-primary btn-xs">
 													<span class="glyphicon glyphicon-plus"></span>
@@ -416,7 +417,7 @@
 								</table>
 							</div>
 						</div>
-						<h5>Current subject</h5>
+						<h5>Added subject</h5>
 						<div class="well">
 							<div class="table-responsive">
 								<table class="table table-condensed table-hover">
