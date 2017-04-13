@@ -72,6 +72,9 @@
 										<li><a href="/admin/school">School</a></li>
 										<li><a href="/admin/specialization">Specialization </a></li>
 										<li><a href="/admin/subject">Subject</a></li>
+										<li><a href="/admin/registrar">Registrar</a></li>
+										<li><a href="/admin/instructor">Instructor</a></li>
+										<li><a href="/admin/student">Student</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -186,7 +189,7 @@
 												<tr
 													data-ng-repeat="x in list | orderBy:sortType:sortReverse"
 													data-ng-show="showList(x,$index)">
-													<td ng-bind="$index+1"></td>
+													<td ng-bind="$index+1"></td><input type="hidden" ng-model="x.id"/>
 													<td data-ng-bind="x.specializationId"></td>
 													<td data-ng-bind="x.specializationName"></td>
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
@@ -327,6 +330,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2">ID</label>
 							<div class="col-sm-10">
+								<input type="hidden" ng-model="info.id"/>
 								<input type="text" id="specializationId_edit"
 									name="specializationId_edit" ng-model="info.specializationId"
 									class="form-control" placeholder="" required="required" /><span
