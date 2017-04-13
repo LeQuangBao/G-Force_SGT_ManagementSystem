@@ -41,6 +41,7 @@
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet" />
 <link href="js/sweetalert.css" rel="stylesheet" />
+<link href="build/css/custom.css" rel="stylesheet" />
 </head>
 
 <body class="nav-md" ng-app="myApp" ng-controller="instructorCtrl">
@@ -160,7 +161,7 @@
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 15%"
 														ng-click="sortType = 'schoolId';sortReverse = !sortReverse">Username
 														<span
 														ng-show="sortType == 'schoolId' &amp;&amp; !sortReverse"
@@ -168,7 +169,7 @@
 														ng-show="sortType == 'schoolId' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 15%"
 														ng-click="sortType = 'lastName';sortReverse = !sortReverse">Last Name
 														<span
 														ng-show="sortType == 'lastName' &amp;&amp; !sortReverse"
@@ -185,7 +186,7 @@
 														class="fa fa-caret-up"></span>
 													</th>
 										
-													<th class="sortable" style="width: 6%"
+													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'active';sortReverse = !sortReverse">Status
 														<span
 														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
@@ -271,153 +272,184 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">Add Instructor</h4>
 				</div>
-				<div class="modal-body">
-				<div class="col-md-6">
-					<form class="form-horizontal" name="frmInstructorAdd">
-						<!-- Text input-->
-						<div class="form-group">
-							<label class=" control-label" for="">Username</label>
-							<div class="">
-								<input id="username" name="username" placeholder=""
-									class="form-control input-md" type="text" ng-model="username"
-									ng-required="true" />
-								<div ng-messages="">
-									<div ng-message="required"
-										ng-show="">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">School ID is already exists. Please
-											enter another ID.</p>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="control-label" for="lastName">
-								Last Name</label>
-							<div class="">
-								<input id="lastName" name="lastName" placeholder=""
-									class="form-control input-md" type="text" ng-model="lastName"
-									ng-required="true" />
-								<div ng-messages="frmInstructorAdd.lastName.$error">
-									<div ng-message="required"
-										ng-show="frmInstructorAdd.lastName.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">School Name is already exists.
-											Please enter another School Name.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="control-label" for="firstName">First Name</label>
-							<div class="">
-								<input id="firstName" name="firstName" placeholder=""
-									class="form-control input-md" type="text" ng-required="true"
-									ng-model="firstName" />
-								<div ng-messages="frmInstructorAdd.firstName.$error">
-									<div ng-message="required"
-										ng-show="frmInstructorAdd.firstName.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-							<!-- Text input-->
-						<div class="form-group">
-							<label class=" control-label" for="birthday">Birthday</label>
-							<div class="">
-								<input type="date" id="startdate" name="startdate"
-									data-ng-model="startdate"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="frmInstructorAdd.birthday.$error">
-									<div ng-message="required"
-										ng-show="frmInstructorAdd.birthday.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<!-- Text input-->
-						<div class="form-group">
-							<label class=" control-label" for="birthday">Email</label>
-							<div class="">
-								<input id="email" name="email" placeholder=""
-									class="form-control input-md" type="phone" ng-required="true"
-									ng-model="email" />
-								<div ng-messages="frmInstructorAdd.email.$error">
-									<div ng-message="required"
-										ng-show="frmInstructorAdd.email.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<!-- Text input-->
-						<div class="form-group">
-							<label class=" control-label" for="birthday">Phone</label>
-							<div class="">
-								<input id="phone" name="phone" placeholder=""
-									class="form-control input-md" type="phone" ng-required="true"
-									ng-model="phone" />
-								<div ng-messages="frmInstructorAdd.phone.$error">
-									<div ng-message="required"
-										ng-show="frmInstructorAdd.phone.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<!-- Text input-->
-						<div class="form-group">
-							<label class=" control-label" for="birthday">Address</label>
-							<div class="">
-								<input id="adress" name="address" placeholder=""
-									class="form-control input-md" type="text" ng-required="true"
-									ng-model="adress" />
-								<div ng-messages="frmInstructorAdd.address.$error">
-									<div ng-message="required"
-										ng-show="frmInstructorAdd.address.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-						
-					</form>
-					</div>
+				<div class="modal-body row">
 					<div class="col-md-6">
-							<label class=" control-label" for="">Profile picture</label>
-							<img src="production/images/img.jpg" width="" class="img-responsive"/>
-							<button class="btn">Upload new picture</button>
-							<!-- Multiple Radios -->
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="status">Status</label>
-							<div class="col-md-8">
-								<div class="checkbox">
-									<label> <input type="radio" ng-model="active"
-										ng-value="true" ng-checked="true" /> Active
-									</label><br /> <label> <input type="radio" ng-model="active"
-										ng-value="false" /> Inactive
-									</label>
+						<form class="form-horizontal" name="frmRegistrarAdd">
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										class="form-control input-md" type="text" ng-model="username"
+										ng-required="true" />
+									<div ng-messages="">
+										<div ng-message="required"
+											ng-show="">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+	
 								</div>
 							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName">
+									Last Name</label>
+								<div class="">
+									<input id="lastName" name="lastName" placeholder=""
+										class="form-control input-md" type="text" ng-model="lastName"
+										ng-required="true" />
+									<div ng-messages="frmRegistrarAdd.lastName.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.lastName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+								</div>
+							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">First Name</label>
+								<div class="">
+									<input id="firstName" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="firstName" />
+									<div ng-messages="frmRegistrarAdd.firstName.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.firstName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+								<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Password</label>
+								<div class="">
+									<input type="password" id="password" name="password"
+										data-ng-model="password"
+										required="required" class="form-control col-md-7 col-xs-12" />
+									<div ng-messages="frmRegistrarAdd.password.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Retype password</label>
+								<div class="">
+									<input type="re_password" id="re_password" name="re_password"
+										required="required" class="form-control col-md-7 col-xs-12" />
+									<div ng-messages="frmRegistrarAdd.password.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Email</label>
+								<div class="">
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="email" />
+									<div ng-messages="frmRegistrarAdd.email.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.email.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Phone</label>
+								<div class="">
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="tel" ng-required="true"
+										ng-model="phone" />
+									<div ng-messages="frmRegistrarAdd.phone.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.phone.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Address</label>
+								<div class="">
+									<input id="adress" name="address" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="address" />
+									<div ng-messages="frmRegistrarAdd.address.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.address.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+	
+							
+						</form>
 						</div>
-					</div>
+						<div class="col-md-6">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
+								<div class=" picture">
+									
+									<img src="production/images/img.jpg" width="" class="img-responsive"/>
+									<button class="btn btn-primary">Upload new picture</button>
+									<!-- Multiple Radios -->
+									
+									</div>
+							
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<div class="col-md-12">
+									<input id="birthday" name="birthday" placeholder=""
+										class="form-control input-md" type="date"/>
+	
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="selectbasic">Degree</label>
+								<div class="col-md-12">
+									<select id="selectbasic" name="selectbasic" class="form-control">
+										<option value="1">College</option>
+										<option value="2">University</option>
+										<option value="3">Master</option>
+										<option value="4">Doctor</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="status">Status</label>
+								
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="active"
+											ng-value="true" ng-checked="true" /> Active
+										</label>
+										 <label> <input type="radio" ng-model="active"
+											ng-value="false" /> Inactive
+										</label>
+									</div>
+							
+							</div>
+						</div>
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
