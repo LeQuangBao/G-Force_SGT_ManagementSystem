@@ -31,6 +31,7 @@ app
 
 					// get list specializations
 					function getListSpecializations() {
+						$scope.list=[];
 						$http.get("http://localhost:8080/api/specialization")
 								.then(function(response) {
 									$scope.list = response.data;
@@ -56,9 +57,27 @@ app
 					// Phân trang
 					$scope.currentPage = 1;
 					// max size of the pagination bar
-					$scope.maxPaginationSize = 50;
+					$scope.maxPaginationSize = 10;
 					$scope.itemsPerPage = 15;
 					$scope.updatePageIndexes = function() {
+						var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
+						if (totalPages <= 10) {
+				            // less than 10 total pages so show all
+							$scope.firstIndex = 1;
+							$scope.lastIndex = totalPages;
+				        } else {
+				            // more than 10 total pages so calculate start and end pages
+				            if ($scope.currentPage <= 6) {
+				            	$scope.firstIndex = 1;
+				            	$scope.lastIndex = 10;
+				            } else if ($scope.currentPage + 4 >= totalPages) {
+				            	$scope.firstIndex = totalPages - 9;
+				            	$scope.lastIndex = totalPages;
+				            } else {
+				            	$scope.firstIndex = $scope.currentPage - 5;
+				            	$scope.lastIndex = $scope.currentPage + 4;
+				            }
+				        }
 						$scope.firstIndex = ($scope.currentPage - 1)
 								* $scope.itemsPerPage;
 						$scope.lastIndex = $scope.currentPage
@@ -150,13 +169,13 @@ app
 					}
 					
 					function filterSubject() {
-						angular.forEach($scope.currentSubjects, function(value1, key1)){
-							angular.forEach($scope.listSubject, function(value2, key2)){
-								if (value1.id == = value2.id){
+						angular.forEach($scope.currentSubjects, function(value1, key1){
+							angular.forEach($scope.listSubject, function(value2, key2){
+								if (value1.id === value2.id){
 									
 								}
-							}
-						}
+							});
+						});
 					}
 
 					$scope.editRelevantSubject = function() {
