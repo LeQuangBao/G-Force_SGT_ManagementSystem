@@ -1,11 +1,17 @@
 package com.isc.model;
-// Generated Apr 5, 2017 2:34:38 PM by Hibernate Tools 4.3.5.Final
+// Generated Apr 13, 2017 3:18:32 PM by Hibernate Tools 4.3.5.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -30,17 +36,28 @@ public class Subject implements java.io.Serializable {
 	private int hour;
 	private String description;
 	private boolean active;
+	private Set<Specialization> specializations = new HashSet<Specialization>(0);
 
 	public Subject() {
 	}
 
-	public Subject(String subjectId, String subjectName, float credit, int hour, String description, boolean active) {
+	public Subject(String subjectId, float credit, int hour, String description, boolean active) {
+		this.subjectId = subjectId;
+		this.credit = credit;
+		this.hour = hour;
+		this.description = description;
+		this.active = active;
+	}
+
+	public Subject(String subjectId, String subjectName, float credit, int hour, String description, boolean active,
+			Set<Specialization> specializations) {
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.credit = credit;
 		this.hour = hour;
 		this.description = description;
 		this.active = active;
+		this.specializations = specializations;
 	}
 
 	@Id
@@ -64,7 +81,7 @@ public class Subject implements java.io.Serializable {
 		this.subjectId = subjectId;
 	}
 
-	@Column(name = "subject_name", nullable = false, length = 50)
+	@Column(name = "subject_name", length = 50)
 	public String getSubjectName() {
 		return this.subjectName;
 	}
@@ -107,6 +124,18 @@ public class Subject implements java.io.Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "specialization_subject", catalog = "my_db", joinColumns = {
+			@JoinColumn(name = "subject", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "specialization", nullable = false, updatable = false) })
+	public Set<Specialization> getSpecializations() {
+		return this.specializations;
+	}
+
+	public void setSpecializations(Set<Specialization> specializations) {
+		this.specializations = specializations;
 	}
 
 }

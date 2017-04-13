@@ -72,6 +72,9 @@
 										<li><a href="/admin/school">School</a></li>
 										<li><a href="/admin/specialization">Specialization </a></li>
 										<li><a href="/admin/subject">Subject</a></li>
+										<li><a href="/admin/registrar">Registrar</a></li>
+										<li><a href="/admin/instructor">Instructor</a></li>
+										<li><a href="/admin/student">Student</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -389,7 +392,8 @@
 					<form class="form-horizontal" name="editForm">
 						<h5>Available subject</h5>
 						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
-						<div class="well">
+						<!-- scrollable table -->
+						<div class="well" style="height:200px;overflow:auto">
 							<div class="table-responsive" ng-model="filterController">
 								<table class="table table-condensed table-hover">
 									<thead>
@@ -443,10 +447,6 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2"></label>
-							<div class="col-sm-10"></div>
 						</div>
 					</form>
 				</div>
