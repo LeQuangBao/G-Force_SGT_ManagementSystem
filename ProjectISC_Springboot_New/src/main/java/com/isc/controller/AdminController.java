@@ -29,4 +29,8 @@ public class AdminController {
 	public String subject() {
 		return "admin/subject";
 	}
+	@RequestMapping(value = "/admin/instructor")
+	public String instructor() {
+		return "admin/instructor";
+	}
 }

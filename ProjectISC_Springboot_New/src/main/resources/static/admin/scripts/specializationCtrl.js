@@ -2,6 +2,7 @@ app
 		.controller(
 				'specializationCtrl',
 				function($scope, $http, $filter) {
+
 					$scope.rowdata = {
 						availableOptions : [ {
 							id : '15',
@@ -30,6 +31,7 @@ app
 
 					// get list specializations
 					function getListSpecializations() {
+						$scope.list=[];
 						$http.get("http://localhost:8080/api/specialization")
 								.then(function(response) {
 									$scope.list = response.data;
@@ -55,9 +57,27 @@ app
 					// Phân trang
 					$scope.currentPage = 1;
 					// max size of the pagination bar
-					$scope.maxPaginationSize = 50;
+					$scope.maxPaginationSize = 10;
 					$scope.itemsPerPage = 15;
 					$scope.updatePageIndexes = function() {
+						var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
+						if (totalPages <= 10) {
+				            // less than 10 total pages so show all
+							$scope.firstIndex = 1;
+							$scope.lastIndex = totalPages;
+				        } else {
+				            // more than 10 total pages so calculate start and end pages
+				            if ($scope.currentPage <= 6) {
+				            	$scope.firstIndex = 1;
+				            	$scope.lastIndex = 10;
+				            } else if ($scope.currentPage + 4 >= totalPages) {
+				            	$scope.firstIndex = totalPages - 9;
+				            	$scope.lastIndex = totalPages;
+				            } else {
+				            	$scope.firstIndex = $scope.currentPage - 5;
+				            	$scope.lastIndex = $scope.currentPage + 4;
+				            }
+				        }
 						$scope.firstIndex = ($scope.currentPage - 1)
 								* $scope.itemsPerPage;
 						$scope.lastIndex = $scope.currentPage
@@ -102,7 +122,10 @@ app
 
 					// update specialization
 					$scope.callEditSpecialization = function(data) {
-						$scope.info = data;
+						$http.get("/api/specialization/"+data.id)
+			            .then(function (response) {
+			            	$scope.info=response.data;
+			            });
 					}
 
 					$scope.editSpecialization = function() {
@@ -114,6 +137,7 @@ app
 						})
 								.then(
 										function(response) {
+											getListSpecializations();
 											alertEditSucess();
 										},
 										function(response) {
@@ -122,14 +146,37 @@ app
 					}
 
 					// update relevant subject
+					$scope.currentSubjects = [];
+					$scope.filterSubject = '';
 					$scope.callEditRelevantSubject = function(data) {
 						$scope.info = data;
 						getAllSubjects();
+
 					}
 					function getAllSubjects() {
 						$http.get("/api/subject").then(function(response) {
 							$scope.listSubject = response.data;
 						});
+					}
+
+					$scope.addSubject = function(subject) {
+						$scope.currentSubjects.push(subject);
+					}
+
+					$scope.deleteSubject = function(subject) {
+						var index = $scope.currentSubjects.indexOf(subject);
+						$scope.currentSubjects.splice(index, 1);
+					}
+
+					$scope.checkDuplicateSubject = function(id) {
+						var flag = false;
+						angular.forEach($scope.currentSubjects,
+								function(value, key) {
+									if (value.id === id) {
+										flag = true;
+									}
+								});
+						return flag;
 					}
 
 					$scope.editRelevantSubject = function() {
@@ -138,14 +185,11 @@ app
 							url : "/api/specialization",
 							data : JSON.stringify($scope.info),
 							dataType : "json",
-						})
-								.then(
-										function(response) {
-											alertEditSucess();
-										},
-										function(response) {
-											alertFailMessage("Oops! Duplicate ID is not allowed.");
-										});
+						}).then(function(response) {
+							alertEditSucess();
+						}, function(response) {
+							alertFailMessage("Oops! Something went wrong.");
+						});
 					}
 
 					// call for data first, then delete specialization
