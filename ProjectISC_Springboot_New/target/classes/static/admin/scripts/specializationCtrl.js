@@ -104,9 +104,9 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                     active: activeElement
                 },
                 dataType: "json",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                // headers: {
+                    // 'Content-Type': 'application/json'
+                // }
             })
             .then(
                 function(response) {

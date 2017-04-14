@@ -74,7 +74,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
             var active=$scope.active;
             
             $http({
-                method: "POST",
+               method: "POST",
                url: "/api/subject",
                data: {
             	   	subjectId: subject_id,
