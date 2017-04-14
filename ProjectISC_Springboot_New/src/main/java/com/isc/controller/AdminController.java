@@ -40,7 +40,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/student")
 	public String student() {
-		return "admin/sudent";
+		return "admin/student";
 	}
 
 }

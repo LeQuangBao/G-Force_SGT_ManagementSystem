@@ -1,9 +1,9 @@
 package com.isc.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
+//import java.io.BufferedOutputStream;
+//import java.io.File;
+//import java.io.FileOutputStream;
+//import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
+//import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -97,53 +97,7 @@ public class StudentController {
 	public ResponseEntity<List<Specialization>> getAllSpecilization() {
 		return new ResponseEntity<>(service.getallspecialization(), HttpStatus.OK);
 	}
-	 private String doUpload(HttpServletRequest request, Model model, MyUploadForm myUploadForm) {
-	 
-	       String description = myUploadForm.getDescription();
-	       System.out.println("Description: " + description);
-	 
-	       // Thư mục gốc upload file.
-	       String uploadRootPath = request.getServletContext().getRealPath("upload");
-	       System.out.println("uploadRootPath=" + uploadRootPath);
-	 
-	       File uploadRootDir = new File(uploadRootPath);
-	       //
-	       // Tạo thư mục gốc upload nếu nó không tồn tại.
-	       if (!uploadRootDir.exists()) {
-	           uploadRootDir.mkdirs();
-	       }
-	       CommonsMultipartFile[] fileDatas = myUploadForm.getFileDatas();
-	       //
-	       List<File> uploadedFiles = new ArrayList<File>();
-	       for (CommonsMultipartFile fileData : fileDatas) {
-	 
-	           // Tên file gốc tại Client.
-	           String name = fileData.getOriginalFilename();
-	           System.out.println("Client File Name = " + name);
-	 
-	           if (name != null && name.length() > 0) {
-	               try {
-	                   // Tạo file tại Server.
-	                   File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
-	 
-	                   // Luồng ghi dữ liệu vào file trên Server.
-	                   BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-	                   stream.write(fileData.getBytes());
-	                   stream.close();
-	                   //
-	                   uploadedFiles.add(serverFile);
-	                   System.out.println("Write file: " + serverFile);
-	               } catch (Exception e) {
-	                   System.out.println("Error Write file: " + name);
-	               }
-	           }
-	       }
-	       model.addAttribute("description", description);
-	       model.addAttribute("uploadedFiles", uploadedFiles);
-	       return "uploadResult";
-	   }
-	
-	
+
 	
 
 	
