@@ -5,7 +5,7 @@ Sua viet hoa dau tien
 Bo new intake cua add
 Them Add and close
 Them display rows
--Degree cho combobox 4 cai
+Degree cho combobox 4 cai
 -drop down school student, drop down intake, drop down entrance exam
 -Status gom 3 trang thai dang hoc, nghi hoc, tot nghiep
 Sua ID chuc nang ADD
