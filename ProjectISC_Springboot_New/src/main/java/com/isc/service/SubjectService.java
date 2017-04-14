@@ -2,7 +2,7 @@ package com.isc.service;
 
 import java.util.List;
 
-import com.isc.model.Subject;;
+import com.isc.model.Subject;
 
 public interface SubjectService {
 	
