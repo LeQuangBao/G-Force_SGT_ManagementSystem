@@ -103,7 +103,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                     specializationName: specializationName,
                     active: activeElement
                 },
-                dataType: "json",
+//                dataType: "json",
                 headers: {
                     'Content-Type': 'application/json'
                 }
