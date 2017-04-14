@@ -35,93 +35,81 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
     }
     getListSpecializations();
 
-    // refresh list (call get list)
-    $scope.refreshList = function() {
-        getListSpecializations();
-    }
-
-    // $scope.sortType = 'specializationName';
-    $scope.filterTable = '';
-    // Tìm kiếm theo tên
-    $scope.filterSort = function(element) {
-        if ($filter('filter')([element], $scope.filterTable).length > 0) {
-            return 1;
-        }
-        return 2;
-    };
-
-    // Phân trang
-    $scope.currentPage = 1;
-    // max size of the pagination bar
-    $scope.maxPaginationSize = 10;
-    $scope.itemsPerPage = 15;
-    $scope.updatePageIndexes = function() {
-        var totalPages = Math.ceil($scope.list.length /
-            $scope.maxPaginationSize);
-        if (totalPages <= 10) {
-            // less than 10 total pages so show all
-            $scope.firstIndex = 1;
-            $scope.lastIndex = totalPages;
-        } else {
-            // more than 10 total pages so calculate start and
-            // end pages
-            if ($scope.currentPage <= 6) {
-                $scope.firstIndex = 1;
-                $scope.lastIndex = 10;
-            } else if ($scope.currentPage + 4 >= totalPages) {
-                $scope.firstIndex = totalPages - 9;
-                $scope.lastIndex = totalPages;
-            } else {
-                $scope.firstIndex = $scope.currentPage - 5;
-                $scope.lastIndex = $scope.currentPage + 4;
-            }
-        }
-        $scope.firstIndex = ($scope.currentPage - 1) *
-            $scope.itemsPerPage;
-        $scope.lastIndex = $scope.currentPage *
-            $scope.itemsPerPage;
-    };
-    $scope.updatePageIndexes();
-
-    $scope.showList = function(spec, index) {
-        return (($scope.filterSort(spec) == 1) &&
-            (index >= $scope.firstIndex) && (index < $scope.lastIndex));
-    }
-
-    // add specialization
-    $scope.addSpecialization = function() {
-        var specializationId = document
-            .getElementById("specializationId_add").value;
-        var specializationName = document
-            .getElementById("specializationName_add").value;
-        var activeElement = $scope.active_add;
-        $http({
-                method: "POST",
-                url: "/api/specialization",
-                data: {
-                    specializationId: specializationId,
-                    specializationName: specializationName,
-                    active: activeElement
-                },
-                dataType: "json",
-                // headers: {
-                    // 'Content-Type': 'application/json'
-                // }
-            })
-            .then(
-                function(response) {
-                    // $("#myModal_them").modal("hide");
-                    getListSpecializations();
-                    alertAddSucess();
-                    $scope.ResetForm_Add();
-                },
-                function(response) {
-                    if (response.status == 406) {
-                        alertFailMessage("Oops! Duplicate ID is not allowed.");
+            // $scope.sortType = 'specializationName';
+            $scope.filterTable = '';
+            
+            // Tìm kiếm theo tên
+            $scope.listfiltered = function(element) {
+                return $filter('filter')(element, $scope.filterTable); 
+            };	
+            // Phân trang
+            $scope.currentPage = 1;
+            // max size of the pagination bar
+            $scope.maxPaginationSize = 10;
+            $scope.itemsPerPage = 15;
+            $scope.updatePageIndexes = function() {
+                var totalPages = Math.ceil($scope.list.length /
+                    $scope.maxPaginationSize);
+                if (totalPages <= 10) {
+                    // less than 10 total pages so show all
+                    $scope.firstIndex = 1;
+                    $scope.lastIndex = totalPages;
+                } else {
+                    // more than 10 total pages so calculate start and
+                    // end pages
+                    if ($scope.currentPage <= 6) {
+                        $scope.firstIndex = 1;
+                        $scope.lastIndex = 10;
+                    } else if ($scope.currentPage + 4 >= totalPages) {
+                        $scope.firstIndex = totalPages - 9;
+                        $scope.lastIndex = totalPages;
+                    } else {
+                        $scope.firstIndex = $scope.currentPage - 5;
+                        $scope.lastIndex = $scope.currentPage + 4;
                     }
-                });
+                }
+                $scope.firstIndex = ($scope.currentPage - 1) *
+                    $scope.itemsPerPage;
+                $scope.lastIndex = $scope.currentPage *
+                    $scope.itemsPerPage;
+            };
+            $scope.updatePageIndexes();
 
-    }
+            $scope.showList = function(index) {
+                return (index >= $scope.firstIndex) && (index < $scope.lastIndex);
+                
+            // add specialization
+            $scope.addSpecialization = function() {
+                var specializationId = document
+                    .getElementById("specializationId_add").value;
+                var specializationName = document
+                    .getElementById("specializationName_add").value;
+                var activeElement = $scope.active_add;
+                $http({
+                        method: "POST",
+                        url: "/api/specialization",
+                        data: {
+                            specializationId: specializationId,
+                            specializationName: specializationName,
+                            active: activeElement
+                        },
+                        dataType: "json",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(
+                        function(response) {
+                            // $("#myModal_them").modal("hide");
+                            getListSpecializations();
+                            alertAddSucess();
+                            $scope.ResetForm_Add();
+                        },
+                        function(response) {
+                            if (response.status == 406) {
+                                alertFailMessage("Oops! Duplicate ID is not allowed.");
+                            }
+                        });
 
     // update specialization
     $scope.callEditSpecialization = function(data) {
