@@ -45,14 +45,11 @@ app
 
             // $scope.sortType = 'specializationName';
             $scope.filterTable = '';
+            
             // Tìm kiếm theo tên
-            $scope.filterSort = function(element) {
-                if ($filter('filter')([element], $scope.filterTable).length > 0) {
-                    return 1;
-                }
-                return 2;
-            };
-
+            $scope.listfiltered = function(element) {
+                return $filter('filter')(element, $scope.filterTable); 
+            };	
             // Phân trang
             $scope.currentPage = 1;
             // max size of the pagination bar
@@ -86,9 +83,8 @@ app
             };
             $scope.updatePageIndexes();
 
-            $scope.showList = function(spec, index) {
-                return (($scope.filterSort(spec) == 1) &&
-                    (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+            $scope.showList = function(index) {
+                return (index >= $scope.firstIndex) && (index < $scope.lastIndex);
             }
 
             // add specialization
@@ -106,7 +102,7 @@ app
                             specializationName: specializationName,
                             active: activeElement
                         },
-                        dataType: "json"
+                        dataType: "json",
                         headers: {
                             'Content-Type': 'application/json'
                         }

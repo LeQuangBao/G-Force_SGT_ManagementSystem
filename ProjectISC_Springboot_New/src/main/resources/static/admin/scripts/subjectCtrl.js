@@ -24,12 +24,9 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 	    $scope.sortType = 'subjectName';
     	$scope.filterTable = '';
 	 // Tìm kiếm theo tên
-    	$scope.filterSort = function(element) {
-    		if ($filter('filter')([element], $scope.filterTable).length > 0) {
-    			return 1;
-    		}
-    		return 2;
-    	};
+    	$scope.listfiltered = function(element) {
+            return $filter('filter')(element, $scope.filterTable); 
+        };
     	
     	// Phân trang
     	$scope.currentPage = 1;
@@ -61,7 +58,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	$scope.updatePageIndexes();
     	
     	$scope.showList=function(subject,index){
-    		return (($scope.filterSort(subject) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+    		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
     	}
     	
 	    // add subject
