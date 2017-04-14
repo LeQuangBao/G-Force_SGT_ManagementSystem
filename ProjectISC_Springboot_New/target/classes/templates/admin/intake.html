@@ -191,14 +191,14 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list | orderBy:[filterSort, sortType]"
-													data-ng-show="showList(x,$index)">
+													data-ng-repeat="x in (listfiltered(list)) | orderBy:[filterSort, sortType]"
+													data-ng-show="showList($index)">
 													<td class="table-row-index" ng-bind="$index+1"><input
 														type="hidden" data-ng-model="x.id" /></td>
 													<td data-ng-bind="x.intakeId"></td>
 													<td data-ng-bind="x.intakeName"></td>
-													<td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
-													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
+													<td data-ng-bind="x.startDate"></td>
+													<td data-ng-bind="x.endDate"></td>
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button class="btn btn-primary btn-sm"

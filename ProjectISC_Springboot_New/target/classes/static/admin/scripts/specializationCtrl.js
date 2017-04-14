@@ -77,7 +77,8 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
 
             $scope.showList = function(index) {
                 return (index >= $scope.firstIndex) && (index < $scope.lastIndex);
-                
+            }
+
             // add specialization
             $scope.addSpecialization = function() {
                 var specializationId = document

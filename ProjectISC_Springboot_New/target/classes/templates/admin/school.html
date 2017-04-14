@@ -206,7 +206,7 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list |  orderBy:sortType:sortReverse"
+													data-ng-repeat="x in (listfiltered(list)) |  orderBy:sortType:sortReverse"
 													data-ng-show="showList(x,$index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.schoolId"></td>
