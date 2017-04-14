@@ -208,7 +208,7 @@
 													<td>
 														<button type="button" ng-click="viewInstructor()"
 															class="btn btn-success btn-sm" data-toggle="modal"
-															data-target="#myModal_sua">
+															data-target="#myModal_detail">
 															<span class="glyphicon glyphicon-eye-open"></span>
 														</button>
 														<button type="button" ng-click="editInstructor(x)"
@@ -268,7 +268,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add specialization</h4>
+					<h4 class="modal-title" id="myModalLabel">Add student</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-6">
@@ -555,32 +555,11 @@
 							</div>
 								<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Password</label>
-								<div class="">
-									<input type="password" id="password" name="password"
-										data-ng-model="password"
-										required="required" class="form-control col-md-7 col-xs-12" />
-									<div ng-messages="frmStudentAdd.password.$error">
-										<div ng-message="required"
-											ng-show="frmStudentAdd.password.$touched">
-											<p style="color: red">This field is required</p>
-										</div>
+								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<div class="col-md-12">
+									<input id="birthday" name="birthday" placeholder=""
+										class="form-control input-md" type="date"/>
 	
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Retype password</label>
-								<div class="">
-									<input type="re_password" id="re_password" name="re_password"
-										required="required" class="form-control col-md-7 col-xs-12" />
-									<div ng-messages="frmStudentAdd.password.$error">
-										<div ng-message="required"
-											ng-show="frmStudentAdd.password.$touched">
-											<p style="color: red">This field is required</p>
-										</div>
-	
-									</div>
 								</div>
 							</div>
 							<!-- Text input-->
@@ -645,14 +624,7 @@
 									
 									</div>
 							
-							<div class="form-group">
-								<label class="col-md-12 control-label" for="birthday">Birthday</label>
-								<div class="col-md-12">
-									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date"/>
-	
-								</div>
-							</div>
+							
 							<div class="form-group row">
 							
 								<div class="col-md-6">
@@ -706,14 +678,220 @@
 						</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="pull-left btn btn-danger">Reset Password</button>
+					<button type="button" class="pull-left btn btn-danger" data-toggle="modal" data-target="#myModal_reset">Reset Password</button>
 					<button type="button" class="btn btn-primary">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- Modal xem chi tiết -->
+	<div class="modal fade" id="myModal_detail" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Detail information</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="col-md-6">
+						<form class="form-horizontal" name="frmStudentAdd">
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										class="form-control input-md" type="text" ng-model="username"
+										ng-required="true" />
+								
 	
+								</div>
+							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName">
+									Last Name</label>
+								<div class="">
+									<input id="lastName" name="lastName" placeholder=""
+										class="form-control input-md" type="text" ng-model="lastName"
+										ng-required="true" />
+									
+								</div>
+							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">First Name</label>
+								<div class="">
+									<input id="firstName" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="firstName" />
+									
+								</div>
+							</div>
+								<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<div class="col-md-12">
+									<input id="birthday" name="birthday" placeholder=""
+										class="form-control input-md" type="date"/>
+	
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Email</label>
+								<div class="">
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="email" />
+									
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Phone</label>
+								<div class="">
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="tel" ng-required="true"
+										ng-model="phone" />
+									
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Address</label>
+								<div class="">
+									<input id="adress" name="address" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="address" />
+									
+								</div>
+							</div>
+	
+							
+						</form>
+						</div>
+						<div class="col-md-6">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
+								<div class=" picture">
+									
+									<img src="production/images/img.jpg" width="" class="img-responsive"/>
+									<button class="btn btn-primary">Upload new picture</button>
+									<!-- Multiple Radios -->
+									
+									</div>
+							
+							
+							<div class="form-group row">
+							
+								<div class="col-md-6">
+									<label class="col-md-12 control-label" for="selectbasic">Intake</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label class="col-md-12 control-label" for="selectbasic">Entrance exam</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1"></option>
+											<option value="2"></option>
+											
+										</select>
+									</div>
+								</div>
+								
+							</div>
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="selectbasic">School</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-12" for="status">Status</label>
+								
+								<p></p>
+							
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer">
+					
+					
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal resetpass -->
+	<div class="modal fade" id="myModal_reset" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm reset password</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<p>Are you sure you want to reset password of this account?</p>
+
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" ng-click="Reset()" data-target="#myModal_confirmReset" data-toggle="modal">Yes</a>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal confirmReset -->
+	<div class="modal fade" id="myModal_confirmReset" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm reset password</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<p>Password of this account has been set to 123456.</p>
+
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" ng-click="Reset()" data-target="#myModal_confirmReset" data-toggle="modal">Yes</a>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Modal xóa -->
 	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
