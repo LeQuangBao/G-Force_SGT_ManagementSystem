@@ -200,7 +200,7 @@
 														</button>
 														<button data-toggle="modal" class="btn btn-primary btn-sm"
 															data-target="#myModal_xoa"
-															ng-click="callDeleteSpecialization(x)">
+															ng-click="">
 															<span class="glyphicon glyphicon-eye-open"></span>
 														</button>
 														<button data-toggle="modal" class="btn btn-primary btn-sm"
@@ -330,8 +330,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2">ID</label>
 							<div class="col-sm-10">
-								<input type="hidden" ng-model="info.id"/>
-								<input type="text" id="specializationId_edit"
+								<input type="hidden" ng-model="info.id" /> <input type="text" id="specializationId_edit"
 									name="specializationId_edit" ng-model="info.specializationId"
 									class="form-control" placeholder="" required="required" /><span
 									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
@@ -385,12 +384,12 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						Edit relevant subject for: <label ng-bind="info.specializationId"></label>
+						Edit relevant subject for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
 					</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm">
-						<h5>Available subject</h5>
+						<h5>Available subject(s)</h5>
 						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
 						<!-- scrollable table -->
 						<div class="well" style="height:200px;overflow:auto">
@@ -422,8 +421,8 @@
 								</table>
 							</div>
 						</div>
-						<h5>Added subject</h5>
-						<div class="well">
+						<h5>Added subject(s)</h5>
+						<div class="well" style="height:200px;overflow:auto">
 							<div class="table-responsive">
 								<table class="table table-condensed table-hover">
 									<thead>
