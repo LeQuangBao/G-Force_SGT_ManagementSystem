@@ -111,7 +111,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                                 alertFailMessage("Oops! Duplicate ID is not allowed.");
                             }
                         });
-
+            }
     // update specialization
     $scope.callEditSpecialization = function(data) {
         $http.get("/api/specialization/" + data.id).then(

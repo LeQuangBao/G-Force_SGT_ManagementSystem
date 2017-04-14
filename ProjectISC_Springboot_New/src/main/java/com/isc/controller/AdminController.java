@@ -37,5 +37,10 @@ public class AdminController {
 	public String entranceExam() {
 		return "admin/entrance_exam";
 	}
+	
+	@RequestMapping(value = "/admin/student")
+	public String student() {
+		return "admin/sudent";
+	}
 
 }
