@@ -17,19 +17,24 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	function GetListIntake(){
 		$scope.list=[];
 		var Intake=$resource('/api/intake');
-		$scope.list=Intake.query();
+		Intake.query().$promise.then(function(listIntake){
+			angular.forEach(listIntake,function(value,key){
+				value.startDate=$filter('date')(value.startDate, "MM/dd/yyyy");
+				value.endDate=$filter('date')(value.endDate, "MM/dd/yyyy");
+			});
+			$scope.list=listIntake;
+		});
+		
 	}
 	GetListIntake();
 	
 	$scope.sortType = 'intakeName';
 	$scope.filterTable = '';
-	// Tìm kiếm theo tên
-	$scope.filterSort = function(element) {
-		if ($filter('filter')([element], $scope.filterTable).length > 0) {
-			return 1;
-		}
-		return 2;
-	};
+	//filter list
+	$scope.listfiltered = function(element) {
+        return $filter('filter')(element, $scope.filterTable); 
+    };
+	
 	function matchFirstChar(c, string) {
 		return (string.charAt(0) == c);
 	}
@@ -144,11 +149,8 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	};
 	$scope.updatePageIndexes();
 	
-	$scope.showList=function(intake,index){
-		var filter=intake;
-		filter.startDate=$filter('date')(intake.startDate, "MM/dd/yyyy");
-		filter.endDate=$filter('date')(intake.endDate, "MM/dd/yyyy");
-		return (($scope.filterSort(filter) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+	$scope.showList=function(index){
+		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
 	}
 	
 	

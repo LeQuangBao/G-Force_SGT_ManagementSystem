@@ -24,12 +24,9 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
 	    $scope.sortType = 'schoolName';
     	$scope.filterTable = '';
     	// Tìm kiếm theo tên
-    	$scope.filterSort = function(element) {
-    		if ($filter('filter')([element], $scope.filterTable).length > 0) {
-    			return 1;
-    		}
-    		return 2;
-    	};
+    	$scope.listfiltered = function(element) {
+            return $filter('filter')(element, $scope.filterTable); 
+        };
     	
     	// Phân trang
     	$scope.currentPage = 1;
@@ -61,7 +58,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
     	$scope.updatePageIndexes();
     	
     	$scope.showList=function(school,index){
-    		return (($scope.filterSort(school) == 1) && (index >= $scope.firstIndex) && (index < $scope.lastIndex));
+    		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
     	}
     	
     	
