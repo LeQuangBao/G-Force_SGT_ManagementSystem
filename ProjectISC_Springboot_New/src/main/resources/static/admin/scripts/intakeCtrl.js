@@ -21,6 +21,7 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			angular.forEach(listIntake,function(value,key){
 				value.startDate=$filter('date')(value.startDate, "MM/dd/yyyy");
 				value.endDate=$filter('date')(value.endDate, "MM/dd/yyyy");
+				value.active=value.active==true?'Active':'Inactive';
 			});
 			$scope.list=listIntake;
 		});

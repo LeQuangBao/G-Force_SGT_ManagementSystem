@@ -17,6 +17,9 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 			$scope.list=[];
 	    	$http.get("/api/subject")
 	    .then(function(response) {	
+	    	angular.forEach(response.data,function(value,key){
+	    		value.active=value.active==true?'Active':'Inactive';
+	    	});
 	       $scope.list = response.data;
 	    });
 	    }
@@ -57,7 +60,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	};
     	$scope.updatePageIndexes();
     	
-    	$scope.showList=function(subject,index){
+    	$scope.showList=function(index){
     		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
     	}
     	
