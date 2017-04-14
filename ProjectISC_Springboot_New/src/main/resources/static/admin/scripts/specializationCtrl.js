@@ -1,47 +1,39 @@
-app
-    .controller(
-        'specializationCtrl',
-        function($scope, $http, $filter) {
-            $scope.rowdata = {
-                availableOptions: [{
-                    id: '15',
-                    name: '15 rows'
-                }, {
-                    id: '30',
-                    name: '30 rows'
-                }, {
-                    id: '50',
-                    name: '50 rows'
-                }, {
-                    id: '100',
-                    name: '100 rows'
-                }],
-                selectedOption: {
-                    id: '15',
-                    name: '15 rows'
-                }
-            };
-            $scope.ChangeRow = function(index) {
-                $scope.itemsPerPage = index;
-                $scope.updatePageIndexes();
-            }
-            var deleteSpecialization = "";
-            var alertDuration = 1800;
+app.controller('specializationCtrl', function($scope, $http, $filter) {
+    $scope.rowdata = {
+        availableOptions: [{
+            id: '15',
+            name: '15 rows'
+        }, {
+            id: '30',
+            name: '30 rows'
+        }, {
+            id: '50',
+            name: '50 rows'
+        }, {
+            id: '100',
+            name: '100 rows'
+        }],
+        selectedOption: {
+            id: '15',
+            name: '15 rows'
+        }
+    };
+    $scope.ChangeRow = function(index) {
+        $scope.itemsPerPage = index;
+        $scope.updatePageIndexes();
+    }
+    var deleteSpecialization = "";
+    var alertDuration = 1800;
 
-            // get list specializations
-            function getListSpecializations() {
-                $scope.list = [];
-                $http.get("http://localhost:8080/api/specialization")
-                    .then(function(response) {
-                        $scope.list = response.data;
-                    })
-            }
-            getListSpecializations();
-
-            // refresh list (call get list)
-            $scope.refreshList = function() {
-                getListSpecializations();
-            }
+    // get list specializations
+    function getListSpecializations() {
+        $scope.list = [];
+        $http.get("http://localhost:8080/api/specialization")
+            .then(function(response) {
+                $scope.list = response.data;
+            })
+    }
+    getListSpecializations();
 
             // $scope.sortType = 'specializationName';
             $scope.filterTable = '';
@@ -85,8 +77,7 @@ app
 
             $scope.showList = function(index) {
                 return (index >= $scope.firstIndex) && (index < $scope.lastIndex);
-            }
-
+                
             // add specialization
             $scope.addSpecialization = function() {
                 var specializationId = document
@@ -120,192 +111,190 @@ app
                             }
                         });
 
-            }
+    // update specialization
+    $scope.callEditSpecialization = function(data) {
+        $http.get("/api/specialization/" + data.id).then(
+            function(response) {
+                $scope.info = response.data;
+            });
+    }
 
-            // update specialization
-            $scope.callEditSpecialization = function(data) {
-                $http.get("/api/specialization/" + data.id).then(
-                    function(response) {
-                        $scope.info = response.data;
-                    });
-            }
-
-            $scope.editSpecialization = function() {
-                $http({
-                        method: "PUT",
-                        url: "/api/specialization",
-                        data: JSON.stringify($scope.info),
-                        dataType: "json",
-                    })
-                    .then(
-                        function(response) {
-                            getListSpecializations();
-                            alertEditSucess();
-                        },
-                        function(response) {
-                            if (response.status == 406) {
-                                alertFailMessage("Oops! Duplicate ID is not allowed.");
-                            }
-                        });
-            }
-
-            // update relevant subjects
-            $scope.currentSubjects = [];
-            $scope.filterSubject = '';
-            $scope.callEditRelevantSubject = function(data) {
-                $scope.info_editRelevantSubject = data;
-                getAllSubjects();
-                $scope.currentSubjects = [];
-                data.subjects.forEach(function(item, index) {
-                    $scope.currentSubjects.push(item);
-                });
-            }
-
-            function getAllSubjects() {
-                $http.get("/api/subject").then(function(response) {
-                    $scope.listSubject = response.data;
-                });
-            }
-
-            $scope.addSubject = function(subject) {
-                $scope.currentSubjects.push(subject);
-            }
-
-            $scope.deleteSubject = function(subject) {
-                var index = $scope.currentSubjects.indexOf(subject);
-                $scope.currentSubjects.splice(index, 1);
-            }
-
-            $scope.checkDuplicateSubject = function(id) {
-                var flag = false;
-                angular.forEach($scope.currentSubjects, function(value,
-                    key) {
-                    if (value.id === id) {
-                        flag = true;
+    $scope.editSpecialization = function() {
+        $http({
+                method: "PUT",
+                url: "/api/specialization",
+                data: JSON.stringify($scope.info),
+                dataType: "json",
+            })
+            .then(
+                function(response) {
+                    getListSpecializations();
+                    alertEditSucess();
+                },
+                function(response) {
+                    if (response.status == 406) {
+                        alertFailMessage("Oops! Duplicate ID is not allowed.");
                     }
                 });
-                return flag;
-            }
+    }
 
-            $scope.editRelevantSubject = function() {
-                $scope.info_editRelevantSubject.subjects = [];
-                $scope.currentSubjects
-                    .forEach(function(item, index) {
-                        $scope.info_editRelevantSubject.subjects
-                            .push(item);
-                    });
-                $http({
-                        method: "PUT",
-                        url: "/api/specialization",
-                        data: JSON
-                            .stringify($scope.info_editRelevantSubject),
-                        contentType: 'application/json; charset=UTF-8',
-                        dataType: "json",
-                    })
-                    .then(
-                        function(response) {
-                            alertEditSucess();
-                        },
-                        function(response) {
-                            if (response.status == 406) {
-                                alertFailMessage("Oops! Duplicate ID is not allowed.");
-                            }
-                        });
-            }
+    // update relevant subjects
+    $scope.currentSubjects = [];
+    $scope.filterSubject = '';
+    $scope.callEditRelevantSubject = function(data) {
+        $scope.info_editRelevantSubject = data;
+        getAllSubjects();
+        $scope.currentSubjects = [];
+        data.subjects.forEach(function(item, index) {
+            $scope.currentSubjects.push(item);
+        });
+    }
 
-            // delete specialization
-            $scope.callDeleteSpecialization = function(data) {
-                deleteSpecialization = data;
-            }
-            $scope.deleteSpecialization = function() {
-                $http({
-                    method: "DELETE",
-                    url: "/api/specialization/" +
-                        deleteSpecialization.id,
-                    dataType: "json",
-                }).then(function(result) {
-                    if (result.status == 202) {
-                        $("#myModal_xoa").modal("hide");
-                        getListSpecializations();
-                        alertDeleteSucess();
-                    }
-                }, function(response) {
-                    alertFail();
-                });
-            }
+    function getAllSubjects() {
+        $http.get("/api/subject").then(function(response) {
+            $scope.listSubject = response.data;
+        });
+    }
 
-            // Sort and filter
-            $scope.sortType = 'specializationName';
-            $scope.sortReverse = false;
-            $scope.searchName = '';
+    $scope.addSubject = function(subject) {
+        $scope.currentSubjects.push(subject);
+    }
 
-            function alertDeleteSucess() {
-                swal({
-                    title: "",
-                    text: "Delete Successfully",
-                    type: "success",
-                    timer: alertDuration,
-                    showConfirmButton: false
-                });
-            }
+    $scope.deleteSubject = function(subject) {
+        var index = $scope.currentSubjects.indexOf(subject);
+        $scope.currentSubjects.splice(index, 1);
+    }
 
-            function alertEditSucess() {
-                swal({
-                    title: "",
-                    text: "Edit Successfully",
-                    type: "success",
-                    timer: alertDuration,
-                    showConfirmButton: false
-                });
-            }
-
-            function alertAddSucess() {
-                swal({
-                    title: "",
-                    text: "Add Successfully",
-                    type: "success",
-                    timer: alertDuration,
-                    showConfirmButton: false
-                });
-            }
-
-            function alertFail() {
-                swal({
-                    title: "",
-                    text: "Opps! Something went wrong.",
-                    type: "error",
-                    timer: alertDuration,
-                    showConfirmButton: false
-                })
-                setTimeout(function() {
-                    location.reload();
-                }, alertDuration);
-            }
-
-            function alertFailMessage(message) {
-                swal({
-                    title: "",
-                    text: message,
-                    type: "error",
-                    timer: alertDuration,
-                    showConfirmButton: false
-                })
-            }
-
-            function alertMessage(message) {
-                swal({
-                    title: message,
-                    timer: alertDuration,
-                    showConfirmButton: false
-                })
-            }
-            // reset form add
-            $scope.ResetForm_Add = function() {
-                $scope.specializationId_add = "";
-                $scope.specializationName_add = "";
-                $scope.active_add = true;
-                $scope.formAdd.specializationId_add.$setUntouched();
-                $scope.formAdd.specializationName_add.$setUntouched();
-
+    $scope.checkDuplicateSubject = function(id) {
+        var flag = false;
+        angular.forEach($scope.currentSubjects, function(value,
+            key) {
+            if (value.id === id) {
+                flag = true;
             }
         });
+        return flag;
+    }
+
+    $scope.editRelevantSubject = function() {
+        $scope.info_editRelevantSubject.subjects = [];
+        $scope.currentSubjects
+            .forEach(function(item, index) {
+                $scope.info_editRelevantSubject.subjects
+                    .push(item);
+            });
+        $http({
+                method: "PUT",
+                url: "/api/specialization",
+                data: JSON
+                    .stringify($scope.info_editRelevantSubject),
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json",
+            })
+            .then(
+                function(response) {
+                    alertEditSucess();
+                },
+                function(response) {
+                    if (response.status == 406) {
+                        alertFailMessage("Oops! Duplicate ID is not allowed.");
+                    }
+                });
+    }
+
+    // delete specialization
+    $scope.callDeleteSpecialization = function(data) {
+        deleteSpecialization = data;
+    }
+    $scope.deleteSpecialization = function() {
+        $http({
+            method: "DELETE",
+            url: "/api/specialization/" +
+                deleteSpecialization.id,
+            dataType: "json",
+        }).then(function(result) {
+            if (result.status == 202) {
+                $("#myModal_xoa").modal("hide");
+                getListSpecializations();
+                alertDeleteSucess();
+            }
+        }, function(response) {
+            alertFail();
+        });
+    }
+
+    // Sort and filter
+    $scope.sortType = 'specializationName';
+    $scope.sortReverse = false;
+    $scope.searchName = '';
+
+    function alertDeleteSucess() {
+        swal({
+            title: "",
+            text: "Delete Successfully",
+            type: "success",
+            timer: alertDuration,
+            showConfirmButton: false
+        });
+    }
+
+    function alertEditSucess() {
+        swal({
+            title: "",
+            text: "Edit Successfully",
+            type: "success",
+            timer: alertDuration,
+            showConfirmButton: false
+        });
+    }
+
+    function alertAddSucess() {
+        swal({
+            title: "",
+            text: "Add Successfully",
+            type: "success",
+            timer: alertDuration,
+            showConfirmButton: false
+        });
+    }
+
+    function alertFail() {
+        swal({
+            title: "",
+            text: "Opps! Something went wrong.",
+            type: "error",
+            timer: alertDuration,
+            showConfirmButton: false
+        })
+        setTimeout(function() {
+            location.reload();
+        }, alertDuration);
+    }
+
+    function alertFailMessage(message) {
+        swal({
+            title: "",
+            text: message,
+            type: "error",
+            timer: alertDuration,
+            showConfirmButton: false
+        })
+    }
+
+    function alertMessage(message) {
+        swal({
+            title: message,
+            timer: alertDuration,
+            showConfirmButton: false
+        })
+    }
+    // reset form add
+    $scope.ResetForm_Add = function() {
+        $scope.specializationId_add = "";
+        $scope.specializationName_add = "";
+        $scope.active_add = true;
+        $scope.formAdd.specializationId_add.$setUntouched();
+        $scope.formAdd.specializationName_add.$setUntouched();
+
+    }
+});
