@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Specialization Management</title>
+<title>Student Management</title>
 
 <base href="http://localhost:8080/admin/" />
 
@@ -41,6 +41,7 @@
 <link href="build/css/custom.min.css" rel="stylesheet" />
 <link href="build/css/style.css" rel="stylesheet" />
 <link href="js/sweetalert.css" rel="stylesheet" />
+<link href="build/css/custom.css" rel="stylesheet" />
 </head>
 
 <body data-ng-app="myApp" data-ng-controller="specializationCtrl"
@@ -124,7 +125,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Specialization Management</h3>
+							<h3>Student Management</h3>
 						</div>
 
 						<div class="title_right">
@@ -158,62 +159,70 @@
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-													<th class="sortable" style="width: 5%"
-														ng-click="sortType = 'specializationId';sortReverse = !sortReverse">ID
+													<th class="sortable" style="width: 15%"
+														ng-click="sortType = 'schoolId';sortReverse = !sortReverse">Username
 														<span
-														ng-show="sortType == 'specializationId' &amp;&amp; !sortReverse"
+														ng-show="sortType == 'schoolId' &amp;&amp; !sortReverse"
 														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'specializationId' &amp;&amp; sortReverse"
+														ng-show="sortType == 'schoolId' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 15%"
+														ng-click="sortType = 'lastName';sortReverse = !sortReverse">Last Name
+														<span
+														ng-show="sortType == 'lastName' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'lastName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
 													<th class="sortable" style="width: 20%"
-														ng-click="sortType = 'specializationName';sortReverse = !sortReverse">Name
+														ng-click="sortType = 'firstName';sortReverse = !sortReverse">First Name
 														<span
-														ng-show="sortType == 'specializationName' &amp;&amp; !sortReverse"
+														ng-show="sortType == 'firstName' &amp;&amp; !sortReverse"
 														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'specializationName' &amp;&amp; sortReverse"
+														ng-show="sortType == 'firstName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
-													<th class="sortable" style="width: 10%"
-														ng-click="sortType = 'active';sortReverse = !sortReverse">
-														Status <span
+													</th>
+										
+													<th class="sortable" style="width: 20%"
+														ng-click="sortType = 'active';sortReverse = !sortReverse">Status
+														<span
 														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
 														class="fa fa-caret-down"></span> <span
 														ng-show="sortType == 'active' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													</th>
-
-													<th style="width: 15%">Action</th>
+													<th style="width: 20%"></th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in (listfiltered(list)) | orderBy:sortType:sortReverse"
-													data-ng-show="showList($index)">
-													<td ng-bind="$index+1"></td><input type="hidden" ng-model="x.id"/>
-													<td data-ng-bind="x.specializationId"></td>
-													<td data-ng-bind="x.specializationName"></td>
-													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
-													<td><button class="btn btn-primary btn-sm"
-															ng-click="callEditSpecialization(x)" data-toggle="modal"
+													data-ng-repeat="x in list |  orderBy:sortType:sortReverse"
+													data-ng-show="showList(x,$index)">
+													<td ng-bind="$index+1"></td>
+													<td data-ng-bind="x.username"></td>
+													<td data-ng-bind="x.lastname"></td>
+													<td data-ng-bind="x.firstname"></td>
+													
+													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
+													<td>
+														<button type="button" ng-click="viewInstructor()"
+															class="btn btn-success btn-sm" data-toggle="modal"
+															data-target="#myModal_sua">
+															<span class="glyphicon glyphicon-eye-open"></span>
+														</button>
+														<button type="button" ng-click="editInstructor(x)"
+															class="btn btn-primary btn-sm" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
-														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_xoa"
-															ng-click="">
-															<span class="glyphicon glyphicon-eye-open"></span>
-														</button>
-														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_editSubject"
-															ng-click="callEditRelevantSubject(x)">
-															<span class="glyphicon glyphicon-th-list"></span>
-														</button>
-														<button data-toggle="modal" class="btn btn-danger btn-sm"
-															data-target="#myModal_xoa"
-															ng-click="callDeleteSpecialization(x)">
+														<button type="button" ng-click="deleteInstructor(x)"
+															data-toggle="modal" class="btn btn-danger btn-sm"
+															data-target="#myModal_xoa">
 															<span class="glyphicon glyphicon-remove"></span>
-														</button></td>
+														</button>
+
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -261,45 +270,210 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">Add specialization</h4>
 				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" name="formAdd">
-						<div class="form-group">
-							<label class="control-label col-sm-2">ID</label>
-							<div class="col-sm-10">
-								<input type="text" id="specializationId_add"
-									name="specializationId_add" class="form-control" placeholder=""
-									ng-model="specializationId_add" required="required" /> <span
-									ng-show="formAdd.specializationId_add.$touched &amp;&amp; formAdd.specializationId_add.$invalid"><p
-										style="color: red">This field is required</p></span>
+				<div class="modal-body row">
+					<div class="col-md-6">
+						<form class="form-horizontal" name="frmStudentAdd">
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										class="form-control input-md" type="text" ng-model="username"
+										ng-required="true" />
+									<div ng-messages="">
+										<div ng-message="required"
+											ng-show="">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+	
+								</div>
+							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName">
+									Last Name</label>
+								<div class="">
+									<input id="lastName" name="lastName" placeholder=""
+										class="form-control input-md" type="text" ng-model="lastName"
+										ng-required="true" />
+									<div ng-messages="frmStudentAdd.lastName.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.lastName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+								</div>
+							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">First Name</label>
+								<div class="">
+									<input id="firstName" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="firstName" />
+									<div ng-messages="frmStudentAdd.firstName.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.firstName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+								<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Password</label>
+								<div class="">
+									<input type="password" id="password" name="password"
+										data-ng-model="password"
+										required="required" class="form-control col-md-7 col-xs-12" />
+									<div ng-messages="frmStudentAdd.password.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Retype password</label>
+								<div class="">
+									<input type="re_password" id="re_password" name="re_password"
+										required="required" class="form-control col-md-7 col-xs-12" />
+									<div ng-messages="frmStudentAdd.password.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Email</label>
+								<div class="">
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="email" />
+									<div ng-messages="frmStudentAdd.email.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.email.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Phone</label>
+								<div class="">
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="tel" ng-required="true"
+										ng-model="phone" />
+									<div ng-messages="frmStudentAdd.phone.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.phone.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Address</label>
+								<div class="">
+									<input id="adress" name="address" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="address" />
+									<div ng-messages="frmStudentAdd.address.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.address.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+	
+							
+						</form>
+						</div>
+						<div class="col-md-6">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
+								<div class=" picture">
+									
+									<img src="production/images/img.jpg" width="" class="img-responsive"/>
+									<button class="btn btn-primary">Upload new picture</button>
+									<!-- Multiple Radios -->
+									
+									</div>
+							
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<div class="col-md-12">
+									<input id="birthday" name="birthday" placeholder=""
+										class="form-control input-md" type="date"/>
+	
+								</div>
+							</div>
+							<div class="form-group row">
+							
+								<div class="col-md-6">
+									<label class="col-md-12 control-label" for="selectbasic">Intake</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label class="col-md-12 control-label" for="selectbasic">Entrance exam</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1"></option>
+											<option value="2"></option>
+											
+										</select>
+									</div>
+								</div>
+								
+							</div>
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="selectbasic">School</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-12" for="status">Status</label>
+								
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="active"
+											ng-value="true" ng-checked="true" /> Studying
+										</label><br/>
+										 <label> <input type="radio" ng-model="active"
+											ng-value="false" /> Dropped
+										</label><br/>
+										<label> <input type="radio" ng-model="active"
+											ng-value="false" /> Graduated
+										</label> 
+									</div>
+							
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2">Name</label>
-							<div class="col-sm-10">
-								<input type="text" id="specializationName_add"
-									name="specializationName_add" ng-model="specializationName_add"
-									class="form-control" placeholder="" required="required" /> <span
-									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
-										style="color: red">This field is required</p></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2 col-md-2">Status</label>
-							<div class="col-sm-9 col-md-9">
-								<label> <input type="radio" ng-model="active_add"
-									ng-value="true" ng-checked="true" /> Active
-								</label> <label> <input type="radio" ng-model="active_add"
-									ng-value="false" /> Inactive
-								</label>
-
-							</div>
-
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2"></label>
-							<div class="col-sm-10"></div>
-						</div>
-					</form>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="addSpecialization()"
@@ -326,137 +500,220 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">Edit Specialization</h4>
 				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" name="editForm">
-						<div class="form-group">
-							<label class="control-label col-sm-2">ID</label>
-							<div class="col-sm-10">
-								<input type="hidden" ng-model="info.id" /> <input type="text" id="specializationId_edit"
-									name="specializationId_edit" ng-model="info.specializationId"
-									class="form-control" placeholder="" required="required" /><span
-									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
-										style="color: red">This field is required</p></span>
+				<div class="modal-body row">
+					<div class="col-md-6">
+						<form class="form-horizontal" name="frmStudentAdd">
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										class="form-control input-md" type="text" ng-model="username"
+										ng-required="true" />
+									<div ng-messages="">
+										<div ng-message="required"
+											ng-show="">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+	
+								</div>
+							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName">
+									Last Name</label>
+								<div class="">
+									<input id="lastName" name="lastName" placeholder=""
+										class="form-control input-md" type="text" ng-model="lastName"
+										ng-required="true" />
+									<div ng-messages="frmStudentAdd.lastName.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.lastName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+								</div>
+							</div>
+	
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">First Name</label>
+								<div class="">
+									<input id="firstName" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="firstName" />
+									<div ng-messages="frmStudentAdd.firstName.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.firstName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+								<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Password</label>
+								<div class="">
+									<input type="password" id="password" name="password"
+										data-ng-model="password"
+										required="required" class="form-control col-md-7 col-xs-12" />
+									<div ng-messages="frmStudentAdd.password.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Retype password</label>
+								<div class="">
+									<input type="re_password" id="re_password" name="re_password"
+										required="required" class="form-control col-md-7 col-xs-12" />
+									<div ng-messages="frmStudentAdd.password.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Email</label>
+								<div class="">
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="email" />
+									<div ng-messages="frmStudentAdd.email.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.email.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Phone</label>
+								<div class="">
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="tel" ng-required="true"
+										ng-model="phone" />
+									<div ng-messages="frmStudentAdd.phone.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.phone.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Address</label>
+								<div class="">
+									<input id="adress" name="address" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="address" />
+									<div ng-messages="frmStudentAdd.address.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.address.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+	
+							
+						</form>
+						</div>
+						<div class="col-md-6">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
+								<div class=" picture">
+									
+									<img src="production/images/img.jpg" width="" class="img-responsive"/>
+									<button class="btn btn-primary">Upload new picture</button>
+									<!-- Multiple Radios -->
+									
+									</div>
+							
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<div class="col-md-12">
+									<input id="birthday" name="birthday" placeholder=""
+										class="form-control input-md" type="date"/>
+	
+								</div>
+							</div>
+							<div class="form-group row">
+							
+								<div class="col-md-6">
+									<label class="col-md-12 control-label" for="selectbasic">Intake</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label class="col-md-12 control-label" for="selectbasic">Entrance exam</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1"></option>
+											<option value="2"></option>
+											
+										</select>
+									</div>
+								</div>
+								
+							</div>
+							<div class="form-group">
+								<label class="col-md-12 control-label" for="selectbasic">School</label>
+									<div class="col-md-12">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-12" for="status">Status</label>
+								
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="active"
+											ng-value="true" ng-checked="true" /> Studying
+										</label><br/>
+										 <label> <input type="radio" ng-model="active"
+											ng-value="false" /> Dropped
+										</label><br/>
+										<label> <input type="radio" ng-model="active"
+											ng-value="false" /> Graduated
+										</label> 
+									</div>
+							
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2">Name</label>
-							<div class="col-sm-10">
-								<input type="text" id="specializationName_edit"
-									name="specializationName_edit"
-									ng-model="info.specializationName" class="form-control"
-									placeholder="" required="required" /><span
-									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
-										style="color: red">This field is required</p></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2">Status</label>
-							<div class="col-sm-10" style="display: inline">
-								<input type="radio" ng-model="info.active" ng-value="true" />
-								Active <input type="radio" ng-model="info.active"
-									ng-value="false" /> Inactive
-
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2"></label>
-							<div class="col-sm-10"></div>
-						</div>
-					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="editSpecialization()"
-						data-dismiss="modal"
-						ng-disabled="editForm.specializationName_edit.$error.required || editForm.specializationId_edit.$error.required">Edit</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						ng-click="refreshList()">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal edit subject -->
-	<div class="modal fade" id="myModal_editSubject" tabindex="-1"
-		role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						Edit relevant subject for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" name="editForm">
-						<h5>Available subject(s)</h5>
-						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
-						<!-- scrollable table -->
-						<div class="well" style="height:200px;overflow:auto">
-							<div class="table-responsive" ng-model="filterController">
-								<table class="table table-condensed table-hover">
-									<thead>
-										<tr>
-											<th style="width: 25%">&#35;</th>
-											<th style="width: 25%">ID</th>
-											<th style="width: 25%">Name</th>
-											<th style="width: 25%"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr data-ng-repeat="x in listSubject | filter:filterSubject">
-											<td ng-bind="$index+1"></td>
-											<td data-ng-bind="x.subjectId"></td>
-											<td data-ng-bind="x.subjectName"></td>
-											<td>
-												<button
-													ng-disabled="checkDuplicateSubject(x.id)"
-													type="button" ng-click="addSubject(x)"
-													class="btn btn-primary btn-xs">
-													<span class="glyphicon glyphicon-plus"></span>
-												</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<h5>Added subject(s)</h5>
-						<div class="well" style="height:200px;overflow:auto">
-							<div class="table-responsive">
-								<table class="table table-condensed table-hover">
-									<thead>
-										<tr>
-											<th style="width: 25%">&#35;</th>
-											<th style="width: 25%">ID</th>
-											<th style="width: 25%">Name</th>
-											<th style="width: 25%"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr ng-repeat="row in currentSubjects">
-											<td ng-bind="$index + 1"></td>
-											<td ng-bind="row.subjectId"></td>
-											<td ng-bind="row.subjectName"></td>
-											<td><button class="btn btn-danger btn-xs"
-													ng-click="deleteSubject(row)">
-													<span class="glyphicon glyphicon-remove"></span>
-												</button></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="editRelevantSubject()">Save</button>
+					<button type="button" class="pull-left btn btn-danger">Reset Password</button>
+					<button type="button" class="btn btn-primary">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<!-- Modal xóa -->
 	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -470,12 +727,12 @@
 				</div>
 
 				<div class="modal-body">
-					<!-- 					<input type="hidden" ng-model="specialization_delete.id"></input> -->
+					
 					<p>Are you sure you want to delete this?</p>
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="deleteSpecialization()">Yes</a>
+					<a class="btn btn-danger btn-ok" ng-click="deleteStudent()">Yes</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
 				</div>
