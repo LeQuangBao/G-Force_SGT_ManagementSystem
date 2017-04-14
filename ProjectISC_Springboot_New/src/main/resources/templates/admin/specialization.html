@@ -75,6 +75,7 @@
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
+										<li><a href="/admin/entrance-exam">Entrance Exam</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -187,8 +188,8 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list | orderBy:sortType:sortReverse"
-													data-ng-show="showList(x,$index)">
+													data-ng-repeat="x in (listfiltered(list)) | orderBy:sortType:sortReverse"
+													data-ng-show="showList($index)">
 													<td ng-bind="$index+1"></td><input type="hidden" ng-model="x.id"/>
 													<td data-ng-bind="x.specializationId"></td>
 													<td data-ng-bind="x.specializationName"></td>
