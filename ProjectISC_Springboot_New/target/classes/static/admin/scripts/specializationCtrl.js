@@ -159,11 +159,13 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
 
     $scope.addSubject = function(subject) {
         $scope.currentSubjects.push(subject);
+        $scope.editRelevantSubject();
     }
 
     $scope.deleteSubject = function(subject) {
         var index = $scope.currentSubjects.indexOf(subject);
         $scope.currentSubjects.splice(index, 1);
+        $scope.editRelevantSubject();
     }
 
     $scope.checkDuplicateSubject = function(id) {
@@ -194,7 +196,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
             })
             .then(
                 function(response) {
-                    alertEditSucess();
+//                    alertEditSucess();
                 },
                 function(response) {
                     if (response.status == 406) {
@@ -202,7 +204,6 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                     }
                 });
     }
-
     // delete specialization
     $scope.callDeleteSpecialization = function(data) {
         deleteSpecialization = data;
