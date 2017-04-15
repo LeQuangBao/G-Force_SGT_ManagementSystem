@@ -1,5 +1,4 @@
 package com.isc.model;
-// Generated Apr 13, 2017 3:18:32 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;

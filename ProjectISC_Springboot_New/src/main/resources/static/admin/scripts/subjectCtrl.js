@@ -1,10 +1,10 @@
 app.controller('subjectCtrl', function($scope, $http,$filter) {
 		$scope.rowdata = {
 			     availableOptions: [
-			       {id: '15', name: '15 rows'},
-			       {id: '30', name: '30 rows'},
-			       {id: '50', name: '50 rows'},
-			       {id: '100', name: '100 rows'}
+			    	 {id: '15', name: '15'},
+				       {id: '30', name: '30'},
+				       {id: '50', name: '50'},
+				       {id: '100', name: '100'}
 			     ],
 			     selectedOption: {id: '15', name: '15 rows'}
 			    };
@@ -87,8 +87,44 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
             })
        .then(function (result) {	
           if (result.status == 201) {
-			
-//        	  $("#myModal").modal("hide");
+        	  getAllsubjects();
+        	  addAlert();
+        	  $scope.ResetForm_Add();
+          } 
+    
+            }, function(response) {
+            	if(response.status == 406) {            		
+            		alertFailMessage("Oops! Duplicate ID is not allowed.");
+            	}
+			});
+            
+        }
+        $scope.saveAndClose = function () {
+            var subject_id = document.getElementById("subjectID").value;        
+            var subject_name = $scope.subjectName;
+            var credit=document.getElementById("credit").value;
+            var hour = document.getElementById("hour").value;
+            var description = document.getElementById("description").value;
+            var active=$scope.active;
+            
+            $http({
+               method: "POST",
+               url: "/api/subject",
+               data: {
+            	   	subjectId: subject_id,
+            	    subjectName: subject_name,
+            	    credit : credit,
+                  	hour:hour,
+                  	description:description,
+                  	active:active
+                  	
+               },
+               
+               dataType: "json"
+            })
+       .then(function (result) {	
+          if (result.status == 201) {
+        	  $("#myModal").hide();
         	  getAllsubjects();
         	  addAlert();
         	  $scope.ResetForm_Add();
@@ -132,9 +168,9 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
                   } 
              }, function(response) {
 					alertFailMessage("Oops! Duplicate ID is not allowed.");
-					setTimeout(function() {
-						location.reload();
-					}, alertDuration);
+//					setTimeout(function() {
+//						location.reload();
+//					}, alertDuration);
              });
        }
         
@@ -170,6 +206,32 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
                   } 
              });
         }
+         
+         // view relevant specialization
+         $scope.filterSpecialization = '';
+         function getListSpecializations(subjectId) {
+             $scope.listSpecialization = [];
+             $http.get("http://localhost:8080/api/specialization")
+                 .then(function(response) {
+                     response.data.forEach(function(item, index){
+                    	var flag = false;
+                    	item.subjects.forEach(function(item2, index){
+                    		if(item2.id === subjectId){
+                    			flag = true;
+                    		}
+                    	});
+                    	if (flag === true){
+                    		$scope.listSpecialization.push(item);
+                    	}
+                     });
+                 });
+         }
+         
+         $scope.viewRelevantSpecialization = function(data){
+        	 getListSpecializations(data.id);
+        	 $scope.info_viewRelevantSpecialization = data;
+         }
+         
         // get data for delete
         $scope.subject_delete = [];
         $scope.deletesubject = function (data) {

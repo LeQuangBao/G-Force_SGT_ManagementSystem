@@ -1,23 +1,13 @@
 app.controller('specializationCtrl', function($scope, $http, $filter) {
-    $scope.rowdata = {
-        availableOptions: [{
-            id: '15',
-            name: '15 rows'
-        }, {
-            id: '30',
-            name: '30 rows'
-        }, {
-            id: '50',
-            name: '50 rows'
-        }, {
-            id: '100',
-            name: '100 rows'
-        }],
-        selectedOption: {
-            id: '15',
-            name: '15 rows'
-        }
-    };
+	$scope.rowdata = {
+		     availableOptions: [
+		       {id: '15', name: '15'},
+		       {id: '30', name: '30'},
+		       {id: '50', name: '50'},
+		       {id: '100', name: '100'}
+		     ],
+		     selectedOption: {id: '15', name: '15 rows'}
+		    };
     $scope.ChangeRow = function(index) {
         $scope.itemsPerPage = index;
         $scope.updatePageIndexes();
@@ -112,6 +102,38 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                             }
                         });
             }
+            $scope.addSpecializationAndClose = function() {
+                var specializationId = document
+                    .getElementById("specializationId_add").value;
+                var specializationName = document
+                    .getElementById("specializationName_add").value;
+                var activeElement = $scope.active_add;
+                $http({
+                        method: "POST",
+                        url: "/api/specialization",
+                        data: {
+                            specializationId: specializationId,
+                            specializationName: specializationName,
+                            active: activeElement
+                        },
+                        dataType: "json",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(
+                        function(response) {
+                             $("#myModal_them").modal("hide");
+                            getListSpecializations();
+                            alertAddSucess();
+                            $scope.ResetForm_Add();
+                        },
+                        function(response) {
+                            if (response.status == 406) {
+                                alertFailMessage("Oops! Duplicate ID is not allowed.");
+                            }
+                        });
+            }
     // update specialization
     $scope.callEditSpecialization = function(data) {
         $http.get("/api/specialization/" + data.id).then(
@@ -129,6 +151,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
             })
             .then(
                 function(response) {
+                	$("#myModal_sua").modal("hide");
                     getListSpecializations();
                     alertEditSucess();
                 },
@@ -159,11 +182,13 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
 
     $scope.addSubject = function(subject) {
         $scope.currentSubjects.push(subject);
+        $scope.editRelevantSubject();
     }
 
     $scope.deleteSubject = function(subject) {
         var index = $scope.currentSubjects.indexOf(subject);
         $scope.currentSubjects.splice(index, 1);
+        $scope.editRelevantSubject();
     }
 
     $scope.checkDuplicateSubject = function(id) {
@@ -194,7 +219,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
             })
             .then(
                 function(response) {
-                    alertEditSucess();
+//                    alertEditSucess();
                 },
                 function(response) {
                     if (response.status == 406) {
@@ -202,7 +227,6 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                     }
                 });
     }
-
     // delete specialization
     $scope.callDeleteSpecialization = function(data) {
         deleteSpecialization = data;
