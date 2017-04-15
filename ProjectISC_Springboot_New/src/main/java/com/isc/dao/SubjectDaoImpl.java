@@ -16,8 +16,10 @@ public class SubjectDaoImpl implements SubjectDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List <Subject> getAllSubjects(){
-		return session.getCurrentSession().createQuery("from Subject").list();
+		List<Subject> temp = session.getCurrentSession().createQuery("from Subject").list();
+		return temp;
 	}
+	
 	
 	@Override
 	public Subject getSubject(int id) {

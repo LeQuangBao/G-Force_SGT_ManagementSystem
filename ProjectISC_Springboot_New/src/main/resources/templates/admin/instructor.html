@@ -72,7 +72,7 @@
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="/admin/school">School</a></li>
 										<li><a href="/admin/specialization">Specialization </a></li>
-										<li><a href="/admin/subject">Subject</a></li>
+										<li><a href="/admin/course">Course</a></li>
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
@@ -151,12 +151,12 @@
 								</div>
 								<div class="x_content">
 
-									<label for="mySelect">Make a choice:</label> <select
-										name="mySelect" id="mySelect"
-										ng-options="option.name for option in rowdata.availableOptions track by option.id"
-										ng-model="rowdata.selectedOption"
-										ng-change="ChangeRow(rowdata.selectedOption.id)">
-									</select>
+									<label for="mySelect">Display </label>
+								    <select name="mySelect" id="mySelect"
+								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
+								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
+								      </select>
+								      <label> rows</label>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover">
 											<thead>

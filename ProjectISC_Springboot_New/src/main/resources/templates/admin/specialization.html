@@ -53,12 +53,8 @@
 						<a href="/admin/intake" class="site_title"><i
 							class="fa fa-paw"></i> <span>Administration</span></a>
 					</div>
-
 					<div class="clearfix"></div>
-
-
 					<br />
-
 					<!-- sidebar menu -->
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
@@ -71,7 +67,7 @@
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="/admin/school">School</a></li>
 										<li><a href="/admin/specialization">Specialization </a></li>
-										<li><a href="/admin/subject">Subject</a></li>
+										<li><a href="/admin/course">Course</a></li>
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
@@ -147,12 +143,12 @@
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
-									<label for="mySelect">Make a choice:</label> <select
-										name="mySelect" id="mySelect"
-										ng-options="option.name for option in rowdata.availableOptions track by option.id"
-										ng-model="rowdata.selectedOption"
-										ng-change="ChangeRow(rowdata.selectedOption.id)">
-									</select>
+									<label for="mySelect">Display </label>
+								    <select name="mySelect" id="mySelect"
+								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
+								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
+								      </select>
+								      <label> rows</label>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover">
 											<thead>
@@ -198,11 +194,6 @@
 															ng-click="callEditSpecialization(x)" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
-														</button>
-														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target=""
-															ng-click="">
-															<span class="glyphicon glyphicon-eye-open"></span>
 														</button>
 														<button data-toggle="modal" class="btn btn-primary btn-sm"
 															data-target="#myModal_editSubject"
@@ -285,13 +276,11 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2 col-md-2">Status</label>
-							<div class="col-sm-9 col-md-9">
-								<label> <input type="radio" ng-model="active_add"
+							<div class="col-sm-9 col-md-9" style="padding:6px">
+								 <input type="radio" ng-model="active_add"
 									ng-value="true" ng-checked="true" /> Active
-								</label> <label> <input type="radio" ng-model="active_add"
+								 <input type="radio" ng-model="active_add"
 									ng-value="false" /> Inactive
-								</label>
-
 							</div>
 
 						</div>
@@ -304,8 +293,7 @@
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="addSpecialization()"
 						ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add</button>
-					<button class="btn btn-default" ng-click="addSpecialization()"
-						data-dismiss="modal"
+					<button class="btn btn-default" ng-click="addSpecializationAndClose()"
 						ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add
 						and close</button>
 					<button class="btn btn-default" data-dismiss="modal">Close</button>
@@ -351,7 +339,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2">Status</label>
-							<div class="col-sm-10" style="display: inline">
+							<div class="col-sm-9 col-md-9" style="padding:6px">
 								<input type="radio" ng-model="info.active" ng-value="true" />
 								Active <input type="radio" ng-model="info.active"
 									ng-value="false" /> Inactive
@@ -366,7 +354,6 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" ng-click="editSpecialization()"
-						data-dismiss="modal"
 						ng-disabled="editForm.specializationName_edit.$error.required || editForm.specializationId_edit.$error.required">Edit</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="refreshList()">Close</button>
@@ -385,12 +372,12 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						Edit relevant subject for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
+						Edit relevant courses for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
 					</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm">
-						<h5>Available subject(s)</h5>
+						<h5>Available course(s)</h5>
 						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
 						<!-- scrollable table -->
 						<div class="well" style="height:200px;overflow:auto">
@@ -422,7 +409,7 @@
 								</table>
 							</div>
 						</div>
-						<h5>Added subject(s)</h5>
+						<h5>Added course(s)</h5>
 						<div class="well" style="height:200px;overflow:auto">
 							<div class="table-responsive">
 								<table class="table table-condensed table-hover">
@@ -451,7 +438,6 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="editRelevantSubject()">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
