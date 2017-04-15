@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated Apr 13, 2017 3:18:32 PM by Hibernate Tools 4.3.5.Final
+// Generated Apr 15, 2017 2:45:35 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,24 +34,24 @@ public class EntranceExam implements java.io.Serializable {
 	private Integer id;
 	private Intake intake;
 	private String entranceExamName;
-	private Date dateStart;
+	private Date startDate;
 	private String description;
 	private Set<Student> students = new HashSet<Student>(0);
 
 	public EntranceExam() {
 	}
 
-	public EntranceExam(Intake intake, String entranceExamName, Date dateStart) {
+	public EntranceExam(Intake intake, String entranceExamName, Date startDate) {
 		this.intake = intake;
 		this.entranceExamName = entranceExamName;
-		this.dateStart = dateStart;
+		this.startDate = startDate;
 	}
 
-	public EntranceExam(Intake intake, String entranceExamName, Date dateStart, String description,
+	public EntranceExam(Intake intake, String entranceExamName, Date startDate, String description,
 			Set<Student> students) {
 		this.intake = intake;
 		this.entranceExamName = entranceExamName;
-		this.dateStart = dateStart;
+		this.startDate = startDate;
 		this.description = description;
 		this.students = students;
 	}
@@ -88,13 +88,13 @@ public class EntranceExam implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_start", nullable = false, length = 10)
-	public Date getDateStart() {
-		return this.dateStart;
+	@Column(name = "start_date", nullable = false, length = 10)
+	public Date getStartDate() {
+		return this.startDate;
 	}
 
-	public void setDateStart(Date dateStart) {
-		this.dateStart = dateStart;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
 	@Column(name = "description", length = 500)
@@ -106,7 +106,7 @@ public class EntranceExam implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "entranceExam")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entranceExam")
 	public Set<Student> getStudents() {
 		return this.students;
 	}
