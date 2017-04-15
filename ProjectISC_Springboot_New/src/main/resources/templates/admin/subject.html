@@ -6,7 +6,7 @@
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Subject Management</title>
+      <title>Course Management</title>
       <base href="http://localhost:8080/admin/" />
       <!-- Bootstrap -->
       <link href="vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -60,7 +60,7 @@
                                  <li><a href="/admin/intake">Intake</a></li>
                                  <li><a href="/admin/school">School</a></li>
                                  <li><a href="/admin/specialization">Specialization </a></li>
-                                 <li><a href="/admin/subject">Subject</a></li>
+                                 <li><a href="/admin/course">Course</a></li>
                                  <li><a href="/admin/registrar">Registrar</a></li>
                                  <li><a href="/admin/instructor">Instructor</a></li>
                                  <li><a href="/admin/student">Student</a></li>
@@ -105,7 +105,7 @@
                <div class="">
                   <div class="page-title">
                      <div class="title_left">
-                        <h3>Subject Management</h3>
+                        <h3>Course Management</h3>
                      </div>
                      <div class="title_right">
                         <div class=" form-group pull-right top_search">
@@ -257,7 +257,7 @@
                      aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
-                  <h4 class="modal-title" id="myModalLabel">Add subject</h4>
+                  <h4 class="modal-title" id="myModalLabel">Add Course</h4>
                </div>
                <div class="modal-body">
                   <form class="form-horizontal" name="frmsubjectAdd">
@@ -295,8 +295,8 @@
                                  <p style="color: red">This field is required</p>
                               </div>
                               <div ng-message="validationError">
-                                 <p style="color: red">Subject Name is already exists.
-                                    Please enter another subject Name.
+                                 <p style="color: red">Course Name is already exists.
+                                    Please enter another course Name.
                                  </p>
                               </div>
                            </div>
@@ -385,8 +385,8 @@
                      aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
-                  <h4 class="modal-title" id="myModalLabel">Edit Subject
-                     Information
+                  <h4 class="modal-title" id="myModalLabel">Edit course
+                     information
                   </h4>
                </div>
                <div class="modal-body">
@@ -399,12 +399,12 @@
                            <input id="subjectId" name="subjectId" placeholder=""
                               class="form-control input-md" type="text"
                               ng-model="subject_edit.subjectId" ng-required="true" />
-                           <div ng-messages="frmsubject.subjectID.$error">
+                           <div ng-messages="frmsubject.subjectId.$error">
                               <div ng-message="required">
                                  <p style="color: red">This field is required</p>
                               </div>
                               <div ng-message="validationError">
-                                 <p style="color: red">Subject ID is already exists. Please
+                                 <p style="color: red">Course ID is already exists. Please
                                     enter another ID.
                                  </p>
                               </div>
@@ -423,8 +423,8 @@
                                  <p style="color: red">This field is required</p>
                               </div>
                               <div ng-message="validationError">
-                                 <p style="color: red">Subject Name is already exists.
-                                    Please enter another subject Name.
+                                 <p style="color: red">Course name is already exists.
+                                    Please enter another course Name.
                                  </p>
                               </div>
                            </div>

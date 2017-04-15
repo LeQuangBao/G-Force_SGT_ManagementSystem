@@ -67,7 +67,7 @@
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="/admin/school">School</a></li>
 										<li><a href="/admin/specialization">Specialization </a></li>
-										<li><a href="/admin/subject">Subject</a></li>
+										<li><a href="/admin/course">Course</a></li>
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
@@ -374,12 +374,12 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						Edit relevant subject for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
+						Edit relevant courses for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
 					</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm">
-						<h5>Available subject(s)</h5>
+						<h5>Available course(s)</h5>
 						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
 						<!-- scrollable table -->
 						<div class="well" style="height:200px;overflow:auto">
@@ -411,7 +411,7 @@
 								</table>
 							</div>
 						</div>
-						<h5>Added subject(s)</h5>
+						<h5>Added course(s)</h5>
 						<div class="well" style="height:200px;overflow:auto">
 							<div class="table-responsive">
 								<table class="table table-condensed table-hover">
