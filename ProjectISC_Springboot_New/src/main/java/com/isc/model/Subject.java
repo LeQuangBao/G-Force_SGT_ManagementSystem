@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated Apr 15, 2017 2:45:35 PM by Hibernate Tools 4.3.5.Final
+// Generated Apr 15, 2017 8:46:24 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -127,6 +127,7 @@ public class Subject implements java.io.Serializable {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "specialization_subject", catalog = "my_db", joinColumns = {

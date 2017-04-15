@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated Apr 15, 2017 2:45:35 PM by Hibernate Tools 4.3.5.Final
+// Generated Apr 15, 2017 8:46:24 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -19,7 +19,6 @@ import org.hibernate.annotations.Proxy;
  */
 @Entity
 @Proxy(lazy = false)
-
 @Table(name = "registrar", catalog = "my_db", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class Registrar implements java.io.Serializable {
 
