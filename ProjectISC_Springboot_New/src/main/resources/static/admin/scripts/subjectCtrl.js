@@ -99,6 +99,44 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 			});
             
         }
+        $scope.saveAndClose = function () {
+            var subject_id = document.getElementById("subjectID").value;        
+            var subject_name = $scope.subjectName;
+            var credit=document.getElementById("credit").value;
+            var hour = document.getElementById("hour").value;
+            var description = document.getElementById("description").value;
+            var active=$scope.active;
+            
+            $http({
+               method: "POST",
+               url: "/api/subject",
+               data: {
+            	   	subjectId: subject_id,
+            	    subjectName: subject_name,
+            	    credit : credit,
+                  	hour:hour,
+                  	description:description,
+                  	active:active
+                  	
+               },
+               
+               dataType: "json"
+            })
+       .then(function (result) {	
+          if (result.status == 201) {
+        	  $("#myModal").hide();
+        	  getAllsubjects();
+        	  addAlert();
+        	  $scope.ResetForm_Add();
+          } 
+    
+            }, function(response) {
+            	if(response.status == 406) {            		
+            		alertFailMessage("Oops! Duplicate ID is not allowed.");
+            	}
+			});
+            
+        }
 	    $scope.ResetForm_Add=function(){
 	    	 $scope.subjectId="";
         	 $scope.subjectName="";
@@ -130,9 +168,9 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
                   } 
              }, function(response) {
 					alertFailMessage("Oops! Duplicate ID is not allowed.");
-					setTimeout(function() {
-						location.reload();
-					}, alertDuration);
+//					setTimeout(function() {
+//						location.reload();
+//					}, alertDuration);
              });
        }
         

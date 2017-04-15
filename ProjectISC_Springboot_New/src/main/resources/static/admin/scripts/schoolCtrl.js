@@ -100,6 +100,43 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
     	    });
 	    }
         
+        $scope.saveAndClose = function () {
+            
+            var school_id = document.getElementById("schoolID").value;        
+            var school_name = document.getElementById("schoolName").value;
+            var address=document.getElementById("address").value;
+            var contact = document.getElementById("contact").value;
+            var active1=document.getElementById("actived");
+            var active=$scope.active;
+          
+            $http({
+                method: "POST",
+               url: "/api/school",
+               data: {
+            	   schoolId: school_id,
+            	   schoolName: school_name,
+            	   address : address,
+                  	contact:contact,
+                  	active:active
+                  	
+               },
+               
+               dataType: "json"
+            })
+       .then(function (result) {	
+          if (result.status == 201) {
+			
+        	  $("#myModal").modal("hide");
+        	  getAllSchools();
+        	  addAlert();
+        	  $scope.ResetForm_Add();
+          } 
+    
+            }, function(response) {
+    			alertFailMessage("Oops! Duplicate ID is not allowed.");
+    	    });
+	    }
+        
         //reset form add
         $scope.ResetForm_Add=function(){
         	 $scope.schoolId="";
@@ -130,9 +167,9 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
                   } 
              }, function(response) {
 					alertFailMessage("Oops! Duplicate ID is not allowed.");
-					setTimeout(function() {
-						location.reload();
-					}, alertDuration);
+//					setTimeout(function() {
+//						location.reload();
+//					}, alertDuration);
              });
        }
         

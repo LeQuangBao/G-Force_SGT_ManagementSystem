@@ -102,6 +102,38 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                             }
                         });
             }
+            $scope.addSpecializationAndClose = function() {
+                var specializationId = document
+                    .getElementById("specializationId_add").value;
+                var specializationName = document
+                    .getElementById("specializationName_add").value;
+                var activeElement = $scope.active_add;
+                $http({
+                        method: "POST",
+                        url: "/api/specialization",
+                        data: {
+                            specializationId: specializationId,
+                            specializationName: specializationName,
+                            active: activeElement
+                        },
+                        dataType: "json",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(
+                        function(response) {
+                             $("#myModal_them").modal("hide");
+                            getListSpecializations();
+                            alertAddSucess();
+                            $scope.ResetForm_Add();
+                        },
+                        function(response) {
+                            if (response.status == 406) {
+                                alertFailMessage("Oops! Duplicate ID is not allowed.");
+                            }
+                        });
+            }
     // update specialization
     $scope.callEditSpecialization = function(data) {
         $http.get("/api/specialization/" + data.id).then(
@@ -119,6 +151,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
             })
             .then(
                 function(response) {
+                	$("#myModal_sua").modal("hide");
                     getListSpecializations();
                     alertEditSucess();
                 },
