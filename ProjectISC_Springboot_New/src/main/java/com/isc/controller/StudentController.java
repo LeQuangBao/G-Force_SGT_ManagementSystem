@@ -6,21 +6,17 @@ package com.isc.controller;
 //import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import com.isc.model.Student;
 import com.isc.model.EntranceExam;
 import com.isc.model.Intake;
@@ -29,8 +25,29 @@ import com.isc.model.School;
 import com.isc.model.Specialization;
 import com.isc.service.StudentService;
 
+// upload hinh2
+import java.io.File;
+//import java.io.IOException;
+ 
+//import javax.servlet.RequestDispatcher;
+//import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+//import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+ 
+@WebServlet("/uploadFile")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+       maxFileSize = 1024 * 1024 * 10, // 10MB
+       maxRequestSize = 1024 * 1024 * 50) // 50MB
 @RestController
 public class StudentController {
+//	private static final long serialVersionUID = 1L;
+	 
+	   public static final String SAVE_DIRECTORY = "uploadDir";
+
 	@Autowired
 	private StudentService service;
 
@@ -51,10 +68,36 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.POST)
-	public ResponseEntity<Void> addStudent(HttpServletRequest request,@RequestBody Student Student,
-			  @ModelAttribute("myUploadForm") MyUploadForm myUploadForm) {
+	public ResponseEntity<Void> addStudent(HttpServletRequest request,@RequestBody Student Student) {
 		try {
 			
+			// Đường dẫn tuyệt đối tới thư mục gốc của web app.
+	           String appPath = request.getServletContext().getRealPath("");
+	           appPath = appPath.replace('\\', '/');
+	 
+	  
+	           // Thư mục để save file tải lên.
+	           String fullSavePath = null;
+	           if (appPath.endsWith("/")) {
+	               fullSavePath = appPath + SAVE_DIRECTORY;
+	           } else {
+	               fullSavePath = appPath + "/" + SAVE_DIRECTORY;
+	           }
+	           // Tạo thư mục nếu nó không tồn tại.
+	           File fileSaveDir = new File(fullSavePath);
+	           if (!fileSaveDir.exists()) {
+	               fileSaveDir.mkdir();
+	           }
+	  
+	           // Danh mục các phần đã upload lên (Có thể là nhiều file).
+	           for (Part part : request.getParts()) {
+	               String fileName = Student.getImage();
+	               if (fileName != null && fileName.length() > 0) {
+	                   String filePath = fullSavePath + File.separator + fileName;
+	                   // Ghi vào file.
+	                   part.write(filePath);
+	               }
+	           }
 			service.addStudent(Student);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -63,8 +106,35 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.PUT)
-	public ResponseEntity<Void> updateStudent(@RequestBody Student Student) {
+	public ResponseEntity<Void> updateStudent(HttpServletRequest request,@RequestBody Student Student) {
 		try {
+			// Đường dẫn tuyệt đối tới thư mục gốc của web app.
+	           String appPath = request.getServletContext().getRealPath("");
+	           appPath = appPath.replace('\\', '/');
+	 
+	  
+	           // Thư mục để save file tải lên.
+	           String fullSavePath = null;
+	           if (appPath.endsWith("/")) {
+	               fullSavePath = appPath + SAVE_DIRECTORY;
+	           } else {
+	               fullSavePath = appPath + "/" + SAVE_DIRECTORY;
+	           }
+	           // Tạo thư mục nếu nó không tồn tại.
+	           File fileSaveDir = new File(fullSavePath);
+	           if (!fileSaveDir.exists()) {
+	               fileSaveDir.mkdir();
+	           }
+	  
+	           // Danh mục các phần đã upload lên (Có thể là nhiều file).
+	           for (Part part : request.getParts()) {
+	               String fileName = Student.getImage();
+	               if (fileName != null && fileName.length() > 0) {
+	                   String filePath = fullSavePath + File.separator + fileName;
+	                   // Ghi vào file.
+	                   part.write(filePath);
+	               }
+	           }
 			service.updateStudent(Student);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

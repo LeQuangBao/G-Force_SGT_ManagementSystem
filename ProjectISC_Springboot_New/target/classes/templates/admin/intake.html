@@ -199,7 +199,7 @@
 													<td data-ng-bind="x.intakeName"></td>
 													<td data-ng-bind="x.startDate"></td>
 													<td data-ng-bind="x.endDate"></td>
-													<td data-ng-bind="x.active"></td>
+													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button class="btn btn-primary btn-sm"
 															data-ng-click="GetIntake(x)" data-toggle="modal"
