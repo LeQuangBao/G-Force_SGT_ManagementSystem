@@ -17,9 +17,6 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
 	    	$scope.list=[];
 	    	$http.get("/api/school")
 	    .then(function(response) {	
-	    	angular.forEach(response.data,function(value,key){
-	    		value.active=value.active==true?'Active':'Inactive';
-	    	});
 	       $scope.list = response.data;
 	    });
 	    }
@@ -60,7 +57,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
     	};
     	$scope.updatePageIndexes();
     	
-    	$scope.showList=function(index){
+    	$scope.showList=function(school,index){
     		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
     	}
     	

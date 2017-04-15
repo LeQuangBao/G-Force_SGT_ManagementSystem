@@ -193,7 +193,7 @@
 													<td ng-bind="$index+1"></td><input type="hidden" ng-model="x.id"/>
 													<td data-ng-bind="x.specializationId"></td>
 													<td data-ng-bind="x.specializationName"></td>
-													<td data-ng-bind="x.active"></td>
+													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td><button class="btn btn-primary btn-sm"
 															ng-click="callEditSpecialization(x)" data-toggle="modal"
 															data-target="#myModal_sua">
