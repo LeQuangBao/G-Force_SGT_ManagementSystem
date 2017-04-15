@@ -175,7 +175,7 @@ app
 							$scope.exam = {
 								"entranceExamName" : "",
 								"intake" : "",
-								"dateStart" : "",
+								"startDate" : "",
 								"description" : ""
 
 							}
@@ -184,7 +184,7 @@ app
 							$scope.exam = {
 								"id" : object.id,
 								"entranceExamName" : object.entranceExamName,
-								"dateStart" : new Date(object.dateStart),
+								"startDate" : new Date(object.startDate),
 								"description" : object.description
 							}
 							for (i = 0; i < $scope.listIntake.length; i++) {
@@ -194,6 +194,7 @@ app
 								}
 							}
 						}
+						delInvalid();
 
 					}
 					$scope.add = function add() {
@@ -230,6 +231,11 @@ app
 							GetListIntake();
 							deleteAlert();
 						});
+					}
+					
+					function delInvalid(){
+						$scope.addForm.$setUntouched();
+						$scope.editForm.$setUntouched();
 					}
 
 					function deleteAlert() {
