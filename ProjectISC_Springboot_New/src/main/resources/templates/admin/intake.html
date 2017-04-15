@@ -150,11 +150,12 @@
 								</div>
 								<div class="x_content">
 
-									<label for="mySelect">Make a choice:</label>
+									<label for="mySelect">Display </label>
 								    <select name="mySelect" id="mySelect"
 								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
 								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
 								      </select>
+								      <label> rows</label>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover ">
 											<thead>

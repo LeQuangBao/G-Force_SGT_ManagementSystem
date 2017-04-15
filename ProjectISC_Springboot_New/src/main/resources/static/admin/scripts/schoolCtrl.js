@@ -1,10 +1,10 @@
 app.controller('schoolCtrl', function($scope, $http, $filter) {
 		$scope.rowdata = {
 			     availableOptions: [
-			       {id: '15', name: '15 rows'},
-			       {id: '30', name: '30 rows'},
-			       {id: '50', name: '50 rows'},
-			       {id: '100', name: '100 rows'}
+			    	 {id: '15', name: '15'},
+				       {id: '30', name: '30'},
+				       {id: '50', name: '50'},
+				       {id: '100', name: '100'}
 			     ],
 			     selectedOption: {id: '15', name: '15 rows'}
 			    };
