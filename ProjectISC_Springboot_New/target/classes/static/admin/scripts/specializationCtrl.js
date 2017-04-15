@@ -30,9 +30,6 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
         $scope.list = [];
         $http.get("http://localhost:8080/api/specialization")
             .then(function(response) {
-            	angular.forEach(response.data,function(value,key){
-    	    		value.active=value.active==true?'Active':'Inactive';
-    	    	});
                 $scope.list = response.data;
             })
     }

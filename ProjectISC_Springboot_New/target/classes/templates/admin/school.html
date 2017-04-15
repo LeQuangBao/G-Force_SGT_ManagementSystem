@@ -207,13 +207,13 @@
 											<tbody>
 												<tr
 													data-ng-repeat="x in (listfiltered(list)) |  orderBy:sortType:sortReverse"
-													data-ng-show="showList($index)">
+													data-ng-show="showList(x,$index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.schoolId"></td>
 													<td data-ng-bind="x.schoolName"></td>
 													<td data-ng-bind="x.address"></td>
 													<td data-ng-bind="x.contact"></td>
-													<td data-ng-bind="x.active"></td>
+													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button type="button" ng-click="editSchool(x)"
 															class="btn btn-primary btn-sm" data-toggle="modal"
