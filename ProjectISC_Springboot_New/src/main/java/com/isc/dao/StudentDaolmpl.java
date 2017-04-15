@@ -46,23 +46,23 @@ public class StudentDaolmpl implements StudentDao {
 		
 	}
 
-
+	@SuppressWarnings("unchecked")
 	public List<School> getallSchool() {
 		
 		 return session.getCurrentSession().createQuery("from School").list();
 	}
 
-	
+	@SuppressWarnings("unchecked")
 	public List<Intake> getallintake() {
 		 return session.getCurrentSession().createQuery("from Intake").list();
 	}
 
-	
+	@SuppressWarnings("unchecked")
 	public List<EntranceExam> getallentranceexam() {
 		 return session.getCurrentSession().createQuery("from EntranceExam").list();
 	}
 
-
+	@SuppressWarnings("unchecked")
 	public List<Specialization> getallspecialization() {
 		 return session.getCurrentSession().createQuery("from Specialization").list();
 	}

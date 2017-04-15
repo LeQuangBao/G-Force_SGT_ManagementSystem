@@ -848,6 +848,115 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal xem thông tin -->
+	<div class="modal fade" id="myModal_view" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">View registrar</h4>
+				</div>
+				<div class="modal-body">
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="schoolID">Username</label>
+							<div class="col-md-8">
+								<input id="username_view" name="username_view" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="registrar_view.username" />
+
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="lastName">
+								Last Name</label>
+							<div class="col-md-8">
+								<input id="lastName" name="lastName" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="registrar_view.lastName"/>
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="firstName">First Name</label>
+							<div class="col-md-8">
+								<input id="firstName" name="firstName" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="registrar_view.firstName" />
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="birthday">Birthday</label>
+							<div class="col-md-8">
+								<input id="birthday" name="birthday" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="registrar_view.birthday" />
+							</div>
+						</div>
+
+						<!-- Multiple Radios -->
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Email</label>
+							<div class="">
+								<input id="email" name="email" placeholder=""
+									class="form-control input-md" type="text" 
+									ng-model="registrar_view.email" />
+							</div>
+						</div>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Phone</label>
+							<div class="">
+								<input id="phone" name="phone" placeholder=""
+									class="form-control input-md" type="tel"
+									ng-model="registrar_view.phone" />
+							</div>
+						</div>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Address</label>
+							<div class="">
+								<input id="adress" name="address" placeholder=""
+									class="form-control input-md" type="text" 
+									ng-model="registrar_view.address" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+							<label class=" control-label" for="">Profile picture</label>
+							<img src="production/images/img.jpg" width="" class="img-responsive"/>
+							<button class="btn">Upload new picture</button>
+							<!-- Multiple Radios -->
+							<br/>
+						
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="status">Status</label>
+							<div class="col-md-8">
+								<span>Active</span>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angular-messages.min.js"></script>
@@ -862,7 +971,7 @@
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/schoolCtrl.js"></script>
+	<script type="text/javascript" src="scripts/registrarCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->

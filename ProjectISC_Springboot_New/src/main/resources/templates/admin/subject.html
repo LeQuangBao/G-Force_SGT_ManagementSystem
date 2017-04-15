@@ -213,14 +213,14 @@
 											<tbody>
 												<tr
 													data-ng-repeat="x in (listfiltered(list)) | orderBy:sortType:sortReverse"
-													data-ng-show="showList(x,$index)">
+													data-ng-show="showList($index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.subjectId"></td>
 													<td data-ng-bind="x.subjectName"></td>
 													<td data-ng-bind="x.credit"></td>
 													<td data-ng-bind="x.hour"></td>
 													<td data-ng-bind="x.description"></td>
-													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
+													<td data-ng-bind="x.active"></td>
 													<td>
 														<button type="button" ng-click="editsubject(x)"
 															class="btn btn-primary btn-sm" data-toggle="modal"
