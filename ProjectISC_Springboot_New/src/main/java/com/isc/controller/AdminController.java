@@ -42,9 +42,10 @@ public class AdminController {
 	public String student() {
 		return "admin/student";
 	}
-
 	@RequestMapping(value = "/admin/registrar")
 	public String registrar() {
 		return "admin/registrar";
 	}
+
+	
 }
