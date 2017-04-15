@@ -447,26 +447,51 @@
 	
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-md-12 control-label" for="selectbasic">Degree</label>
-								<div class="col-md-12">
-									<select id="selectbasic" name="selectbasic" class="form-control">
-										<option value="1">College</option>
-										<option value="2">University</option>
-										<option value="3">Master</option>
-										<option value="4">Doctor</option>
-									</select>
+							<div class="row col-md-12">
+								<div class="form-group col-md-6">
+									<label class="control-label" for="selectbasic">Intake</label>
+									<div class="">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="control-label" for="selectbasic">Entrance exam</label>
+									<div class="">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1"></option>
+											
+										</select>
+									</div>
 								</div>
 							</div>
+							
+							<div class="form-group col-md-12">
+									<label class="control-label" for="selectbasic">School</label>
+									<div class="">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">Đại học Sài Gòn</option>
+											
+										</select>
+									</div>
+								</div>
+							
+							
 							<div class="form-group">
 								<label class="col-md-12 control-label" for="status">Status</label>
 								
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="active"
-											ng-value="true" ng-checked="true" /> Active
-										</label>
+											ng-value="true" ng-checked="true" /> Studying
+										</label><br/>
 										 <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Inactive
+											ng-value="false" /> Dropped
+										</label><br/>
+										 <label> <input type="radio" ng-model="active"
+											ng-value="false" /> Graduated
 										</label>
 									</div>
 							
@@ -623,15 +648,25 @@
 									</div>
 							
 							
-							<div class="form-group">
-								<label class="col-md-12 control-label" for="selectbasic">Degree</label>
-								<div class="col-md-12">
-									<select id="selectbasic" name="selectbasic" class="form-control">
-										<option value="1">College</option>
-										<option value="2">University</option>
-										<option value="3">Master</option>
-										<option value="4">Doctor</option>
-									</select>
+						<div class="row col-md-12">
+								<div class="form-group col-md-6">
+									<label class="control-label" for="selectbasic">Intake</label>
+									<div class="">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="control-label" for="selectbasic">Entrance exam</label>
+									<div class="">
+										<select id="selectbasic" name="selectbasic" class="form-control">
+											<option value="1"></option>
+											
+										</select>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -639,10 +674,13 @@
 								
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="active"
-											ng-value="true" ng-checked="true" /> Active
-										</label>
+											ng-value="true" ng-checked="true" /> Studying
+										</label><br/>
 										 <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Inactive
+											ng-value="false" /> Dropped
+										</label><br/>
+										 <label> <input type="radio" ng-model="active"
+											ng-value="false" /> Graduated
 										</label>
 									</div>
 							
