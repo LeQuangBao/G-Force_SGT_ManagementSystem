@@ -3,7 +3,9 @@ package com.isc.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -41,7 +43,7 @@ public class Subject implements java.io.Serializable {
 	private String description;
 	private boolean active;
 	private Set<Specialization> specializations = new HashSet<Specialization>(0);
-
+	private List<Specialization> spec = new ArrayList<Specialization>();
 	public Subject() {
 	}
 
