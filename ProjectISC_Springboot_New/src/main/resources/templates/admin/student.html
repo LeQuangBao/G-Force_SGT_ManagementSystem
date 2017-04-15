@@ -223,31 +223,14 @@
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
 														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_xoa" ng-click=""></button></td>
-													<td ng-bind="$index+1"></td>
-													<td data-ng-bind="x.username"></td>
-													<td data-ng-bind="x.lastname"></td>
-													<td data-ng-bind="x.firstname"></td>
-
-													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
-													<td>
-														<button type="button" ng-click="viewInstructor()"
-															class="btn btn-success btn-sm" data-toggle="modal"
-															data-target="#myModal_detail">
-															<span class="glyphicon glyphicon-eye-open"></span>
-														</button>
-														<button type="button" ng-click="editInstructor(x)"
-															class="btn btn-primary btn-sm" data-toggle="modal"
-															data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit"></span>
-														</button>
-														<button type="button" ng-click="deleteInstructor(x)"
-															data-toggle="modal" class="btn btn-danger btn-sm"
-															data-target="#myModal_xoa">
+															data-target="#myModal_xoa" ng-click="xoa()">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button>
+														<button data-toggle="modal" class="btn btn-primary btn-sm"
+															data-target="#myModal_chitiet" ng-click="chitiet()">
+															<span class="glyphicon glyphicon-eye-open"></span>
+														</button></td>
 
-													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -292,7 +275,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add Instructor</h4>
+					<h4 class="modal-title" id="myModalLabel">Add Student</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-6">
@@ -317,7 +300,7 @@
 							<div class="form-group">
 								<label class="control-label" for="lastName"> Last Name</label>
 								<div class="">
-									<input id="lastName" name="lastName" placeholder=""
+									<input id="lastname" name="lastName" placeholder=""
 										class="form-control input-md" type="text" ng-model="lastName"
 										ng-required="true" />
 									<div ng-messages="frmInstructor.lastName.$error">
@@ -333,7 +316,7 @@
 							<div class="form-group">
 								<label class="control-label" for="firstName">First Name</label>
 								<div class="">
-									<input id="firstName" name="firstName" placeholder=""
+									<input id="firstname" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="firstName" />
 									<div ng-messages="frmInstructor.firstName.$error">
@@ -365,7 +348,7 @@
 								<label class=" control-label" for="birthday">Retype
 									password</label>
 								<div class="">
-									<input type="re_password" id="re_password" name="re_password"
+									<input type="password" id="re_password" name="re_password"
 										required="required" class="form-control col-md-7 col-xs-12" />
 									<div ng-messages="frmInstructor.password.$error">
 										<div ng-message="required"
@@ -381,7 +364,7 @@
 								<label class=" control-label" for="birthday">Email</label>
 								<div class="">
 									<input id="email" name="email" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
+										class="form-control input-md" type="email" ng-required="true"
 										ng-model="email" />
 									<div ng-messages="frmInstructor.email.$error">
 										<div ng-message="required"
@@ -397,7 +380,7 @@
 								<label class=" control-label" for="birthday">Phone</label>
 								<div class="">
 									<input id="phone" name="phone" placeholder=""
-										class="form-control input-md" type="tel" ng-required="true"
+										class="form-control input-md" type="text" ng-required="true"
 										ng-model="phone" />
 									<div ng-messages="frmInstructor.phone.$error">
 										<div ng-message="required"
@@ -432,12 +415,15 @@
 						<label class=" control-label" style="margin-top: 9px;" for="">Profile
 							picture</label>
 						<div class=" picture">
+							<div class="form-group">
+								<div ng-repeat="step in stepsModel">
+									<img width="" class="img-responsive" ng-src="{{step}}" />
+								</div>
 
-							<img src="production/images/img.jpg" width=""
-								class="img-responsive" />
-							<button class="btn btn-primary">Upload new picture</button>
-							<!-- Multiple Radios -->
+								<input type="file"
+									onchange="angular.element(this).scope().imageUpload(event)" />
 
+							</div>
 						</div>
 
 						<div class="form-group">
@@ -451,69 +437,71 @@
 								<div class="form-group col-md-6">
 									<label class="control-label" for="selectbasic">Intake</label>
 									<div class="">
-										<select id="selectbasic" name="selectbasic" class="form-control">
+										<select id="selectbasic" name="selectbasic"
+											class="form-control">
 											<option value="1">1</option>
 											<option value="2">2</option>
-											
+
 										</select>
 									</div>
 								</div>
 								<div class="form-group col-md-6">
-									<label class="control-label" for="selectbasic">Entrance exam</label>
+									<label class="control-label" for="selectbasic">Entrance
+										exam</label>
 									<div class="">
-										<select id="selectbasic" name="selectbasic" class="form-control">
+										<select id="selectbasic" name="selectbasic"
+											class="form-control">
 											<option value="1"></option>
-											
+
 										</select>
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="form-group col-md-12">
-									<label class="control-label" for="selectbasic">School</label>
-									<div class="">
-										<select id="selectbasic" name="selectbasic" class="form-control">
-											<option value="1">Đại học Sài Gòn</option>
-											
-										</select>
-									</div>
+								<label class="control-label" for="selectbasic">School</label>
+								<div class="">
+									<select id="selectbasic" name="selectbasic"
+										class="form-control">
+										<option value="1">Đại học Sài Gòn</option>
+
+									</select>
 								</div>
-							
-							
+							</div>
+
+
 							<div class="form-group">
 								<label class="col-md-12 control-label" for="status">Status</label>
-								
-									<div class="checkbox">
-										<label> <input type="radio" ng-model="active"
-											ng-value="true" ng-checked="true" /> Studying
-										</label><br/>
-										 <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Dropped
-										</label><br/>
-										 <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Graduated
-										</label>
-									</div>
-							
+
+								<div class="checkbox">
+									<label> <input type="radio" ng-model="active"
+										ng-value="true" ng-checked="true" /> Studying
+									</label><br /> <label> <input type="radio" ng-model="active"
+										ng-value="false" /> Dropped
+									</label><br /> <label> <input type="radio" ng-model="active"
+										ng-value="false" /> Graduated
+									</label>
+								</div>
+
+
+							</div>
 
 						</div>
-				
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="save()"
-						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required">Add</button>
-					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="save()"
-						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required"
-						data-dismiss="modal">Add and close</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<div class="modal-footer">
+						<button id="btnSave" name="btnSave" class="btn btn-primary"
+							ng-click="them()"
+							ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required">Add</button>
+						<button id="btnSave" name="btnSave" class="btn btn-default"
+							ng-click="them()"
+							ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required"
+							data-dismiss="modal">Add and close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<!-- Modal sửa -->
 	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
@@ -652,77 +640,85 @@
 						</div>
 
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
-								<div class=" picture">
-									
-									<img src="production/images/img.jpg" width="" class="img-responsive"/>
-									<button class="btn btn-primary">Upload new picture</button>
-									<!-- Multiple Radios -->
-									
-									</div>
-							
-							
-						<div class="row col-md-12">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile
+								picture</label>
+							<div class=" picture">
+
+								<img src="production/images/img.jpg" width=""
+									class="img-responsive" />
+								<button class="btn btn-primary">Upload new picture</button>
+								<!-- Multiple Radios -->
+
+							</div>
+
+
+							<div class="row col-md-12">
 								<div class="form-group col-md-6">
 									<label class="control-label" for="selectbasic">Intake</label>
 									<div class="">
-										<select id="selectbasic" name="selectbasic" class="form-control">
+										<select id="selectbasic" name="selectbasic"
+											class="form-control">
 											<option value="1">1</option>
 											<option value="2">2</option>
-											
+
 										</select>
 									</div>
 								</div>
 								<div class="form-group col-md-6">
-									<label class="control-label" for="selectbasic">Entrance exam</label>
+									<label class="control-label" for="selectbasic">Entrance
+										exam</label>
 									<div class="">
-										<select id="selectbasic" name="selectbasic" class="form-control">
+										<select id="selectbasic" name="selectbasic"
+											class="form-control">
 											<option value="1"></option>
-											
+
 										</select>
 									</div>
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-									<label class="control-label" for="selectbasic">School</label>
-									<div class="">
-										<select id="selectbasic" name="selectbasic" class="form-control">
-											<option value="1">Đại học Sài Gòn</option>
-											
-										</select>
-									</div>
+								<label class="control-label" for="selectbasic">School</label>
+								<div class="">
+									<select id="selectbasic" name="selectbasic"
+										class="form-control">
+										<option value="1">Đại học Sài Gòn</option>
+
+									</select>
 								</div>
-							
+							</div>
+
 							<div class="form-group">
 								<label class="col-md-12 control-label" for="status">Status</label>
-								
-									<div class="checkbox">
-										<label> <input type="radio" ng-model="active"
-											ng-value="true" ng-checked="true" /> Studying
-										</label><br/>
-										 <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Dropped
-										</label><br/>
-										 <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Graduated
-										</label>
-									</div>
-							
+
+								<div class="checkbox">
+									<label> <input type="radio" ng-model="active"
+										ng-value="true" ng-checked="true" /> Studying
+									</label> <br /> <label> <input type="radio" ng-model="active"
+										ng-value="false" /> Dropped
+									</label> <br /> <label> <input type="radio" ng-model="active"
+										ng-value="false" /> Graduated
+									</label>
+								</div>
+
+							</div>
 						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="pull-left btn btn-danger"
-						data-toggle="modal" data-target="#myModal_reset">Reset
-						Password</button>
-					<button type="button" class="btn btn-primary" ng-click="update()"
-						ng-disabled="frmSchool.schoolId.$error.required || frmSchool.lastName.$error.required || frmSchool.firstName.$error.required|| frmSchool.birthday.$error.required">Save</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<div class="row">
+							<div class="modal-footer">
+								<button type="button" class="pull-left btn btn-danger"
+									data-toggle="modal" data-target="#myModal_reset">Reset
+									Password</button>
+								<button type="button" class="btn btn-primary"
+									ng-click="update()"
+									ng-disabled="frmSchool.schoolId.$error.required || frmSchool.lastName.$error.required || frmSchool.firstName.$error.required|| frmSchool.birthday.$error.required">Save</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-</div>
 	<!-- Modal xem chi tiết -->
 	<div class="modal fade" id="myModal_detail" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -980,7 +976,7 @@
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/specializationCtrl.js"></script>
+	<script type="text/javascript" src="scripts/studentCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->

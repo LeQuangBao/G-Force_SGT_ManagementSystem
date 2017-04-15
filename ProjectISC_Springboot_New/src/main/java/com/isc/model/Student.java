@@ -99,7 +99,7 @@ public class Student implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "entrance_exam", nullable = false)
 	public EntranceExam getEntranceExam() {
