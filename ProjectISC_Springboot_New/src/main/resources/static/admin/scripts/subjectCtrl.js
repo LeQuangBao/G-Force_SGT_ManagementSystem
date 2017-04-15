@@ -87,8 +87,6 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
             })
        .then(function (result) {	
           if (result.status == 201) {
-			
-//        	  $("#myModal").modal("hide");
         	  getAllsubjects();
         	  addAlert();
         	  $scope.ResetForm_Add();
@@ -170,6 +168,32 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
                   } 
              });
         }
+         
+         // view relevant specialization
+         $scope.filterSpecialization = '';
+         function getListSpecializations(subjectId) {
+             $scope.listSpecialization = [];
+             $http.get("http://localhost:8080/api/specialization")
+                 .then(function(response) {
+                     response.data.forEach(function(item, index){
+                    	var flag = false;
+                    	item.subjects.forEach(function(item2, index){
+                    		if(item2.id === subjectId){
+                    			flag = true;
+                    		}
+                    	});
+                    	if (flag === true){
+                    		$scope.listSpecialization.push(item);
+                    	}
+                     });
+                 });
+         }
+         
+         $scope.viewRelevantSpecialization = function(data){
+        	 getListSpecializations(data.id);
+        	 $scope.info_viewRelevantSpecialization = data;
+         }
+         
         // get data for delete
         $scope.subject_delete = [];
         $scope.deletesubject = function (data) {
