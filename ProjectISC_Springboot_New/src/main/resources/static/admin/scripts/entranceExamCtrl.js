@@ -180,26 +180,65 @@ app
 								&& (index >= $scope.firstIndex) && (index < $scope.lastIndex));
 					}
 
-					$scope.getData = function getData(id) {
-						if (id == 0) {
+					$scope.getData = function getData(object) {
+						if (object == 0) {
 							$scope.exam = {
 								"entranceExamName" : "",
 								"intake" : "",
-								"dataStart" : "",
-								"description" : "",
-								"active" : true
+								"dateStart" : "",
+								"description" : ""
+
 							}
 
+						} else {
+							$scope.exam = {
+								"id" : object.id,
+								"entranceExamName" : object.entranceExamName,
+								"dateStart" : new Date(object.dateStart),
+								"description" : object.description
+							}
+							for (i = 0; i < $scope.listIntake.length; i++) {
+								if ($scope.listIntake[i].intakeId == object.intake.intakeId) {
+									$scope.exam.intake = $scope.listIntake[i];
+									break;
+								}
+							}
 						}
 
 					}
 					$scope.add = function add() {
+
 						$http({
 							method : "POST",
 							url : "/admin/api/entrance-exam",
 							data : $scope.exam
 						}).then(function mySucces(response) {
+							GetListIntake();
 							addAlert();
+						});
+					}
+					$scope.edit = function edit() {
+
+						$http({
+							method : "PUT",
+							url : "/admin/api/entrance-exam",
+							data : $scope.exam
+						}).then(function mySucces(response) {
+							$('#editModal').modal('hide');
+							GetListIntake();
+							editAlert();
+						});
+					}
+					$scope.del = function del() {
+
+						$http({
+							method : "DELETE",
+							url : "/admin/api/entrance-exam/" + $scope.exam.id
+
+						}).then(function mySucces(response) {
+							$('#deleteModal').modal('hide');
+							GetListIntake();
+							deleteAlert();
 						});
 					}
 

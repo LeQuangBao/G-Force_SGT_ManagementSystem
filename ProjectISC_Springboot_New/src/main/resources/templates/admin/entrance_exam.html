@@ -193,14 +193,7 @@
 														ng-show="sortType == 'description' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 6%"
-														ng-click="sortType = 'active';sortReverse = !sortReverse">Status
-														<span
-														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'active' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
+
 													<th style="width: 15%">Action</th>
 												</tr>
 											</thead>
@@ -213,16 +206,16 @@
 													<td data-ng-bind="x.intake.intakeName"></td>
 													<td data-ng-bind="x.dateStart | date:'MM/dd/yyyy'"></td>
 													<td data-ng-bind="x.description"></td>
-													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
+
 													<td>
-														<button type="button" ng-click="editSchool(x)"
+														<button type="button" ng-click="getData(x)"
 															class="btn btn-primary btn-sm" data-toggle="modal"
-															data-target="#myModal_sua">
+															data-target="#editModal">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
-														<button type="button" ng-click="deleteSchool(x)"
+														<button type="button" ng-click="getData(x)"
 															data-toggle="modal" class="btn btn-danger btn-sm"
-															data-target="#myModal_xoa">
+															data-target="#deleteModal">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button>
 
@@ -349,22 +342,7 @@
 						</div>
 
 						<!-- Multiple Radios -->
-						<div class="form-group">
 
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="status">Status</label>
-							<div class="col-md-8">
-								<div class="checkbox">
-									<label> <input type="radio" ng-model="exam.active"
-										ng-value="true" /> Active
-									</label><br /> <label> <input type="radio"
-										ng-model="exam.active" ng-value="false" /> Inactive
-									</label>
-								</div>
-
-							</div>
-
-						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -382,7 +360,7 @@
 		</div>
 	</div>
 	<!-- Modal sửa -->
-	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -395,85 +373,84 @@
 						Information</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" name="frmSchool">
-						<input type="hidden" name="id" ng-model="school_edit.id" />
-
-
+					<form class="form-horizontal" name="editForm">
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="schoolID"> ID</label>
-							<div class="col-md-8">
-								<input id="schoolId" name="schoolId" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="school_edit.schoolId" ng-required="true" /> <span
-									id="helpBlock" style="color: red" class="help-block"
-									ng-show="frmSchool.schoolId.$error.required">This field
-									is required</span>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12"
+								for="entranceExamName">Name</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input id="entranceExamName" name="entranceExamName"
+									placeholder="" class="form-control input-md" type="text"
+									ng-model="exam.entranceExamName" ng-required="true" />
+								<div ng-messages="addForm.entranceExamName.$error">
+									<div ng-message="required"
+										ng-show="addForm.entranceExamName.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+
+								</div>
 
 							</div>
 						</div>
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="schoolName">
-								Name</label>
-							<div class="col-md-8">
-								<input id="schoolName" name="schoolName" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="school_edit.schoolName" ng-required="true" /> <span
-									id="helpBlock" class="help-block" style="color: red"
-									ng-show="frmSchool.schoolName.$error.required">This
-									field is required</span>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12"
+								for="intake"> Intake</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<select ng-model="exam.intake" class="form-control"
+									ng-options="x.intakeName for x in listIntake" name="intake"
+									id="intake" ng-required="true">
+								</select>
+								<div ng-messages="addForm.intake.$error">
+									<div ng-message="required" ng-show="addForm.intake.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12l"
+								for="startDate">Start Date</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="date" id="startDate" name="startDate"
+									data-ng-model="exam.dateStart" required="required"
+									class="form-control col-md-7 col-xs-12" />
+								<div ng-messages="addForm.startDate.$error">
+									<div ng-message="required" ng-show="addForm.startDate.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
 							</div>
 						</div>
 
 						<!-- Text input-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="address">Address</label>
-							<div class="col-md-8">
-								<input id="address" name="address" placeholder=""
+							<label class="control-label col-md-3 col-sm-3 col-xs-12"
+								for="description">Description</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input id="description" name="description" placeholder=""
 									class="form-control input-md" type="text" ng-required="true"
-									ng-model="school_edit.address" /> <span id="helpBlock"
-									class="help-block" style="color: red"
-									ng-show="frmSchool.address.$error.required">This field
-									is required</span>
-							</div>
-						</div>
+									ng-model="exam.description" />
+								<div ng-messages="addForm.description.$error">
+									<div ng-message="required"
+										ng-show="addForm.description.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
 
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="contact">Contact</label>
-							<div class="col-md-8">
-								<input id="contact" name="contact" placeholder=""
-									class="form-control input-md" type="text" ng-required="true"
-									ng-model="school_edit.contact" /> <span id="helpBlock"
-									class="help-block" style="color: red"
-									ng-show="frmSchool.contact.$error.required">This field
-									is required</span>
-							</div>
-						</div>
-
-						<!-- Multiple Radios -->
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="status">Status</label>
-							<div class="col-md-8">
-								<div class="checkbox">
-									<label> <input type="radio"
-										ng-model="school_edit.active" ng-value="true" /> Active
-									</label><br /> <label> <input type="radio"
-										ng-model="school_edit.active" ng-value="false" /> Inactive
-									</label>
 								</div>
 							</div>
 						</div>
 
 
-
-
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" ng-click="update()"
+					<button type="button" class="btn btn-primary" ng-click="edit()"
 						ng-disabled="frmSchool.schoolId.$error.required || frmSchool.schoolName.$error.required || frmSchool.address.$error.required|| frmSchool.contact.$error.required">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -482,7 +459,7 @@
 		</div>
 	</div>
 	<!-- Modal xóa -->
-	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -500,7 +477,7 @@
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="delete()">Yes</a>
+					<a class="btn btn-danger btn-ok" ng-click="del()">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
