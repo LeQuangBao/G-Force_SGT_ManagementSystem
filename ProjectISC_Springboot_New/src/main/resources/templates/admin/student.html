@@ -147,12 +147,12 @@
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="x_content">
-									<label for="mySelect">Display </label>
-								    <select name="mySelect" id="mySelect"
-								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
-								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
-								      </select>
-								      <label> rows</label>
+									<label for="mySelect">Display </label> <select name="mySelect"
+										id="mySelect"
+										ng-options="option.name for option in rowdata.availableOptions track by option.id"
+										ng-model="rowdata.selectedOption"
+										ng-change="ChangeRow(rowdata.selectedOption.id)">
+									</select> <label> rows</label>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover">
 											<thead>
@@ -278,8 +278,9 @@
 					<h4 class="modal-title" id="myModalLabel">Add Student</h4>
 				</div>
 				<div class="modal-body row">
-					<div class="col-md-6">
-						<form class="form-horizontal" name="frmInstructor">
+					<form class="form-horizontal" name="frmInstructor">
+						<div class="col-md-6">
+
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
@@ -407,63 +408,50 @@
 									</div>
 								</div>
 							</div>
-
-
-						</form>
-					</div>
-					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
-						<div class=" picture">
-							<div class="form-group">
-								<div ng-repeat="step in stepsModel">
-									<img width="" class="img-responsive" ng-src="{{step}}" />
-								</div>
-
-								<input type="file"
-									onchange="angular.element(this).scope().imageUpload(event)" />
-
-							</div>
 						</div>
-
-						<div class="form-group">
-							<label class="col-md-12 control-label" for="birthday">Birthday</label>
-							<div class="col-md-12">
-								<input id="birthday" name="birthday" placeholder=""
-									class="form-control input-md" type="date" />
-
-							</div>
-							<div class="row col-md-12">
-								<div class="form-group col-md-6">
-									<label class="control-label" for="selectbasic">Intake</label>
-									<div class="">
-										<select id="selectbasic" name="selectbasic"
-											class="form-control">
-											<option value="1">1</option>
-											<option value="2">2</option>
-
-										</select>
+						<div class="col-md-6">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile
+								picture</label>
+							<div class=" picture">
+								<div class="form-group">
+									<div ng-repeat="step in stepsModel">
+										<img width="" class="img-responsive" ng-src="{{step}}" />
 									</div>
-								</div>
-								<div class="form-group col-md-6">
-									<label class="control-label" for="selectbasic">Entrance
-										exam</label>
-									<div class="">
-										<select id="selectbasic" name="selectbasic"
-											class="form-control">
-											<option value="1"></option>
 
-										</select>
-									</div>
+									<input type="file"
+										onchange="angular.element(this).scope().imageUpload(event)" />
+
 								</div>
 							</div>
 
 							<div class="form-group col-md-12">
-								<label class="control-label" for="selectbasic">School</label>
+								<label class="control-label" for="selectbasic">Intake</label>
 								<div class="">
-									<select id="selectbasic" name="selectbasic"
+									<select id="intake" name="selectbasic" class="form-control">
+
+										<option ng-repeat="x in list_intake" value="{{x.id}}">{{x.intakeName}}</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label" for="selectbasic">Entrance
+									exam</label>
+								<div class="">
+									<select id="enchance_exam" name="selectbasic"
 										class="form-control">
-										<option value="1">Đại học Sài Gòn</option>
+										<option ng-repeat="x in list_enchance_exam" value="{{x.id}}">{{x.entranceExamName}}</option>
+
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label">School</label>
+								<div class="">
+									<select id="school" class="form-control">
+
+										<option ng-repeat="x in list_school" value="{{x.id}}">{{x.schoolName}}</option>
 
 									</select>
 								</div>
@@ -471,38 +459,60 @@
 
 
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="status">Status</label>
+								<label class="control-label" for="birthday">Birthday</label>
+								<div class="col-md-12">
+									<input id="birthday" name="birthday" placeholder=""
+										class="form-control input-md" type="date" />
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="status">Status</label>
 
 								<div class="checkbox">
-									<label> <input type="radio" ng-model="active"
-										ng-value="true" ng-checked="true" /> Studying
-									</label><br /> <label> <input type="radio" ng-model="active"
-										ng-value="false" /> Dropped
-									</label><br /> <label> <input type="radio" ng-model="active"
-										ng-value="false" /> Graduated
+									<label> <input type="radio" value="Studying" name="status" /> Studying
+									</label> <br /> <label> <input type="radio" value="Dropped" name="status" /> Dropped
+									</label> <br /> <label> <input type="radio" value="Graduated" name="status" /> Graduated
+									</label>
+								</div>
+
+
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="status">Gender</label>
+
+								<div class="checkbox">
+									<label> <input type="radio" value="0" name="gender" /> Nam
+									</label> <br /> <label> <input type="radio" value="1" name="gender" /> Nữ
 									</label>
 								</div>
 
 
 							</div>
 
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button id="btnSave" name="btnSave" class="btn btn-primary"
-							ng-click="them()"
-							ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required">Add</button>
-						<button id="btnSave" name="btnSave" class="btn btn-default"
-							ng-click="them()"
-							ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required"
-							data-dismiss="modal">Add and close</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-					</div>
+
+
+
+						</div>
+					</form>
 				</div>
+				<div class="modal-footer">
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="them()"
+						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required">Add</button>
+					<button id="btnSave" name="btnSave" class="btn btn-default"
+						ng-click="them()"
+						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required"
+						data-dismiss="modal">Add and close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+
 			</div>
 		</div>
 	</div>
+
 	<!-- Modal sửa -->
 	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
