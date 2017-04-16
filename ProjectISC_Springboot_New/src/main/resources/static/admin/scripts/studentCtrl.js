@@ -228,7 +228,15 @@ app
 
 					// upload hình ảnh
 					// $scope.stepsModel = [];
-					$scope.listfile = [];// list file
+					$scope.listfile = [];// list file// cái này để lưu image khi em chọn nè// gui listfile nay vo cai image cua 
+					// em chuyen thanh service het doan code nay roi su dung lai 
+					// em chua hieu
+					// yeu cau cua em la gi?
+					// student xuong cho controller luu vo mot thu muc trong project dong thoi luu vao db 
+					// passing data between controller in angularjs dungkhong?
+					// dung oi
+					// ==
+					
 					$scope.stepsModel = [];
 
 					$scope.imageUpload = function(event) {
@@ -249,67 +257,69 @@ app
 							$scope.stepsModel.push(e.target.result);
 						});
 					}
-					BasicDBObject obj = new BasicDBObject();
-					obj.put("name", "Matt");
-					obj.put("date", new Date());
+//					BasicDBObject obj = new BasicDBObject();
+//					obj.put("name", "Matt");
+//					obj.put("date", new Date());
 
 					// thêm student
-					$scope.them = function() {
-					
-
-						var username = $("#username").val();
-					
-						var firstname =  $("#firstname").val();
-						var lastname =  $("#lastname").val();
-						var password =  $("#password").val();
-						var birthday =  $("#birthday").val();
-						var intake =  $("#intake").val();
-						var entrance_exam =  $("#entranceexam").val();
-						var school =  $("#school").val();
-						var status = $('input[name="status"]:checked').val();
-						var diachi =  $("#address").val();
-						var gender =  $('input[name="gender"]:checked').val();
-						var email =  $("#email").val();
-						var phone =  $("#phone").val();
-						var specialization =  $("#specialization").val();
-
-						fd.append("username", username);
-						fd.append("firstname", firstname);
-						fd.append("lastname", lastname);
-						fd.append("birthday", birthday);
-						fd.append("status", status);
-						fd.append("diachi", diachi);
-						fd.append("gender", gender);
-						fd.append("email", email);
-						fd.append("entranceExam", entrance_exam);
-						fd.append("specialization", specialization);
-						fd.append("intake", intake);
-						fd.append("school", school);
-						
-						if ($scope.listfile) {
-							for (var i = 0; i < $scope.listfile.length; i++) {
-								console.log($scope.listfile[i]);
-								fd.append("image", $scope.listfile[i]);
-							}
-						}
-						$http
-								.post('admin/api/Student', fd, {
-									transformRequest : angular.identity,
-									headers : {
-										'Content-Type' : undefined
-									}
-								})
-								.then(
-										function(result) {
-											if (result.status == "201") {
-												addAlert();
-												// location.reload();
-											} else {
-												alertFailMessage("Oops! Duplicate ID is not allowed.");
-											}
-										});
-
-					};
+//					$scope.them = function() {
+//					
+//
+//						var username = $("#username").val();
+//					
+//						var firstname =  $("#firstname").val();
+//						var lastname =  $("#lastname").val();
+//						var password =  $("#password").val();
+//						var birthday =  $("#birthday").val();
+//						var intake =  $("#intake").val();
+//						var entrance_exam =  $("#entranceexam").val();
+//						var school =  $("#school").val();
+//						var status = $('input[name="status"]:checked').val();
+//						var diachi =  $("#address").val();
+//						var gender =  $('input[name="gender"]:checked').val();
+//						var email =  $("#email").val();
+//						var phone =  $("#phone").val();
+//						var specialization =  $("#specialization").val();
+//						obj.put("username", username);
+//						obj.put("firstname", firstname);
+//						obj.put("lastname", lastname);
+//						obj.put("birthday", birthday);
+//						obj.put("status", status);
+//						obj.put("address", diachi);
+//						obj.put("gender", gender);
+//						obj.put("email", email);
+//						obj.put("entranceExam",entrance_exam);
+//						obj.put("specialization",specialization);
+//						obj.put("intake",intake);
+//						obj.put("school",school);
+//
+//						
+//						
+//						if ($scope.listfile) {
+//							for (var i = 0; i < $scope.listfile.length; i++) {
+//								console.log($scope.listfile[i]);
+//								obj.put("image", $scope.listfile[i]);
+//							}
+//							console.log(obj);
+//						}
+//						$http
+//								.post('admin/api/Student', obj, {
+//									transformRequest : angular.identity,
+//									headers : {
+//										'Content-Type' : undefined
+//									}
+//								})
+//								.then(
+//										function(result) {
+//											if (result.status == "201") {
+//												addAlert();
+//												// location.reload();
+//											} else {
+//												alertFailMessage("Oops! Duplicate ID is not allowed.");
+//											}
+//										});
+//
+//					};
 
 					// // Thêm mới intake
 					// $scope.Them=function(){
