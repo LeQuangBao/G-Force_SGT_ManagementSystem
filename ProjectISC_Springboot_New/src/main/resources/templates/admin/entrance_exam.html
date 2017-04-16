@@ -150,12 +150,12 @@
 								</div>
 								<div class="x_content">
 
-									<label for="mySelect">Display </label>
-								    <select name="mySelect" id="mySelect"
-								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
-								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
-								      </select>
-								      <label> rows</label>
+									<label for="mySelect">Display </label> <select name="mySelect"
+										id="mySelect"
+										ng-options="option.name for option in rowdata.availableOptions track by option.id"
+										ng-model="rowdata.selectedOption"
+										ng-change="ChangeRow(rowdata.selectedOption.id)">
+									</select> <label> rows</label>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover">
 											<thead>
@@ -199,7 +199,7 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in list |  orderBy:sortType:sortReverse"
+													data-ng-repeat="x in (listfiltered(list)) |  orderBy:sortType:sortReverse"
 													data-ng-show="showList(x,$index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.entranceExamName"></td>
@@ -213,17 +213,16 @@
 															data-target="#editModal">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
+														<button type="button" ng-click="getStudents(x.id)"
+															data-toggle="modal" class="btn btn-success btn-sm"
+															data-target="#studentModal">
+															<span class="glyphicon glyphicon-eye-open"></span>
+														</button>
 														<button type="button" ng-click="getData(x)"
 															data-toggle="modal" class="btn btn-danger btn-sm"
 															data-target="#deleteModal">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button>
-														<button class="btn btn-success btn-sm"
-															data-target="#myModal_xoa" href="#myModal_xoa"
-															data-ng-click="GetIntakeObj(x)" data-toggle="modal">
-															<span class="glyphicon glyphicon-eye-open"></span>
-														</button>
-
 													</td>
 												</tr>
 											</tbody>
@@ -483,6 +482,49 @@
 					<a class="btn btn-danger btn-ok" ng-click="del()">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal student -->
+	<div class="modal fade" id="studentModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">List of students</h4>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Full Name</th>
+									<th>School</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in listStudent">
+									<td ng-bind="$index +1"></td>
+									<td ng-bind="x[1] + ' ' + x[0]"></td>
+									<td ng-bind="x[3]"></td>
+									<td ng-bind="x[2]"></td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
 			</div>

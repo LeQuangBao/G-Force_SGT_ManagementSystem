@@ -3,6 +3,7 @@ package com.isc.dao;
 import java.util.List;
 
 import com.isc.model.EntranceExam;
+import com.isc.model.Student;
 
 public interface EntranceExamDao {
 	public List<EntranceExam> getAllEntranceExams();
@@ -14,4 +15,6 @@ public interface EntranceExamDao {
 	public void deleteEntranceExam(int id);
 
 	public void updateEntranceExam(EntranceExam entranceExam);
+
+	public List<Student> getStudents(int id);
 }

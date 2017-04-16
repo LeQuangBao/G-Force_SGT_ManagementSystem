@@ -11,6 +11,7 @@ import com.isc.dao.EntranceExamDao;
 import com.isc.dao.IntakeDao;
 import com.isc.model.EntranceExam;
 import com.isc.model.Intake;
+import com.isc.model.Student;
 
 @Service
 public class EntranceExamServiceImp implements EntranceExamService {
@@ -49,6 +50,11 @@ public class EntranceExamServiceImp implements EntranceExamService {
 	public void updateEntranceExam(EntranceExam entranceExam) {
 		entranceExamDao.updateEntranceExam(entranceExam);
 
+	}
+
+	@Transactional
+	public List<Student> getStudents(int id) {
+		return entranceExamDao.getStudents(id);
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.isc.model.EntranceExam;
+import com.isc.model.Student;
 
 @Repository
 public class EntranceExamDaoImpl implements EntranceExamDao {
@@ -33,5 +34,13 @@ public class EntranceExamDaoImpl implements EntranceExamDao {
 
 	public void updateEntranceExam(EntranceExam entranceExam) {
 		session.getCurrentSession().update(entranceExam);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Student> getStudents(int id) {
+		return session.getCurrentSession()
+				.createQuery(
+						"select firstname, lastname, email, school.schoolName from Student s where s.entranceExam.id = :id order by firstname, lastname")
+				.setInteger("id", id).list();
 	}
 }

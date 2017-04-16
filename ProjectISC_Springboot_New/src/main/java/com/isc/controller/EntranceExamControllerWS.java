@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isc.model.EntranceExam;
+import com.isc.model.Student;
 import com.isc.service.EntranceExamService;
 
 @RestController
@@ -63,6 +64,11 @@ public class EntranceExamControllerWS {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+
+	@RequestMapping(value = "admin/api/entrance-exam/get-students/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Student>> getStudents(@PathVariable int id) {
+		return new ResponseEntity<>(service.getStudents(id), HttpStatus.OK);
 	}
 
 }
