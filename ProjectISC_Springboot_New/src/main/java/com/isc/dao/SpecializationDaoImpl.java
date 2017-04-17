@@ -27,6 +27,7 @@ public class SpecializationDaoImpl implements SpecializationDao {
 
 	@Override
 	public void addSpecialization(Specialization specialization) {
+//		specialization.setSpecializationName(Ultility.getMD5(specialization.getSpecializationName()));
 		session.getCurrentSession().save(specialization);
 	}
 
@@ -37,6 +38,7 @@ public class SpecializationDaoImpl implements SpecializationDao {
 
 	@Override
 	public void updateSpecialization(Specialization specialization) {
+//		specialization.setSpecializationName(Ultility.getMD5(specialization.getSpecializationName()));
 		session.getCurrentSession().update(specialization);
 	}
 
