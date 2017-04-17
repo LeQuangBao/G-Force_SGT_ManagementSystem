@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.isc.dao.InstructorDao;
 import com.isc.model.Instructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class InstructorServiceImpl implements InstructorService {
@@ -30,6 +31,7 @@ public class InstructorServiceImpl implements InstructorService {
 
 	@Transactional
 	public void addInstructor(Instructor instructor) {
+		instructor.setPassword(new BCryptPasswordEncoder().encode(instructor.getPassword()));
 		instructorDao.addInstructor(instructor);
 
 	}
@@ -42,15 +44,26 @@ public class InstructorServiceImpl implements InstructorService {
 
 	@Transactional
 	public void updateInstructor(Instructor instructor) {
-		instructorDao.updateInstructor(instructor);
+		Instructor instructorObj = instructorDao.getInstructor(instructor.getId());
+		instructorObj.setUsername(instructor.getUsername());
+		instructorObj.setLastname(instructor.getLastname());
+		instructorObj.setFirstname(instructor.getFirstname());
+		instructorObj.setBirthday(instructor.getBirthday());
+		instructorObj.setEmail(instructor.getEmail());
+		instructorObj.setAddress(instructor.getAddress());
+		instructorObj.setPhone(instructor.getPhone());
+		instructorObj.setImage(instructor.getImage());
+		instructorObj.setDegree(instructor.getDegree());
+		instructorObj.setStatus(instructor.isStatus());
+		instructorDao.updateInstructor(instructorObj);
 
 	}
 
 	@Transactional
-	public void resetPassword(int id) {
-		Instructor instructor = instructorDao.getInstructor(id);
-		instructor.setPassword("123456");
-		instructorDao.updateInstructor(instructor);
+	public void resetPassword(Instructor instructor) {
+		Instructor instructorObj = instructorDao.getInstructor(instructor.getId());
+		instructorObj.setPassword(new BCryptPasswordEncoder().encode(instructor.getPassword()));
+		instructorDao.updateInstructor(instructorObj);
 	}
 
 }

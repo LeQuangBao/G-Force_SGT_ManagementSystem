@@ -1,5 +1,9 @@
 package com.isc.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.isc.model.Instructor;
 import com.isc.service.InstructorService;
@@ -65,13 +72,14 @@ public class InstructorController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "admin/api/instructor/reset/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> resetPassword(@PathVariable int id) {
+	@RequestMapping(value = "admin/api/instructor/reset", method = RequestMethod.PUT)
+	public ResponseEntity<Void> resetPassword(@RequestBody Instructor instructor) {
 		try {
-			service.resetPassword(id);
+			service.resetPassword(instructor);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	
 }

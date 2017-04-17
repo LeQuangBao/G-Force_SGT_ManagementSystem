@@ -14,6 +14,6 @@ public interface InstructorService {
 	public void deleteInstructor(int id);
 
 	public void updateInstructor(Instructor instructor);
-
-	public void resetPassword(int id);
+	
+	public void resetPassword(Instructor instructor);
 }
