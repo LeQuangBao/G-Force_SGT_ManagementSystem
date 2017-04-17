@@ -206,7 +206,7 @@
 
 													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
 													<td>
-														<button type="button" ng-click="viewRegistrar()"
+														<button type="button" ng-click="viewRegistrar(x)"
 															class="btn btn-success btn-sm" data-toggle="modal"
 															data-target="#myModal_detail">
 															<span class="glyphicon glyphicon-eye-open"></span>
@@ -280,8 +280,8 @@
 									<input id="username" name="username" placeholder=""
 										class="form-control input-md" type="text" ng-model="username"
 										ng-required="true" />
-									<div ng-messages="">
-										<div ng-message="required" ng-show="">
+									<div ng-messages="frmRegistrarAdd.username.$error">
+										<div ng-message="required" ng-show="frmRegistrarAdd.username.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -328,8 +328,8 @@
 									<input type="password" id="password" name="password"
 										data-ng-model="password" required="required"
 										class="form-control col-md-7 col-xs-12" />
-									<div ng-messages="">
-										<div ng-message="required" ng-show="">
+									<div ng-messages="frmRegistrarAdd.password.$error">
+										<div ng-message="required" ng-show="frmRegistrarAdd.password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -340,10 +340,10 @@
 								<label class=" control-label" for="password">Retype
 									password</label>
 								<div class="">
-									<input type="re_password" id="re_password" name="re_password"
+									<input type="password" id="re_password" name="re_password"
 										required="required" class="form-control col-md-7 col-xs-12" />
-									<div ng-messages="">
-										<div ng-message="required" ng-show="">
+									<div ng-messages="frmRegistrarAdd.re_password.$error">
+										<div ng-message="required" ng-show="frmRegistrarAdd.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -352,16 +352,17 @@
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Email</label>
+								<label class=" control-label" for="email">Email</label>
 								<div class="">
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="email" />
-									<div ng-messages="">
-										<div ng-message="required" ng-show="">
+									<div ng-messages="frmInstructor.email.$error">
+										<div ng-message="required"
+											ng-show="frmInstructor.email.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-
+	
 									</div>
 								</div>
 							</div>
@@ -372,8 +373,8 @@
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="tel" ng-required="true"
 										ng-model="phone" />
-									<div ng-messages="">
-										<div ng-message="required" ng-show="">
+									<div ng-messages="frmRegistrarAdd.phone.$error">
+										<div ng-message="required" ng-show="frmRegistrarAdd.phone.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -387,8 +388,8 @@
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="address" />
-									<div ng-messages="">
-										<div ng-message="required" ng-show="">
+									<div ng-messages="frmRegistrarAdd.address.$error">
+										<div ng-message="required" ng-show="frmRegistrarAdd.address.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -404,10 +405,9 @@
 							picture</label>
 						<div class=" picture">
 
-							<img src="production/images/img.jpg" width=""
+							<img ng-src="{{prev_img}}" width="100" height="150"
 								class="img-responsive" />
-								<input class="form-control" type="file" file-model="Empdet.PhotoFile" style="border-radius: 5px;"/>  
-							<button class="btn btn-primary" ng-click="UploadFile()">Upload new picture</button>
+								<input type="file" id="image" name="image" onchange="angular.element(this).scope().getImage(this)" ng-model="image"/>
 							<!-- Multiple Radios -->
 
 						</div>
@@ -416,7 +416,7 @@
 							<label class="col-md-12 control-label" for="birthday">Birthday</label>
 							<div class="col-md-12">
 								<input id="birthday" name="birthday" placeholder=""
-									class="form-control input-md" type="date" />
+									class="form-control input-md" type="date" ng-model="birthday"/>
 
 							</div>
 						</div>
@@ -437,9 +437,9 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="save()">Add</button>
+						ng-click="save()" ng-disabled="frmRegistrarAdd.schoolId.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="save()" data-dismiss="modal">Add and close</button>
+						ng-click="save()" data-dismiss="modal" ng-disabled="frmRegistrarAdd.schoolId.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -466,7 +466,7 @@
 								<label class="control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="username"
+										class="form-control input-md" type="text" ng-model="edit.username"
 										ng-required="true" />
 									<div ng-messages="">
 										<div ng-message="required" ng-show="">
@@ -482,7 +482,7 @@
 								<label class="control-label" for="lastName"> Last Name</label>
 								<div class="">
 									<input id="lastName" name="lastName" placeholder=""
-										class="form-control input-md" type="text" ng-model="lastName"
+										class="form-control input-md" type="text" ng-model="edit.lastname"
 										ng-required="true" />
 									<div ng-messages="">
 										<div ng-message="required" ng-show="">
@@ -498,7 +498,7 @@
 								<div class="">
 									<input id="firstName" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="firstName" />
+										ng-model="edit.firstname" />
 									<div ng-messages="">
 										<div ng-message="required" ng-show="">
 											<p style="color: red">This field is required</p>
@@ -512,7 +512,7 @@
 								<label class=" control-label" for="birthday">Birthday</label>
 								<div class="">
 									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" />
+										class="form-control input-md" type="date" ng-model="edit.birthday"/>
 
 								</div>
 							</div>
@@ -522,7 +522,7 @@
 								<div class="">
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="email" />
+										ng-model="edit.email" />
 									<div ng-messages="">
 										<div ng-message="required" ng-show="">
 											<p style="color: red">This field is required</p>
@@ -537,7 +537,7 @@
 								<div class="">
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="tel" ng-required="true"
-										ng-model="phone" />
+										ng-model="edit.phone" />
 									<div ng-messages="">
 										<div ng-message="required"
 											ng-show="frmRegistrarAdd.phone.$touched">
@@ -553,7 +553,7 @@
 								<div class="">
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="address" />
+										ng-model="edit.address" />
 									<div ng-messages="">
 										<div ng-message="required" ng-show="">
 											<p style="color: red">This field is required</p>
@@ -571,9 +571,9 @@
 							picture</label>
 						<div class=" picture">
 
-							<img src="production/images/img.jpg" width=""
-								class="img-responsive" ng-model="image"/>
-							<button class="btn btn-primary">Upload new picture</button>
+							<img ng-src="http://localhost:8080/admin/images/{{edit.image}}" ng-show="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
+									<img ng-src="{{prev_img_edit}}" width="100" height="150" class="img-responsive"/>
+									<input type="file" id="image" name="image" onchange="angular.element(this).scope().getImage_Edit(this)"/>
 							<!-- Multiple Radios -->
 
 						</div>
@@ -583,9 +583,9 @@
 							<label class="col-md-12 control-label" for="status">Status</label>
 
 							<div class="checkbox">
-								<label> <input type="radio" ng-model="active"
+								<label> <input type="radio" ng-model="edit.status"
 									ng-value="true" ng-checked="true" /> Active
-								</label> <label> <input type="radio" ng-model="active"
+								</label> <label> <input type="radio" ng-model="edit.status"
 									ng-value="false" /> Inactive
 								</label>
 							</div>
@@ -624,7 +624,7 @@
 								<label class=" control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="username"
+										class="form-control input-md" type="text" ng-model="view.username" readonly="readonly"
 										ng-required="true" />
 									
 
@@ -636,7 +636,7 @@
 								<label class="control-label" for="lastName"> Last Name</label>
 								<div class="">
 									<input id="lastName" name="lastName" placeholder=""
-										class="form-control input-md" type="text" ng-model="lastName"
+										class="form-control input-md" type="text" ng-model="view.lastname" readonly="readonly"
 										ng-required="true" />
 								
 								</div>
@@ -648,7 +648,7 @@
 								<div class="">
 									<input id="firstName" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="firstName" />
+										ng-model="view.firstname" readonly="readonly" />
 									
 								</div>
 							</div>
@@ -657,7 +657,7 @@
 								<label class="control-label" for="birthday">Birthday</label>
 								<div class="">
 									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" />
+										class="form-control input-md" type="date" ng-model="view.birthday" readonly="readonly" />
 
 								</div>
 							</div>
@@ -667,7 +667,7 @@
 								<div class="">
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="email" />
+										ng-model="view.email" readonly="readonly" />
 									
 								</div>
 							</div>
@@ -677,7 +677,7 @@
 								<div class="">
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="tel" ng-required="true"
-										ng-model="phone" />
+										ng-model="view.phone" readonly="readonly"/>
 									
 								</div>
 							</div>
@@ -687,7 +687,7 @@
 								<div class="">
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="address" />
+										ng-model="view.address" readonly="readonly" />
 									
 								</div>
 							</div>
@@ -700,19 +700,18 @@
 							picture</label>
 						<div class=" picture">
 
-							<img src="production/images/img.jpg" width=""
+							<img src="http://localhost:8080/admin/images/{{view.image}}" width="100" height="150"
 								class="img-responsive" />
-							<button class="btn btn-primary">Upload new picture</button>
+							
 							<!-- Multiple Radios -->
 
 						</div>
 
 
 						<div class="form-group">
-							<label class="col-md-12 control-label" for="status">Status</label>
+							<label class="control-label col-md-4" for="status">Status </label>
 
-							<p ng-model="active"></p>
-
+							<p ng-bind="view.status ? 'Active' : 'Inactive'"></p>
 						</div>
 					</div>
 				</div>

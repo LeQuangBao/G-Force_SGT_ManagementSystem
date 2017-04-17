@@ -47,76 +47,189 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
  	}
  	//ADD REGISTRAR
- 	$scope.save= function()
- 	{
- 		var username= document.getElementById("username").value;
- 		var lastname=document.getElementById("lastName").value;
- 		var firstname=document.getElementById("firstName").value;
- 		var password=document.getElementById("password").value;
- 		var email=document.getElementById("email").value;
- 		var phone=document.getElementById("phone").value;
- 		var address=document.getElementById("address").value;
- 		 var active1=document.getElementById("actived");
-         var active=$scope.active;
- 		
- 	}
-	 //edit registrar
-	 $scope.update = function () {
-		 var registrarObj={id:$scope.id,username:$scope.username,fistname:$scope.firstName,lastName:$scope.lastname,birthday:$scope.birthday,email:$scope.email,phone:$scope.phone,address:$scope.address,image:$scope.image,status:($scope.active==null?false:($scope.active==false?false:true))};
-		 $http({
-             method: "PUT",
+ 	 $scope.save = function () {
+         $http({
+             method: "POST",
             url: "/admin/api/registrar",
-             data: registrarObj,
-             contentType: "application/json; charset=utf-8",
-             dataType: "json"
-          })
-          .then(function (result) {
-              if (result.status == 202) {
-            	  $("#myModal_sua").modal("hide");
-            	  getAllRegistrars();
-            	  editAlert();
-              } 
+            data: {
+         	   	username: $scope.username,
+         	    password: $scope.password,
+         	    firstname : $scope.firstName,
+               	lastname: $scope.lastName,
+               	birthday: $scope.birthday,
+               	email: $scope.email,
+               	phone: $scope.phone,
+               	address: $scope.address,
+               	image: $scope.image,
+               	status: $scope.active                 	
+            },
+            
+            dataType: "json"
+         })
+    .then(function (result) {	
+       if (result.status == 201) {
+    	   getAllRegistrars();
+     	  addAlert();
+     	  $scope.ResetForm_Add();
+       } 
+ 
          }, function(response) {
-				alertFailMessage("Oops! Duplicate ID is not allowed.");
-				setTimeout(function() {
-					location.reload();
-				}, alertDuration);
-         });
-		 
-	 }
-	 $scope.editRegistrar = function(data)
-	 {
-		 $http.get("/admin/api/registrar"+data.id)
-		 .then(function (response)
-		 {
-			 $scope.username=response.data.username;
-			 $scope.lastName=response.data.lastname;
-			 $scope.fistName=response.data.firstname;
-			 $scope.birthday=respone.data.birthday;
-			 $scope.email=response.data.email;
-			 $scope.phone=response.data.phone;
-			 $scope.address=response.data.address;
-			 $scope.image=respone.data.image;
-			 $scope.active=respone.data.status;
-			 $scope.id=data.id;
-		 }); 
-	 };
+         	if(response.status == 406) {            		
+         		alertFailMessage("Oops! Duplicate Username is not allowed.");
+         	}
+			});
+         
+     }
+ 	 $scope.ResetForm_Add=function(){
+    	 $scope.username="";
+    	 $scope.password="";
+    	 $scope.firstName="";
+    	 $scope.lastName="";
+    	 $scope.re_password="";
+    	 $scope.email="";
+    	 $scope.phone="";
+    	 $scope.address="";
+    	 $scope.birthday="";
+    	 $scope.active=true;
+    	 $scope.frmRegistrarAdd.username.$setUntouched();
+    	 $scope.frmRegistrarAdd.lastName.$setUntouched();
+    	 $scope.frmRegistrarAdd.firstName.$setUntouched();
+    	
+    }
+ 	
 	//view detail
-	 $scope.viewRegistrar = function (data)
-	 {
-		 $http.get("/admin/api/registrar"+data.id)
-		 .then(function (response)
-		 {
-			 $scope.username=response.data.username;
-			 $scope.lastName=response.data.lastname;
-			 $scope.fistName=response.data.firstname;
-			 $scope.birthday=respone.data.birthday;
-			 $scope.email=response.data.email;
-			 $scope.phone=response.data.phone;
-			 $scope.address=response.data.address;
-			 $scope.image=respone.data.image;
-			 $scope.active=respone.data.status;
-			 $scope.id=data.id;
-		 });
-	 };
+ 	$scope.view=[];
+	 $scope.viewRegistrar=function(data){
+     	$scope.view.username=data.username;
+			$scope.view.password=data.password;
+			$scope.view.firstname=data.firstname; 
+			$scope.view.lastname=data.lastname;
+			$scope.view.phone=data.phone;
+			$scope.view.birthday=new Date(data.birthday);
+			$scope.view.email=data.email;
+			$scope.view.address=data.address;
+			$scope.view.image=data.image;
+			$scope.view.status=data.status;
+     }
+	 var registrarID;
+     $scope.getRegistrarID=function(data){
+    	 registrarID=data.id;
+     }
+     
+     $scope.getImage_Edit = function(element) {
+ 		photofile = element.files[0];
+         var reader = new FileReader();
+         reader.onload = function(e) {
+             $scope.$apply(function() {
+                 $scope.prev_img_edit = e.target.result;
+             });
+         };
+         reader.readAsDataURL(photofile);
+         $scope.image=photofile.name;
+ 	};
+ 	$scope.edit = [];
+	 //edit registrar
+	$scope.update = function () {
+   	var dataRegistrar={id:registrarID,username:$scope.edit.username,lastname:$scope.edit.lastname,
+   			firstname:$scope.edit.firstname,birthday:$scope.edit.birthday,email:$scope.edit.email,
+   			phone:$scope.edit.phone,address:$scope.edit.address,image:$scope.edit.image,
+   			status:$scope.edit.status};
+   	
+       $http({
+          method: "PUT",
+          url: "/admin/api/registrar",
+          data: dataRegistrar,
+          dataType: "json"
+       })
+          .then(function (result) {
+           	  $("#myModal_sua").modal("hide");
+           	  getAllRegistrars();
+           	  editAlert();
+        }, function(response) {
+				alertFailMessage("Oops! Duplicate Username is not allowed.");
+				setTimeout(function() {
+				});
+        });
+  }  
+ 	 $scope.edit=[];
+ 	 $scope.editRegistrar = function (data) {
+     
+     	$http.get("/admin/api/registrar"+data.id)
+         .then(function (response) {
+         	$scope.edit.username=response.data.username;
+    			
+    			$scope.edit.firstname=response.data.firstname; 
+    			$scope.edit.lastname=response.data.lastname;
+    			$scope.edit.birthday=new Date(response.data.birthday);
+    			$scope.edit.email=response.data.email;
+    			$scope.edit.phone=response.data.phone;
+    			$scope.edit.address=response.data.address;
+    			$scope.edit.image=response.data.image;
+    			$scope.edit.status=response.data.status;
+    			$scope.edit.id=data.id;
+       });
+     };
+     
+     //delete
+     $scope.delete=function()
+     {
+         $http({
+            method: "DELETE",
+           url: "/admin/api/registrar" +  $scope.id,
+           dataType: "json"
+         })
+            .then(function (result) {
+               if (result.status == 202) {
+             	  $("#myModal_xoa").modal("hide");
+             	 getAllRegistrars();
+             	  deleteAlert();
+               } 
+          });
+     }
+ 
+     function deleteAlert(){
+ 	  	swal({
+ 	  	  title:"",
+ 	  	  text: "Delete Successfully",
+ 	  	  type: "success",
+ 	  	  timer: 2000,
+ 	  	  showConfirmButton: false
+ 	  	});
+ 	  }
+ 	  function editAlert(){
+ 		  swal({
+ 		  	  title:"",
+ 		  	  text: "Edit Successfully",
+ 		  	  type: "success",
+ 		  	  timer: 2000,
+ 		  	  showConfirmButton: false
+ 		  	});
+   	  }
+ 	  function addAlert(){
+ 		  swal({
+ 		  	  title:"",
+ 		  	  text: "Add Successfully",
+ 		  	  type: "success",
+ 		  	  timer: 2000,
+ 		  	  showConfirmButton: false
+ 		  	});
+ 	  }
+ 	  function resetAlert(){
+ 		  swal({
+ 		  	  title:"",
+ 		  	  text: "Reset Successfully",
+ 		  	  type: "success",
+ 		  	  timer: 2000,
+ 		  	  showConfirmButton: false
+ 		  	});
+ 	  }
+ 	  function alertFailMessage(message) {
+				swal({
+					title : "",
+					text : message,
+					type : "error",
+					timer : alertDuration,
+					showConfirmButton : false
+				});
+			}
 });
