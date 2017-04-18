@@ -198,8 +198,8 @@
 														type="hidden" data-ng-model="x.id" /></td>
 													<td data-ng-bind="x.intakeId"></td>
 													<td data-ng-bind="x.intakeName"></td>
-													<td data-ng-bind="x.startDate"></td>
-													<td data-ng-bind="x.endDate"></td>
+													<td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
+ -													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button class="btn btn-primary btn-sm"
