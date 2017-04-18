@@ -86,26 +86,26 @@ INSERT INTO `registrar`(`id`, `username`, `password`, `firstname`, `lastname`, `
 
 -----student
 INSERT INTO `student`(`id`, `student_id`, `username`, `password`, `firstname`, `lastname`, `gender`, `email`, `phone`, `address`, `school`, `intake`, `entrance_exam`, `specialization`, `image`, `status`) VALUES
-(1,'ISC01-17-0-101','nhatnguyen','123456','Nhật','Nguyễn Minh','Nam','nhat.nguyenminh@gmail.com','0939019506','99 Nguyễn Tri Phương, P.7,Q.5,TP.HCM','SGD','1','1','1','nguyenminhnhat.jpg','Studying'),
-(2,'ISC01-17-0-102','anhnhat','123456','Anh','Nhật Kim','Nữ','anh.nhatkim@gmail.com','0938028980','754 Nguyễn Trãi, P.11,Q.5,TP.HCM','SGD','1','1','2','nhatkimanh.jpg','Studying'),
-(3,'ISC01-17-0-103','nguyentran','123456','Nguyên','Trần Khai','Nam','nguyen.trankhai@gmail.com','0937037762','250 Tùng Thiện Vương, P.11,Q.8,TP.HCM','DKC','1','1','3','trankhainguyen.jpg','Studying'),
-(4,'ISC01-17-0-104','ngockhai','123456','Ngọc','Khai Minh','Nữ','ngoc.khaiminh@gmail.com','0936046566','169 Bùi Minh Trực, P.5,Q.8,TP.HCM','DKC','1','1','4','khaiminhngoc.jpg','Studying'),
-(5,'ISC01-17-0-105','phatphan','123456','Phát','Phan Tiến','Nam','phat.phantien@gmail.com','0935055721','15 Nguyễn Hữu Thọ, P.Tân Phong,Q.7,TP.HCM','SPK','1','1','5','phantienphat.jpg','Studying'),
-(6,'ISC01-17-0-106','haho','123456','Hà','Hồ Ngọc','Nữ','ha.hongoc@gmail.com','0934064789','15 Hoàng Văn Thái, P.Tân Phú ,Q.7,TP.HCM','SPK','1','2','1','hongocha.jpg','Studying'),
-(7,'ISC01-17-0-107','dungcao','123456','Dũng','Cao Chí','Nam','dung.caochi@gmail.com','0933073234','207 Đội Cung, P.9,Q.11,TP.HCM','DCT','1','2','2','caochidung.jpg','Studying'),
-(8,'ISC01-17-0-108','huongho','123456','Hương','Hồ Xuân','Nữ','huong.hoxuan@gmail.com','0932082547','138 Tạ Uyên, P.6,Q.11,TP.HCM','DCT','1','2','3','hoxuanhuong.jpg','Studying'),
-(9,'ISC01-17-0-109','tungcao','123456','Tùng','Cao Sơn','Nam','tung.caoson@gmail.com','0931091982','96 Nguyễn Thiện Thuật, P.2,Q.3,TP.HCM','DTM','1','2','4','caosontung.jpg','Studying'),
-(10,'ISC01-17-0-110','aiminh','123456','Ái','Minh Thiên','Nữ','ai.minhthien@gmail.com','0929100123','169 Võ Thị Sáu, P.2,Q.3,TP.HCM','DTM','1','2','5','minhthienai.jpg','Studying'),
-(11,'ISC01-17-0-111','soncao','123456','Sơn','Cao Thái','Nam','son.caothai@gmail.com','0928119753','191 Phạm Phú Thứ, P.4,Q.6,TP.HCM','QSC','1','2','1','caothaison.jpg','Studying'),
-(12,'ISC01-17-0-112','trinhnguyen','123456','Trinh','Nguyễn Ngọc','Nữ','trinh.nguyenngoc@gmail.com','0927128742','105 Trần Văn Kiếu, P.10,Q.6,TP.HCM','QSC','1','2','2','nguyenngoctrinh.jpg','Studying'),
-(13,'ISC01-17-0-113','minhtruong','123456','Minh','Trương Thanh','Nam','minh.truongthanh@gmail.com','0926137598','935 Quang Trung, P.14,Q.12,TP.HCM','QSB','1','2','3','truongthanhminh.jpg','Studying'),
-(14,'ISC01-17-0-114','phupham','123456','Phú','Phạm Hồng','Nữ','phu.phamhong@gmail.com','0925146084','153 Quang Trung, P.Đông Hưng Thuận,Q.12,TP.HCM','QSB','1','2','4','phamhongphu.jpg','Studying'),
-(15,'ISC01-17-0-115','khoalang','123456','Khoa','Lăng Tiến','Nam','khoa.langtien@gmail.com','0924155687','1155 Phan Văn Trị, P.10,Q.Gò Vấp,TP.HCM','QST','1','3','5','langtienkhoa.jpg','Studying'),
-(16,'ISC01-17-0-116','kieudap','123456','Kiều','Đạp Thuý','Nữ','kieu.dapthuy@gmail.com','0923164387','45 Trần Thị Nghĩ, P.7,Q.Gò Vấp,TP.HCM','QST','1','3','1','dapthuykieu.jpg','Studying'),
-(17,'ISC01-17-0-117','tiendo','123456','Tiến','Đỗ Thăng','Nam','tien.dothang@gmail.com','0922173299','157 Nguyễn Trọng Tuyến, P.8,Q.2,TP.HCM','SPS','1','3','2','dothangtien.jpg','Studying'),
-(18,'ISC01-17-0-118','phuocla','123456','Phước','Lã Minh','Nữ','phuoc.laminh@gmail.com','0921182400','10 Nguyên Văn Bảo, P.4,Q.2,TP.HCM','SPS','1','3','3','laminhphuoc.jpg','Studying'),
-(19,'ISC01-17-0-119','phuctran','123456','Phúc','Trần Tiến','Nam','phuc.trantien@gmail.com','0963191318','15 Nguyễn Thái Bình, P.4,Q.9,TP.HCM','DTH','1','3','4','trantienphuc.jpg','Studying'),
-(20,'ISC01-17-0-120','tammy','123456','Tâm','Mỹ','Nữ','tam.my@gmail.com','0964200672','Đường số 4, P.Trường Thọ,Q.9,TP.HCM','DTH','1','3','5','mytam.jpg','Studying');
+(1,'ISC01-17-0-0001','nhatnguyen','123456','Nhật','Nguyễn Minh','Nam','nhat.nguyenminh@gmail.com','0939019506','99 Nguyễn Tri Phương, P.7,Q.5,TP.HCM','SGD','1','1','1','nguyenminhnhat.jpg','Studying'),
+(2,'ISC01-17-1-0002','anhnhat','123456','Anh','Nhật Kim','Nữ','anh.nhatkim@gmail.com','0938028980','754 Nguyễn Trãi, P.11,Q.5,TP.HCM','SGD','1','1','2','nhatkimanh.jpg','Studying'),
+(3,'ISC01-17-0-0003','nguyentran','123456','Nguyên','Trần Khai','Nam','nguyen.trankhai@gmail.com','0937037762','250 Tùng Thiện Vương, P.11,Q.8,TP.HCM','DKC','1','1','3','trankhainguyen.jpg','Studying'),
+(4,'ISC01-17-1-0004','ngockhai','123456','Ngọc','Khai Minh','Nữ','ngoc.khaiminh@gmail.com','0936046566','169 Bùi Minh Trực, P.5,Q.8,TP.HCM','DKC','1','1','4','khaiminhngoc.jpg','Studying'),
+(5,'ISC01-17-0-0005','phatphan','123456','Phát','Phan Tiến','Nam','phat.phantien@gmail.com','0935055721','15 Nguyễn Hữu Thọ, P.Tân Phong,Q.7,TP.HCM','SPK','1','1','5','phantienphat.jpg','Studying'),
+(6,'ISC01-17-1-0006','haho','123456','Hà','Hồ Ngọc','Nữ','ha.hongoc@gmail.com','0934064789','15 Hoàng Văn Thái, P.Tân Phú ,Q.7,TP.HCM','SPK','1','2','1','hongocha.jpg','Studying'),
+(7,'ISC01-17-0-0007','dungcao','123456','Dũng','Cao Chí','Nam','dung.caochi@gmail.com','0933073234','207 Đội Cung, P.9,Q.11,TP.HCM','DCT','1','2','2','caochidung.jpg','Studying'),
+(8,'ISC01-17-1-0008','huongho','123456','Hương','Hồ Xuân','Nữ','huong.hoxuan@gmail.com','0932082547','138 Tạ Uyên, P.6,Q.11,TP.HCM','DCT','1','2','3','hoxuanhuong.jpg','Studying'),
+(9,'ISC01-17-0-0009','tungcao','123456','Tùng','Cao Sơn','Nam','tung.caoson@gmail.com','0931091982','96 Nguyễn Thiện Thuật, P.2,Q.3,TP.HCM','DTM','1','2','4','caosontung.jpg','Studying'),
+(10,'ISC01-17-1-0010','aiminh','123456','Ái','Minh Thiên','Nữ','ai.minhthien@gmail.com','0929100123','169 Võ Thị Sáu, P.2,Q.3,TP.HCM','DTM','1','2','5','minhthienai.jpg','Studying'),
+(11,'ISC01-17-0-0011','soncao','123456','Sơn','Cao Thái','Nam','son.caothai@gmail.com','0928119753','191 Phạm Phú Thứ, P.4,Q.6,TP.HCM','QSC','1','2','1','caothaison.jpg','Studying'),
+(12,'ISC01-17-1-0012','trinhnguyen','123456','Trinh','Nguyễn Ngọc','Nữ','trinh.nguyenngoc@gmail.com','0927128742','105 Trần Văn Kiếu, P.10,Q.6,TP.HCM','QSC','1','2','2','nguyenngoctrinh.jpg','Studying'),
+(13,'ISC01-17-0-0013','minhtruong','123456','Minh','Trương Thanh','Nam','minh.truongthanh@gmail.com','0926137598','935 Quang Trung, P.14,Q.12,TP.HCM','QSB','1','2','3','truongthanhminh.jpg','Studying'),
+(14,'ISC01-17-1-0014','phupham','123456','Phú','Phạm Hồng','Nữ','phu.phamhong@gmail.com','0925146084','153 Quang Trung, P.Đông Hưng Thuận,Q.12,TP.HCM','QSB','1','2','4','phamhongphu.jpg','Studying'),
+(15,'ISC01-17-0-0015','khoalang','123456','Khoa','Lăng Tiến','Nam','khoa.langtien@gmail.com','0924155687','1155 Phan Văn Trị, P.10,Q.Gò Vấp,TP.HCM','QST','1','3','5','langtienkhoa.jpg','Studying'),
+(16,'ISC01-17-1-0016','kieudap','123456','Kiều','Đạp Thuý','Nữ','kieu.dapthuy@gmail.com','0923164387','45 Trần Thị Nghĩ, P.7,Q.Gò Vấp,TP.HCM','QST','1','3','1','dapthuykieu.jpg','Studying'),
+(17,'ISC01-17-0-0017','tiendo','123456','Tiến','Đỗ Thăng','Nam','tien.dothang@gmail.com','0922173299','157 Nguyễn Trọng Tuyến, P.8,Q.2,TP.HCM','SPS','1','3','2','dothangtien.jpg','Studying'),
+(18,'ISC01-17-1-0018','phuocla','123456','Phước','Lã Minh','Nữ','phuoc.laminh@gmail.com','0921182400','10 Nguyên Văn Bảo, P.4,Q.2,TP.HCM','SPS','1','3','3','laminhphuoc.jpg','Studying'),
+(19,'ISC01-17-0-0019','phuctran','123456','Phúc','Trần Tiến','Nam','phuc.trantien@gmail.com','0963191318','15 Nguyễn Thái Bình, P.4,Q.9,TP.HCM','DTH','1','3','4','trantienphuc.jpg','Studying'),
+(20,'ISC01-17-1-0020','tammy','123456','Tâm','Mỹ','Nữ','tam.my@gmail.com','0964200672','Đường số 4, P.Trường Thọ,Q.9,TP.HCM','DTH','1','3','5','mytam.jpg','Studying');
 
 
 -----specialization_subject
