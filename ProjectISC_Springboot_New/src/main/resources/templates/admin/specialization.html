@@ -255,8 +255,8 @@
 				<div class="modal-body">
 					<form class="form-horizontal" name="formAdd">
 						<div class="form-group">
-							<label class="control-label col-sm-2">ID</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-3">ID</label>
+							<div class="col-sm-8">
 								<input type="text" id="specializationId_add"
 									name="specializationId_add" class="form-control" placeholder=""
 									ng-model="specializationId_add" required="required" /> <span
@@ -265,8 +265,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2">Name</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-3">Name</label>
+							<div class="col-sm-8">
 								<input type="text" id="specializationName_add"
 									name="specializationName_add" ng-model="specializationName_add"
 									class="form-control" placeholder="" required="required" /> <span
@@ -275,18 +275,14 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2 col-md-2">Status</label>
-							<div class="col-sm-9 col-md-9" style="padding:6px">
+							<label class="control-label col-sm-3 col-md-3">Status</label>
+							<div class="col-sm-8 col-md-8" style="padding:6px">
 								 <input type="radio" ng-model="active_add"
 									ng-value="true" ng-checked="true" /> Active
 								 <input type="radio" ng-model="active_add"
 									ng-value="false" /> Inactive
 							</div>
 
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2"></label>
-							<div class="col-sm-10"></div>
 						</div>
 					</form>
 				</div>
@@ -317,8 +313,8 @@
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm">
 						<div class="form-group">
-							<label class="control-label col-sm-2">ID</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-3">ID</label>
+							<div class="col-sm-8">
 								<input type="hidden" ng-model="info.id" /> <input type="text" id="specializationId_edit"
 									name="specializationId_edit" ng-model="info.specializationId"
 									class="form-control" placeholder="" required="required" /><span
@@ -327,8 +323,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2">Name</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-3">Name</label>
+							<div class="col-sm-8">
 								<input type="text" id="specializationName_edit"
 									name="specializationName_edit"
 									ng-model="info.specializationName" class="form-control"
@@ -338,17 +334,13 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2">Status</label>
+							<label class="control-label col-sm-3">Status</label>
 							<div class="col-sm-9 col-md-9" style="padding:6px">
 								<input type="radio" ng-model="info.active" ng-value="true" />
 								Active <input type="radio" ng-model="info.active"
 									ng-value="false" /> Inactive
 
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2"></label>
-							<div class="col-sm-10"></div>
 						</div>
 					</form>
 				</div>
