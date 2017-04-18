@@ -46,6 +46,17 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	$scope.showList=function(school,index){
  		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
  	}
+ 	$scope.getImage = function(element) {
+		photofile = element.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $scope.$apply(function() {
+                $scope.prev_img = e.target.result;
+            });
+        };
+        reader.readAsDataURL(photofile);
+        $scope.image=photofile.name;
+	};
  	//ADD REGISTRAR
  	 $scope.save = function () {
          $http({
@@ -94,8 +105,11 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 $scope.frmRegistrarAdd.username.$setUntouched();
     	 $scope.frmRegistrarAdd.lastName.$setUntouched();
     	 $scope.frmRegistrarAdd.firstName.$setUntouched();
-    	
-    }
+    	 $scope.frmRegistrarAdd.phone.$setUntouched();
+    	 $scope.frmRegistrarAdd.email.$setUntouched();
+    	 $scope.frmRegistrarAdd.address.$setUntouched();
+    	 
+ 	 }
  	
 	//view detail
  	$scope.view=[];
@@ -130,7 +144,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	$scope.edit = [];
 	 //edit registrar
 	$scope.update = function () {
-   	var dataRegistrar={id:registrarID,username:$scope.edit.username,lastname:$scope.edit.lastname,
+   	var dataRegistrar={id:$scope.registrar_delete.id,username:$scope.edit.username,lastname:$scope.edit.lastname,
    			firstname:$scope.edit.firstname,birthday:$scope.edit.birthday,email:$scope.edit.email,
    			phone:$scope.edit.phone,address:$scope.edit.address,image:$scope.edit.image,
    			status:$scope.edit.status};
@@ -151,31 +165,36 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 				});
         });
   }  
- 	 $scope.edit=[];
+ 	 
  	 $scope.editRegistrar = function (data) {
      
-     	$http.get("/admin/api/registrar"+data.id)
+     	$http.get("/admin/api/registrar/"+data.id)
          .then(function (response) {
-         	$scope.edit.username=response.data.username;
+         		$scope.edit.username=response.data.username;
     			
     			$scope.edit.firstname=response.data.firstname; 
     			$scope.edit.lastname=response.data.lastname;
+    			$scope.edit.password=response.data.password;
     			$scope.edit.birthday=new Date(response.data.birthday);
     			$scope.edit.email=response.data.email;
     			$scope.edit.phone=response.data.phone;
     			$scope.edit.address=response.data.address;
     			$scope.edit.image=response.data.image;
     			$scope.edit.status=response.data.status;
-    			$scope.edit.id=data.id;
+    			
        });
      };
-     
+     // get data for delete
+     $scope.registrar_delete = [];
+     $scope.deleteRegistrar = function (data) {
+         $scope.registrar_delete = data;
+     }; 
      //delete
      $scope.delete=function()
      {
          $http({
             method: "DELETE",
-           url: "/admin/api/registrar" +  $scope.id,
+           url: "/admin/api/registrar/" +  $scope.registrar_delete.id,
            dataType: "json"
          })
             .then(function (result) {
