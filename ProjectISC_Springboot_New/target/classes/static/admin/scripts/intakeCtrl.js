@@ -202,17 +202,18 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 			Intake.update({id:intakeObj.id,intakeId:$scope._id, intakeName: $scope._name, startDate:$scope._startdate, endDate:$scope._enddate, active:($scope._active==null?false:($scope._active==false?false:true))})
 				.$promise.then(function(){
 					$('#myModal_sua').modal('hide');
+					var idx = $scope.list.indexOf(intakeObj);
+					$scope.list[idx].intakeId=$scope._id;
+					$scope.list[idx].intakeName=$scope._name;
+					$scope.list[idx].startDate=new Date($scope._startdate);
+					$scope.list[idx].endDate=new Date($scope._enddate);
+					$scope.list[idx].active=($scope._active==null?false:($scope._active==false?false:true));
 					editAlert();
 					}, function(response) {
 						alertFailMessage("Oops! Duplicate ID is not allowed.");
 					});
 			
-			var idx = $scope.list.indexOf(intakeObj);
-			$scope.list[idx].intakeId=$scope._id;
-			$scope.list[idx].intakeName=$scope._name;
-			$scope.list[idx].startDate=new Date($scope._startdate);
-			$scope.list[idx].endDate=new Date($scope._enddate);
-			$scope.list[idx].active=($scope._active==null?false:($scope._active==false?false:true));
+			
 		}	
 	}  
 	
