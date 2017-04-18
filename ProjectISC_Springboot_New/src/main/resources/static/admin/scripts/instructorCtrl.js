@@ -107,6 +107,27 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 			});
             
         }
+        //Upload file 
+        function uploadFile_Edit() {
+            $.ajax({
+              url: "uploadFile",
+              type: "POST",
+              data: new FormData($("#upload-file-form-edit")[0]),
+              enctype: 'multipart/form-data',
+              processData: false,
+              contentType: false,
+              cache: false,
+              success: function () {
+                // Handle upload success
+                $("#upload-file-message").text("File succesfully uploaded");
+              },
+              error: function () {
+                // Handle upload error
+                $("#upload-file-message").text(
+                    "File not uploaded (perhaps it's too much big)");
+              }
+            });
+          }
 	    $scope.ResetForm_Add=function(){
 	    	 $scope.username="";
         	 $scope.password="";
@@ -130,6 +151,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 	    $scope.instructor_edit = [];
 	  //edit instructor
         $scope.update = function () {
+        	uploadFile_Edit();
         	var dataInstructor={id:instructorID,username:$scope.instructor_edit.username,lastname:$scope.instructor_edit.lastname,
         			firstname:$scope.instructor_edit.firstname,birthday:$scope.instructor_edit.birthday,email:$scope.instructor_edit.email,
         			phone:$scope.instructor_edit.phone,address:$scope.instructor_edit.address,image:$scope.instructor_edit.image,
@@ -274,5 +296,6 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 					showConfirmButton : false
 				});
 			}
-       
+    	  
+    	  
 	});
