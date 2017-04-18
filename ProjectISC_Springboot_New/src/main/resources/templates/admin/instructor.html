@@ -409,11 +409,8 @@
 						<div class="col-md-6">
 							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
 								<div class=" picture">
-									
-									<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
-									
 									<img ng-src="{{prev_img}}" height="150" width="100"/>
-									<input type="file" id="image" name="image" onchange="angular.element(this).scope().getImage(this)" ng-model="image"/>
+									<input type="file" id="image" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage(this)" ng-model="image"/>
 									<!-- Multiple Radios -->
 									
 									</div>
@@ -479,7 +476,7 @@
 					<h4 class="modal-title" id="myModalLabel">Edit Instructor</h4>
 				</div>
 				<div class="modal-body row">
-				<form class="form-horizontal" name="frmInstructor" id="upload-file-form-edit">
+				<form class="form-horizontal" name="frmInstructor_edit" id="upload-file-form-edit">
 					<div class="col-md-6">
 						
 							<!-- Text input-->
@@ -548,9 +545,9 @@
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="instructor_edit.email" />
-									<div ng-messages="frmInstructor.email.$error">
+									<div ng-messages="instructor_edit.email.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.email.$touched">
+											ng-show="instructor_edit.email.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 	
@@ -564,9 +561,9 @@
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="tel" ng-required="true"
 										ng-model="instructor_edit.phone" />
-									<div ng-messages="frmInstructor.phone.$error">
+									<div ng-messages="instructor_edit.phone.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.phone.$touched">
+											ng-show="instructor_edit.phone.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 	
@@ -580,9 +577,9 @@
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="instructor_edit.address" />
-									<div ng-messages="frmInstructor.address.$error">
+									<div ng-messages="instructor_edit.address.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.address.$touched">
+											ng-show="instructor_edit.address.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 	
@@ -596,11 +593,9 @@
 						<div class="col-md-6">
 							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
 								<div class=" picture">
-									
 									<img ng-src="http://localhost:8080/admin/images/{{instructor_edit.image}}" ng-show="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
-									<img ng-src="{{prev_img_edit}}" width="100" height="150" class="img-responsive"/>
-									<!-- <input type="file" id="image" name="image" onchange="angular.element(this).scope().getImage_Edit(this)"/> -->
-									<input id="upload-file-input" type="file" name="uploadfile" accept="*" />
+									<img ng-src="{{prev_img_edit}}" ng-hide="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
+									<input type="file" id="image_edit" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage_Edit(this)"/>
 									
 									<!-- Multiple Radios -->
 									
@@ -733,7 +728,6 @@
 								<div class=" picture">
 									
 									<img ng-src="http://localhost:8080/admin/images/{{view.image}}" width="100" height="150" class="img-responsive"/>
-									<input type="file" id="image" name="image" onchange="angular.element(this).scope().getImage(this)" ng-model="image"/>
 									</div>
 							
 							

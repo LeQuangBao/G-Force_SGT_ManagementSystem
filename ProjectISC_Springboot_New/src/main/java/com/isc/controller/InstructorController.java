@@ -3,12 +3,16 @@ package com.isc.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +30,7 @@ import com.isc.service.InstructorService;
 public class InstructorController {
 	@Autowired
 	private InstructorService service;
-
+		
 	@RequestMapping(value = "admin/api/instructor", method = RequestMethod.GET)
 	public ResponseEntity<List<Instructor>> getAllInstructors() {
 		return new ResponseEntity<>(service.getAllInstructors(), HttpStatus.OK);
@@ -91,7 +95,7 @@ public class InstructorController {
 	    try {
 	      // Get the filename and build the local file path
 	      String filename = uploadfile.getOriginalFilename();
-	      String directory = "admin\\images";
+	      String directory = "src\\main\\resources\\static\\admin\\images";
 	      String filepath = Paths.get(directory, filename).toString();
 	      
 	      // Save the file locally

@@ -72,6 +72,26 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
             reader.readAsDataURL(photofile);
             $scope.image=photofile.name;
     	};
+    	function uploadFile() {
+            $.ajax({
+              url: "uploadFile",
+              type: "POST",
+              data: new FormData($("#fileUploadForm")[0][8]),
+              enctype: 'multipart/form-data',
+              processData: false,
+              contentType: false,
+              cache: false,
+              success: function () {
+                // Handle upload success
+                $("#upload-file-message").text("File succesfully uploaded");
+              },
+              error: function () {
+                // Handle upload error
+                $("#upload-file-message").text(
+                    "File not uploaded (perhaps it's too much big)");
+              }
+            });
+          }
 	    // add instructor
         $scope.save = function () {
             $http({
@@ -107,12 +127,12 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 			});
             
         }
-        //Upload file 
+        //Upload file trong modal Edit
         function uploadFile_Edit() {
             $.ajax({
               url: "uploadFile",
               type: "POST",
-              data: new FormData($("#upload-file-form-edit")[0]),
+              data: new FormData($("#upload-file-form-edit")[0][8]),
               enctype: 'multipart/form-data',
               processData: false,
               contentType: false,
@@ -129,6 +149,8 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
             });
           }
 	    $scope.ResetForm_Add=function(){
+	    	 document.getElementById("image").value="";
+        	 $scope.prev_img='';
 	    	 $scope.username="";
         	 $scope.password="";
         	 $scope.firstName="";
@@ -142,11 +164,11 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.frmInstructor.username.$setUntouched();
         	 $scope.frmInstructor.lastName.$setUntouched();
         	 $scope.frmInstructor.firstName.$setUntouched();
-        	 /*$scope.frmInstructor.password.$setUntouched();
+        	 $scope.frmInstructor.password.$setUntouched();
         	 $scope.frmInstructor.re_password.$setUntouched();
         	 $scope.frmInstructor.email.$setUntouched();
         	 $scope.frmInstructor.phone.$setUntouched();
-        	 $scope.frmInstructor.address.$setUntouched();*/
+        	 $scope.frmInstructor.address.$setUntouched();
 	    }
 	    $scope.instructor_edit = [];
 	  //edit instructor
@@ -164,6 +186,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                dataType: "json"
             })
                .then(function (result) {
+            	   
                 	  $("#myModal_sua").modal("hide");
                 	  getAllinstructors();
                 	  editAlert();
@@ -202,9 +225,11 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                 });
             };
             reader.readAsDataURL(photofile);
-            $scope.image=photofile.name;
+            $scope.instructor_edit.image=photofile.name;
     	};
         $scope.getInstructor = function (data) {
+        	document.getElementById("image_edit").value="";
+        	$scope.prev_img_edit='';
         	$scope.getInstructorID(data);
         	$http.get("api/instructor/"+data.id)
             .then(function (response) {
