@@ -26,5 +26,8 @@ public interface StudentDao {
 	public List<EntranceExam> getallentranceexam();
 
 	public List<Specialization> getallspecialization();
+	public void resetpassword(Student student);
+	
+
 
 }

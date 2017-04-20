@@ -29,6 +29,11 @@ public class StudentServicelmpl implements StudentService  {
 	public Student getStudent(int id) {
 		return studentDao.getStudent(id);
 	}
+	@Transactional
+	public void resetpassword(Student student)
+	{
+		studentDao.resetpassword(student);
+	}
 
 	@Transactional
 	public void addStudent(Student Student) {
