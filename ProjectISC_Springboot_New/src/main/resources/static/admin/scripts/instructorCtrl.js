@@ -161,14 +161,14 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.address="";
         	 $scope.birthday="";
         	 $scope.active=true;
-        	 $scope.frmInstructor.username.$setUntouched();
-        	 $scope.frmInstructor.lastName.$setUntouched();
-        	 $scope.frmInstructor.firstName.$setUntouched();
-        	 $scope.frmInstructor.password.$setUntouched();
-        	 $scope.frmInstructor.re_password.$setUntouched();
-        	 $scope.frmInstructor.email.$setUntouched();
-        	 $scope.frmInstructor.phone.$setUntouched();
-        	 $scope.frmInstructor.address.$setUntouched();
+//        	 $scope.frmInstructor.username.$setUntouched();
+//        	 $scope.frmInstructor.lastName.$setUntouched();
+//        	 $scope.frmInstructor.firstName.$setUntouched();
+//        	 $scope.frmInstructor.password.$setUntouched();
+//        	 $scope.frmInstructor.re_password.$setUntouched();
+//        	 $scope.frmInstructor.email.$setUntouched();
+//        	 $scope.frmInstructor.phone.$setUntouched();
+//        	 $scope.frmInstructor.address.$setUntouched();
 	    }
 	    $scope.instructor_edit = [];
 	  //edit instructor

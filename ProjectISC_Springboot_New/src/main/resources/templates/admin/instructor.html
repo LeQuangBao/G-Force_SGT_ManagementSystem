@@ -283,7 +283,7 @@
 								<div class="">
 									<input id="username" name="username" placeholder=""
 										class="form-control input-md" type="text" ng-model="username"
-										ng-required="true" />
+										ng-required="true"  />
 									<div ng-messages="frmInstructor.username.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.username.$touched">
@@ -347,7 +347,7 @@
 								<label class=" control-label" for="birthday">Retype password</label>
 								<div class="">
 									<input type="password" id="re_password" name="re_password"
-										required="required" class="form-control col-md-7 col-xs-12" />
+										required="required" class="form-control col-md-7 col-xs-12"  />
 									<div ng-messages="frmInstructor.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.re_password.$touched">
@@ -359,7 +359,7 @@
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Email</label>
+								<label class=" control-label">Email</label>
 								<div class="">
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
@@ -416,17 +416,18 @@
 									</div>
 							
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<label class="col-md-2 control-label" for="birthday">Birthday</label>
 								<div class="col-md-12">
 									<input id="birthday" name="birthday" placeholder=""
 										class="form-control input-md" type="date" ng-model="birthday"/>
+<!-- 										class="form-control input-md" type="date" ng-model="birthday" value=""/> -->
 	
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="selectbasic">Degree</label>
+								<label class="col-md-2 control-label" for="selectbasic">Degree</label>
 								<div class="col-md-12">
-									<select name="degree" id="degree" ng-model="degree">
+									<select class="form-control" name="degree" id="degree" ng-model="degree">
 								      	<option value="College">College</option>
 										<option value="University">University</option>
 										<option value="Master">Master</option>
@@ -435,7 +436,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="status">Status</label>
+								<label class="col-md-2 control-label" for="status">Status</label>
 								<div class="col-md-12">
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="active"
