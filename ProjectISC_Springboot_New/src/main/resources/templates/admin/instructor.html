@@ -408,9 +408,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
-								<div class=" picture">
+						<div class="col-md-6 form-group">
+							<label class="col-md-2 control-label">Picture</label>
+								<div class="col-md-12 picture">
 									<img ng-src="{{prev_img}}" height="150" width="100"/>
 									<input type="file" id="image" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage(this)" ng-model="image"/>
 									<!-- Multiple Radios -->
@@ -594,8 +594,8 @@
 						
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
-								<div class=" picture">
+							<label class="col-md-2 control-label">Picture</label>
+								<div class="col-md-12 picture">
 									<img ng-src="http://localhost:8080/admin/images/{{instructor_edit.image}}" ng-show="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
 									<img ng-src="{{prev_img_edit}}" ng-hide="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
 									<input type="file" id="image_edit" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage_Edit(this)"/>
@@ -606,7 +606,7 @@
 							
 							
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="selectbasic">Degree</label>
+								<label class="col-md-2 control-label" for="selectbasic">Degree</label>
 								<div class="col-md-12">
 									<select id="degree" name="degree" class="form-control" ng-model="instructor_edit.degree">
 										<option value="College">College</option>
@@ -617,9 +617,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="status">Status</label>
+								<label class="col-md-2 control-label" for="status">Status</label>
 								
-									<div class="checkbox">
+									<div class="col-md-12 checkbox">
 										<label> <input type="radio" ng-model="instructor_edit.status"
 											ng-value="true" ng-checked="true" /> Active
 										</label>
@@ -727,7 +727,7 @@
 							
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
+							<label class=" control-label">Picture</label>
 								<div class=" picture">
 									
 									<img ng-src="http://localhost:8080/admin/images/{{view.image}}" width="100" height="150" class="img-responsive"/>
