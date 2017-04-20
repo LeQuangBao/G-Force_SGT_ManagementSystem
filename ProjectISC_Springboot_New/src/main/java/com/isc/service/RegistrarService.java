@@ -2,7 +2,7 @@ package com.isc.service;
 
 import java.util.List;
 
-import com.isc.model.Instructor;
+
 import com.isc.model.Registrar;
 
 public interface RegistrarService {

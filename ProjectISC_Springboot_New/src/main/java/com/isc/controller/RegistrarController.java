@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isc.model.Instructor;
+
 import com.isc.model.Registrar;
-import com.isc.service.InstructorService;
 import com.isc.service.RegistrarService;
 
 @RestController
