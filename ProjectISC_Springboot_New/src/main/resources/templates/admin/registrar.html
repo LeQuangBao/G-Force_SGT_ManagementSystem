@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Registrar Management</title>
+<title>Registrar management</title>
 
 <base href="http://localhost:8080/admin/" />
 
@@ -42,6 +42,7 @@
 <link href="build/css/custom.min.css" rel="stylesheet" />
 <link href="js/sweetalert.css" rel="stylesheet" />
 <link href="build/css/custom.css" rel="stylesheet" />
+<link href="build/css/style.css" rel="stylesheet" />
 </head>
 
 <body class="nav-md" ng-app="myApp" ng-controller="registrarCtrl">
@@ -123,7 +124,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Registrar Management</h3>
+							<h3>Registrar management</h3>
 						</div>
 						<div class="title_right">
 							<div class=" form-group pull-right top_search">
@@ -151,18 +152,20 @@
 								</div>
 								<div class="x_content">
 
-									<label for="mySelect">Display </label>
-								    <select name="mySelect" id="mySelect"
-								      ng-options="option.name for option in rowdata.availableOptions track by option.id"
-								      ng-model="rowdata.selectedOption" ng-change="ChangeRow(rowdata.selectedOption.id)">
-								      </select>
-								      <label> rows</label>
+									<label for="mySelect">Display </label> <select name="mySelect"
+										id="mySelect"
+										ng-options="option.name for option in rowdata.availableOptions track by option.id"
+										ng-model="rowdata.selectedOption"
+										ng-change="ChangeRow(rowdata.selectedOption.id)">
+									</select> <label> rows</label>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover">
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-													<th class="sortable" style="width: 15%" ng-click="sortType = 'userName';sortReverse = !sortReverse">Username <span
+													<th class="sortable" style="width: 15%"
+														ng-click="sortType = 'userName';sortReverse = !sortReverse">Username
+														<span
 														ng-show="sortType == 'userName' &amp;&amp; !sortReverse"
 														class="fa fa-caret-down"></span> <span
 														ng-show="sortType == 'userName' &amp;&amp; sortReverse"
@@ -268,7 +271,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add Registrar</h4>
+					<h4 class="modal-title" id="myModalLabel">Add registrar</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-6">
@@ -281,7 +284,8 @@
 										class="form-control input-md" type="text" ng-model="username"
 										ng-required="true" />
 									<div ng-messages="frmRegistrarAdd.username.$error">
-										<div ng-message="required" ng-show="frmRegistrarAdd.username.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.username.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -329,7 +333,8 @@
 										data-ng-model="password" required="required"
 										class="form-control col-md-7 col-xs-12" />
 									<div ng-messages="frmRegistrarAdd.password.$error">
-										<div ng-message="required" ng-show="frmRegistrarAdd.password.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -343,7 +348,8 @@
 									<input type="password" id="re_password" name="re_password" data-ng-model="re_password"
 										required="required" class="form-control col-md-7 col-xs-12"/>
 									<div ng-messages="frmRegistrarAdd.re_password.$error">
-										<div ng-message="required" ng-show="frmRegistrarAdd.re_password.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -363,7 +369,7 @@
 											ng-show="frmInstructor.email.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-	
+
 									</div>
 								</div>
 							</div>
@@ -375,7 +381,8 @@
 										class="form-control input-md" type="tel" ng-required="true"
 										ng-model="phone" />
 									<div ng-messages="frmRegistrarAdd.phone.$error">
-										<div ng-message="required" ng-show="frmRegistrarAdd.phone.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.phone.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -390,7 +397,8 @@
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="address" />
 									<div ng-messages="frmRegistrarAdd.address.$error">
-										<div ng-message="required" ng-show="frmRegistrarAdd.address.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.address.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -402,48 +410,52 @@
 						</form>
 					</div>
 					<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
-								<div class=" picture">
-									
-									<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
-									
-									<img ng-src="{{prev_img}}" height="150" width="100"/>
-									<input type="file" id="image" name="image" onchange="angular.element(this).scope().getImage(this)" ng-model="image" class="col-md-12"/>
-									<!-- Multiple Radios -->
-									
-									</div>
-							
-							<div class="form-group">
-								<label class="col-md-12 control-label" for="birthday">Birthday</label>
-								<div class="col-md-12">
-									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" ng-model="birthday"/>
-	
-								</div>
+						<label class=" control-label" style="margin-top: 9px;" for="">Profile
+							picture</label>
+						<div class=" picture">
+
+							<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
+
+							<img ng-src="{{prev_img}}" height="150" width="100" /> <input
+								type="file" id="image" name="image"
+								onchange="angular.element(this).scope().getImage(this)"
+								ng-model="image" class="col-md-12" />
+							<!-- Multiple Radios -->
+
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-12 control-label" for="birthday">Birthday</label>
+							<div class="col-md-12">
+								<input id="birthday" name="birthday" placeholder=""
+									class="form-control input-md" type="date" ng-model="birthday" />
+
 							</div>
-						
-							<div class="form-group">
-								<label class="col-md-12 control-label" for="status">Status</label>
-								<div class="col-md-12">
-									<div class="checkbox">
-										<label> <input type="radio" ng-model="active"
-											ng-value="true" ng-checked="true" /> Active
-										</label>
-										 <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Inactive
-										</label>
-									</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-12 control-label" for="status">Status</label>
+							<div class="col-md-12">
+								<div class="checkbox">
+									<label> <input type="radio" ng-model="active"
+										ng-value="true" ng-checked="true" /> Active
+									</label> <label> <input type="radio" ng-model="active"
+										ng-value="false" /> Inactive
+									</label>
 								</div>
 							</div>
 						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<!-- <button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()" ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required || frmRegistrarAdd.address.$error.required|| frmRegistrarAdd.phone.$error.required|| frmRegistrarAdd.email.$error.required|| frmRegistrarAdd.password.$error.required|| frmRegistrarAdd.re_password.$error.required">Add</button> -->
-						<button id="btnSave" name="btnSave" class="btn btn-primary"
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="save()" data-dismiss="modal" ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required">Add and close</button>
+						ng-click="save()" data-dismiss="modal"
+						ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required">Add
+						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -460,21 +472,23 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Edit Registrar</h4>
+					<h4 class="modal-title" id="myModalLabel">Edit registrar</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-6">
-						<form class="form-horizontal" name="frmRegistrarEdit" id="upload-file-form-edit">
-						<input type="hidden" name="id" ng-model="registrar_edit.id" />
+						<form class="form-horizontal" name="frmRegistrarEdit"
+							id="upload-file-form-edit">
+							<input type="hidden" name="id" ng-model="registrar_edit.id" />
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="edit.username"
-										ng-required="true" />
-									<div ng-messages="frmRegistrarEdit.usename.$error">
-										<div ng-message="required" ng-show="frmRegistrarEdit.username.$touched">
+										class="form-control input-md" type="text"
+										ng-model="edit.username" ng-required="true" />
+									<div ng-messages="frmRegistrarEdit.username.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarEdit.username.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -487,10 +501,11 @@
 								<label class="control-label" for="lastName">Last Name</label>
 								<div class="">
 									<input id="lastName" name="lastName" placeholder=""
-										class="form-control input-md" type="text" ng-model="edit.lastname"
-										ng-required="true" />
+										class="form-control input-md" type="text"
+										ng-model="edit.lastname" ng-required="true" />
 									<div ng-messages="frmRegistrarEdit.lastName.$error">
-										<div ng-message="required" ng-show="frmRegistrarEdit.lastName.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarEdit.lastName.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -505,7 +520,8 @@
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="edit.firstname" />
 									<div ng-messages="frmRegistrarEdit.firstName.$error">
-										<div ng-message="required" ng-show="frmRegistrarEdit.firstName.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarEdit.firstName.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -517,7 +533,8 @@
 								<label class=" control-label" for="birthday">Birthday</label>
 								<div class="">
 									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" ng-model="edit.birthday"/>
+										class="form-control input-md" type="date"
+										ng-model="edit.birthday" />
 
 								</div>
 							</div>
@@ -529,7 +546,8 @@
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="edit.email" />
 									<div ng-messages="frmRegistrarEdit.email.$error">
-										<div ng-message="required" ng-show="frmRegistrarEdit.email.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarEdit.email.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -560,7 +578,8 @@
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="edit.address" />
 									<div ng-messages="frmRegistrarEdit.address.$error">
-										<div ng-message="required" ng-show="frmRegistrarEdit.address.$touched">
+										<div ng-message="required"
+											ng-show="frmRegistrarEdit.address.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -576,9 +595,11 @@
 							picture</label>
 						<div class=" picture">
 
+
 							<img ng-src="http://localhost:8080/admin/images/{{edit.image}}" ng-show="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
 									<img ng-src="{{prev_img_edit}}" ng-hide="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
 									<input type="file" id="image_edit" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage_Edit(this)"/>
+
 							<!-- Multiple Radios -->
 
 						</div>
@@ -602,7 +623,8 @@
 					<button type="button" class="pull-left btn btn-danger"
 						data-toggle="modal" data-target="#myModal_confirmReset">Reset
 						Password</button>
-					<button type="button" class="btn btn-primary" ng-click="update()" ng-disabled="frmRegistrarEdit.username.$error.required || frmRegistrarEdit.lastName.$error.required || frmRegistrarEdit.firstName.$error.required|| frmRegistrarEdit.email.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.address.$error.required">Save</button>
+					<button type="button" class="btn btn-primary" ng-click="update()"
+						ng-disabled="frmRegistrarEdit.username.$error.required || frmRegistrarEdit.lastName.$error.required || frmRegistrarEdit.firstName.$error.required|| frmRegistrarEdit.email.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.address.$error.required">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -629,9 +651,10 @@
 								<label class=" control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="view.username" readonly="readonly"
+										class="form-control input-md" type="text"
+										ng-model="view.username" readonly="readonly"
 										ng-required="true" />
-									
+
 
 								</div>
 							</div>
@@ -641,9 +664,10 @@
 								<label class="control-label" for="lastName"> Last Name</label>
 								<div class="">
 									<input id="lastName" name="lastName" placeholder=""
-										class="form-control input-md" type="text" ng-model="view.lastname" readonly="readonly"
+										class="form-control input-md" type="text"
+										ng-model="view.lastname" readonly="readonly"
 										ng-required="true" />
-								
+
 								</div>
 							</div>
 
@@ -654,7 +678,7 @@
 									<input id="firstName" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="view.firstname" readonly="readonly" />
-									
+
 								</div>
 							</div>
 							<!-- Text input-->
@@ -662,7 +686,8 @@
 								<label class="control-label" for="birthday">Birthday</label>
 								<div class="">
 									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" ng-model="view.birthday" readonly="readonly" />
+										class="form-control input-md" type="date"
+										ng-model="view.birthday" readonly="readonly" />
 
 								</div>
 							</div>
@@ -673,7 +698,7 @@
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="view.email" readonly="readonly" />
-									
+
 								</div>
 							</div>
 							<!-- Text input-->
@@ -682,8 +707,8 @@
 								<div class="">
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="tel" ng-required="true"
-										ng-model="view.phone" readonly="readonly"/>
-									
+										ng-model="view.phone" readonly="readonly" />
+
 								</div>
 							</div>
 							<!-- Text input-->
@@ -693,7 +718,7 @@
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="view.address" readonly="readonly" />
-									
+
 								</div>
 							</div>
 
@@ -705,16 +730,17 @@
 							picture</label>
 						<div class=" picture">
 
-							<img src="http://localhost:8080/admin/images/{{view.image}}" width="100" height="150"
-								class="img-responsive" />
-							
+							<img src="http://localhost:8080/admin/images/{{view.image}}"
+								width="100" height="150" class="img-responsive" />
+
 							<!-- Multiple Radios -->
 
 						</div>
 
 
 						<div class="form-group">
-							<label class="control-label col-md-4" for="status">Status </label>
+							<label class="control-label col-md-4" for="status">Status
+							</label>
 
 							<p ng-bind="view.status ? 'Active' : 'Inactive'"></p>
 						</div>
@@ -728,16 +754,17 @@
 			</div>
 		</div>
 	</div>
-		<!-- Modal resetpass -->
-	<div class="modal fade" id="myModal_reset" tabindex="-1"  role="dialog" data-backdrop="false"
-		aria-labelledby="myModalLabel">
+	<!-- Modal resetpass -->
+	<div class="modal fade" id="myModal_reset" tabindex="-1" role="dialog"
+		data-backdrop="false" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm reset password</h4>
+					<h4 class="modal-title" id="myModalLabel">Confirm reset
+						password</h4>
 				</div>
 
 				<div class="modal-body">
@@ -747,7 +774,8 @@
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="ResetPassword()" data-toggle="modal" data-dismiss="modal">Yes</a>
+					<a class="btn btn-danger btn-ok" ng-click="ResetPassword()"
+						data-toggle="modal" data-dismiss="modal">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
@@ -756,31 +784,34 @@
 		</div>
 	</div>
 	<!-- Modal confirmReset -->
-	<div class="modal fade" id="myModal_confirmReset" tabindex="-1" role="dialog" 
-		aria-labelledby="myModalLabel">
+	<div class="modal fade" id="myModal_confirmReset" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm reset password</h4>
+					<h4 class="modal-title" id="myModalLabel">Confirm reset
+						password</h4>
 				</div>
 
 				<div class="modal-body">
 
 					<div class="form-group">
-								<label class=" control-label" for="birthday">New password</label>
-								<div class="">
-									<input type="password" id="password" name="password"
-										data-ng-model="newPassword" class="form-control col-md-6" ng-required="true"/>
-								</div>
-							</div>
+						<label class=" control-label" for="birthday">New password</label>
+						<div class="">
+							<input type="password" id="password" name="password"
+								data-ng-model="newPassword" class="form-control col-md-6"
+								ng-required="true" />
+						</div>
+					</div>
 
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" data-target="#myModal_reset" data-toggle="modal">Yes</a>
+					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
+						data-toggle="modal">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 

@@ -1,12 +1,14 @@
 app.controller('registrarCtrl', function($scope, $http,$filter) {
 	$scope.rowdata = {
 		     availableOptions: [
+
 		       {id: '15', name: '15'},
 		       {id: '30', name: '30'},
 		       {id: '50', name: '50'},
 		       {id: '100', name: '100'}
 		     ],
 		     selectedOption: {id: '15', name: '15'}
+
 		    };
 	$scope.ChangeRow=function(index){
 		$scope.itemsPerPage = index;
@@ -14,6 +16,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	}
 	
 	var alertDuration = 1800;
+
 	// Lấy danh sách Registrar
 	 function getAllRegistrars(){
 	    	$scope.list=[];
