@@ -94,6 +94,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
           }
 	    // add instructor
         $scope.save = function () {
+        	uploadFile();
             $http({
                 method: "POST",
                url: "api/instructor",
@@ -165,8 +166,8 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.frmInstructor.lastName.$setUntouched();
         	 $scope.frmInstructor.firstName.$setUntouched();
         	 $scope.frmInstructor.password.$setUntouched();
-        	 //$scope.frmInstructor.re_password.$setUntouched();
-        	 //$scope.frmInstructor.email.$setUntouched();
+        	 $scope.frmInstructor.re_password.$setUntouched();
+        	 $scope.frmInstructor.email.$setUntouched();
         	 $scope.frmInstructor.phone.$setUntouched();
         	 $scope.frmInstructor.address.$setUntouched();
 	    }
@@ -325,7 +326,8 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     	  
 	});
 
-/*app.directive("matchPassword", function(){
+//Compare password and retype password
+app.directive("matchPassword", function(){
 return {
     require: "ngModel",
     scope: {
@@ -342,4 +344,4 @@ return {
       });
     }
   };
-});*/
+});
