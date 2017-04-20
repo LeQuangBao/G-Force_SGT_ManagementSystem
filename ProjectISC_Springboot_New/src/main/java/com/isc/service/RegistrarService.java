@@ -11,5 +11,6 @@ public interface RegistrarService {
 	public void addRegistrar(Registrar registrar);
 	public void deleteRegistrar(int id);
 	public void updateRegistrar(Registrar registrar);
-	public void resetPassword(int id);
+	public void resetPassword(Registrar registrar);
+	
 }

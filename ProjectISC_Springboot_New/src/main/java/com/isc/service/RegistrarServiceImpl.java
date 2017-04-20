@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isc.dao.InstructorDao;
@@ -30,6 +31,7 @@ public class RegistrarServiceImpl implements RegistrarService {
 	@Transactional
 	public void addRegistrar(Registrar registrar)
 	{
+		registrar.setPassword(new BCryptPasswordEncoder().encode(registrar.getPassword()));
 		registrarDao.addRegistrar(registrar);
 	}
 	@Transactional
@@ -39,15 +41,27 @@ public class RegistrarServiceImpl implements RegistrarService {
 	}
 	@Transactional
 	public void updateRegistrar(Registrar registrar)
+	
 	{
-		registrarDao.updateRegistrar(registrar);
+		Registrar registrarObj=registrarDao.getRegistrar(registrar.getId());
+		registrarObj.setUsername(registrar.getUsername());
+		registrarObj.setLastname(registrar.getLastname());
+		registrarObj.setFirstname(registrar.getFirstname());
+		registrarObj.setBirthday(registrar.getBirthday());
+		registrarObj.setEmail(registrar.getEmail());
+		registrarObj.setAddress(registrar.getAddress());
+		registrarObj.setPhone(registrar.getPhone());
+		registrarObj.setImage(registrar.getImage());
+		registrarObj.setStatus(registrar.isStatus());
+		
+		registrarDao.updateRegistrar(registrarObj);
 	}
 	@Transactional
-	public void resetPassword(int id)
+	public void resetPassword(Registrar registrar)
 	{
-		Registrar registrar =registrarDao.getRegistrar(id);
-		registrar.setPassword("123456");
-		registrarDao.updateRegistrar(registrar);
+		Registrar registrarObj =registrarDao.getRegistrar(registrar.getId());
+		registrarObj.setPassword(new BCryptPasswordEncoder().encode(registrar.getPassword()));
+		registrarDao.updateRegistrar(registrarObj);
 	}
 	
 
