@@ -347,13 +347,15 @@
 								<label class=" control-label" for="birthday">Retype password</label>
 								<div class="">
 									<input type="password" id="re_password" name="re_password"
-										required="required" class="form-control col-md-7 col-xs-12" />
+										required="required" class="form-control col-md-7 col-xs-12" match-password="frmInstructor.password"/>
 									<div ng-messages="frmInstructor.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-	
+										<div ng-message="matchPassword">
+											<p style="color: red">Must match the previous entry</p>
+										</div>
 									</div>
 								</div>
 							</div>
