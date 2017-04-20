@@ -45,6 +45,10 @@ public class StudentDaolmpl implements StudentDao {
 		session.getCurrentSession().update(Student);
 		
 	}
+	public void resetpassword(Student student)
+	{
+		session.getCurrentSession().update(student);
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<School> getallSchool() {
@@ -66,5 +70,6 @@ public class StudentDaolmpl implements StudentDao {
 	public List<Specialization> getallspecialization() {
 		 return session.getCurrentSession().createQuery("from Specialization").list();
 	}
+	
 
 }
