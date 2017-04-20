@@ -113,6 +113,8 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 		}).then(function mySucces(response) {
 			getAllEntranceExam();
 			addAlert();
+			$scope.getData(0);
+
 		});
 	}
 	$scope.edit = function edit() {
@@ -142,7 +144,6 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 
 	function delInvalid() {
 		$scope.addForm.$setUntouched();
-		$scope.editForm.$setUntouched();
 	}
 
 	$scope.getStudents = function getStudent(id) {
