@@ -1,4 +1,19 @@
 app.controller('registrarCtrl', function($scope, $http,$filter) {
+	$scope.rowdata = {
+		     availableOptions: [
+		       {id: '15', name: '15'},
+		       {id: '30', name: '30'},
+		       {id: '50', name: '50'},
+		       {id: '100', name: '100'}
+		     ],
+		     selectedOption: {id: '15', name: '15'}
+		    };
+	$scope.ChangeRow=function(index){
+		$scope.itemsPerPage = index;
+		$scope.updatePageIndexes();
+	}
+	
+	var alertDuration = 1800;
 	// Lấy danh sách Registrar
 	 function getAllRegistrars(){
 	    	$scope.list=[];
@@ -101,6 +116,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 $scope.phone="";
     	 $scope.address="";
     	 $scope.birthday="";
+    	 
     	 $scope.active=true;
     	 $scope.frmRegistrarAdd.username.$setUntouched();
     	 $scope.frmRegistrarAdd.lastName.$setUntouched();
@@ -130,23 +146,13 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 registrarID=data.id;
      }
      
-     $scope.getImage_Edit = function(element) {
- 		photofile = element.files[0];
-         var reader = new FileReader();
-         reader.onload = function(e) {
-             $scope.$apply(function() {
-                 $scope.prev_img_edit = e.target.result;
-             });
-         };
-         reader.readAsDataURL(photofile);
-         $scope.image=photofile.name;
- 	};
+    
  	//Upload file trong modal Edit
     function uploadFile_Edit() {
         $.ajax({
-          url: "uploadFile",
+          url: "registrar/uploadFile",
           type: "POST",
-          data: new FormData($("#upload-file-form-edit")[0][8]),
+          data: new FormData($("#upload-file-form-edit")[0]),
           enctype: 'multipart/form-data',
           processData: false,
           contentType: false,
@@ -162,7 +168,17 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
           }
         });
       }
-   
+    $scope.getImage_Edit = function(element) {
+		photofile = element.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $scope.$apply(function() {
+                $scope.prev_img_edit = e.target.result;
+            });
+        };
+        reader.readAsDataURL(photofile);
+        $scope.edit.image=photofile.name;
+	};
  	$scope.edit = [];
 	 //edit registrar
 	$scope.update = function () {
