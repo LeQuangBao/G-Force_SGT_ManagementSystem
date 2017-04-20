@@ -75,11 +75,34 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
         reader.readAsDataURL(photofile);
         $scope.image=photofile.name;
 	};
+	
+	function uploadFile() {
+        $.ajax({
+          url: "uploadFile",
+          type: "POST",
+          data: new FormData($("#upload-file-form")[0]),
+          enctype: 'multipart/form-data',
+          processData: false,
+          contentType: false,
+          cache: false,
+          success: function () {
+            // Handle upload success
+            $("#upload-file-message").text("File succesfully uploaded");
+          },
+          error: function () {
+            // Handle upload error
+            $("#upload-file-message").text(
+                "File not uploaded (perhaps it's too much big)");
+          }
+        });
+      }
+	
  	//ADD REGISTRAR
  	 $scope.save = function () {
+ 		uploadFile();
          $http({
              method: "POST",
-            url: "/admin/api/registrar",
+            url: "api/registrar",
             data: {
          	   	username: $scope.username,
          	   password: $scope.password,
@@ -153,7 +176,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	//Upload file trong modal Edit
     function uploadFile_Edit() {
         $.ajax({
-          url: "registrar/uploadFile",
+          url: "uploadFile",
           type: "POST",
           data: new FormData($("#upload-file-form-edit")[0]),
           enctype: 'multipart/form-data',
@@ -193,7 +216,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
    	
        $http({
           method: "PUT",
-          url: "/admin/api/registrar",
+          url: "api/registrar",
           data: dataRegistrar,
           dataType: "json"
        })
@@ -211,7 +234,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	 $scope.editRegistrar = function (data) {
  		document.getElementById("image_edit").value="";
     	$scope.prev_img_edit='';
-     	$http.get("/admin/api/registrar/"+data.id)
+     	$http.get("api/registrar/"+data.id)
          .then(function (response) {
         	 registrarID=data.id;
          		$scope.edit.username=response.data.username;
