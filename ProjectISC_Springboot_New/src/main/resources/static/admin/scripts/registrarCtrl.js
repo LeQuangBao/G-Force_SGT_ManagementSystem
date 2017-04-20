@@ -1,4 +1,17 @@
 app.controller('registrarCtrl', function($scope, $http,$filter) {
+	$scope.rowdata = {
+		     availableOptions: [
+		    	 {id: '15', name: '15'},
+			       {id: '30', name: '30'},
+			       {id: '50', name: '50'},
+			       {id: '100', name: '100'}
+		     ],
+		     selectedOption: {id: '15', name: '15 rows'}
+		    };
+	$scope.ChangeRow=function(index){
+		$scope.itemsPerPage = index;
+		$scope.updatePageIndexes();
+	}
 	// Lấy danh sách Registrar
 	 function getAllRegistrars(){
 	    	$scope.list=[];
@@ -64,7 +77,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
             url: "/admin/api/registrar",
             data: {
          	   	username: $scope.username,
-         	    password: $scope.password,
+         	   password: $scope.password,
          	    firstname : $scope.firstName,
                	lastname: $scope.lastName,
                	birthday: $scope.birthday,
@@ -141,10 +154,33 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
          reader.readAsDataURL(photofile);
          $scope.image=photofile.name;
  	};
+ 	//Upload file trong modal Edit
+    function uploadFile_Edit() {
+        $.ajax({
+          url: "uploadFile",
+          type: "POST",
+          data: new FormData($("#upload-file-form-edit")[0][8]),
+          enctype: 'multipart/form-data',
+          processData: false,
+          contentType: false,
+          cache: false,
+          success: function () {
+            // Handle upload success
+            $("#upload-file-message").text("File succesfully uploaded");
+          },
+          error: function () {
+            // Handle upload error
+            $("#upload-file-message").text(
+                "File not uploaded (perhaps it's too much big)");
+          }
+        });
+      }
+   
  	$scope.edit = [];
 	 //edit registrar
 	$scope.update = function () {
-   	var dataRegistrar={id:$scope.registrar_delete.id,username:$scope.edit.username,lastname:$scope.edit.lastname,
+		uploadFile_Edit();
+   	var dataRegistrar={id:registrarID,username:$scope.edit.username,lastname:$scope.edit.lastname,
    			firstname:$scope.edit.firstname,birthday:$scope.edit.birthday,email:$scope.edit.email,
    			phone:$scope.edit.phone,address:$scope.edit.address,image:$scope.edit.image,
    			status:$scope.edit.status};
@@ -167,11 +203,12 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
   }  
  	 
  	 $scope.editRegistrar = function (data) {
-     
+ 		document.getElementById("image_edit").value="";
+    	$scope.prev_img_edit='';
      	$http.get("/admin/api/registrar/"+data.id)
          .then(function (response) {
+        	 registrarID=data.id;
          		$scope.edit.username=response.data.username;
-    			
     			$scope.edit.firstname=response.data.firstname; 
     			$scope.edit.lastname=response.data.lastname;
     			$scope.edit.password=response.data.password;
@@ -205,6 +242,19 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
                } 
           });
      }
+   //Reset password
+     $scope.ResetPassword = function () {
+     	var dataRegistrar={id:registrarID,password:$scope.newPassword};
+         $http({
+            method: "PUT",
+            url: "api/registrar/reset",
+            data: dataRegistrar,
+            dataType: "json"
+         })
+            .then(function (result) {
+             	  resetAlert();
+          });
+    }     
  
      function deleteAlert(){
  	  	swal({

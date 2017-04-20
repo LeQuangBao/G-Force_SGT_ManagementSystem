@@ -76,7 +76,7 @@
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
-										<li><a href="/admin/entrance-exam">Entrance Exam</a></li>
+										<li><a href="/admin/entrance-exam">Entrance exam</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -146,6 +146,17 @@
 									<input id="filter" type="text" placeholder="Filter"
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
+								<div class="col-md-6 col-md-offset-6">
+								Show:
+									<input type="checkbox" data-ng-model="showBirthday">Birthday</input>
+									<input type="checkbox" data-ng-model="showEmail">Email</input>
+									<input type="checkbox" data-ng-model="showPhone">Phone</input>
+									<input type="checkbox" data-ng-model="showAddress">Address</input>
+									<input type="checkbox" data-ng-model="showSchool">School</input>
+									<input type="checkbox" data-ng-model="showIntake">Intake</input>
+									<input type="checkbox" data-ng-model="showEntranceExam">Entrance exam</input>
+									<input type="checkbox" data-ng-model="showSpecialization">Specialization</input>
+								</div>
 								<div class="x_content">
 									<label for="mySelect">Display </label> <select name="mySelect"
 										id="mySelect"
@@ -167,7 +178,7 @@
 														ng-show="sortType == 'schoolId' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 15%"
+													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'lastName';sortReverse = !sortReverse">Last
 														Name <span
 														ng-show="sortType == 'lastName' &amp;&amp; !sortReverse"
@@ -175,7 +186,7 @@
 														ng-show="sortType == 'lastName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 20%"
+													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'firstName';sortReverse = !sortReverse">First
 														Name <span
 														ng-show="sortType == 'firstName' &amp;&amp; !sortReverse"
@@ -183,11 +194,69 @@
 														ng-show="sortType == 'firstName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-
-
-
-
-
+													<th class="sortable" style="width: 10%" ng-show="showBirthday"
+														ng-click="sortType = 'birthday';sortReverse = !sortReverse">Birthday
+														<span
+														ng-show="sortType == 'birthday' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'birthday' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th><th class="sortable" style="width: 20%" ng-show="showEmail"
+														ng-click="sortType = 'email';sortReverse = !sortReverse">Email
+														<span
+														ng-show="sortType == 'email' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'email' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showPhone"
+														ng-click="sortType = 'phone';sortReverse = !sortReverse">Phone
+														<span
+														ng-show="sortType == 'phone' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'phone' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showAddress"
+														ng-click="sortType = 'address';sortReverse = !sortReverse">Address
+														<span
+														ng-show="sortType == 'address' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'address' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showSchool"
+														ng-click="sortType = 'school';sortReverse = !sortReverse">School
+														<span
+														ng-show="sortType == 'school' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'school' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showIntake"
+														ng-click="sortType = 'intake';sortReverse = !sortReverse">Intake
+														<span
+														ng-show="sortType == 'intake' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'intake' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 15%" ng-show="showEntranceExam"
+														ng-click="sortType = 'entranceExam';sortReverse = !sortReverse">Entrance exam
+														<span
+														ng-show="sortType == 'entranceExam' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'entranceExam' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showSpecialization"
+														ng-click="sortType = 'specialization';sortReverse = !sortReverse">Specialization
+														<span
+														ng-show="sortType == 'specialization' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'specialization' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
 													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'active';sortReverse = !sortReverse">
 														Status <span
@@ -196,13 +265,10 @@
 														ng-show="sortType == 'active' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-
-
 													<th style="width: 15%">Action</th>
 													<th style="width: 20%"></th>
 												</tr>
 											</thead>
-
 											<tbody>
 												<tr
 													data-ng-repeat="x in (listfiltered(list)) |
@@ -214,23 +280,30 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.firstname"></td>
 													<td data-ng-bind="x.lastname"></td>
+													<td data-ng-bind="x.birthday" ng-show="showBirthday"></td>
+													<td data-ng-bind="x.email" ng-show="showEmail"></td>
+													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
+													<td data-ng-bind="x.address" ng-show="showAddress"></td>
+													<td data-ng-bind="x.school.schoolId" ng-show="showSchool"></td>
+													<td data-ng-bind="x.intake.intakeId" ng-show="showIntake"></td>
+													<td data-ng-bind="x.entranceExam.entranceExamName" ng-show="showEntranceExam"></td>
+													<td data-ng-bind="x.specialization.specializationId" ng-show="showSpecialization"></td>
 													<td data-ng-bind="x.status"></td>
-
-
-													<td><button class="btn btn-primary btn-sm"
-															ng-click="sua(x)" data-toggle="modal"
+													<td>
+														<button data-toggle="modal" class="btn btn-success btn-sm"
+															data-target="#myModal_chitiet" ng-click="chitiet()">
+															<span class="glyphicon glyphicon-eye-open"></span>
+														</button>
+													<button class="btn btn-primary btn-sm"
+															ng-click="callEditSpecialization(x)" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
-														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_xoa" ng-click="xoa(x)">
+														<button data-toggle="modal" class="btn btn-danger btn-sm"
+															data-target="#myModal_xoa" ng-click="xoa()">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button>
-														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_chitiet" ng-click="chitiet()">
-															<span class="glyphicon glyphicon-eye-open"></span>
-														</button></td>
-
+														</td>
 												</tr>
 											</tbody>
 										</table>
@@ -249,7 +322,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -275,7 +347,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add Student</h4>
+					<h4 class="modal-title" id="myModalLabel">Add student</h4>
 				</div>
 				<div class="modal-body row">
 					<form class="form-horizontal" name="frmStudent"
@@ -411,13 +483,18 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile
-								picture</label>
-							<div class=" picture">
-								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
-									type="file" id="image" name="image"
-									onchange="angular.element(this).scope().getImage(this)"
-									ng-model="student.image" class="col-md-12" />
+
+							<label class="col-md-2 control-label"> Picture</label>
+							<div class="col-md-12 picture">
+								<div class="form-group">
+									<div ng-repeat="step in stepsModel">
+										<img width="" class="img-responsive" ng-src="{{step}}" />
+									</div>
+
+									<input type="file"
+										onchange="angular.element(this).scope().imageUpload(event)" />
+
+								</div>
 							</div>
 
 							<div class="form-group col-md-12">
@@ -446,6 +523,7 @@
 									<select ng-model="student.school" class="form-control"
 										ng-options="x.intakeName for x in listIntake" name="intake"
 										id="intake" ng-required="true">
+==
 									</select>
 								</div>
 							</div>
@@ -457,9 +535,8 @@
 									<input id="birthday" name="student.birthday" placeholder=""
 										class="form-control input-md" type="date" />
 
-								</div>
 							</div>
-							<div class="form-group">
+							<div class="form-group col-md-12">
 								<label class="control-label" for="status">Status</label>
 
 								<div class="checkbox">
@@ -476,9 +553,8 @@
 
 
 							</div>
-							<div class="form-group">
-								<label class="control-label" for="status">Gender</label>
-
+							<div class="form-group col-md-12">
+								<label class="control-label">Gender</label>
 								<div class="checkbox">
 									<label> <input type="radio" ng-model="student.gender"
 										value="0" name="gender" /> Nam
@@ -517,7 +593,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Edit Student</h4>
+					<h4 class="modal-title" id="myModalLabel">Edit student</h4>
 				</div>
 				<div class="modal-body row">
 					<form class="form-horizontal" name="formStudent"
@@ -542,7 +618,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName"> Last Name</label>
+								<label class="control-label" for="lastName"> Lastname</label>
 								<div class="">
 									<input id="lastname" name="lastName" placeholder=""
 										class="form-control input-md" type="text"
@@ -558,7 +634,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="firstName">First Name</label>
+								<label class="control-label" for="firstName">Firstname</label>
 								<div class="">
 									<input id="firstname" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
@@ -637,10 +713,23 @@
 									</div>
 								</div>
 							</div>
+
+
+						</form>
+					</div>
+					<div class="col-md-6">
+						<label class=" control-label" style="margin-top: 9px;" for="">
+							Picture</label>
+						<div class=" picture">
+
+							<img src="production/images/img.jpg" width=""
+								class="img-responsive" />
+							<button class="btn btn-primary">Upload new picture</button>
+							<!-- Multiple Radios -->
+
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile
-								picture</label>
+							<label class=" control-label" style="margin-top: 9px;" for=""></label>
 							<div class=" picture">
 								<img
 									ng-src="http://localhost:8080/admin/images/{{list_temp_inf_edit.image}}"
@@ -774,7 +863,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName"> Last Name</label>
+								<label class="control-label" for="lastName"> Lastname</label>
 								<div class="">
 									<p>{{chitiet.lastname}}</p>
 								</div>
@@ -782,7 +871,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="firstName">First Name</label>
+								<label class="control-label" for="firstName">Firstname</label>
 								<div class="">
 									<p>{{chitiet.firstname}}</p>
 								</div>
@@ -820,8 +909,7 @@
 						</form>
 					</div>
 					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
+						<label class=" control-label" style="margin-top: 9px;" for="">Piture</label>
 						<div class=" picture">
 
 							<img
@@ -936,7 +1024,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+					<h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
 				</div>
 
 				<div class="modal-body">

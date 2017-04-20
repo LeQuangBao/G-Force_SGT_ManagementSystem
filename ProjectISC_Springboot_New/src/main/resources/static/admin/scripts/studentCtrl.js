@@ -5,16 +5,16 @@ app
 					$scope.rowdata = {
 						availableOptions : [ {
 							id : '15',
-							name : '15 rows'
+							name : '15'
 						}, {
 							id : '30',
-							name : '30 rows'
+							name : '30'
 						}, {
 							id : '50',
-							name : '50 rows'
+							name : '50'
 						}, {
 							id : '100',
-							name : '100 rows'
+							name : '100'
 						} ],
 						selectedOption : {
 							id : '15',
