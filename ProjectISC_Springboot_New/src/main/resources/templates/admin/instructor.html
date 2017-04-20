@@ -71,12 +71,12 @@
 									<ul class="nav child_menu">
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="/admin/school">School</a></li>
-										<li><a href="/admin/specialization">Specialization </a></li>
+										<li><a href="/admin/specialization">Specialization</a></li>
 										<li><a href="/admin/subject">Subject</a></li>
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
-										<li><a href="/admin/entrance-exam">Entrance Exam</a></li>
+										<li><a href="/admin/entrance-exam">Entrance exam</a></li>
 									</ul></li>
 
 
@@ -149,6 +149,15 @@
 									<input id="filter" type="text" placeholder="Filter"
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
+								<div class="col-md-6 col-md-offset-6">
+								Show:
+									<input type="checkbox" data-ng-model="showBirthday">Birthday</input>
+									<input type="checkbox" data-ng-model="showEmail">Email</input>
+									<input type="checkbox" data-ng-model="showPhone">Phone</input>
+									<input type="checkbox" data-ng-model="showAddress">Address</input>
+									<input type="checkbox" data-ng-model="showDegree">Degree</input>
+<!-- 									<input type="checkbox" data-ng-model="showBirthday">Birthday</input> -->
+								</div>
 								<div class="x_content">
 
 									<label for="mySelect">Make a choice:</label> <select
@@ -187,6 +196,45 @@
 														class="fa fa-caret-up"></span>
 													</th>
 										
+													<th class="sortable" style="width: 10%" ng-show="showBirthday"
+														ng-click="sortType = 'active';sortReverse = !sortReverse">Birthday
+														<span
+														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'active' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th><th class="sortable" style="width: 10%" ng-show="showEmail"
+														ng-click="sortType = 'active';sortReverse = !sortReverse">Email
+														<span
+														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'active' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showPhone"
+														ng-click="sortType = 'active';sortReverse = !sortReverse">Phone
+														<span
+														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'active' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showAddress"
+														ng-click="sortType = 'active';sortReverse = !sortReverse">Address
+														<span
+														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'active' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showDegree"
+														ng-click="sortType = 'active';sortReverse = !sortReverse">Degree
+														<span
+														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'active' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
 													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'active';sortReverse = !sortReverse">Status
 														<span
@@ -206,6 +254,11 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.lastname"></td>
 													<td data-ng-bind="x.firstname"></td>
+													<td data-ng-bind="x.birthday" ng-show="showBirthday"></td>
+													<td data-ng-bind="x.email" ng-show="showEmail"></td>
+													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
+													<td data-ng-bind="x.address" ng-show="showAddress"></td>
+													<td data-ng-bind="x.degree" ng-show="showDegree"></td>
 													
 													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
 													<td>
@@ -283,7 +336,7 @@
 								<div class="">
 									<input id="username" name="username" placeholder=""
 										class="form-control input-md" type="text" ng-model="username"
-										ng-required="true" />
+										ng-required="true"  />
 									<div ng-messages="frmInstructor.username.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.username.$touched">
@@ -347,19 +400,21 @@
 								<label class=" control-label" for="birthday">Retype password</label>
 								<div class="">
 									<input type="password" id="re_password" name="re_password"
-										required="required" class="form-control col-md-7 col-xs-12" />
+										required="required" class="form-control col-md-7 col-xs-12" match-password="frmInstructor.password"/>
 									<div ng-messages="frmInstructor.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-	
+										<div ng-message="matchPassword">
+											<p style="color: red">Must match the previous entry</p>
+										</div>
 									</div>
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Email</label>
+								<label class=" control-label">Email</label>
 								<div class="">
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
@@ -406,9 +461,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
-								<div class=" picture">
+						<div class="col-md-6 form-group">
+							<label class="col-md-2 control-label">Picture</label>
+								<div class="col-md-12 picture">
 									<img ng-src="{{prev_img}}" height="150" width="100"/>
 									<input type="file" id="image" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage(this)" ng-model="image"/>
 									<!-- Multiple Radios -->
@@ -416,17 +471,18 @@
 									</div>
 							
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<label class="col-md-2 control-label" for="birthday">Birthday</label>
 								<div class="col-md-12">
 									<input id="birthday" name="birthday" placeholder=""
 										class="form-control input-md" type="date" ng-model="birthday"/>
+<!-- 										class="form-control input-md" type="date" ng-model="birthday" value=""/> -->
 	
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="selectbasic">Degree</label>
+								<label class="col-md-2 control-label" for="selectbasic">Degree</label>
 								<div class="col-md-12">
-									<select name="degree" id="degree" ng-model="degree">
+									<select class="form-control" name="degree" id="degree" ng-model="degree">
 								      	<option value="College">College</option>
 										<option value="University">University</option>
 										<option value="Master">Master</option>
@@ -435,7 +491,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="status">Status</label>
+								<label class="col-md-2 control-label" for="status">Status</label>
 								<div class="col-md-12">
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="active"
@@ -591,8 +647,8 @@
 						
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
-								<div class=" picture">
+							<label class="col-md-2 control-label">Picture</label>
+								<div class="col-md-12 picture">
 									<img ng-src="http://localhost:8080/admin/images/{{instructor_edit.image}}" ng-show="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
 									<img ng-src="{{prev_img_edit}}" ng-hide="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
 									<input type="file" id="image_edit" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage_Edit(this)"/>
@@ -603,7 +659,7 @@
 							
 							
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="selectbasic">Degree</label>
+								<label class="col-md-2 control-label" for="selectbasic">Degree</label>
 								<div class="col-md-12">
 									<select id="degree" name="degree" class="form-control" ng-model="instructor_edit.degree">
 										<option value="College">College</option>
@@ -614,9 +670,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="status">Status</label>
+								<label class="col-md-2 control-label" for="status">Status</label>
 								
-									<div class="checkbox">
+									<div class="col-md-12 checkbox">
 										<label> <input type="radio" ng-model="instructor_edit.status"
 											ng-value="true" ng-checked="true" /> Active
 										</label>
@@ -724,7 +780,7 @@
 							
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile picture</label>
+							<label class=" control-label">Picture</label>
 								<div class=" picture">
 									
 									<img ng-src="http://localhost:8080/admin/images/{{view.image}}" width="100" height="150" class="img-responsive"/>

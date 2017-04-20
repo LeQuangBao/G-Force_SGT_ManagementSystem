@@ -75,7 +75,7 @@
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
-										<li><a href="/admin/entrance-exam">Entrance Exam</a></li>
+										<li><a href="/admin/entrance-exam">Entrance exam</a></li>
 									</ul></li>
 
 
@@ -295,7 +295,7 @@
 						<!-- Text input-->
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="intake"> Intake</label>
+								for="intake">Intake</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<select ng-model="exam.intake" class="form-control"
 									ng-options="x.intakeName for x in listIntake" name="intake"
@@ -333,15 +333,9 @@
 								for="description">Description</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<input id="description" name="description" placeholder=""
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="text"
 									ng-model="exam.description" />
-								<div ng-messages="addForm.description.$error">
-									<div ng-message="required"
-										ng-show="addForm.description.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
 
-								</div>
 							</div>
 						</div>
 
@@ -434,14 +428,9 @@
 								for="description">Description</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<input id="description" name="description" placeholder=""
-									class="form-control input-md" type="text" ng-required="true"
+									class="form-control input-md" type="text"
 									ng-model="exam.description" />
-								<div ng-messages="editForm.description.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
 
-								</div>
 							</div>
 						</div>
 

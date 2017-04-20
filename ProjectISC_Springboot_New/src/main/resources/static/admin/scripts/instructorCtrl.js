@@ -76,7 +76,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
             $.ajax({
               url: "uploadFile",
               type: "POST",
-              data: new FormData($("#fileUploadForm")[0][8]),
+              data: new FormData($("#fileUploadForm")[0]),
               enctype: 'multipart/form-data',
               processData: false,
               contentType: false,
@@ -132,7 +132,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
             $.ajax({
               url: "uploadFile",
               type: "POST",
-              data: new FormData($("#upload-file-form-edit")[0][8]),
+              data: new FormData($("#upload-file-form-edit")[0]),
               enctype: 'multipart/form-data',
               processData: false,
               contentType: false,
@@ -165,8 +165,8 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.frmInstructor.lastName.$setUntouched();
         	 $scope.frmInstructor.firstName.$setUntouched();
         	 $scope.frmInstructor.password.$setUntouched();
-        	 $scope.frmInstructor.re_password.$setUntouched();
-        	 $scope.frmInstructor.email.$setUntouched();
+        	 //$scope.frmInstructor.re_password.$setUntouched();
+        	 //$scope.frmInstructor.email.$setUntouched();
         	 $scope.frmInstructor.phone.$setUntouched();
         	 $scope.frmInstructor.address.$setUntouched();
 	    }
@@ -324,3 +324,22 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     	  
     	  
 	});
+
+/*app.directive("matchPassword", function(){
+return {
+    require: "ngModel",
+    scope: {
+      otherModelValue: "=matchPassword"
+    },
+    link: function(scope, element, attributes, ngModel) {
+
+      ngModel.$validators.matchPassword = function(modelValue) {
+        return modelValue == scope.otherModelValue;
+      };
+
+      scope.$watch("otherModelValue", function() {
+        ngModel.$validate();
+      });
+    }
+  };
+});*/

@@ -1,5 +1,9 @@
 package com.isc.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import com.isc.model.Registrar;
@@ -34,13 +40,23 @@ public class RegistrarController {
 		}
 		return new ResponseEntity<>(registrar,HttpStatus.OK);
 	}
-	@RequestMapping(value="admin/api/registrar",method=RequestMethod.PUT)
-	public ResponseEntity<Void>updateRegistrar(@RequestBody Registrar registrar){
+	@RequestMapping(value="admin/api/registrar", method=RequestMethod.POST)
+	public ResponseEntity<Void> addRegistrar(@RequestBody Registrar registrar){
 		try {
-			service.updateRegistrar(registrar);
+			service.addRegistrar(registrar);
+			
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	@RequestMapping(value="admin/api/registrar",method=RequestMethod.PUT)
+	public ResponseEntity<Void>updateRegistrar(@RequestBody Registrar registrar){
+		
+			service.updateRegistrar(registrar);
+		
+			
+		
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	@RequestMapping(value="admin/api/registrar/{id}",method=RequestMethod.DELETE)
@@ -53,14 +69,15 @@ public class RegistrarController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	@RequestMapping(value="admin/api/registrar/reset/{id}",method=RequestMethod.GET)
-	public ResponseEntity<Void>resetPassword(@PathVariable int id)
+	@RequestMapping(value="admin/api/registrar/reset", method=RequestMethod.PUT)
+	public ResponseEntity<Void>resetPassword(@RequestBody Registrar registrar)
 	{
 		try {
-			service.resetPassword(id);
+			service.resetPassword(registrar);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	
 }
