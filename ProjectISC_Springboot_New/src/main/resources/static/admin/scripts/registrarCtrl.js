@@ -32,6 +32,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	$scope.listfiltered = function(element) {
          return $filter('filter')(element, $scope.filterTable); 
      };
+     $scope.prev_img='';
   // Phân trang
  	$scope.currentPage = 1;
  	// max size of the pagination bar
@@ -61,7 +62,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	};
  	$scope.updatePageIndexes();
  	
- 	$scope.showList=function(school,index){
+ 	$scope.showList=function(index){
  		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
  	}
  	$scope.getImage = function(element) {
@@ -273,6 +274,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
      }
    //Reset password
      $scope.ResetPassword = function () {
+    	
      	var dataRegistrar={id:registrarID,password:$scope.newPassword};
          $http({
             method: "PUT",
@@ -330,4 +332,24 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 					showConfirmButton : false
 				});
 			}
+ 	  
+});
+//Compare password and retype password
+app.directive("matchPassword", function(){
+return {
+    require: "ngModel",
+    scope: {
+      otherModelValue: "=matchPassword"
+    },
+    link: function(scope, element, attributes, ngModel) {
+
+      ngModel.$validators.matchPassword = function(modelValue) {
+        return modelValue == scope.otherModelValue;
+      };
+
+      scope.$watch("otherModelValue", function() {
+        ngModel.$validate();
+      });
+    }
+  };
 });
