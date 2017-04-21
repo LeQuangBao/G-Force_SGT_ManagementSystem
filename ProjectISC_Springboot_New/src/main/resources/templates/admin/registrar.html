@@ -275,9 +275,9 @@
 					<h4 class="modal-title" id="myModalLabel">Add registrar</h4>
 				</div>
 				<div class="modal-body row">
-				<form class="form-horizontal" name="frmRegistrarAdd" id="upload-file-form" method="POST"
-						enctype="multipart/form-data">
-					<div class="col-md-6">						
+					<form class="form-horizontal" name="frmRegistrarAdd"
+						id="upload-file-form" method="POST" enctype="multipart/form-data">
+						<div class="col-md-6">
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
@@ -285,6 +285,7 @@
 									<input id="username" name="username" placeholder=""
 										class="form-control input-md" type="text" ng-model="username"
 										ng-required="true" />
+
 									<div ng-messages="frmRegistrarAdd.username.$error">
 										<div ng-message="required"
 											ng-show="frmRegistrarAdd.username.$touched">
@@ -347,8 +348,9 @@
 								<label class=" control-label" for="password">Retype
 									password</label>
 								<div class="">
-									<input type="password" id="re_password" name="re_password" data-ng-model="re_password"
-										required="required" class="form-control col-md-7 col-xs-12"/>
+									<input type="password" id="re_password" name="re_password"
+										data-ng-model="re_password" required="required"
+										class="form-control col-md-7 col-xs-12" />
 									<div ng-messages="frmRegistrarAdd.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmRegistrarAdd.re_password.$touched">
@@ -358,7 +360,7 @@
 											<p style="color: red">Must match the previous field</p>
 										</div>
 									</div>
-									
+
 								</div>
 							</div>
 							<!-- Text input-->
@@ -411,56 +413,55 @@
 							</div>
 
 
-						
-					</div>
-					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
-						<div class=" picture">
-
-							<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
-
-							<img ng-src="{{prev_img}}" height="150" width="100" /> <input
-								type="file" id="image" name="image"
-								onchange="angular.element(this).scope().getImage(this)"
-								ng-model="image" class="col-md-12" />
-							<!-- Multiple Radios -->
 
 						</div>
+						<div class="col-md-6">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile
+								picture</label>
+							<div class=" picture">
 
-						<div class="form-group">
-							<label class="control-label" for="birthday">Birthday</label>
-							<div class="col-md-12">
-								<input id="birthday" name="birthday" placeholder=""
-									class="form-control input-md" type="date" ng-model="birthday" />
+								<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
+
+								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
+									type="file" id="image" name="image"
+									onchange="angular.element(this).scope().getImage(this)"
+									ng-model="image" class="col-md-12" />
+								<!-- Multiple Radios -->
 
 							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="control-label" for="status">Status</label>
-							<div class="col-md-12">
-								<div class="checkbox">
-									<label> <input type="radio" ng-model="active"
-										ng-value="true" ng-checked="true" /> Active
-									</label> <label> <input type="radio" ng-model="active"
-										ng-value="false" /> Inactive
-									</label>
+							<div class="form-group">
+								<label class="control-label" for="birthday">Birthday</label>
+								<div class="col-md-12">
+									<input id="birthday" name="birthday" placeholder=""
+										class="form-control input-md" type="date" ng-model="birthday" />
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label" for="status">Status</label>
+								<div class="col-md-12">
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="active"
+											ng-value="true" ng-checked="true" /> Active
+										</label> <label> <input type="radio" ng-model="active"
+											ng-value="false" /> Inactive
+										</label>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<!-- <button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()" ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required || frmRegistrarAdd.address.$error.required|| frmRegistrarAdd.phone.$error.required|| frmRegistrarAdd.email.$error.required|| frmRegistrarAdd.password.$error.required|| frmRegistrarAdd.re_password.$error.required">Add</button> -->
-					<button id="btnSave" name="btnSave" class="btn btn-primary" ng-disabled="frmRegistrarAdd.$invalid"
-						ng-click="save()">Add</button>
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-disabled="frmRegistrarAdd.$invalid" ng-click="save()">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
 						ng-click="save()" data-dismiss="modal"
-						ng-disabled="frmRegistrarAdd.$invalid">Add
-						and close</button>
+						ng-disabled="frmRegistrarAdd.$invalid">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -481,8 +482,8 @@
 				</div>
 				<div class="modal-body row">
 					<form class="form-horizontal" name="frmRegistrarEdit"
-							id="upload-file-form-edit">
-					<div class="col-md-6">
+						id="upload-file-form-edit">
+						<div class="col-md-6">
 							<input type="hidden" name="id" ng-model="registrar_edit.id" />
 							<!-- Text input-->
 							<div class="form-group">
@@ -593,36 +594,40 @@
 							</div>
 
 
-						
-					</div>
-					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
-						<div class=" picture">
-
-
-							<img ng-src="http://localhost:8080/admin/{{edit.image}}" ng-show="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
-									<img ng-src="{{prev_img_edit}}" ng-hide="prev_img_edit==''" width="100" height="150" class="img-responsive"/>
-									<input type="file" id="image_edit" name="uploadfile" accept="*" onchange="angular.element(this).scope().getImage_Edit(this)"/>
-
-							<!-- Multiple Radios -->
 
 						</div>
+						<div class="col-md-6">
+							<label class=" control-label" style="margin-top: 9px;" for="">Profile
+								picture</label>
+							<div class=" picture">
 
 
-						<div class="form-group">
-							<label class="control-label" for="status">Status</label>
+								<img ng-src="http://localhost:8080/admin/{{edit.image}}"
+									ng-show="prev_img_edit==''" width="100" height="150"
+									class="img-responsive" /> <img ng-src="{{prev_img_edit}}"
+									ng-hide="prev_img_edit==''" width="100" height="150"
+									class="img-responsive" /> <input type="file" id="image_edit"
+									name="uploadfile" accept="*"
+									onchange="angular.element(this).scope().getImage_Edit(this)" />
 
-							<div class="checkbox">
-								<label> <input type="radio" ng-model="edit.status"
-									ng-value="true" ng-checked="true" /> Active
-								</label> <label> <input type="radio" ng-model="edit.status"
-									ng-value="false" /> Inactive
-								</label>
+								<!-- Multiple Radios -->
+
 							</div>
 
+
+							<div class="form-group">
+								<label class="control-label" for="status">Status</label>
+
+								<div class="checkbox">
+									<label> <input type="radio" ng-model="edit.status"
+										ng-value="true" ng-checked="true" /> Active
+									</label> <label> <input type="radio" ng-model="edit.status"
+										ng-value="false" /> Inactive
+									</label>
+								</div>
+
+							</div>
 						</div>
-					</div>
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -651,7 +656,7 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-6">
-						<form class="form-horizontal" name="frmRegistrarAdd">
+						<form class="form-horizontal" name="frmRegistrarSeeAll">
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
@@ -852,7 +857,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angular-messages.min.js"></script>
