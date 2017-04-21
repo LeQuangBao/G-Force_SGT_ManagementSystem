@@ -75,33 +75,8 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 	}
 	
 	// sort functions
-	// add or remove '-' to sort up or down
-	$scope.sortReverse = function(set) {
-		set = set || false;
-		if (set || !matchFirstChar('-', $scope.sortType)) {
-			$scope.sortType = addDash($scope.sortType);
-		} else {
-			$scope.sortType = removeDash($scope.sortType);
-		}
-	};
-	
 	// sort a column with a single data attribute
-	$scope.singleSort = function(label) {
-		if ($scope.sortType == label) {
-			$scope.sortReverse();
-		} else {
-			$scope.sortType = label;
-		}
-	};
-	$scope.sortDescend = function(label1, label2) {
-		label2 = label2 || '';
-		return ($scope.sortType == label1 || $scope.sortType == label2);
-	};
-	
-	$scope.sortAscend = function(label1, label2) {
-		label2 = label2 || '';
-		return ($scope.sortType == ('-' + label1) || $scope.sortType == ('-' + label2));
-	};
+	$scope.sortReverse = false;
 	
 	// show a tooltip displaying how a column is sorted
 	$scope.sortTooltip = function(label1) {

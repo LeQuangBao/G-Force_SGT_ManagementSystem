@@ -79,6 +79,7 @@ app
 								listenchanceexam) {
 
 							$scope.list_enchance_exam = listenchanceexam;
+							console.log($scope.list_enchance_exam);
 
 						});
 
@@ -245,6 +246,7 @@ app
 						reader.readAsDataURL(photofile);
 						$scope.image = photofile.name;
 					};
+					// kiểm tra retype password
 
 					// upload file
 					function uploadFile() {
@@ -253,8 +255,7 @@ app
 									type : "POST",
 									url : "/admin/student/uploadFile",
 									type : "POST",
-									data : new FormData(
-											$("#fileUploadForm")[0][8]),
+									data : new FormData($("#fileUploadForm")[0]),
 									enctype : 'multipart/form-data',
 									processData : false,
 									contentType : false,
@@ -272,9 +273,49 @@ app
 									}
 								});
 					}
+					;
 
 					// thêm student
 					$scope.them = function() {
+						// uploadFile();
+						$scope.student.image = $scope.fileupload1;
+						$scope.student.birthday = $scope.birthday;
+						// tạo mã học viên
+						// mã khóa đầu vào
+						var makhoa = $scope.student.intake.intakeId;
+
+						// hai số cuối của năm
+						var date = new Date();
+						var year = date.getFullYear().toString();
+
+						// giới tính
+						console.log($scope.student.gender);
+						// random số từ 0001-9999
+						var number = (Math
+								.floor(Math.random() * (9999 - 1 + 1)) + 1)
+								.toString();
+						var number2 = "";
+						if (number.length = 1) {
+							number2 = "000" + number;
+						}
+						if (number.length = 2) {
+							number2 = "00" + number;
+
+						}
+						if (number.length = 3) {
+							number2 = "0" + number;
+						}
+						if (number.length = 4) {
+							number2 = number;
+						}
+						console.log(makhoa);
+
+						// mã học viên
+						var mahv = makhoa + "-" + year.substr(2, 4) + "-"
+								+ $scope.student.gender + "-" + number2;
+						$scope.student.image = $scope.uploadfile1;
+						$scope.birthday = $scope.birthday;
+						$scope.student.studentId = mahv;
 						$http({
 							method : "POST",
 							url : "/admin/api/Student",
@@ -293,12 +334,12 @@ app
 							data : $scope.list_temp_inf_edit
 						}).then(function mySucces(response) {
 							$('#editModal').modal('hide');
-							getAllEntranceExam();
+							GetListStudent();
 							editAlert();
 						});
 					}
 					// load chi tiet student
-					scope.chitiet = function(data) {
+					$scope.chitiet = function(data) {
 						$scope.chitiet = data;
 					}
 					// reset password
@@ -309,20 +350,20 @@ app
 							data : $scope.list_temp_inf_reset
 						}).then(function mySucces(response) {
 							$('#editModal').modal('hide');
-							getAllEntranceExam();
+							GetListStudent();
 							editAlert();
 						});
 					}
 					// xóa student
 					$scope.deleteStudent = function xoa() {
-
+						console.log($scope.list_temp_inf_delete.id);
 						$http({
 							method : "DELETE",
-							url : "/admin/api/student/" + $scope.list_temp_inf_delete.id
+							url : "/admin/api/Student/" +$scope.list_temp_inf_delete.id
 
 						}).then(function mySucces(response) {
 							$('#myModal_xoa').modal('hide');
-							getAllEntranceExam();
+							GetListStudent();
 							deleteAlert();
 						});
 					}
@@ -335,12 +376,14 @@ app
 					// lấy dữ liệu để xóa
 					$scope.list_temp_inf_delete = [];
 					$scope.xoa = function(data) {
-						$scope.list_temp_inf_delete=data;
+
+						$scope.list_temp_inf_delete = data;
+						console.log($scope.list_temp_inf_delete);
 					}
 					// lấy dữ liệu để reset
 					$scope.list_temp_inf_reset = [];
 					$scope.reset = function(data) {
-						$scope.list_temp_inf_reset=data;
+						$scope.list_temp_inf_reset = data;
 					}
 
 					function deleteAlert() {
@@ -380,4 +423,4 @@ app
 							showConfirmButton : false
 						})
 					}
-				})
+				});

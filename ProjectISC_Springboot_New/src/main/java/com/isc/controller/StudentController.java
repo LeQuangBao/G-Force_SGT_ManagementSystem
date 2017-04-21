@@ -111,11 +111,11 @@ public class StudentController {
 
 	@RequestMapping(value = "admin/api/Student/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStudent(@PathVariable int id) {
-		try {
+		//try {
 			service.deleteStudent(id);
-		} catch (Exception ex) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		//} catch (Exception ex) {
+			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		//}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	@RequestMapping(value = "admin/api/StudentIntake", method = RequestMethod.GET)
@@ -137,7 +137,7 @@ public class StudentController {
 	@RequestMapping(value = "admin/student/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	 public ResponseEntity<?> uploadFile(
-	      @RequestParam("uploadfile") MultipartFile uploadfile) {
+	      @RequestParam("uploadfile1") MultipartFile uploadfile) {
 	    
 	    try {
 	      // Get the filename and build the local file path
