@@ -201,7 +201,8 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in (listfiltered(list)) |  orderBy:sortType:sortReverse">
+													data-ng-repeat="x in listfiltered(list) |  orderBy:sortType:sortReverse"
+													data-ng-show="showList($index)">
 													<td ng-bind="$index+1"></td>
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.lastname"></td>
@@ -274,7 +275,8 @@
 					<h4 class="modal-title" id="myModalLabel">Add registrar</h4>
 				</div>
 				<div class="modal-body row">
-				<form class="form-horizontal" name="frmRegistrarAdd" id="upload-file-form">
+				<form class="form-horizontal" name="frmRegistrarAdd" id="upload-file-form" method="POST"
+						enctype="multipart/form-data">
 					<div class="col-md-6">						
 							<!-- Text input-->
 							<div class="form-group">
@@ -352,7 +354,9 @@
 											ng-show="frmRegistrarAdd.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-
+										<div ng-message="matchPassword">
+											<p style="color: red">Must match the previous field</p>
+										</div>
 									</div>
 									
 								</div>
@@ -364,9 +368,9 @@
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="email" />
-									<div ng-messages="frmInstructor.email.$error">
+									<div ng-messages="frmRegistrarAdd.email.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.email.$touched">
+											ng-show="frmRegistrarAdd.email.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -425,7 +429,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-12 control-label" for="birthday">Birthday</label>
+							<label class="control-label" for="birthday">Birthday</label>
 							<div class="col-md-12">
 								<input id="birthday" name="birthday" placeholder=""
 									class="form-control input-md" type="date" ng-model="birthday" />
@@ -434,7 +438,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-12 control-label" for="status">Status</label>
+							<label class="control-label" for="status">Status</label>
 							<div class="col-md-12">
 								<div class="checkbox">
 									<label> <input type="radio" ng-model="active"
@@ -451,11 +455,11 @@
 				<div class="modal-footer">
 					<!-- <button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()" ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required || frmRegistrarAdd.address.$error.required|| frmRegistrarAdd.phone.$error.required|| frmRegistrarAdd.email.$error.required|| frmRegistrarAdd.password.$error.required|| frmRegistrarAdd.re_password.$error.required">Add</button> -->
-					<button id="btnSave" name="btnSave" class="btn btn-primary"
+					<button id="btnSave" name="btnSave" class="btn btn-primary" ng-disabled="frmRegistrarAdd.$invalid"
 						ng-click="save()">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
 						ng-click="save()" data-dismiss="modal"
-						ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required">Add
+						ng-disabled="frmRegistrarAdd.$invalid">Add
 						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -607,7 +611,7 @@
 
 
 						<div class="form-group">
-							<label class="col-md-12 control-label" for="status">Status</label>
+							<label class="control-label" for="status">Status</label>
 
 							<div class="checkbox">
 								<label> <input type="radio" ng-model="edit.status"
@@ -848,115 +852,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal xem thông tin -->
-	<div class="modal fade" id="myModal_view" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">View registrar</h4>
-				</div>
-				<div class="modal-body">
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="username">Username</label>
-						<div class="col-md-8">
-							<input id="username_view" name="username_view" placeholder=""
-								class="form-control input-md" type="text"
-								ng-model="registrar_view.username" />
-
-						</div>
-					</div>
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="lastName"> Last
-							Name</label>
-						<div class="col-md-8">
-							<input id="lastName" name="lastName" placeholder=""
-								class="form-control input-md" type="text"
-								ng-model="registrar_view.lastName" />
-						</div>
-					</div>
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="firstName">First
-							Name</label>
-						<div class="col-md-8">
-							<input id="firstName" name="firstName" placeholder=""
-								class="form-control input-md" type="text"
-								ng-model="registrar_view.firstName" />
-						</div>
-					</div>
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="birthday">Birthday</label>
-						<div class="col-md-8">
-							<input id="birthday" name="birthday" placeholder=""
-								class="form-control input-md" type="text"
-								ng-model="registrar_view.birthday" />
-						</div>
-					</div>
-
-					<!-- Multiple Radios -->
-					<div class="form-group">
-						<label class=" control-label" for="birthday">Email</label>
-						<div class="">
-							<input id="email" name="email" placeholder=""
-								class="form-control input-md" type="text"
-								ng-model="registrar_view.email" />
-						</div>
-					</div>
-					<!-- Text input-->
-					<div class="form-group">
-						<label class=" control-label" for="birthday">Phone</label>
-						<div class="">
-							<input id="phone" name="phone" placeholder=""
-								class="form-control input-md" type="tel"
-								ng-model="registrar_view.phone" />
-						</div>
-					</div>
-					<!-- Text input-->
-					<div class="form-group">
-						<label class=" control-label" for="birthday">Address</label>
-						<div class="">
-							<input id="adress" name="address" placeholder=""
-								class="form-control input-md" type="text"
-								ng-model="registrar_view.address" />
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<label class=" control-label" for="">Profile picture</label> <img
-						src="production/images/img.jpg" width="" class="img-responsive" />
-					<button class="btn">Upload new picture</button>
-					<!-- Multiple Radios -->
-					<br />
-
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="status">Status</label>
-						<div class="col-md-8">
-							<span>Active</span>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-			</div>
-		</div>
-	</div>
-
+	
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angular-messages.min.js"></script>
