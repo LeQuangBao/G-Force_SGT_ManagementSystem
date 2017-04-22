@@ -229,6 +229,8 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
             $scope.instructor_edit.image=photofile.name;
     	};
         $scope.getInstructor = function (data) {
+        	$scope.re_newPassword='';
+        	$scope.newPassword='';
         	document.getElementById("image_edit").value="";
         	$scope.prev_img_edit='';
         	$scope.getInstructorID(data);

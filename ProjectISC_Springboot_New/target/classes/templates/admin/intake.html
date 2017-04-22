@@ -208,7 +208,7 @@
 													<td data-ng-bind="x.intakeId"></td>
 													<td data-ng-bind="x.intakeName"></td>
 													<td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
- -													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
+ 													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button class="btn btn-primary btn-sm"
@@ -454,7 +454,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="sua"
-						data-ng-click="Sua()" ng-disabled="formSua.$invalid">Edit</button>
+						data-ng-click="Sua()" ng-disabled="formSua.$invalid">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetValidation_Edit()">Close</button>
 				</div>

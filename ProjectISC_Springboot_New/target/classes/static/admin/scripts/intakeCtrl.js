@@ -145,9 +145,31 @@ app.controller('intakeCtrl', function($scope, $http,$filter,$resource) {
 					addAlert();
 				}, function(response) {
 	    			alertFailMessage("Oops! Duplicate ID is not allowed.");
-	    	    });
+	    	    });	
+		}
+		else
+			alertFailMessage("Oops! The End date must be greater than the Start date.");
+	}
+	//Nút thêm và đóng
+	$scope.Them2=function(){
+		if(Check_Add()){
+			var startdate=new Date($scope.startdate);
+			var enddate=new Date($scope.enddate);
 			
-		}		
+			var Intake = $resource('/api/intake');
+			// Call action method (save) on the class
+			//
+			Intake.save({intakeId:$scope.intakeid, intakeName: $scope.name, startDate:$scope.startdate, endDate:$scope.enddate, active:$scope.active})
+				.$promise.then(function(){
+					GetListIntake();
+					$('#myModal_them').modal('hide');
+					addAlert();
+				}, function(response) {
+	    			alertFailMessage("Oops! Duplicate ID is not allowed.");
+	    	    });	
+		}
+		else
+			alertFailMessage("Oops! The End date must be greater than the Start date.");
 	}
 	
 	var intakeObj=null;
