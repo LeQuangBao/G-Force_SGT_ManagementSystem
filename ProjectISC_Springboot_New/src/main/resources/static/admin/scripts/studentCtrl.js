@@ -5,16 +5,16 @@ app
 					$scope.rowdata = {
 						availableOptions : [ {
 							id : '15',
-							name : '15 rows'
+							name : '15'
 						}, {
 							id : '30',
-							name : '30 rows'
+							name : '30'
 						}, {
 							id : '50',
-							name : '50 rows'
+							name : '50'
 						}, {
 							id : '100',
-							name : '100 rows'
+							name : '100'
 						} ],
 						selectedOption : {
 							id : '15',
@@ -31,12 +31,6 @@ app
 						$scope.list = [];
 						var Student = $resource('http://localhost:8080/admin/api/Student');
 						Student.query().$promise.then(function(listStudent) {
-							// angular.forEach(listIntake,function(value,key){
-							// value.startDate=$filter('date')(value.startDate,
-							// "MM/dd/yyyy");
-							// value.endDate=$filter('date')(value.endDate,
-							// "MM/dd/yyyy");
-							// });
 							$scope.list = listStudent;
 							console.log($scope.list);
 
@@ -85,6 +79,7 @@ app
 								listenchanceexam) {
 
 							$scope.list_enchance_exam = listenchanceexam;
+							console.log($scope.list_enchance_exam);
 
 						});
 
@@ -228,317 +223,209 @@ app
 
 					// upload hình ảnh
 					// $scope.stepsModel = [];
-					$scope.listfile = [];// list file// cái này để lưu image khi em chọn nè// gui listfile nay vo cai image cua 
-					// em chuyen thanh service het doan code nay roi su dung lai 
-					// em chua hieu
-					// yeu cau cua em la gi?
-					// student xuong cho controller luu vo mot thu muc trong project dong thoi luu vao db 
-					// passing data between controller in angularjs dungkhong?
-					// dung oi
-					// ==
-					
-					$scope.stepsModel = [];
 
-					$scope.imageUpload = function(event) {
-						var files = event.target.files; // FileList object
+					$scope.getImage = function(element) {
+						photofile = element.files[0];
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$scope.$apply(function() {
+								$scope.prev_img = e.target.result;
+							});
+						};
+						reader.readAsDataURL(photofile);
+						$scope.image = photofile.name;
+					};
+					$scope.getImage_Edit = function(element) {
+						photofile = element.files[0];
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$scope.$apply(function() {
+								$scope.prev_img_edit = e.target.result;
+							});
+						};
+						reader.readAsDataURL(photofile);
+						$scope.image = photofile.name;
+					};
+					// kiểm tra retype password
 
-						for (var i = 0; i < files.length; i++) {
-							var file = files[i];
-							var reader = new FileReader();
-							reader.onload = $scope.imageIsLoaded;
-							reader.readAsDataURL(file);
-							$scope.listfile.push(file);
-							
-						}
+					// upload file
+					function uploadFile() {
+						$
+								.ajax({
+									type : "POST",
+									url : "/admin/student/uploadFile",
+									type : "POST",
+									data : new FormData($("#fileUploadForm")[0]),
+									enctype : 'multipart/form-data',
+									processData : false,
+									contentType : false,
+									cache : false,
+									success : function() {
+										// Handle upload success
+										$("#upload-file-message").text(
+												"File succesfully uploaded");
+									},
+									error : function() {
+										// Handle upload error
+										$("#upload-file-message")
+												.text(
+														"File not uploaded (perhaps it's too much big)");
+									}
+								});
 					}
-
-					$scope.imageIsLoaded = function(e) {
-						$scope.$apply(function() {
-							$scope.stepsModel.push(e.target.result);
-						});
-					}
-//					BasicDBObject obj = new BasicDBObject();
-//					obj.put("name", "Matt");
-//					obj.put("date", new Date());
+					;
 
 					// thêm student
-//					$scope.them = function() {
-//					
-//
-//						var username = $("#username").val();
-//					
-//						var firstname =  $("#firstname").val();
-//						var lastname =  $("#lastname").val();
-//						var password =  $("#password").val();
-//						var birthday =  $("#birthday").val();
-//						var intake =  $("#intake").val();
-//						var entrance_exam =  $("#entranceexam").val();
-//						var school =  $("#school").val();
-//						var status = $('input[name="status"]:checked').val();
-//						var diachi =  $("#address").val();
-//						var gender =  $('input[name="gender"]:checked').val();
-//						var email =  $("#email").val();
-//						var phone =  $("#phone").val();
-//						var specialization =  $("#specialization").val();
-//						obj.put("username", username);
-//						obj.put("firstname", firstname);
-//						obj.put("lastname", lastname);
-//						obj.put("birthday", birthday);
-//						obj.put("status", status);
-//						obj.put("address", diachi);
-//						obj.put("gender", gender);
-//						obj.put("email", email);
-//						obj.put("entranceExam",entrance_exam);
-//						obj.put("specialization",specialization);
-//						obj.put("intake",intake);
-//						obj.put("school",school);
-//
-//						
-//						
-//						if ($scope.listfile) {
-//							for (var i = 0; i < $scope.listfile.length; i++) {
-//								console.log($scope.listfile[i]);
-//								obj.put("image", $scope.listfile[i]);
-//							}
-//							console.log(obj);
-//						}
-//						$http
-//								.post('admin/api/Student', obj, {
-//									transformRequest : angular.identity,
-//									headers : {
-//										'Content-Type' : undefined
-//									}
-//								})
-//								.then(
-//										function(result) {
-//											if (result.status == "201") {
-//												addAlert();
-//												// location.reload();
-//											} else {
-//												alertFailMessage("Oops! Duplicate ID is not allowed.");
-//											}
-//										});
-//
-//					};
+					$scope.them = function() {
+						// uploadFile();
+						$scope.student.image = $scope.fileupload1;
+						$scope.student.birthday = $scope.birthday;
+						// tạo mã học viên
+						// mã khóa đầu vào
+						var makhoa = $scope.student.intake.intakeId;
 
-					// // Thêm mới intake
-					// $scope.Them=function(){
-					// if(Check_Add()){
-					// var startdate=new Date($scope.startdate);
-					// var enddate=new Date($scope.enddate);
-					//			
-					// var Intake = $resource('/api/intake');
-					// // Call action method (save) on the class
-					// //
-					// Intake.save({intakeId:$scope.intakeid,
-					// intakeName: $scope.name,
-					// startDate:$scope.startdate,
-					// endDate:$scope.enddate,
-					// active:$scope.active})
-					// }
-					// .$promise.then(function(){
-					// GetListIntake();
-					// addAlert();
-					// }, function(response) {
-					// alertFailMessage("Oops! Duplicate ID is not allowed.");
-					// });
-					//			
-					// }
-					// }
-					//	
-					// var intakeObj=null;
+						// hai số cuối của năm
+						var date = new Date();
+						var year = date.getFullYear().toString();
 
-					// // Lấy intake theo id
-					// $scope.GetIntake=function(x){
-					// $scope.formSua._id.$error.validationError=false;
-					// $scope.formSua._enddate.$error.validationError=false;
-					// var Intake = $resource('/api/intake/:id',{id:'@id'});
-					// Intake.get({id:x.id}).$promise.then(function(intake){
-					// $scope._id=intake.intakeId;
-					// $scope._name=intake.intakeName;
-					// $scope._intakeName=intake.intakeName; // Tên intake trong
-					// modal
-					// // Sửa
-					// $scope._startdate=new Date(intake.startDate);
-					// $scope._enddate=new Date(intake.endDate);
-					// $scope._active=intake.active;
-					// });
-					// intakeObj=x;
-					// $scope.name1=x.intakeName;
-					// }
-					//	
-					// // Sửa intake
-					// $scope.Sua=function(){
-					// if(Check_Edit()){
-					// var Intake = $resource('/api/intake/',{},{'update': {
-					// method:'PUT',headers: { 'Content-Type':
-					// 'application/json' }}});
-					// Intake.update({id:intakeObj.id,intakeId:$scope._id,
-					// intakeName: $scope._name, startDate:$scope._startdate,
-					// endDate:$scope._enddate,
-					// active:($scope._active==null?false:($scope._active==false?false:true))})
-					// .$promise.then(function(){
-					// $('#myModal_sua').modal('hide');
-					// editAlert();
-					// }, function(response) {
-					// alertFailMessage("Oops! Duplicate ID is not allowed.");
-					// });
-					//			
-					// var idx = $scope.list.indexOf(intakeObj);
-					// $scope.list[idx].intakeId=$scope._id;
-					// $scope.list[idx].intakeName=$scope._name;
-					// $scope.list[idx].startDate=new Date($scope._startdate);
-					// $scope.list[idx].endDate=new Date($scope._enddate);
-					// $scope.list[idx].active=($scope._active==null?false:($scope._active==false?false:true));
-					// }
-					// }
-					//	
-					// // Lấy đối tượng intake
-					// $scope.GetIntakeObj=function(intake){
-					// intakeObj=intake;
-					// }
-					//	
-					// $scope.Xoa=function(){
-					// var Intake = $resource('/api/intake/:id',{id:'@id'});
-					// Intake.delete({id:intakeObj.id});
-					// var idx = $scope.list.indexOf(intakeObj);
-					// $scope.list.splice(idx, 1); // Xóa 1 intake vị trí idx
-					// deleteAlert();
-					// }
-					//
-					// $scope.ResetForm_Add=function(){
-					// $scope.intakeid='';
-					// $scope.name='';
-					// $scope.startdate='';
-					// $scope.enddate='';
-					// $scope.active=true;
-					// $scope.formThem.intakeid.$setUntouched();
-					// $scope.formThem.name.$setUntouched();
-					// $scope.formThem.startdate.$setUntouched();
-					// $scope.formThem.enddate.$setUntouched();
-					// $scope.formThem.intakeid.$error.validationError=false;
-					// $scope.formThem.enddate.$error.validationError=false;
-					// }
-					// $scope.ResetValidation1_Add=function(){
-					// $scope.formThem.intakeid.$error.validationError=false;
-					// }
-					// $scope.ResetValidation2_Add=function(){
-					// $scope.formThem.enddate.$error.validationError=false;
-					// }
-					//	
-					// $scope.ResetValidation1_Edit=function(){
-					// $scope.formSua._id.$error.validationError=false;
-					// }
-					//	
-					// $scope.ResetValidation2_Edit=function(){
-					// $scope.formSua._enddate.$error.validationError=false;
-					// }
-					//	
-					// // Kiểm tra form Thêm có trùng intakeId, endDate <
-					// startDate
-					// function Check_Add(){
-					// var flag=true;
-					// angular.forEach($scope.list,function(value,key){
-					// if(value.intakeId==$scope.intakeid)
-					// {
-					// $scope.formThem.intakeid.$error.validationError=true;
-					// $scope.formThem.intakeid.$valid=false;
-					// flag=false;
-					// }
-					// });
-					// if(flag){
-					// $scope.formThem.enddate.$error.validationError=false;
-					// $scope.formThem.intakeid.$valid=true;
-					// }
-					// flag=true;
-					// if($scope.startdate > $scope.enddate)
-					// {
-					// $scope.formThem.enddate.$error.validationError=true;
-					// $scope.formThem.enddate.$valid=false;
-					// flag= false;
-					// }
-					// if(flag){
-					// $scope.formThem.enddate.$error.validationError=false;
-					// $scope.formThem.enddate.$valid=true;
-					// }
-					// if(/* !($scope.formThem.intakeid.$valid) || */
-					// !($scope.formThem.enddate.$valid))
-					// return false;
-					// return true;
-					// }
-					//	
-					// // Kiểm tra form Sửa có trùng intakeId, endDate <
-					// startDate
-					// function Check_Edit(){
-					// var flag=true;
-					// angular.forEach($scope.list,function(value,key){
-					// if($scope._id!=intakeObj.intakeId){
-					// if(value.intakeId==$scope._id)
-					// {
-					// $scope.formSua._id.$error.validationError=true;
-					// $scope.formSua._id.$valid=false;
-					// flag=false;
-					// }
-					// }
-					// });
-					// if(flag){
-					// $scope.formSua._enddate.$error.validationError=false;
-					// $scope.formSua._id.$valid=true;
-					// }
-					// flag=true;
-					// if($scope._startdate > $scope._enddate)
-					// {
-					// $scope.formSua._enddate.$error.validationError=true;
-					// $scope.formSua._enddate.$valid=false;
-					// flag= false;
-					// }
-					// if(flag){
-					// $scope.formSua._enddate.$error.validationError=false;
-					// $scope.formSua._enddate.$valid=true;
-					// }
-					// if(/* !($scope.formSua._id.$valid) || */
-					// !($scope.formSua._enddate.$valid))
-					// return false;
-					// return true;
-					// }
-					//	
-					// // Đặt mindate là ngày hiện tại
-					// $scope.minDate=new Date();
-					//	
-					// function deleteAlert(){
-					// swal({
-					// title:"",
-					// text: "Delete Successfully",
-					// type: "success",
-					// timer: 2000,
-					// showConfirmButton: false
-					// });
-					// }
-					// function editAlert(){
-					// swal({
-					// title:"",
-					// text: "Edit Successfully",
-					// type: "success",
-					// timer: 2000,
-					// showConfirmButton: false
-					// });
-					// }
-					// function addAlert(){
-					// swal({
-					// title:"",
-					// text: "Add Successfully",
-					// type: "success",
-					// timer: 2000,
-					// showConfirmButton: false
-					// });
-					// }
-					// function alertFailMessage(message) {
-					// swal({
-					// title : "",
-					// text : message,
-					// type : "error",
-					// timer : alertDuration,
-					// showConfirmButton : false
-					// })
-					// }
+						// giới tính
+						console.log($scope.student.gender);
+						// random số từ 0001-9999
+						var number = (Math
+								.floor(Math.random() * (9999 - 1 + 1)) + 1)
+								.toString();
+						var number2 = "";
+						if (number.length = 1) {
+							number2 = "000" + number;
+						}
+						if (number.length = 2) {
+							number2 = "00" + number;
+
+						}
+						if (number.length = 3) {
+							number2 = "0" + number;
+						}
+						if (number.length = 4) {
+							number2 = number;
+						}
+						console.log(makhoa);
+
+						// mã học viên
+						var mahv = makhoa + "-" + year.substr(2, 4) + "-"
+								+ $scope.student.gender + "-" + number2;
+						$scope.student.image = $scope.uploadfile1;
+						$scope.birthday = $scope.birthday;
+						$scope.student.studentId = mahv;
+						$http({
+							method : "POST",
+							url : "/admin/api/Student",
+							data : $scope.student
+						}).then(function mySucces(response) {
+							GetListStudent();
+							addAlert();
+						});
+					};
+					// sửa student
+					$scope.edit = function edit() {
+
+						$http({
+							method : "PUT",
+							url : "/admin/api/Student",
+							data : $scope.list_temp_inf_edit
+						}).then(function mySucces(response) {
+							$('#editModal').modal('hide');
+							GetListStudent();
+							editAlert();
+						});
+					}
+					// load chi tiet student
+					$scope.chitiet = function(data) {
+						$scope.chitiet = data;
+					}
+					// reset password
+					$scope.Reset = function(data) {
+						$http({
+							method : "PUT",
+							url : "/admin/api/Student_Reset",
+							data : $scope.list_temp_inf_reset
+						}).then(function mySucces(response) {
+							$('#editModal').modal('hide');
+							GetListStudent();
+							editAlert();
+						});
+					}
+					// xóa student
+					$scope.deleteStudent = function xoa() {
+						console.log($scope.list_temp_inf_delete.id);
+						$http(
+								{
+									method : "DELETE",
+									url : "/admin/api/Student/"
+											+ $scope.list_temp_inf_delete.id
+
+								}).then(function mySucces(response) {
+							$('#myModal_xoa').modal('hide');
+							GetListStudent();
+							deleteAlert();
+						});
+					}
+					// lấy dữ liệu để sửa
+					// array did filter
+					$scope.list_temp_inf_edit = [];
+					$scope.sua = function(data) {
+						$scope.list_temp_inf_edit = data;
+						$scope.list_temp_inf_edit.birthday = new date(
+								data.birthday)
+					
+					};
+					// lấy dữ liệu để xóa
+					$scope.list_temp_inf_delete = [];
+					$scope.xoa = function(data) {
+
+						$scope.list_temp_inf_delete = data;
+						console.log($scope.list_temp_inf_delete);
+					}
+					// lấy dữ liệu để reset
+					$scope.list_temp_inf_reset = [];
+					$scope.reset = function(data) {
+						$scope.list_temp_inf_reset = data;
+					}
+
+					function deleteAlert() {
+						swal({
+							title : "",
+							text : "Delete Successfully",
+							type : "success",
+							timer : 2000,
+							showConfirmButton : false
+						});
+					}
+
+					function editAlert() {
+						swal({
+							title : "",
+							text : "Edit Successfully",
+							type : "success",
+							timer : 2000,
+							showConfirmButton : false
+						});
+					}
+					function addAlert() {
+						swal({
+							title : "",
+							text : "Add Successfully",
+							type : "success",
+							timer : 2000,
+							showConfirmButton : false
+						});
+					}
+					function alertFailMessage(message) {
+						swal({
+							title : "",
+							text : message,
+							type : "error",
+							timer : alertDuration,
+							showConfirmButton : false
+						})
+					}
 				});

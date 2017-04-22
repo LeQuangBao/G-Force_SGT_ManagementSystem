@@ -1,4 +1,22 @@
 app.controller('registrarCtrl', function($scope, $http,$filter) {
+	$scope.rowdata = {
+		     availableOptions: [
+
+		       {id: '15', name: '15'},
+		       {id: '30', name: '30'},
+		       {id: '50', name: '50'},
+		       {id: '100', name: '100'}
+		     ],
+		     selectedOption: {id: '15', name: '15'}
+
+		    };
+	$scope.ChangeRow=function(index){
+		$scope.itemsPerPage = index;
+		$scope.updatePageIndexes();
+	}
+	
+	var alertDuration = 1800;
+
 	// Lấy danh sách Registrar
 	 function getAllRegistrars(){
 	    	$scope.list=[];
@@ -14,6 +32,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	$scope.listfiltered = function(element) {
          return $filter('filter')(element, $scope.filterTable); 
      };
+     $scope.prev_img='';
   // Phân trang
  	$scope.currentPage = 1;
  	// max size of the pagination bar
@@ -43,7 +62,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	};
  	$scope.updatePageIndexes();
  	
- 	$scope.showList=function(school,index){
+ 	$scope.showList=function(index){
  		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
  	}
  	$scope.getImage = function(element) {
@@ -57,11 +76,34 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
         reader.readAsDataURL(photofile);
         $scope.image=photofile.name;
 	};
+	
+	function uploadFile() {
+        $.ajax({
+          url: "uploadFile",
+          type: "POST",
+          data: new FormData($("#upload-file-form")[0]),
+          enctype: 'multipart/form-data',
+          processData: false,
+          contentType: false,
+          cache: false,
+          success: function () {
+            // Handle upload success
+            $("#upload-file-message").text("File succesfully uploaded");
+          },
+          error: function () {
+            // Handle upload error
+            $("#upload-file-message").text(
+                "File not uploaded (perhaps it's too much big)");
+          }
+        });
+      }
+	
  	//ADD REGISTRAR
  	 $scope.save = function () {
+ 		uploadFile();
          $http({
              method: "POST",
-            url: "/admin/api/registrar",
+            url: "api/registrar",
             data: {
          	   	username: $scope.username,
          	   password: $scope.password,
@@ -101,6 +143,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 $scope.phone="";
     	 $scope.address="";
     	 $scope.birthday="";
+    	 
     	 $scope.active=true;
     	 $scope.frmRegistrarAdd.username.$setUntouched();
     	 $scope.frmRegistrarAdd.lastName.$setUntouched();
@@ -130,23 +173,13 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 registrarID=data.id;
      }
      
-     $scope.getImage_Edit = function(element) {
- 		photofile = element.files[0];
-         var reader = new FileReader();
-         reader.onload = function(e) {
-             $scope.$apply(function() {
-                 $scope.prev_img_edit = e.target.result;
-             });
-         };
-         reader.readAsDataURL(photofile);
-         $scope.image=photofile.name;
- 	};
+    
  	//Upload file trong modal Edit
     function uploadFile_Edit() {
         $.ajax({
           url: "uploadFile",
           type: "POST",
-          data: new FormData($("#upload-file-form-edit")[0][8]),
+          data: new FormData($("#upload-file-form-edit")[0]),
           enctype: 'multipart/form-data',
           processData: false,
           contentType: false,
@@ -162,7 +195,17 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
           }
         });
       }
-   
+    $scope.getImage_Edit = function(element) {
+		photofile = element.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $scope.$apply(function() {
+                $scope.prev_img_edit = e.target.result;
+            });
+        };
+        reader.readAsDataURL(photofile);
+        $scope.edit.image=photofile.name;
+	};
  	$scope.edit = [];
 	 //edit registrar
 	$scope.update = function () {
@@ -174,7 +217,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
    	
        $http({
           method: "PUT",
-          url: "/admin/api/registrar",
+          url: "api/registrar",
           data: dataRegistrar,
           dataType: "json"
        })
@@ -192,7 +235,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	 $scope.editRegistrar = function (data) {
  		document.getElementById("image_edit").value="";
     	$scope.prev_img_edit='';
-     	$http.get("/admin/api/registrar/"+data.id)
+     	$http.get("api/registrar/"+data.id)
          .then(function (response) {
         	 registrarID=data.id;
          		$scope.edit.username=response.data.username;
@@ -231,6 +274,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
      }
    //Reset password
      $scope.ResetPassword = function () {
+    	
      	var dataRegistrar={id:registrarID,password:$scope.newPassword};
          $http({
             method: "PUT",
@@ -288,4 +332,24 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 					showConfirmButton : false
 				});
 			}
+ 	  
+});
+//Compare password and retype password
+app.directive("matchPassword", function(){
+return {
+    require: "ngModel",
+    scope: {
+      otherModelValue: "=matchPassword"
+    },
+    link: function(scope, element, attributes, ngModel) {
+
+      ngModel.$validators.matchPassword = function(modelValue) {
+        return modelValue == scope.otherModelValue;
+      };
+
+      scope.$watch("otherModelValue", function() {
+        ngModel.$validate();
+      });
+    }
+  };
 });

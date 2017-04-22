@@ -146,6 +146,16 @@
 									<input id="filter" type="text" placeholder="Filter"
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
+								<div class="col-md-6 col-md-offset-6">
+									Show: <input type="checkbox" data-ng-model="showBirthday">Birthday</input>
+									<input type="checkbox" data-ng-model="showEmail">Email</input>
+									<input type="checkbox" data-ng-model="showPhone">Phone</input>
+									<input type="checkbox" data-ng-model="showAddress">Address</input>
+									<input type="checkbox" data-ng-model="showSchool">School</input>
+									<input type="checkbox" data-ng-model="showIntake">Intake</input>
+									<input type="checkbox" data-ng-model="showEntranceExam">Entrance
+									exam</input> <input type="checkbox" data-ng-model="showSpecialization">Specialization</input>
+								</div>
 								<div class="x_content">
 									<label for="mySelect">Display </label> <select name="mySelect"
 										id="mySelect"
@@ -167,7 +177,7 @@
 														ng-show="sortType == 'schoolId' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 15%"
+													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'lastName';sortReverse = !sortReverse">Last
 														Name <span
 														ng-show="sortType == 'lastName' &amp;&amp; !sortReverse"
@@ -175,7 +185,7 @@
 														ng-show="sortType == 'lastName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 20%"
+													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'firstName';sortReverse = !sortReverse">First
 														Name <span
 														ng-show="sortType == 'firstName' &amp;&amp; !sortReverse"
@@ -183,11 +193,76 @@
 														ng-show="sortType == 'firstName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-
-
-
-
-
+													<th class="sortable" style="width: 10%"
+														ng-show="showBirthday"
+														ng-click="sortType = 'birthday';sortReverse = !sortReverse">Birthday
+														<span
+														ng-show="sortType == 'birthday' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'birthday' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 20%" ng-show="showEmail"
+														ng-click="sortType = 'email';sortReverse = !sortReverse">Email
+														<span
+														ng-show="sortType == 'email' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'email' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showPhone"
+														ng-click="sortType = 'phone';sortReverse = !sortReverse">Phone
+														<span
+														ng-show="sortType == 'phone' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'phone' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%"
+														ng-show="showAddress"
+														ng-click="sortType = 'address';sortReverse = !sortReverse">Address
+														<span
+														ng-show="sortType == 'address' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'address' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%"
+														ng-show="showSchool"
+														ng-click="sortType = 'school';sortReverse = !sortReverse">School
+														<span
+														ng-show="sortType == 'school' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'school' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%"
+														ng-show="showIntake"
+														ng-click="sortType = 'intake';sortReverse = !sortReverse">Intake
+														<span
+														ng-show="sortType == 'intake' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'intake' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 15%"
+														ng-show="showEntranceExam"
+														ng-click="sortType = 'entranceExam';sortReverse = !sortReverse">Entrance
+														exam <span
+														ng-show="sortType == 'entranceExam' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'entranceExam' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%"
+														ng-show="showSpecialization"
+														ng-click="sortType = 'specialization';sortReverse = !sortReverse">Specialization
+														<span
+														ng-show="sortType == 'specialization' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'specialization' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
 													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'active';sortReverse = !sortReverse">
 														Status <span
@@ -196,13 +271,10 @@
 														ng-show="sortType == 'active' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-
-
 													<th style="width: 15%">Action</th>
 													<th style="width: 20%"></th>
 												</tr>
 											</thead>
-
 											<tbody>
 												<tr
 													data-ng-repeat="x in (listfiltered(list)) |
@@ -214,23 +286,32 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.firstname"></td>
 													<td data-ng-bind="x.lastname"></td>
+													<td ng-show="showBirthday">{{x.birthday | date:'MM/dd/yyyy'}}</td>
+													<td data-ng-bind="x.email" ng-show="showEmail"></td>
+													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
+													<td data-ng-bind="x.address" ng-show="showAddress"></td>
+													<td data-ng-bind="x.school.schoolId" ng-show="showSchool"></td>
+													<td data-ng-bind="x.intake.intakeId" ng-show="showIntake"></td>
+													<td data-ng-bind="x.entranceExam.entranceExamName"
+														ng-show="showEntranceExam"></td>
+													<td data-ng-bind="x.specialization.specializationId"
+														ng-show="showSpecialization"></td>
 													<td data-ng-bind="x.status"></td>
-
-
-													<td><button class="btn btn-primary btn-sm"
-															ng-click="callEditSpecialization(x)" data-toggle="modal"
+													<td>
+														<button data-toggle="modal" class="btn btn-success btn-sm"
+															data-target="#myModal_chitiet" ng-click="chitiet(x)">
+															<span class="glyphicon glyphicon-eye-open"></span>
+														</button>
+														<button class="btn btn-primary btn-sm"
+															ng-click="sua(x)" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
-														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_xoa" ng-click="xoa()">
+														<button data-toggle="modal" class="btn btn-danger btn-sm"
+															data-target="#myModal_xoa" ng-click="xoa(x)">
 															<span class="glyphicon glyphicon-remove"></span>
 														</button>
-														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_chitiet" ng-click="chitiet()">
-															<span class="glyphicon glyphicon-eye-open"></span>
-														</button></td>
-
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -249,7 +330,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -275,10 +355,11 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add Student</h4>
+					<h4 class="modal-title" id="myModalLabel">Add student</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" name="frmInstructor">
+					<form class="form-horizontal" name="fileUploadForm"
+						enctype="multipart/form-data" id="fileUploadForm">
 						<div class="col-md-6">
 
 							<!-- Text input-->
@@ -286,8 +367,8 @@
 								<label class=" control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="username"
-										ng-required="true" />
+										class="form-control input-md" type="text"
+										ng-model="student.username" ng-required="true" />
 									<div ng-messages="">
 										<div ng-message="required" ng-show="">
 											<p style="color: red">This field is required</p>
@@ -302,8 +383,8 @@
 								<label class="control-label" for="lastName"> Last Name</label>
 								<div class="">
 									<input id="lastname" name="lastName" placeholder=""
-										class="form-control input-md" type="text" ng-model="lastName"
-										ng-required="true" />
+										class="form-control input-md" type="text"
+										ng-model="student.lastname" ng-required="true" />
 									<div ng-messages="frmInstructor.lastName.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.lastName.$touched">
@@ -319,7 +400,7 @@
 								<div class="">
 									<input id="firstname" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="firstName" />
+										ng-model="student.firstname" />
 									<div ng-messages="frmInstructor.firstName.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.firstName.$touched">
@@ -333,8 +414,8 @@
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Password</label>
 								<div class="">
-									<input type="password" id="password" name="password"
-										data-ng-model="password" required="required"
+									<input type="password" id="pass" name="password"
+										data-ng-model="student.password" required="required"
 										class="form-control col-md-7 col-xs-12" />
 									<div ng-messages="frmInstructor.password.$error">
 										<div ng-message="required"
@@ -349,7 +430,7 @@
 								<label class=" control-label" for="birthday">Retype
 									password</label>
 								<div class="">
-									<input type="password" id="re_password" name="re_password"
+									<input type="password" id="pass2" onkeyup="ValidatePass()" name="re_password"
 										required="required" class="form-control col-md-7 col-xs-12" />
 									<div ng-messages="frmInstructor.password.$error">
 										<div ng-message="required"
@@ -359,6 +440,7 @@
 
 									</div>
 								</div>
+								<p id="kiemtra"></p>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
@@ -366,7 +448,7 @@
 								<div class="">
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="email" ng-required="true"
-										ng-model="email" />
+										ng-model="student.email" />
 									<div ng-messages="frmInstructor.email.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.email.$touched">
@@ -382,7 +464,7 @@
 								<div class="">
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="phone" />
+										ng-model="student.phone" />
 									<div ng-messages="frmInstructor.phone.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.phone.$touched">
@@ -398,7 +480,7 @@
 								<div class="">
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="address" />
+										ng-model="student.address" />
 									<div ng-messages="frmInstructor.address.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.address.$touched">
@@ -410,27 +492,21 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile
-								picture</label>
-							<div class=" picture">
-								<div class="form-group">
-									<div ng-repeat="step in stepsModel">
-										<img width="" class="img-responsive" ng-src="{{step}}" />
-									</div>
-
-									<input type="file"
-										onchange="angular.element(this).scope().imageUpload(event)" />
-
-								</div>
+							<label class="col-md-2 control-label"> Picture</label>
+							<div class="col-md-12 picture">
+								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
+									type="file" id="uploadfile1" name="uploadfile1"
+									onchange="angular.element(this).scope().getImage(this)"
+									ng-model="uploadfile1" class="col-md-12" />
+								<p id="upload-file-message"></p>
 							</div>
 
 							<div class="form-group col-md-12">
 								<label class="control-label" for="selectbasic">Intake</label>
 								<div class="">
-									<select id="intake" name="selectbasic" class="form-control">
-
-										<option ng-repeat="x in list_intake" value="{{x.id}}">{{x.intakeName}}</option>
-
+									<select ng-model="student.intake" class="form-control"
+										ng-options="x.intakeName for x in list_intake" name="intake"
+										id="intake" ng-required="true">
 									</select>
 								</div>
 							</div>
@@ -438,10 +514,9 @@
 								<label class="control-label" for="selectbasic">Entrance
 									exam</label>
 								<div class="">
-									<select id="enchance_exam" name="selectbasic"
-										class="form-control">
-										<option ng-repeat="x in list_enchance_exam" value="{{x.id}}">{{x.entranceExamName}}</option>
-
+									<select ng-model="student.entranceExam" class="form-control"
+										ng-options="x.entranceExamName for x in list_enchance_exam "
+										name="intake" id="intake" ng-required="true">
 									</select>
 								</div>
 							</div>
@@ -449,50 +524,60 @@
 							<div class="form-group col-md-12">
 								<label class="control-label">School</label>
 								<div class="">
-									<select id="school" class="form-control">
-
-										<option ng-repeat="x in list_school" value="{{x.id}}">{{x.schoolName}}</option>
-
+									<select ng-model="student.school" class="form-control"
+										ng-options="x.schoolName for x in list_school" name="intake"
+										id="intake" ng-required="true">
 									</select>
 								</div>
 							</div>
 
+							<div class="form-group col-md-12">
+								<label class="control-label">Specialization</label>
+								<div class="">
+									<select ng-model="student.specialization" class="form-control"
+										ng-options="x.specializationName for x in list_specialization"
+										name="intake" id="intake" ng-required="true">
+									</select>
+								</div>
+							</div>
 
-							<div class="form-group">
+							<div class="form-group col-md-12">
 								<label class="control-label" for="birthday">Birthday</label>
 								<div class="col-md-12">
 									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" />
+										ng-model="birthday" class="form-control input-md" type="date" />
+
+								</div>
+								<div class="form-group col-md-12">
+									<label class="control-label" for="status">Status</label>
+
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="student.status"
+											value="Studying" name="status" /> Studying
+										</label> <br /> <label> <input type="radio"
+											ng-model="student.status" value="Dropped" name="status" />
+											Dropped
+										</label> <br /> <label> <input type="radio"
+											ng-model="student.status" value="Graduated" name="status" />
+											Graduated
+										</label>
+									</div>
+
+
+								</div>
+								<div class="form-group col-md-12">
+									<label class="control-label">Gender</label>
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="student.gender"
+											value="0" name="gender" /> Nam
+										</label> <br /> <label> <input type="radio"
+											ng-model="student.gender" value="1" name="gender" /> Nữ
+										</label>
+									</div>
+
 
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="control-label" for="status">Status</label>
-
-								<div class="checkbox">
-									<label> <input type="radio" value="Studying" name="status" /> Studying
-									</label> <br /> <label> <input type="radio" value="Dropped" name="status" /> Dropped
-									</label> <br /> <label> <input type="radio" value="Graduated" name="status" /> Graduated
-									</label>
-								</div>
-
-
-							</div>
-							<div class="form-group">
-								<label class="control-label" for="status">Gender</label>
-
-								<div class="checkbox">
-									<label> <input type="radio" value="0" name="gender" /> Nam
-									</label> <br /> <label> <input type="radio" value="1" name="gender" /> Nữ
-									</label>
-								</div>
-
-
-							</div>
-
-
-
-
 
 						</div>
 					</form>
@@ -512,10 +597,8 @@
 			</div>
 		</div>
 	</div>
-
 	<!-- Modal sửa -->
-	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -523,18 +606,20 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Edit Instructor</h4>
+					<h4 class="modal-title" id="myModalLabel">Edit student</h4>
 				</div>
 				<div class="modal-body row">
-					<div class="col-md-6">
-						<form class="form-horizontal" name="frmInstructor">
+					<form class="form-horizontal" name="formStudent_sua"
+						enctype="multipart/form-data" id="fileUploadForm1">
+						<div class="col-md-6">
+
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="username"
-										ng-required="true" />
+										class="form-control input-md" type="text"
+										ng-model="list_temp_inf_edit.username" ng-required="true" />
 									<div ng-messages="">
 										<div ng-message="required" ng-show="">
 											<p style="color: red">This field is required</p>
@@ -546,11 +631,11 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName"> Last Name</label>
+								<label class="control-label" for="lastName"> Lastname</label>
 								<div class="">
-									<input id="lastName" name="lastName" placeholder=""
-										class="form-control input-md" type="text" ng-model="lastName"
-										ng-required="true" />
+									<input id="lastname" name="lastName" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="list_temp_inf_edit.lastname" ng-required="true" />
 									<div ng-messages="frmInstructor.lastName.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.lastName.$touched">
@@ -562,11 +647,11 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="firstName">First Name</label>
+								<label class="control-label" for="firstName">Firstname</label>
 								<div class="">
-									<input id="firstName" name="firstName" placeholder=""
+									<input id="firstname" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="firstName" />
+										ng-model="list_temp_inf_edit.firstname" />
 									<div ng-messages="frmInstructor.firstName.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.firstName.$touched">
@@ -576,22 +661,30 @@
 									</div>
 								</div>
 							</div>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="col-md-12 control-label" for="birthday">Birthday</label>
-								<div class="col-md-12">
-									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" />
+<!-- 							Text input -->
+<!-- 							<div class="form-group"> -->
+<!-- 								<label class=" control-label" for="birthday">Password</label> -->
+<!-- 								<div class=""> -->
+<!-- 									<input type="password" id="password" name="password" -->
+<!-- 										data-ng-model="list_temp_inf_edit.password" -->
+<!-- 										required="required" class="form-control col-md-7 col-xs-12" /> -->
+<!-- 									<div ng-messages="frmInstructor.password.$error"> -->
+<!-- 										<div ng-message="required" -->
+<!-- 											ng-show="frmInstructor.password.$touched"> -->
+<!-- 											<p style="color: red">This field is required</p> -->
+<!-- 										</div> -->
 
-								</div>
-							</div>
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Email</label>
 								<div class="">
 									<input id="email" name="email" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="email" />
+										class="form-control input-md" type="email" ng-required="true"
+										ng-model="list_temp_inf_edit.email" />
 									<div ng-messages="frmInstructor.email.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.email.$touched">
@@ -606,8 +699,8 @@
 								<label class=" control-label" for="birthday">Phone</label>
 								<div class="">
 									<input id="phone" name="phone" placeholder=""
-										class="form-control input-md" type="tel" ng-required="true"
-										ng-model="phone" />
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="list_temp_inf_edit.phone" />
 									<div ng-messages="frmInstructor.phone.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.phone.$touched">
@@ -623,7 +716,7 @@
 								<div class="">
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="address" />
+										ng-model="list_temp_inf_edit.address" />
 									<div ng-messages="frmInstructor.address.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.address.$touched">
@@ -634,24 +727,10 @@
 								</div>
 							</div>
 
-
-						</form>
-					</div>
-					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
-						<div class=" picture">
-
-							<img src="production/images/img.jpg" width=""
-								class="img-responsive" />
-							<button class="btn btn-primary">Upload new picture</button>
-							<!-- Multiple Radios -->
-
 						</div>
-
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile
-								picture</label>
+							<label class=" control-label" style="margin-top: 9px;" for="">
+								Picture</label>
 							<div class=" picture">
 
 								<img src="production/images/img.jpg" width=""
@@ -660,72 +739,113 @@
 								<!-- Multiple Radios -->
 
 							</div>
+							<div class="col-md-6">
+								<label class=" control-label" style="margin-top: 9px;" for=""></label>
+								<div class=" picture">
+									<img
+										ng-src="http://localhost:8080/admin/images/{{list_temp_inf_edit.image}}"
+										ng-show="prev_img_edit==''" width="100" height="150"
+										class="img-responsive" /> <img ng-src="{{prev_img_edit}}"
+										width="100" height="150" class="img-responsive" /> <input
+										type="file" id="image" name="image"
+										ng-model="list_temp_inf_edit.image"
+										onchange="angular.element(this).scope().imageUpload(event)" />
+								</div>
 
-
-							<div class="row col-md-12">
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-12">
 									<label class="control-label" for="selectbasic">Intake</label>
 									<div class="">
-										<select id="selectbasic" name="selectbasic"
-											class="form-control">
-											<option value="1">1</option>
-											<option value="2">2</option>
-
+										<select ng-model="list_temp_inf_edit.intake"
+											class="form-control"
+											ng-options="x.intakeName for x in listIntake" name="intake"
+											id="intake" ng-required="true">
 										</select>
 									</div>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-12">
 									<label class="control-label" for="selectbasic">Entrance
 										exam</label>
 									<div class="">
-										<select id="selectbasic" name="selectbasic"
-											class="form-control">
-											<option value="1"></option>
-
+										<select ng-model="list_temp_inf_edit.entranceExam"
+											class="form-control"
+											ng-options="x.entranceExamName for x in list_entrance_exam"
+											name="intake" id="intake" ng-required="true">
 										</select>
 									</div>
 								</div>
-							</div>
-							<div class="form-group col-md-12">
-								<label class="control-label" for="selectbasic">School</label>
-								<div class="">
-									<select id="selectbasic" name="selectbasic"
-										class="form-control">
-										<option value="1">Đại học Sài Gòn</option>
 
-									</select>
+								<div class="form-group col-md-12">
+									<label class="control-label">School</label>
+									<div class="">
+										<select ng-model="student.school"
+											class="form-control"
+											ng-options="x.intakeName for x in listIntake" name="intake"
+											id="intake" ng-required="true">
+										</select>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="control-label" for="birthday">Birthday</label>
+									<div class="col-md-12">
+										<input id="birthday" name="list_temp_inf_edit.birthday"
+											placeholder="" class="form-control input-md" type="date" />
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="status">Status</label>
+
+									<div class="checkbox">
+										<label> <input type="radio"
+											ng-model="list_temp_inf_edit.status" value="Studying"
+											name="status" /> Studying
+										</label> <br /> <label> <input type="radio"
+											ng-model="list_temp_inf_edit.status" value="Dropped"
+											name="status" /> Dropped
+										</label> <br /> <label> <input type="radio"
+											ng-model="list_temp_inf_edit.status" value="Graduated"
+											name="status" /> Graduated
+										</label>
+									</div>
+
+
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="status">Gender</label>
+
+									<div class="checkbox">
+										<label> <input type="radio"
+											ng-model="list_temp_inf_edit.gender" value="0" name="gender" />
+											Nam
+										</label> <br /> <label> <input type="radio"
+											ng-model="list_temp_inf_edit.gender" value="1" name="gender" />
+											Nữ
+										</label>
+									</div>
+
+
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="col-md-12 control-label" for="status">Status</label>
-
-								<div class="checkbox">
-									<label> <input type="radio" ng-model="active"
-										ng-value="true" ng-checked="true" /> Studying
-									</label> <br /> <label> <input type="radio" ng-model="active"
-										ng-value="false" /> Dropped
-									</label> <br /> <label> <input type="radio" ng-model="active"
-										ng-value="false" /> Graduated
-									</label>
-								</div>
-
-							</div>
 						</div>
-						<div class="row">
-							<div class="modal-footer">
-								<button type="button" class="pull-left btn btn-danger"
-									data-toggle="modal" data-target="#myModal_reset">Reset
-									Password</button>
-								<button type="button" class="btn btn-primary"
-									ng-click="update()"
-									ng-disabled="frmSchool.schoolId.$error.required || frmSchool.lastName.$error.required || frmSchool.firstName.$error.required|| frmSchool.birthday.$error.required">Save</button>
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
+					</form>
 				</div>
+				<div class="modal-footer">
+					<button id="btnchitiet" name="btnchitiet" class="btn btn-primary"
+						ng-click="resetpasword()">Reset Password</button>
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="edit()"
+						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required">Edit</button>
+					<button id="btnSave" name="btnSave" class="btn btn-default"
+						ng-click="edit()"
+						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required"
+						data-dismiss="modal">Edit and close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -748,72 +868,53 @@
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
 								<div class="">
-									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="username"
-										ng-required="true" />
 
+									<p>{{chitiet.username}}</p>
 
 								</div>
 							</div>
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName"> Last Name</label>
+								<label class="control-label" for="lastName"> Lastname</label>
 								<div class="">
-									<input id="lastName" name="lastName" placeholder=""
-										class="form-control input-md" type="text" ng-model="lastName"
-										ng-required="true" />
-
+									<p>{{chitiet.lastname}}</p>
 								</div>
 							</div>
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="firstName">First Name</label>
+								<label class="control-label" for="firstName">Firstname</label>
 								<div class="">
-									<input id="firstName" name="firstName" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="firstName" />
-
+									<p>{{chitiet.firstname}}</p>
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="col-md-12 control-label" for="birthday">Birthday</label>
 								<div class="col-md-12">
-									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" />
-
+									<p>{{chitiet.birthday}}</p>
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Email</label>
 								<div class="">
-									<input id="email" name="email" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="email" />
-
+									<p>{{chitiet.email}}</p>
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Phone</label>
 								<div class="">
-									<input id="phone" name="phone" placeholder=""
-										class="form-control input-md" type="tel" ng-required="true"
-										ng-model="phone" />
-
+									<p>{{chitiet.phone}}</p>
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Address</label>
 								<div class="">
-									<input id="adress" name="address" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="address" />
-
+									<p>{{chitiet.address}}</p>
 								</div>
 							</div>
 
@@ -821,13 +922,14 @@
 						</form>
 					</div>
 					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
+						<label class=" control-label" style="margin-top: 9px;" for="">Piture</label>
 						<div class=" picture">
 
-							<img src="production/images/img.jpg" width=""
+							<img
+								ng-src="http://localhost:8080/admin/images/{{chitiet.image}}"
+								ng-show="prev_img_edit==''" width="100" height="150"
 								class="img-responsive" />
-							<button class="btn btn-primary">Upload new picture</button>
+
 							<!-- Multiple Radios -->
 
 						</div>
@@ -838,24 +940,14 @@
 							<div class="col-md-6">
 								<label class="col-md-12 control-label" for="selectbasic">Intake</label>
 								<div class="col-md-12">
-									<select id="selectbasic" name="selectbasic"
-										class="form-control">
-										<option value="1">1</option>
-										<option value="2">2</option>
-
-									</select>
+									<p>{{chitiet.intake}}</p>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<label class="col-md-12 control-label" for="selectbasic">Entrance
 									exam</label>
 								<div class="col-md-12">
-									<select id="selectbasic" name="selectbasic"
-										class="form-control">
-										<option value="1"></option>
-										<option value="2"></option>
-
-									</select>
+									<p>{{chitiet.entranceExam}}</p>
 								</div>
 							</div>
 
@@ -863,24 +955,18 @@
 						<div class="form-group">
 							<label class="col-md-12 control-label" for="selectbasic">School</label>
 							<div class="col-md-12">
-								<select id="selectbasic" name="selectbasic" class="form-control">
-									<option value="1">1</option>
-									<option value="2">2</option>
-
-								</select>
+								<p>{{chitiet.school}}</p>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-12" for="status">Status</label>
 
-							<p></p>
+							<p>{{chitiet.status}}</p>
 
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-
-
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -906,7 +992,7 @@
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="Reset()"
+					<a class="btn btn-danger btn-ok" ng-click="reset()"
 						data-target="#myModal_confirmReset" data-toggle="modal">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -935,10 +1021,7 @@
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="Reset()"
-						data-target="#myModal_confirmReset" data-toggle="modal">Yes</a>
-
-					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
 			</div>
@@ -953,12 +1036,12 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+					<h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
 				</div>
 
 				<div class="modal-body">
 
-					<input type="hidden" ng-model="student_delete.id"></input> -->
+					<input type="hidden" ng-model="student_delete.id"></input>
 
 					<p>Are you sure you want to delete this?</p>
 				</div>
