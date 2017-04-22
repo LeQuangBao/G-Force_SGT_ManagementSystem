@@ -18,7 +18,7 @@ app
 						} ],
 						selectedOption : {
 							id : '15',
-							name : '15 rows'
+							name : '15'
 						}
 					};
 					$scope.ChangeRow = function(index) {
@@ -26,6 +26,32 @@ app
 						$scope.updatePageIndexes();
 					}
 					var alertDuration = 1800;
+					//danh sanh student co intake
+					function CountListStudent() {
+						$scope.listsl = [];
+			             $http.get("http://localhost:8080/admin/api/Student")
+			                 .then(function(response) {
+			                     response.data.forEach(function(item, index){
+			                    	var flag = false;
+			                    	item.student.forEach(function(item2, index){
+			                    		if(item2.intake.id === 1){
+			                    			flag = true;
+			                    		}
+			                    	});
+			                    	if (flag === true){
+			                    		$scope.list.push(item);
+			                    	}
+			                     });
+			                 });
+			             console.log($scope.listsl);
+						};
+
+					CountListStudent();
+					$scope.Clicktest= function() {
+						
+						$scope.sohocsinh=$scope.listsl.length;
+					}
+					
 					// Lấy danh sách Student
 					function GetListStudent() {
 						$scope.list = [];
@@ -288,6 +314,10 @@ app
 						var year = date.getFullYear().toString();
 						//
 						console.log($scope.list.length);
+						//dem so luong hoc sinh trong 1 intake
+						var numberstudent="";
+						
+						
 						// 4 số cuối của mã học viên
 						var number = "";
 						if ($scope.list = null) {
