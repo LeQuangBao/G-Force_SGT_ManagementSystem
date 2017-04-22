@@ -148,6 +148,8 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 $scope.frmRegistrarAdd.username.$setUntouched();
     	 $scope.frmRegistrarAdd.lastName.$setUntouched();
     	 $scope.frmRegistrarAdd.firstName.$setUntouched();
+    	 $scope.frmRegistrarAdd.password.$setUntouched();
+    	 $scope.frmRegistrarAdd.re_password.$setUntouched();
     	 $scope.frmRegistrarAdd.phone.$setUntouched();
     	 $scope.frmRegistrarAdd.email.$setUntouched();
     	 $scope.frmRegistrarAdd.address.$setUntouched();
