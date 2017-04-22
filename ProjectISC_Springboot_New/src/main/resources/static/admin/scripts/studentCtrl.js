@@ -26,32 +26,36 @@ app
 						$scope.updatePageIndexes();
 					}
 					var alertDuration = 1800;
-					//danh sanh student co intake
+					// danh sanh student co intake
 					function CountListStudent() {
 						$scope.listsl = [];
-			             $http.get("http://localhost:8080/admin/api/Student")
-			                 .then(function(response) {
-			                     response.data.forEach(function(item, index){
-			                    	var flag = false;
-			                    	item.student.forEach(function(item2, index){
-			                    		if(item2.intake.id === 1){
-			                    			flag = true;
-			                    		}
-			                    	});
-			                    	if (flag === true){
-			                    		$scope.list.push(item);
-			                    	}
-			                     });
-			                 });
-			             console.log($scope.listsl);
-						};
+						$http.get("http://localhost:8080/admin/api/Student")
+								.then(
+										function(response) {
+											response.data.forEach(function(
+													item, index) {
+												var flag = false;
+												item.student.forEach(function(
+														item2, index) {
+													if (item2.intake.id === 1) {
+														flag = true;
+													}
+												});
+												if (flag === true) {
+													$scope.list.push(item);
+												}
+											});
+										});
+						console.log($scope.listsl);
+					}
+					;
 
 					CountListStudent();
-					$scope.Clicktest= function() {
-						
-						$scope.sohocsinh=$scope.listsl.length;
+					$scope.Clicktest = function() {
+
+						$scope.sohocsinh = $scope.listsl.length;
 					}
-					
+
 					// Lấy danh sách Student
 					function GetListStudent() {
 						$scope.list = [];
@@ -277,7 +281,8 @@ app
 
 					// upload file
 					function uploadFile() {
-						$.ajax({
+						$
+								.ajax({
 									type : "POST",
 									url : "/admin/student/uploadFile",
 									type : "POST",
@@ -306,6 +311,7 @@ app
 						uploadFile();
 						$scope.student.image = $scope.image1;
 						$scope.student.birthday = $scope.birthday;
+						$scope.student.password = $scope.password;
 
 						var makhoa = $scope.student.intake.intakeId;
 						//
@@ -314,10 +320,9 @@ app
 						var year = date.getFullYear().toString();
 						//
 						console.log($scope.list.length);
-						//dem so luong hoc sinh trong 1 intake
-						var numberstudent="";
-						
-						
+						// dem so luong hoc sinh trong 1 intake
+						var numberstudent = "";
+
 						// 4 số cuối của mã học viên
 						var number = "";
 						if ($scope.list = null) {
@@ -380,16 +385,16 @@ app
 						console.log($scope.chitiet.image);
 					}
 					// reset password
-					$scope.Reset = function(data) {
-						$scope.list_temp_inf_reset.password = "123456";
+					$scope.reset = function(data) {
+						$scope.list_temp_inf_reset.password = $scope.newpassword;
 						$http({
 							method : "PUT",
 							url : "/admin/api/Student_Reset",
 							data : $scope.list_temp_inf_reset
 						}).then(function mySucces(response) {
-							$('#editModal').modal('hide');
+							$('#myModal_reset').modal('hide');
 							GetListStudent();
-							editAlert();
+							resetAlert()
 						});
 					}
 					// xóa student
@@ -414,7 +419,7 @@ app
 						$scope.list_temp_inf_edit = data;
 						$scope.list_temp_inf_edit.birthday = new date(
 								data.birthday)
-					
+
 					};
 					// lấy dữ liệu để xóa
 					$scope.list_temp_inf_delete = [];
@@ -425,9 +430,20 @@ app
 					}
 					// lấy dữ liệu để reset
 					$scope.list_temp_inf_reset = [];
-					$scope.reset = function(data) {
-						$scope.list_temp_inf_reset = data;
+					$scope.resetpasword = function() {
+						$scope.list_temp_inf_reset = $scope.list_temp_inf_edit;
 					}
+					// kiểm tra retype password
+					$scope.kiemtra = function() {
+//						console.log($scope.password);
+//						console.log($scope.newpassword);
+						if ($scope.password == $scope.newpassword) {
+						$scope.ketqua="Match password";
+					}
+					else{
+						$scope.ketqua=" Not Match password";
+					}
+				}
 
 					function deleteAlert() {
 						swal({
@@ -443,6 +459,15 @@ app
 						swal({
 							title : "",
 							text : "Edit Successfully",
+							type : "success",
+							timer : 2000,
+							showConfirmButton : false
+						});
+					}
+					function resetAlert() {
+						swal({
+							title : "",
+							text : "Reset password Successfully",
 							type : "success",
 							timer : 2000,
 							showConfirmButton : false

@@ -169,8 +169,8 @@
 												<tr>
 													<th style="width: 5%">&#35;</th>
 													<th class="sortable" style="width: 15%"
-														ng-click="sortType = 'schoolId';sortReverse = !sortReverse">Student ID
-														<span
+														ng-click="sortType = 'schoolId';sortReverse = !sortReverse">Student
+														ID <span
 														ng-show="sortType == 'schoolId' &amp;&amp; !sortReverse"
 														class="fa fa-caret-down"></span> <span
 														ng-show="sortType == 'schoolId' &amp;&amp; sortReverse"
@@ -293,7 +293,8 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.lastname"></td>
 													<td data-ng-bind="x.firstname"></td>
-													<td ng-show="showBirthday">{{x.birthday | date:'MM/dd/yyyy'}}</td>
+													<td ng-show="showBirthday">{{x.birthday |
+														date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.email" ng-show="showEmail"></td>
 													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
 													<td data-ng-bind="x.address" ng-show="showAddress"></td>
@@ -309,9 +310,8 @@
 															data-target="#myModal_detail" ng-click="chitiet1(x)">
 															<span class="glyphicon glyphicon-eye-open"></span>
 														</button>
-														<button class="btn btn-primary btn-sm"
-															ng-click="sua(x)" data-toggle="modal"
-															data-target="#myModal_sua">
+														<button class="btn btn-primary btn-sm" ng-click="sua(x)"
+															data-toggle="modal" data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
 														<button data-toggle="modal" class="btn btn-danger btn-sm"
@@ -421,8 +421,8 @@
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Password</label>
 								<div class="">
-									<input type="password" id="pass" name="password"
-										data-ng-model="student.password" required="required"
+									<input type="password" id="password" name="password"
+										data-ng-model="password" required="required"
 										class="form-control col-md-7 col-xs-12" />
 									<div ng-messages="frmInstructor.password.$error">
 										<div ng-message="required"
@@ -437,18 +437,18 @@
 								<label class=" control-label" for="birthday">Retype
 									password</label>
 								<div class="">
-									<input type="password" id="pass2" onkeyup="ValidatePass()"
+									<input type="password" ng-keyup="kiemtra()" id="re_password"
 										name="re_password" required="required"
-										class="form-control col-md-7 col-xs-12" />
-									<div ng-messages="frmInstructor.password.$error">
+										class="form-control col-md-7 col-xs-12" ng-model="newpassword"
+										match-password="password" />
+									<div ng-messages="frmInstructor.re_password.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.password.$touched">
+											ng-show="frmInstructor.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-
+										<p ng-bind="ketqua"></p>
 									</div>
 								</div>
-								<p id="kiemtra"></p>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
@@ -669,22 +669,22 @@
 									</div>
 								</div>
 							</div>
-<!-- 							Text input -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label class=" control-label" for="birthday">Password</label> -->
-<!-- 								<div class=""> -->
-<!-- 									<input type="password" id="password" name="password" -->
-<!-- 										data-ng-model="list_temp_inf_edit.password" -->
-<!-- 										required="required" class="form-control col-md-7 col-xs-12" /> -->
-<!-- 									<div ng-messages="frmInstructor.password.$error"> -->
-<!-- 										<div ng-message="required" -->
-<!-- 											ng-show="frmInstructor.password.$touched"> -->
-<!-- 											<p style="color: red">This field is required</p> -->
-<!-- 										</div> -->
+							<!-- 							Text input -->
+							<!-- 							<div class="form-group"> -->
+							<!-- 								<label class=" control-label" for="birthday">Password</label> -->
+							<!-- 								<div class=""> -->
+							<!-- 									<input type="password" id="password" name="password" -->
+							<!-- 										data-ng-model="list_temp_inf_edit.password" -->
+							<!-- 										required="required" class="form-control col-md-7 col-xs-12" /> -->
+							<!-- 									<div ng-messages="frmInstructor.password.$error"> -->
+							<!-- 										<div ng-message="required" -->
+							<!-- 											ng-show="frmInstructor.password.$touched"> -->
+							<!-- 											<p style="color: red">This field is required</p> -->
+							<!-- 										</div> -->
 
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+							<!-- 									</div> -->
+							<!-- 								</div> -->
+							<!-- 							</div> -->
 
 							<!-- Text input-->
 							<div class="form-group">
@@ -785,8 +785,7 @@
 								<div class="form-group col-md-12">
 									<label class="control-label">School</label>
 									<div class="">
-										<select ng-model="student.school"
-											class="form-control"
+										<select ng-model="student.school" class="form-control"
 											ng-options="x.intakeName for x in listIntake" name="intake"
 											id="intake" ng-required="true">
 										</select>
@@ -842,7 +841,8 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnchitiet" name="btnchitiet" class="btn btn-primary"
-						ng-click="resetpasword()">Reset Password</button>
+						ng-click="resetpasword()" data-toggle="modal"
+						data-target="#myModal_reset">Reset Password</button>
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="edit()"
 						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required">Edit</button>
@@ -1003,19 +1003,25 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm reset
-						password</h4>
+					<h4 class="modal-title" id="myModalLabel">Reset password</h4>
 				</div>
 
 				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="exampleInputEmail1">New Password </label> <input
+								type="password" class="form-control" id="exampleInputEmail1"
+								placeholder="Email" ng-model="newpassword" />
+						</div>
 
-					<p>Are you sure you want to reset password of this account?</p>
+
+					</form>
+
 
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="reset()"
-						data-target="#myModal_confirmReset" data-toggle="modal">Yes</a>
+					<a class="btn btn-danger btn-ok" ng-click="reset()">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
