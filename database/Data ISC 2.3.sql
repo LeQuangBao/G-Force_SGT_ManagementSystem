@@ -81,11 +81,11 @@ INSERT INTO `registrar`(`id`, `username`, `password`, `firstname`, `lastname`, `
 (2,'quynhnguyen','$2y$10$3UVxzD8bZFdzTK3x7TFj5u0iv5KKfFtwRGBYH/qwEJHjEItT1REpm','Quỳnh','Nguyễn Mạnh','1980-05-24','quynh.nguyenmanh@gmail.com','0937229526','856 Tạ Quang Bửu, P.5,Q.8,TP.HCM ','nguyenmanhquynh.jpg',1),
 (3,'hungly','$2y$10$k84blK8r4eqtCQgZq8K..ucdl/FeJMg/5nXHj8Aff/X522pxNjl82','Hùng','Lý','1981-07-27','hung.ly@gmail.com','0937229571','39485 Kha Vạn Cân, P.Linh Đông,Q.Thủ Đức,TP.HCM ','lyhung.png',1),
 (4,'thaonguyen','$2y$10$qsCtU6s2lIVjstJL4SKYleTZIvo.kex/P7R9ieODvookVRSAhl7cG','Thảo','Nguyễn Thu','1976-08-14','thao.nguyenthu@gmail.com','0937229592','132 Nguyễn Mình Hoàng, P.12,Q.Tân Bình,TP.HCM ','nguyenthuthao.jpg',1),
-(5,'yenly','$2y$10$kji.U.Sgg/j3FrwgeHotc.b1V3KaPFwiuBXZuAAu/MiMYPJwSyNJa','Yến','Lý','1983-10-09','yen.ly@gmail.com','0937229588','582 Ba Tháng Hai, P.10,Q.10,TP.HCM ','lyyen.jpg',1);
-(6,'thanhnguyen','$2y$10$feIKzE/YWE.kShn58GSZB.tJKQllmnrpZ6nsQ/aOicX/kDewqoxyq','Thành','Nguyễn Tiến','1984-01-19','thanh.nguyentien@gmail.com','0933229517','528 Hưng Phú, P.10,Q.8,TP.HCM ','nguyentienthanh.png',1);
-(7,'tanly','$2y$10$854RFa30b4QjXzNtfnTTsuYlrFO1jNJXCFI6M99VvIcxhk0Jxgt8a','Tân','Lý Nhật','1972-09-08','tan.lynhat@gmail.com','0933229522','333 Đường Số 77, P.Tân Quy,Q.7,TP.HCM ','lynhattan.png',1);
-(8,'tungo','$2y$10$JE54Lqo4EwfvuB8rOUsiKOtjJYZGaqWU.8JWQ2d3skFS.fjaqKLIC','Tú','Ngô Thanh','1977-11-29','tu.ngothanh@gmail.com','0933229534','54 Phan Huy Chú, P.10,Q.5,TP.HCM ','ngothanhtu.png',1);
-(9,'diepbui','$$2y$10$97N.nIZfpH4h24qjDEnOYehbMujHRS8MOz31QL/K0mlRPVBomW7TC','Điệp','Bùi Văn','1978-12-15','diep.buivan@gmail.com','0933229599','382 Ba Tháng Hai, P.10,Q.10,TP.HCM ','buivandiep.png',1);
+(5,'yenly','$2y$10$kji.U.Sgg/j3FrwgeHotc.b1V3KaPFwiuBXZuAAu/MiMYPJwSyNJa','Yến','Lý','1983-10-09','yen.ly@gmail.com','0937229588','582 Ba Tháng Hai, P.10,Q.10,TP.HCM ','lyyen.jpg',1),
+(6,'thanhnguyen','$2y$10$feIKzE/YWE.kShn58GSZB.tJKQllmnrpZ6nsQ/aOicX/kDewqoxyq','Thành','Nguyễn Tiến','1984-01-19','thanh.nguyentien@gmail.com','0933229517','528 Hưng Phú, P.10,Q.8,TP.HCM ','nguyentienthanh.png',1),
+(7,'tanly','$2y$10$854RFa30b4QjXzNtfnTTsuYlrFO1jNJXCFI6M99VvIcxhk0Jxgt8a','Tân','Lý Nhật','1972-09-08','tan.lynhat@gmail.com','0933229522','333 Đường Số 77, P.Tân Quy,Q.7,TP.HCM ','lynhattan.png',1),
+(8,'tungo','$2y$10$JE54Lqo4EwfvuB8rOUsiKOtjJYZGaqWU.8JWQ2d3skFS.fjaqKLIC','Tú','Ngô Thanh','1977-11-29','tu.ngothanh@gmail.com','0933229534','54 Phan Huy Chú, P.10,Q.5,TP.HCM ','ngothanhtu.png',1),
+(9,'diepbui','$$2y$10$97N.nIZfpH4h24qjDEnOYehbMujHRS8MOz31QL/K0mlRPVBomW7TC','Điệp','Bùi Văn','1978-12-15','diep.buivan@gmail.com','0933229599','382 Ba Tháng Hai, P.10,Q.10,TP.HCM ','buivandiep.png',1),
 (10,'dudoan','$2y$10$9Jl/6HJHyn9B0w5h26HQ/./9DpTG3oRIBRVQfxz3YuuLPBqEXh5Ty','Dự','Đoàn','1980-07-27','du.doan@gmail.com','0933229544','9 Sư Vạn Hạnh, P.12,Q.10,TP.HCM ','doandu.png',1);
 
 -----student
