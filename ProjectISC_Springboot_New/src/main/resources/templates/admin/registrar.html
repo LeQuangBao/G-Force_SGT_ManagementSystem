@@ -298,7 +298,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName"> Last Name</label>
+								<label class="control-label" for="lastName">Last Name</label>
 								<div class="">
 									<input id="lastName" name="lastName" placeholder=""
 										class="form-control input-md" type="text" ng-model="lastName"
@@ -416,8 +416,8 @@
 
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile
-								picture</label>
+							<label class=" control-label" style="margin-top: 9px;" for="">
+								Picture</label>
 							<div class=" picture">
 
 								<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
@@ -737,9 +737,9 @@
 						</form>
 					</div>
 					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
-						<div class=" picture">
+						<label class="col-md-2 control-label" style="margin-top: 9px;" for="">
+							Picture</label>
+						<div class="col-md-12 picture">
 
 							<img ng-src="http://localhost:8080/admin/images/{{view.image}}"
 								width="100" height="150" class="img-responsive" />
@@ -750,10 +750,9 @@
 
 
 						<div class="form-group">
-							<label class="control-label col-md-4" for="status">Status
+							<label class="control-label col-md-12" for="status">Status
 							</label>
-
-							<p ng-bind="view.status ? 'Active' : 'Inactive'"></p>
+							<p class="col-md-4" ng-bind="view.status ? 'Active' : 'Inactive'"></p>
 						</div>
 					</div>
 				</div>
