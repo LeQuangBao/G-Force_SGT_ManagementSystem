@@ -331,10 +331,6 @@
 									<div ng-message="required" ng-show="formThem.enddate.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
-									<div ng-message="validationError">
-										<p style="color: red">The End date must be greater than
-											the Start date</p>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -357,8 +353,7 @@
 					<button type="button" class="btn btn-primary" id="them"
 						data-ng-click="Them()" ng-disabled="formThem.$invalid">Add</button>
 					<button type="button" class="btn btn-default" id="them"
-						data-ng-click="Them()" ng-disabled="formThem.$invalid"
-						data-dismiss="modal">Add and close</button>
+						data-ng-click="Them2()" ng-disabled="formThem.$invalid">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetForm()">Close</button>
 
