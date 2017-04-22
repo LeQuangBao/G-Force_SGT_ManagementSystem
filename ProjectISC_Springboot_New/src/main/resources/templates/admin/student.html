@@ -168,7 +168,14 @@
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-
+													<th class="sortable" style="width: 15%"
+														ng-click="sortType = 'schoolId';sortReverse = !sortReverse">Student_id
+														<span
+														ng-show="sortType == 'schoolId' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'schoolId' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
 													<th class="sortable" style="width: 15%"
 														ng-click="sortType = 'schoolId';sortReverse = !sortReverse">Username
 														<span
@@ -282,7 +289,7 @@
 													data-ng-show="showList($index)">
 													<td ng-bind="$index+1"><input type="hidden"
 														ng-model="x.id" /></td>
-
+													<td data-ng-bind="x.studentId"></td>
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.firstname"></td>
 													<td data-ng-bind="x.lastname"></td>
@@ -299,7 +306,7 @@
 													<td data-ng-bind="x.status"></td>
 													<td>
 														<button data-toggle="modal" class="btn btn-success btn-sm"
-															data-target="#myModal_chitiet" ng-click="chitiet(x)">
+															data-target="#myModal_detail" ng-click="chitiet1(x)">
 															<span class="glyphicon glyphicon-eye-open"></span>
 														</button>
 														<button class="btn btn-primary btn-sm"
@@ -430,8 +437,9 @@
 								<label class=" control-label" for="birthday">Retype
 									password</label>
 								<div class="">
-									<input type="password" id="pass2" onkeyup="ValidatePass()" name="re_password"
-										required="required" class="form-control col-md-7 col-xs-12" />
+									<input type="password" id="pass2" onkeyup="ValidatePass()"
+										name="re_password" required="required"
+										class="form-control col-md-7 col-xs-12" />
 									<div ng-messages="frmInstructor.password.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.password.$touched">
@@ -862,8 +870,9 @@
 					<h4 class="modal-title" id="myModalLabel">Detail information</h4>
 				</div>
 				<div class="modal-body row">
-					<div class="col-md-6">
-						<form class="form-horizontal" name="frmStudentAdd">
+					<form class="form-horizontal" name="frmStudentAdd">
+						<div class="col-md-6">
+
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
@@ -891,7 +900,7 @@
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-12 control-label" for="birthday">Birthday</label>
+								<label class="control-label" for="birthday">Birthday</label>
 								<div class="col-md-12">
 									<p>{{chitiet.birthday}}</p>
 								</div>
@@ -917,61 +926,74 @@
 									<p>{{chitiet.address}}</p>
 								</div>
 							</div>
-
-
-						</form>
-					</div>
-					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Piture</label>
-						<div class=" picture">
-
-							<img
-								ng-src="http://localhost:8080/admin/images/{{chitiet.image}}"
-								ng-show="prev_img_edit==''" width="100" height="150"
-								class="img-responsive" />
-
-							<!-- Multiple Radios -->
-
 						</div>
+						<div class="col-md-6">
 
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Picture</label>
+								<div class=" picture">
 
-						<div class="form-group row">
+									<img
+										ng-src="http://localhost:8080/admin/images/{{chitiet.image}}"
+										width="100" height="150" class="img-responsive" />
+									<!-- Multiple Radios -->
 
-							<div class="col-md-6">
-								<label class="col-md-12 control-label" for="selectbasic">Intake</label>
-								<div class="col-md-12">
-									<p>{{chitiet.intake}}</p>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<label class="col-md-12 control-label" for="selectbasic">Entrance
-									exam</label>
-								<div class="col-md-12">
-									<p>{{chitiet.entranceExam}}</p>
 								</div>
 							</div>
 
-						</div>
-						<div class="form-group">
-							<label class="col-md-12 control-label" for="selectbasic">School</label>
-							<div class="col-md-12">
-								<p>{{chitiet.school}}</p>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName">School</label>
+								<div class="">
+									<p>{{chitiet.school.schoolName}}</p>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-12" for="status">Status</label>
 
-							<p>{{chitiet.status}}</p>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">Entrance_Exam</label>
+								<div class="">
+									<p>{{chitiet.entranceExam.entranceExamName}}</p>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="birthday">Intake</label>
+								<div class="col-md-12">
+									<p>{{chitiet.intake.intakeName}}</p>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Gender</label>
+								<div class="">
+									<p>{{chitiet.gender}}</p>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Status</label>
+								<div class="">
+									<p>{{chitiet.status}}</p>
+								</div>
+							</div>
+							<!-- Text input-->
 
 						</div>
-					</div>
+
+					</form>
+
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 	<!-- Modal resetpass -->
 	<div class="modal fade" id="myModal_reset" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
