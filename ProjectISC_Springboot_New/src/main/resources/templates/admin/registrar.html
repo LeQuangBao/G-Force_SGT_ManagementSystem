@@ -150,6 +150,12 @@
 									<input id="filter" type="text" placeholder="Filter"
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
+								<div class="col-md-6 col-md-offset-6">
+									Show: <input type="checkbox" data-ng-model="showBirthday">Birthday</input>
+									<input type="checkbox" data-ng-model="showEmail">Email</input>
+									<input type="checkbox" data-ng-model="showPhone">Phone</input>
+									<input type="checkbox" data-ng-model="showAddress">Address</input>
+								</div>
 								<div class="x_content">
 
 									<label for="mySelect">Display </label> <select name="mySelect"
@@ -187,7 +193,40 @@
 														ng-show="sortType == 'firstName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-
+													<th class="sortable" style="width: 10%"
+														ng-show="showBirthday"
+														ng-click="sortType = 'birthday';sortReverse = !sortReverse">Birthday
+														<span
+														ng-show="sortType == 'birthday' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'birthday' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 25%" ng-show="showEmail"
+														ng-click="sortType = 'email';sortReverse = !sortReverse">Email
+														<span
+														ng-show="sortType == 'email' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'email' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%" ng-show="showPhone"
+														ng-click="sortType = 'phone';sortReverse = !sortReverse">Phone
+														<span
+														ng-show="sortType == 'phone' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'phone' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
+													<th class="sortable" style="width: 10%"
+														ng-show="showAddress"
+														ng-click="sortType = 'address';sortReverse = !sortReverse">Address
+														<span
+														ng-show="sortType == 'address' &amp;&amp; !sortReverse"
+														class="fa fa-caret-down"></span> <span
+														ng-show="sortType == 'address' &amp;&amp; sortReverse"
+														class="fa fa-caret-up"></span>
+													</th>
 													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'active';sortReverse = !sortReverse">Status
 														<span
@@ -196,7 +235,7 @@
 														ng-show="sortType == 'active' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th style="width: 20%">Action</th>
+													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -207,7 +246,10 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.lastname"></td>
 													<td data-ng-bind="x.firstname"></td>
-
+													<td data-ng-bind="x.birthday" ng-show="showBirthday"></td>
+													<td data-ng-bind="x.email" ng-show="showEmail"></td>
+													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
+													<td data-ng-bind="x.address" ng-show="showAddress"></td>
 													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button type="button" ng-click="viewRegistrar(x)"
@@ -298,7 +340,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName"> Last Name</label>
+								<label class="control-label" for="lastName">Last Name</label>
 								<div class="">
 									<input id="lastName" name="lastName" placeholder=""
 										class="form-control input-md" type="text" ng-model="lastName"
@@ -350,7 +392,7 @@
 								<div class="">
 									<input type="password" id="re_password" name="re_password"
 										data-ng-model="re_password" required="required"
-										class="form-control col-md-7 col-xs-12" />
+										class="form-control col-md-7 col-xs-12" match-password="password"/>
 									<div ng-messages="frmRegistrarAdd.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmRegistrarAdd.re_password.$touched">
@@ -416,14 +458,14 @@
 
 						</div>
 						<div class="col-md-6">
-							<label class=" control-label" style="margin-top: 9px;" for="">Profile
-								picture</label>
+							<label class=" control-label" style="margin-top: 9px;" for="">
+								Picture</label>
 							<div class=" picture">
 
 								<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
 
 								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
-									type="file" id="image" name="image"
+									type="file" id="image" name="uploadfile" accept="*"
 									onchange="angular.element(this).scope().getImage(this)"
 									ng-model="image" class="col-md-12" />
 								<!-- Multiple Radios -->
@@ -633,7 +675,7 @@
 				<div class="modal-footer">
 					<button type="button" class="pull-left btn btn-danger"
 						data-toggle="modal" data-target="#myModal_confirmReset">Reset
-						Password</button>
+						password</button>
 					<button type="button" class="btn btn-primary" ng-click="update()"
 						ng-disabled="frmRegistrarEdit.username.$error.required || frmRegistrarEdit.lastName.$error.required || frmRegistrarEdit.firstName.$error.required|| frmRegistrarEdit.email.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.address.$error.required">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -737,9 +779,9 @@
 						</form>
 					</div>
 					<div class="col-md-6">
-						<label class=" control-label" style="margin-top: 9px;" for="">Profile
-							picture</label>
-						<div class=" picture">
+						<label class="col-md-2 control-label" style="margin-top: 9px;" for="">
+							Picture</label>
+						<div class="col-md-12 picture">
 
 							<img ng-src="http://localhost:8080/admin/images/{{view.image}}"
 								width="100" height="150" class="img-responsive" />
@@ -750,10 +792,9 @@
 
 
 						<div class="form-group">
-							<label class="control-label col-md-4" for="status">Status
+							<label class="control-label col-md-12" for="status">Status
 							</label>
-
-							<p ng-bind="view.status ? 'Active' : 'Inactive'"></p>
+							<p class="col-md-4" ng-bind="view.status ? 'Active' : 'Inactive'"></p>
 						</div>
 					</div>
 				</div>
@@ -765,35 +806,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal resetpass -->
-	<div class="modal fade" id="myModal_reset" tabindex="-1" role="dialog"
-		data-backdrop="false" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Confirm reset
-						password</h4>
-				</div>
-
-				<div class="modal-body">
-
-					<p>Are you sure you want to reset password of this account?</p>
-
-				</div>
-
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="ResetPassword()"
-						data-toggle="modal" data-dismiss="modal">Yes</a>
-
-					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<!-- Modal confirmReset -->
 	<div class="modal fade" id="myModal_confirmReset" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
@@ -807,22 +820,46 @@
 						password</h4>
 				</div>
 
-				<div class="modal-body">
-
-					<div class="form-group">
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmReset">
+					<div class="form-group" >
 						<label class=" control-label" for="birthday">New password</label>
+							<div class="">
+								<input type="password" id="newPassword" name="newPassword"
+									ng-model="newPassword" class="form-control "
+									required="required" />
+								<div ng-messages="frmReset.newPassword.$error">
+									<div ng-message="required"
+										ng-show="frmReset.newPassword.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					<div class="form-group">
+						<label class=" control-label" for="birthday">Retype password</label>
 						<div class="">
-							<input type="password" id="password" name="password"
-								data-ng-model="newPassword" class="form-control col-md-6"
-								ng-required="true" />
+							<input type="password" id="reNewPassword" name="reNewPassword"
+								ng-model="reNewPassword" class="form-control"
+								required="required" match-password="newPassword"/>
+								<div ng-messages="frmReset.reNewPassword.$error">
+										<div ng-message="required"
+											ng-show="frmReset.reNewPassword.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+										<div ng-message="matchPassword">
+											<p style="color: red">Must match the previous field</p>
+										</div>
+									</div>
+								
 						</div>
 					</div>
-
+					</form>
 				</div>
 
 				<div class="modal-footer">
 					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
-						data-toggle="modal">Yes</a>
+						data-toggle="modal" ng-click="ResetPassword()">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 

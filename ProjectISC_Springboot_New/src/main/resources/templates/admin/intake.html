@@ -161,7 +161,7 @@
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-													<th style="width: 10%"
+													<th style="width: 10%" class="sortable"
 														data-ng-click="sortType = 'id';sortReverse = !sortReverse">ID <span
 														ng-show="sortType == 'id' &amp;&amp; !sortReverse"
 														class="fa fa-caret-down"></span> <span
@@ -208,7 +208,7 @@
 													<td data-ng-bind="x.intakeId"></td>
 													<td data-ng-bind="x.intakeName"></td>
 													<td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
- -													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
+ 													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button class="btn btn-primary btn-sm"
@@ -331,10 +331,6 @@
 									<div ng-message="required" ng-show="formThem.enddate.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
-									<div ng-message="validationError">
-										<p style="color: red">The End date must be greater than
-											the Start date</p>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -357,8 +353,7 @@
 					<button type="button" class="btn btn-primary" id="them"
 						data-ng-click="Them()" ng-disabled="formThem.$invalid">Add</button>
 					<button type="button" class="btn btn-default" id="them"
-						data-ng-click="Them()" ng-disabled="formThem.$invalid"
-						data-dismiss="modal">Add and close</button>
+						data-ng-click="Them2()" ng-disabled="formThem.$invalid">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetForm()">Close</button>
 
@@ -454,7 +449,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="sua"
-						data-ng-click="Sua()" ng-disabled="formSua.$invalid">Edit</button>
+						data-ng-click="Sua()" ng-disabled="formSua.$invalid">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetValidation_Edit()">Close</button>
 				</div>

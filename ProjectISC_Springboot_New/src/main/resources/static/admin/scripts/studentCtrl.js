@@ -382,6 +382,9 @@ app
 					$scope.list_temp_inf_edit = [];
 					$scope.sua = function(data) {
 						$scope.list_temp_inf_edit = data;
+						$scope.list_temp_inf_edit.birthday = new date(
+								data.birthday)
+					
 					};
 					// lấy dữ liệu để xóa
 					$scope.list_temp_inf_delete = [];
