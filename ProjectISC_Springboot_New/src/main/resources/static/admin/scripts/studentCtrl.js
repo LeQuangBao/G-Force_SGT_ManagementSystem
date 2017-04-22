@@ -357,11 +357,13 @@ app
 					// xóa student
 					$scope.deleteStudent = function xoa() {
 						console.log($scope.list_temp_inf_delete.id);
-						$http({
-							method : "DELETE",
-							url : "/admin/api/Student/" +$scope.list_temp_inf_delete.id
+						$http(
+								{
+									method : "DELETE",
+									url : "/admin/api/Student/"
+											+ $scope.list_temp_inf_delete.id
 
-						}).then(function mySucces(response) {
+								}).then(function mySucces(response) {
 							$('#myModal_xoa').modal('hide');
 							GetListStudent();
 							deleteAlert();
@@ -372,6 +374,9 @@ app
 					$scope.list_temp_inf_edit = [];
 					$scope.sua = function(data) {
 						$scope.list_temp_inf_edit = data;
+						$scope.list_temp_inf_edit.birthday = new date(
+								data.birthday)
+					
 					};
 					// lấy dữ liệu để xóa
 					$scope.list_temp_inf_delete = [];

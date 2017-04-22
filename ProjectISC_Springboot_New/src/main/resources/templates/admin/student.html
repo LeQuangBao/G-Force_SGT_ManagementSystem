@@ -303,7 +303,7 @@
 															<span class="glyphicon glyphicon-eye-open"></span>
 														</button>
 														<button class="btn btn-primary btn-sm"
-															ng-click="callEditSpecialization(x)" data-toggle="modal"
+															ng-click="sua(x)" data-toggle="modal"
 															data-target="#myModal_sua">
 															<span class="glyphicon glyphicon-edit"></span>
 														</button>
@@ -598,7 +598,7 @@
 		</div>
 	</div>
 	<!-- Modal sửa -->
-	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -609,7 +609,7 @@
 					<h4 class="modal-title" id="myModalLabel">Edit student</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" name="formStudent"
+					<form class="form-horizontal" name="formStudent_sua"
 						enctype="multipart/form-data" id="fileUploadForm1">
 						<div class="col-md-6">
 
@@ -661,22 +661,22 @@
 									</div>
 								</div>
 							</div>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Password</label>
-								<div class="">
-									<input type="password" id="password" name="password"
-										data-ng-model="list_temp_inf_edit.password"
-										required="required" class="form-control col-md-7 col-xs-12" />
-									<div ng-messages="frmInstructor.password.$error">
-										<div ng-message="required"
-											ng-show="frmInstructor.password.$touched">
-											<p style="color: red">This field is required</p>
-										</div>
+<!-- 							Text input -->
+<!-- 							<div class="form-group"> -->
+<!-- 								<label class=" control-label" for="birthday">Password</label> -->
+<!-- 								<div class=""> -->
+<!-- 									<input type="password" id="password" name="password" -->
+<!-- 										data-ng-model="list_temp_inf_edit.password" -->
+<!-- 										required="required" class="form-control col-md-7 col-xs-12" /> -->
+<!-- 									<div ng-messages="frmInstructor.password.$error"> -->
+<!-- 										<div ng-message="required" -->
+<!-- 											ng-show="frmInstructor.password.$touched"> -->
+<!-- 											<p style="color: red">This field is required</p> -->
+<!-- 										</div> -->
 
-									</div>
-								</div>
-							</div>
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 
 							<!-- Text input-->
 							<div class="form-group">
@@ -777,7 +777,7 @@
 								<div class="form-group col-md-12">
 									<label class="control-label">School</label>
 									<div class="">
-										<select ng-model="list_temp_inf_edit.school"
+										<select ng-model="student.school"
 											class="form-control"
 											ng-options="x.intakeName for x in listIntake" name="intake"
 											id="intake" ng-required="true">
