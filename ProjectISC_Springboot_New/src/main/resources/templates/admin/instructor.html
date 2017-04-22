@@ -252,7 +252,7 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.lastname"></td>
 													<td data-ng-bind="x.firstname"></td>
-													<td data-ng-bind="x.birthday" ng-show="showBirthday"></td>
+													<td ng-show="showBirthday">{{x.birthday | date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.email" ng-show="showEmail"></td>
 													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
 													<td data-ng-bind="x.address" ng-show="showAddress"></td>
