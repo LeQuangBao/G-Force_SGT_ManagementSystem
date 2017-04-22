@@ -233,7 +233,8 @@ app
 							});
 						};
 						reader.readAsDataURL(photofile);
-						$scope.image = photofile.name;
+						$scope.image1 = photofile.name;
+
 					};
 					$scope.getImage_Edit = function(element) {
 						photofile = element.files[0];
@@ -250,8 +251,7 @@ app
 
 					// upload file
 					function uploadFile() {
-						$
-								.ajax({
+						$.ajax({
 									type : "POST",
 									url : "/admin/student/uploadFile",
 									type : "POST",
@@ -277,54 +277,59 @@ app
 
 					// thêm student
 					$scope.them = function() {
-						// uploadFile();
-						$scope.student.image = $scope.fileupload1;
+						uploadFile();
+						$scope.student.image = $scope.image1;
 						$scope.student.birthday = $scope.birthday;
-						// tạo mã học viên
-						// mã khóa đầu vào
-						var makhoa = $scope.student.intake.intakeId;
 
+						var makhoa = $scope.student.intake.intakeId;
+						//
 						// hai số cuối của năm
 						var date = new Date();
 						var year = date.getFullYear().toString();
+						//
+						console.log($scope.list.length);
+						// 4 số cuối của mã học viên
+						var number = "";
+						if ($scope.list = null) {
+							number2 = "0001";
+						} else {
+							var mahv = $scope.list[$scope.list.length - 1].studentId;
+							var mahv1 = mahv.substr(11, 5);
 
-						// giới tính
-						console.log($scope.student.gender);
-						// random số từ 0001-9999
-						var number = (Math
-								.floor(Math.random() * (9999 - 1 + 1)) + 1)
-								.toString();
-						var number2 = "";
-						if (number.length = 1) {
-							number2 = "000" + number;
-						}
-						if (number.length = 2) {
-							number2 = "00" + number;
+							var mahv2 = "";
+							if (mahv1.substr(0, 3) == "000") {
+								mahv2 = mahv1.substr(4, 1);
+							} else {
+								if (mahv1.substr(0, 2) == "00") {
+									mahv2 = mahv1.substr(3, 2);
+								} else {
+									if (mahv1.substr(0, 1) == "0") {
+										mahv2 = mahv1.substr(2, 3);
+									} else {
+										mahv2 = mahv1;
+									}
+								}
+							}
+							var mahv3 = parseInt(mahv2);
+							var mahv4 = mahv3 + 1;
+							var mahv5 = mahv4.toString();
 
-						}
-						if (number.length = 3) {
-							number2 = "0" + number;
-						}
-						if (number.length = 4) {
-							number2 = number;
-						}
-						console.log(makhoa);
+							// mã học viên
+							var mahv6 = makhoa + "-" + year.substr(2, 4) + "-"
+									+ $scope.student.gender + "-" + mahv5;
 
-						// mã học viên
-						var mahv = makhoa + "-" + year.substr(2, 4) + "-"
-								+ $scope.student.gender + "-" + number2;
-						$scope.student.image = $scope.uploadfile1;
-						$scope.birthday = $scope.birthday;
-						$scope.student.studentId = mahv;
-						$http({
-							method : "POST",
-							url : "/admin/api/Student",
-							data : $scope.student
-						}).then(function mySucces(response) {
-							GetListStudent();
-							addAlert();
-						});
-					};
+							$scope.student.studentId = mahv6;
+							$http({
+								method : "POST",
+								url : "/admin/api/Student",
+								data : $scope.student
+							}).then(function mySucces(response) {
+								GetListStudent();
+								addAlert();
+							});
+						}
+						;
+					}
 					// sửa student
 					$scope.edit = function edit() {
 
@@ -339,11 +344,14 @@ app
 						});
 					}
 					// load chi tiet student
-					$scope.chitiet = function(data) {
+					$scope.chitiet = [];
+					$scope.chitiet1 = function(data) {
 						$scope.chitiet = data;
+						console.log($scope.chitiet.image);
 					}
 					// reset password
 					$scope.Reset = function(data) {
+						$scope.list_temp_inf_reset.password = "123456";
 						$http({
 							method : "PUT",
 							url : "/admin/api/Student_Reset",

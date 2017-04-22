@@ -296,8 +296,8 @@
                                  <p style="color: red">This field is required</p>
                               </div>
                               <div ng-message="validationError">
-                                 <p style="color: red">Course Name is already exists.
-                                    Please enter another course Name.
+                                 <p style="color: red">Course name is already exists.
+                                    Please enter another course name.
                                  </p>
                               </div>
                            </div>
@@ -369,7 +369,7 @@
                   <button id="btnSave" name="btnSave" class="btn btn-primary"
                      ng-click="save()" ng-disabled="frmsubjectAdd.$invalid">Add</button>
                   <button id="btnSave" name="btnSave" class="btn btn-default"
-                     ng-click="save()" ng-disabled="frmsubjectAdd.$invalid">Add and close</button>
+                     ng-click="save()" ng-disabled="frmsubjectAdd.$invalid" data-dismiss="modal">Add and close</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                </div>
             </div>
