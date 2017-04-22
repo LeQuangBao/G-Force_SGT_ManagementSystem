@@ -81,10 +81,11 @@ app
 									numberOfStudent = numberOfStudent + 1;
 								}
 							});
-							alert(numberOfStudent);
+//							alert(numberOfStudent);
 						});
 					}
 					countStudent("IN005");
+					
 					
 					// lấy danh sách intake
 					function GetListIntake() {
