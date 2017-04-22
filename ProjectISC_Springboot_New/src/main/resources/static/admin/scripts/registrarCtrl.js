@@ -285,6 +285,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
             dataType: "json"
          })
             .then(function (result) {
+            	$("#myModal_confirmReset").modal("hide");
              	  resetAlert();
           });
     }     
