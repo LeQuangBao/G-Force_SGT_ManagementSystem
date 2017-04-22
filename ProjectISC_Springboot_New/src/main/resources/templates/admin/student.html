@@ -291,8 +291,8 @@
 														ng-model="x.id" /></td>
 													<td data-ng-bind="x.studentId"></td>
 													<td data-ng-bind="x.username"></td>
-													<td data-ng-bind="x.firstname"></td>
 													<td data-ng-bind="x.lastname"></td>
+													<td data-ng-bind="x.firstname"></td>
 													<td ng-show="showBirthday">{{x.birthday | date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.email" ng-show="showEmail"></td>
 													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
@@ -968,7 +968,7 @@
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Gender</label>
 								<div class="">
-									<p>{{chitiet.gender}}</p>
+									<p>{{chitiet.gender ? 'Female' : 'Male'}}</p>
 								</div>
 							</div>
 							<!-- Text input-->
