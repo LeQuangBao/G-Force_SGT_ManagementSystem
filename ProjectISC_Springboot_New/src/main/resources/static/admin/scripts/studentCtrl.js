@@ -46,9 +46,9 @@ app
 												}
 											});
 										});
-						console.log($scope.listsl);
+//						console.log($scope.listsl);
 					}
-					;
+					
 
 					CountListStudent();
 					$scope.Clicktest = function() {
@@ -62,11 +62,30 @@ app
 						var Student = $resource('http://localhost:8080/admin/api/Student');
 						Student.query().$promise.then(function(listStudent) {
 							$scope.list = listStudent;
+							listAllStudent = listStudent;
 							console.log($scope.list);
 
 						});
 
 					}
+					
+					// Lấy số lượng student theo intake id, bỏ vào biến countStudent
+					var numberOfStudent = 0;
+					
+					function countStudent(intakeId) {
+						var Student = $resource('http://localhost:8080/admin/api/Student');
+						Student.query().$promise.then(function(listStudent) {
+
+							listStudent.forEach(function(item, index){
+								if (item.intake.intakeId === intakeId) {
+									numberOfStudent = numberOfStudent + 1;
+								}
+							});
+							alert(numberOfStudent);
+						});
+					}
+					countStudent("IN005");
+					
 					// lấy danh sách intake
 					function GetListIntake() {
 						$scope.list_intake = [];
@@ -121,7 +140,7 @@ app
 					GetListschool();
 					GetListEnchance_Exam();
 
-					$scope.sortType = 'username';
+					$scope.sortType = 'studentId';
 					$scope.filterTable = '';
 					// filter list
 					$scope.listfiltered = function(element) {
