@@ -46,9 +46,8 @@ app
 												}
 											});
 										});
-//						console.log($scope.listsl);
+						// console.log($scope.listsl);
 					}
-					
 
 					CountListStudent();
 					$scope.Clicktest = function() {
@@ -68,25 +67,26 @@ app
 						});
 
 					}
-					
-					// Lấy số lượng student theo intake id, bỏ vào biến countStudent
+
+					// Lấy số lượng student theo intake id, bỏ vào biến
+					// countStudent
 					var numberOfStudent = 0;
-					
+
 					function countStudent(intakeId) {
 						var Student = $resource('http://localhost:8080/admin/api/Student');
 						Student.query().$promise.then(function(listStudent) {
 
-							listStudent.forEach(function(item, index){
+							listStudent.forEach(function(item, index) {
 								if (item.intake.intakeId === intakeId) {
 									numberOfStudent = numberOfStudent + 1;
 								}
 							});
-//							alert(numberOfStudent);
+							// alert(numberOfStudent);
 						});
 					}
-					countStudent("IN005");
-					
-					
+					// countStudent("IN005");
+					//					
+
 					// lấy danh sách intake
 					function GetListIntake() {
 						$scope.list_intake = [];
@@ -325,54 +325,65 @@ app
 								});
 					}
 					;
+					// kiểm ra trùng username
+					function usernameduplicate(username) {
+						var Student = $resource('http://localhost:8080/admin/api/Student');
+						Student.query().$promise.then(function(listStudent) {
+
+							listStudent.forEach(function(item, index) {
+								if (item.username === username) {
+									alertduplicatestudent();
+								}
+							});
+							// alert(numberOfStudent);
+						});
+					}
 
 					// thêm student
-					$scope.them = function() {
+				$scope.them = function() {
 						uploadFile();
+						usernameduplicate($scope.student.username);
 						$scope.student.image = $scope.image1;
 						$scope.student.birthday = $scope.birthday;
 						$scope.student.password = $scope.password;
 
-						var makhoa = $scope.student.intake.intakeId;
-						//
-						// hai số cuối của năm
-						var date = new Date();
-						var year = date.getFullYear().toString();
-						//
-						console.log($scope.list.length);
-						// dem so luong hoc sinh trong 1 intake
-						var numberstudent = "";
+						var numberOfStudent = 0;
+						var Student = $resource('http://localhost:8080/admin/api/Student');
+						Student.query().$promise.then(function(listStudent) {
 
-						// 4 số cuối của mã học viên
-						var number = "";
-						if ($scope.list = null) {
-							number2 = "0001";
-						} else {
-							var mahv = $scope.list[$scope.list.length - 1].studentId;
-							var mahv1 = mahv.substr(11, 5);
-
-							var mahv2 = "";
-							if (mahv1.substr(0, 3) == "000") {
-								mahv2 = mahv1.substr(4, 1);
-							} else {
-								if (mahv1.substr(0, 2) == "00") {
-									mahv2 = mahv1.substr(3, 2);
-								} else {
-									if (mahv1.substr(0, 1) == "0") {
-										mahv2 = mahv1.substr(2, 3);
-									} else {
-										mahv2 = mahv1;
-									}
+							listStudent.forEach(function(item, index) {
+								if (item.intake.intakeId === $scope.student.intake.intakeId) {
+									numberOfStudent = numberOfStudent + 1;
 								}
+							});
+							console.log(numberOfStudent);
+							var numberstring = numberOfStudent.toString();
+							console.log(numberstring);
+							if (numberstring.length == 1) {
+								numberstring = "000" + numberstring;
 							}
-							var mahv3 = parseInt(mahv2);
-							var mahv4 = mahv3 + 1;
-							var mahv5 = mahv4.toString();
-
+							if (numberstring.length == 2) {
+								numberstring = "00" + numberstring;
+							}
+							if (numberstring.length == 3) {
+								numberstring = "0" + numberstring;
+							}
+							if (numberstring.length == 4) {
+								numberstring = numberstring;
+							}
+							 //hai số cuối của năm
+							var date = new Date();
+							var year = date.getFullYear().toString();
+							//
+	
+							// dem so luong hoc sinh trong 1 intake
+							// var numberstudent = "";
+	
 							// mã học viên
-							var mahv6 = makhoa + "-" + year.substr(2, 4) + "-"
-									+ $scope.student.gender + "-" + mahv5;
-
+							var mahv6 = $scope.student.intake.intakeId + "-"
+									+ year.substr(2, 4) + "-"
+									+ $scope.student.gender + "-" + numberstring;
+	
 							$scope.student.studentId = mahv6;
 							$http({
 								method : "POST",
@@ -382,9 +393,16 @@ app
 								GetListStudent();
 								addAlert();
 							});
-						}
-						;
-					}
+							
+	
+						})
+							
+				
+							
+						};
+//						
+					
+
 					// sửa student
 					$scope.edit = function edit() {
 
@@ -455,15 +473,14 @@ app
 					}
 					// kiểm tra retype password
 					$scope.kiemtra = function() {
-//						console.log($scope.password);
-//						console.log($scope.newpassword);
+						// console.log($scope.password);
+						// console.log($scope.newpassword);
 						if ($scope.password == $scope.newpassword) {
-						$scope.ketqua="Match password";
+							$scope.ketqua = "Match password";
+						} else {
+							$scope.ketqua = " Not Match password";
+						}
 					}
-					else{
-						$scope.ketqua=" Not Match password";
-					}
-				}
 
 					function deleteAlert() {
 						swal({
@@ -511,4 +528,14 @@ app
 							showConfirmButton : false
 						})
 					}
-				});
+					function alertduplicatestudent() {
+						swal({
+							title : "",
+							text : "Oops! Duplicate Username is not allowed.",
+							type : "error",
+							timer : alertDuration,
+							showConfirmButton : false
+						})
+					}
+				})
+// );
