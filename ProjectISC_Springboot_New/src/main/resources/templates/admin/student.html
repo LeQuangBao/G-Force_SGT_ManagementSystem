@@ -832,8 +832,11 @@
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
 								<div class="">
-
-									<p>{{chitiet.username}}</p>
+									<input id="username" name="username" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="chitiet.username" readonly="readonly"
+										ng-required="true" />
+									
 
 								</div>
 							</div>
@@ -842,7 +845,10 @@
 							<div class="form-group">
 								<label class="control-label" for="lastName"> Lastname</label>
 								<div class="">
-									<p>{{chitiet.lastname}}</p>
+									<input id="lastName" name="lastName" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="chitiet.lastname" readonly="readonly"
+										ng-required="true" />
 								</div>
 							</div>
 
@@ -850,35 +856,49 @@
 							<div class="form-group">
 								<label class="control-label" for="firstName">Firstname</label>
 								<div class="">
-									<p>{{chitiet.firstname}}</p>
+									<input id="firstName" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="chitiet.firstname" readonly="readonly" />
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="control-label" for="birthday">Birthday</label>
-								<div class="col-md-12">
-									<p>{{chitiet.birthday}}</p>
+								<div class="">
+								<input id="birthday" name="birthday"
+									class="form-control input-md" type="text"
+									ng-model="chitiet.birthday" readonly="readonly" />
+									<!-- <p>{{chitiet.birthday}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Email</label>
 								<div class="">
-									<p>{{chitiet.email}}</p>
+								<input id="email" name="email" placeholder=""
+									class="form-control input-md" type="text" ng-model="chitiet.email"
+									readonly="readonly" />
+									<!-- <p>{{chitiet.email}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Phone</label>
 								<div class="">
-									<p>{{chitiet.phone}}</p>
+								<input id="phone" name="phone" placeholder=""
+									class="form-control input-md" type="tel" ng-model="chitiet.phone"
+									readonly="readonly" />
+									<!-- <p>{{chitiet.phone}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Address</label>
 								<div class="">
-									<p>{{chitiet.address}}</p>
+								<input id="adress" name="address" placeholder=""
+									class="form-control input-md" type="text"
+									ng-model="chitiet.address" readonly="readonly" />
+									<!-- <p>{{chitiet.address}}</p> -->
 								</div>
 							</div>
 						</div>
@@ -900,36 +920,48 @@
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="control-label" for="lastName">School</label>
-								<div class="">
-									<p>{{chitiet.school.schoolName}}</p>
+								<div class="col-md-12">
+								<select id="selectbasic" name="selectbasic" class="form-control"
+									readonly="readonly">
+									<option ng-bind="chitiet.school.schoolName"></option>
+								</select>
+									<!-- <p>{{chitiet.school.schoolName}}</p> -->
 								</div>
 							</div>
 
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="control-label" for="firstName">Entrance_Exam</label>
-								<div class="">
-									<p>{{chitiet.entranceExam.entranceExamName}}</p>
+								<div class="col-md-12">
+								<select id="selectbasic" name="selectbasic" class="form-control"
+									readonly="readonly">
+									<option ng-bind="chitiet.entranceExam.entranceExamName"></option>
+								</select>
+									<!-- <p>{{chitiet.entranceExam.entranceExamName}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="control-label" for="birthday">Intake</label>
 								<div class="col-md-12">
-									<p>{{chitiet.intake.intakeName}}</p>
+								<select id="selectbasic" name="selectbasic" class="form-control"
+									readonly="readonly">
+									<option ng-bind="chitiet.intake.intakeName"></option>
+								</select>
+									<!-- <p>{{chitiet.intake.intakeName}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Gender</label>
-								<div class="">
+								<div class="col-md-12">
 									<p>{{chitiet.gender ? 'Female' : 'Male'}}</p>
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Status</label>
-								<div class="">
+								<div class="col-md-12">
 									<p>{{chitiet.status}}</p>
 								</div>
 							</div>
