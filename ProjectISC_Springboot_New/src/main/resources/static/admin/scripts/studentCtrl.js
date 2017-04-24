@@ -358,6 +358,7 @@ app
 													numberOfStudent = numberOfStudent + 1;
 												}
 											});
+									numberOfStudent =numberOfStudent +1;
 									console.log(numberOfStudent);
 									var numberstring = numberOfStudent
 											.toString();

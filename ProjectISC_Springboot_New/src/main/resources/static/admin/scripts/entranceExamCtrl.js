@@ -1,4 +1,4 @@
-app.controller('entranceExamCtrl', function($scope, $http, $filter) {
+app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 	$scope.rowdata = {
 		availableOptions : [ {
 			id : '15',
@@ -118,19 +118,45 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 		});
 	}
 	$scope.edit = function edit() {
-
+		
 		$http({
 			method : "PUT",
 			url : "/admin/api/entrance-exam",
 			data : $scope.exam
 		}).then(function mySucces(response) {
 			$('#editModal').modal('hide');
-			getAllEntranceExam();
+				
+			//getAllEntranceExam();
+			
 			editAlert();
+			$scope.updatePageIndexes();
+
+			$scope.showList = function(school, index) {
+				return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+			}
 		});
 	}
+	
 	$scope.del = function del() {
+		var Student = $resource('http://localhost:8080/admin/api/Student');
+		var numberOfStudent=0;
+		Student.query().$promise.then(function(listStudent) {
 
+					listStudent.forEach(function(item, index) {
+								if (item.entranceExam.id === $scope.exam.id) {
+									numberOfStudent = numberOfStudent + 1;
+								}
+							});
+					
+					if(numberOfStudent!=0)
+						{
+						alertFailMessage("This entranceExam have student");
+						$('#deleteModal').modal('hide');
+						getAllEntranceExam();
+						}
+					
+		})
+//				})
 		$http({
 			method : "DELETE",
 			url : "/admin/api/entrance-exam/" + $scope.exam.id
@@ -194,4 +220,6 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 			showConfirmButton : false
 		})
 	}
+	
+	
 });
