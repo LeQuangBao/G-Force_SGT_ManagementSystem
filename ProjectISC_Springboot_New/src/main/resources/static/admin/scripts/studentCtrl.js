@@ -295,7 +295,7 @@ app
 							});
 						};
 						reader.readAsDataURL(photofile);
-						$scope.image = photofile.name;
+						$scope.list_temp_inf_edit.image = photofile.name
 					};
 					// kiểm tra retype password
 
@@ -358,7 +358,7 @@ app
 													numberOfStudent = numberOfStudent + 1;
 												}
 											});
-									numberOfStudent =numberOfStudent +1;
+									numberOfStudent = numberOfStudent + 1;
 									console.log(numberOfStudent);
 									var numberstring = numberOfStudent
 											.toString();
@@ -406,6 +406,7 @@ app
 
 					// sửa student
 					$scope.edit = function edit() {
+						uploadFile_Edit();
 
 						$http({
 							method : "PUT",
@@ -461,9 +462,19 @@ app
 					}
 					// lấy dữ liệu để sửa
 					// array did filter
-					$scope.list_temp_inf_edit = [];
+
 					$scope.sua = function(data) {
+						$scope.list_temp_inf_edit = [];
+						$scope.prev_img_edit = '';
+						document.getElementById("image_edit").value = "";
 						$scope.list_temp_inf_edit = data;
+						$scope.list_temp_inf_edit.lastname = data.lastname;
+						$scope.list_temp_inf_edit.firstname = data.firstname;
+						$scope.list_temp_inf_edit.email = data.email;
+						$scope.list_temp_inf_edit.phone = data.phone;
+						$scope.list_temp_inf_edit.address = data.address;
+						$scope.list_temp_inf_edit.status = data.status;
+						$scope.list_temp_inf_edit.image = data.image;
 						$scope.list_temp_inf_edit.birthday = new Date(
 								data.birthday)
 						$scope.list_temp_inf_edit.gender = data.gender == 0 ? '0'
@@ -493,7 +504,6 @@ app
 							}
 						}
 
-
 					};
 					// lấy dữ liệu để xóa
 					$scope.list_temp_inf_delete = [];
@@ -516,6 +526,42 @@ app
 						} else {
 							$scope.ketqua = " Not Match password";
 						}
+					}
+					function uploadFile_Edit() {
+						$
+								.ajax({
+									url : "uploadFile",
+									type : "POST",
+									data : new FormData(
+											$("#upload-file-form-edit")[0]),
+									enctype : 'multipart/form-data',
+									processData : false,
+									contentType : false,
+									cache : false,
+									success : function() {
+										// Handle upload success
+										$("#upload-file-message").text(
+												"File succesfully uploaded");
+									},
+									error : function() {
+										// Handle upload error
+										$("#upload-file-message")
+												.text(
+														"File not uploaded (perhaps it's too much big)");
+									}
+								});
+					}
+					$scope.ResetPassword = function() {
+						$scope.list_temp_inf_edit.password = $scope.newPassword;
+						$http({
+							method : "PUT",
+							url : "admin/api/Student",
+							data : $scope.list_temp_inf_edit,
+							dataType : "json"
+						}).then(function(result) {
+							$("#myModal_confirmReset").modal("hide");
+							resetAlert();
+						});
 					}
 
 					function deleteAlert() {
@@ -572,6 +618,15 @@ app
 							timer : alertDuration,
 							showConfirmButton : false
 						})
+					}
+					function resetAlert() {
+						swal({
+							title : "",
+							text : "Reset Successfully",
+							type : "success",
+							timer : 2000,
+							showConfirmButton : false
+						});
 					}
 				})
 // );

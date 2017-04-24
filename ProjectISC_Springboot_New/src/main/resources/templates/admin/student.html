@@ -141,14 +141,20 @@
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="col-md-9 col-md-offset-3">
-									<strong>Show :</strong> <input type="checkbox" id="test1" data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
-									<input type="checkbox" id="test4" data-ng-model="showEmail" /> <label for="test4">Email</label>
-									<input type="checkbox" id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
-									<input type="checkbox" id="test3" data-ng-model="showAddress" /> <label for="test3">Address</label>
-									<input type="checkbox" id="school" data-ng-model="showSchool" /> <label for="school">School</label>
-									<input type="checkbox" id="intake" data-ng-model="showIntake" /> <label for="intake">Intake</label>
-									<input type="checkbox" id="entrance" data-ng-model="showEntranceExam" /> <label for="entrance">Entrance Exam</label>
-									<input type="checkbox" id="speci" data-ng-model="showSpecialization" /> <label for="speci">Specialization</label>
+									<strong>Show :</strong> <input type="checkbox" id="test1"
+										data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
+									<input type="checkbox" id="test4" data-ng-model="showEmail" />
+									<label for="test4">Email</label> <input type="checkbox"
+										id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
+									<input type="checkbox" id="test3" data-ng-model="showAddress" />
+									<label for="test3">Address</label> <input type="checkbox"
+										id="school" data-ng-model="showSchool" /> <label for="school">School</label>
+									<input type="checkbox" id="intake" data-ng-model="showIntake" />
+									<label for="intake">Intake</label> <input type="checkbox"
+										id="entrance" data-ng-model="showEntranceExam" /> <label
+										for="entrance">Entrance Exam</label> <input type="checkbox"
+										id="speci" data-ng-model="showSpecialization" /> <label
+										for="speci">Specialization</label>
 								</div>
 								<div class="x_content">
 									<label for="mySelect">Display </label> <select name="mySelect"
@@ -228,8 +234,7 @@
 														ng-show="sortType == 'address' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 5%"
-														ng-show="showSchool"
+													<th class="sortable" style="width: 5%" ng-show="showSchool"
 														ng-click="sortType = 'school';sortReverse = !sortReverse">School
 														<span
 														ng-show="sortType == 'school' &amp;&amp; !sortReverse"
@@ -237,8 +242,7 @@
 														ng-show="sortType == 'school' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 5%"
-														ng-show="showIntake"
+													<th class="sortable" style="width: 5%" ng-show="showIntake"
 														ng-click="sortType = 'intake';sortReverse = !sortReverse">Intake
 														<span
 														ng-show="sortType == 'intake' &amp;&amp; !sortReverse"
@@ -273,7 +277,7 @@
 														class="fa fa-caret-up"></span>
 													</th>
 													<th style="width: 6%">Action</th>
-													
+
 												</tr>
 											</thead>
 											<tbody>
@@ -371,7 +375,8 @@
 										class="form-control input-md" type="text"
 										ng-model="student.username" ng-required="true" />
 									<div ng-messages="frmStudentAdd.username.$error">
-										<div ng-message="required" ng-show="frmStudentAdd.username.$touched">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.username.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -586,11 +591,9 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="them()"
-						ng-disabled="frmStudentAdd.$invalid">Add</button>
+						ng-click="them()" ng-disabled="frmStudentAdd.$invalid">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="them()"
-						ng-disabled="frmStudentAdd.$invalid"
+						ng-click="them()" ng-disabled="frmStudentAdd.$invalid"
 						data-dismiss="modal">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -611,8 +614,8 @@
 					<h4 class="modal-title" id="myModalLabel">Edit student</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" name="fileUploadForm"
-						enctype="multipart/form-data" id="fileUploadForm">
+					<form class="form-horizontal" name="editForm"
+						enctype="multipart/form-data" id="upload-file-form-edit">
 						<div class="col-md-6">
 
 							<!-- Text input-->
@@ -622,9 +625,8 @@
 									<input id="lastname" name="lastName" placeholder=""
 										class="form-control input-md" type="text"
 										ng-model="list_temp_inf_edit.lastname" ng-required="true" />
-									<div ng-messages="fileUploadForm.lastName.$error">
-										<div ng-message="required"
-											ng-show="fileUploadForm.lastName.$touched">
+									<div ng-messages="editForm.lastName.$error">
+										<div ng-message="required">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -638,9 +640,8 @@
 									<input id="firstname" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="list_temp_inf_edit.firstname" />
-									<div ng-messages="fileUploadForm.firstName.$error">
-										<div ng-message="required"
-											ng-show="fileUploadForm.firstName.$touched">
+									<div ng-messages="editForm.firstName.$error">
+										<div ng-message="required">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -655,9 +656,8 @@
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="email" ng-required="true"
 										ng-model="list_temp_inf_edit.email" />
-									<div ng-messages="fileUploadForm.email.$error">
-										<div ng-message="required"
-											ng-show="fileUploadForm.email.$touched">
+									<div ng-messages="editForm.email.$error">
+										<div ng-message="required">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -671,9 +671,8 @@
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="list_temp_inf_edit.phone" />
-									<div ng-messages="fileUploadForm.phone.$error">
-										<div ng-message="required"
-											ng-show="fileUploadForm.phone.$touched">
+									<div ng-messages="editForm.phone.$error">
+										<div ng-message="required">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -687,9 +686,8 @@
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="list_temp_inf_edit.address" />
-									<div ng-messages="fileUploadForm.address.$error">
-										<div ng-message="required"
-											ng-show="fileUploadForm.address.$touched">
+									<div ng-messages="editForm.address.$error">
+										<div ng-message="required">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -735,21 +733,32 @@
 						<div class="col-md-6">
 							<label class="col-md-2 control-label"> Picture</label>
 							<div class="col-md-12 picture">
-								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
-									type="file" id="uploadfile1" name="uploadfile1"
-									onchange="angular.element(this).scope().getImage(this)"
-									ng-model="uploadfile1" class="col-md-12" />
-								<p id="upload-file-message"></p>
+								<img
+									ng-src="http://localhost:8080/admin/images/{{list_temp_inf_edit.image}}"
+									ng-show="prev_img_edit==''" width="100" height="150"
+									class="img-responsive" /> <img ng-src="{{prev_img_edit}}"
+									ng-hide="prev_img_edit==''" width="100" height="150"
+									class="img-responsive" /> <input type="file" id="image_edit"
+									name="uploadfile" accept="*"
+									onchange="angular.element(this).scope().getImage_Edit(this)" />
+
 							</div>
 
 
 							<div class="form-group col-md-12">
-								<label class="control-label" for="birthday">Birthday</label>
-								<div class="col-md-12">
-									<input id="birthday" name="birthday" placeholder=""
-										ng-model="list_temp_inf_edit.birthday"
-										class="form-control input-md" type="date" />
+								<div class="form-group">
+									<label class="control-label" for="birthday">Birthday</label>
+									<div class="col-md-12">
+										<input id="birthday" name="birthday" placeholder=""
+											ng-model="list_temp_inf_edit.birthday"
+											class="form-control input-md" type="date" ng-required="true" />
+										<div ng-messages="editForm.birthday.$error">
+											<div ng-message="required">
+												<p style="color: red">This field is required</p>
+											</div>
 
+										</div>
+									</div>
 								</div>
 								<div class="form-group col-md-12">
 									<label class="control-label">Specialization</label>
@@ -800,10 +809,11 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-
+					<button type="button" class="pull-left btn btn-danger"
+						data-toggle="modal" data-target="#myModal_confirmReset">Reset
+						password</button>
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="edit()"
-						ng-disabled="fileUploadForm.$invalid"
+						ng-click="edit()" ng-disabled="editForm.$invalid"
 						data-dismiss="modal">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -981,41 +991,6 @@
 	</div>
 
 
-	<!-- Modal resetpass -->
-	<div class="modal fade" id="myModal_reset" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Reset password</h4>
-				</div>
-
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="exampleInputEmail1">New Password </label> <input
-								type="password" class="form-control" id="exampleInputEmail1"
-								placeholder="Email" ng-model="newpassword" />
-						</div>
-
-
-					</form>
-
-
-				</div>
-
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="reset()">Yes</a>
-
-					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- Modal confirmReset -->
 	<div class="modal fade" id="myModal_confirmReset" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
@@ -1029,14 +1004,49 @@
 						password</h4>
 				</div>
 
-				<div class="modal-body">
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmReset">
+						<div class="form-group">
+							<label class=" control-label" for="birthday">New password</label>
+							<div class="">
+								<input type="password" id="newPassword" name="newPassword"
+									ng-model="newPassword" class="form-control "
+									required="required" />
+								<div ng-messages="frmReset.newPassword.$error">
+									<div ng-message="required"
+										ng-show="frmReset.newPassword.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Retype
+								password</label>
+							<div class="">
+								<input type="password" id="reNewPassword" name="reNewPassword"
+									ng-model="reNewPassword" class="form-control"
+									required="required" match-password="newPassword" />
+								<div ng-messages="frmReset.reNewPassword.$error">
+									<div ng-message="required"
+										ng-show="frmReset.reNewPassword.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+									<div ng-message="matchPassword">
+										<p style="color: red">Must match the previous field</p>
+									</div>
+								</div>
 
-					<p>Password of this account has been set to 123456.</p>
-
+							</div>
+						</div>
+					</form>
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
+						data-toggle="modal" ng-click="ResetPassword()">Yes</a>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
 				</div>
 			</div>
