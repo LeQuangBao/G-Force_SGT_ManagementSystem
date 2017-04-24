@@ -320,7 +320,7 @@ app
 										// Handle upload error
 										$("#upload-file-message")
 												.text(
-														"File not uploaded (perhaps it's too much big)");
+														"File not uploaded (perhaps it's too big)");
 									}
 								});
 					}
@@ -547,7 +547,7 @@ app
 										// Handle upload error
 										$("#upload-file-message")
 												.text(
-														"File not uploaded (perhaps it's too much big)");
+														"File not uploaded (perhaps it's too big)");
 									}
 								});
 					}
@@ -567,7 +567,7 @@ app
 					function deleteAlert() {
 						swal({
 							title : "",
-							text : "Delete Successfully",
+							text : "Delete successfully.",
 							type : "success",
 							timer : 2000,
 							showConfirmButton : false
@@ -577,7 +577,7 @@ app
 					function editAlert() {
 						swal({
 							title : "",
-							text : "Edit Successfully",
+							text : "Edit successfully.",
 							type : "success",
 							timer : 2000,
 							showConfirmButton : false
@@ -586,7 +586,7 @@ app
 					function resetAlert() {
 						swal({
 							title : "",
-							text : "Reset password Successfully",
+							text : "Reset password successfully.",
 							type : "success",
 							timer : 2000,
 							showConfirmButton : false
@@ -595,7 +595,7 @@ app
 					function addAlert() {
 						swal({
 							title : "",
-							text : "Add Successfully",
+							text : "Add successfully.",
 							type : "success",
 							timer : 2000,
 							showConfirmButton : false
@@ -613,7 +613,7 @@ app
 					function alertduplicatestudent() {
 						swal({
 							title : "",
-							text : "Oops! Duplicate Username is not allowed.",
+							text : "Oops! Something went wrong, please check your input again.",
 							type : "error",
 							timer : alertDuration,
 							showConfirmButton : false
@@ -622,7 +622,7 @@ app
 					function resetAlert() {
 						swal({
 							title : "",
-							text : "Reset Successfully",
+							text : "Reset successfully.",
 							type : "success",
 							timer : 2000,
 							showConfirmButton : false

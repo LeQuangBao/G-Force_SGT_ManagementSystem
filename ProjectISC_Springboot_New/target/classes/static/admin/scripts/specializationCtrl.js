@@ -98,7 +98,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                         },
                         function(response) {
                             if (response.status == 406) {
-                                alertFailMessage("Oops! Duplicate ID is not allowed.");
+                                alertFailMessage("Oops! Something went wrong, please check your input again.");
                             }
                         });
             }
@@ -130,7 +130,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                         },
                         function(response) {
                             if (response.status == 406) {
-                                alertFailMessage("Oops! Duplicate ID is not allowed.");
+                                alertFailMessage("Oops! Something went wrong, please check your input again.");
                             }
                         });
             }
@@ -157,7 +157,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                 },
                 function(response) {
                     if (response.status == 406) {
-                        alertFailMessage("Oops! Duplicate ID is not allowed.");
+                        alertFailMessage("Oops! Something went wrong, please check your input again.");
                     }
                 });
     }
@@ -221,7 +221,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                 },
                 function(response) {
                     if (response.status == 406) {
-                        alertFailMessage("Oops! Duplicate ID is not allowed.");
+                        alertFailMessage("Oops! Something went wrong, please check your input again.");
                     }
                 });
     }
@@ -254,7 +254,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
     function alertDeleteSucess() {
         swal({
             title: "",
-            text: "Delete Successfully",
+            text: "Delete successfully.",
             type: "success",
             timer: alertDuration,
             showConfirmButton: false
@@ -264,7 +264,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
     function alertEditSucess() {
         swal({
             title: "",
-            text: "Edit Successfully",
+            text: "Edit successfully.",
             type: "success",
             timer: alertDuration,
             showConfirmButton: false
@@ -274,7 +274,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
     function alertAddSucess() {
         swal({
             title: "",
-            text: "Add Successfully",
+            text: "Add successfully.",
             type: "success",
             timer: alertDuration,
             showConfirmButton: false
@@ -284,7 +284,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
     function alertFail() {
         swal({
             title: "",
-            text: "Opps! Something went wrong.",
+            text: "Opps! Something went wrong, please check your input again.",
             type: "error",
             timer: alertDuration,
             showConfirmButton: false

@@ -1,5 +1,5 @@
 app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
-	var failMessage = 'Oops! Something went wrong, please check your input again';
+	var failMessage = 'Oops! Something went wrong, please check your input again.';
     $scope.rowdata = {
         availableOptions: [{
                 id: '15',
@@ -365,7 +365,7 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
     function deleteAlert() {
         swal({
             title: "",
-            text: "Delete Successfully",
+            text: "Delete successfully.",
             type: "success",
             timer: 2000,
             showConfirmButton: false
@@ -375,7 +375,7 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
     function editAlert() {
         swal({
             title: "",
-            text: "Edit Successfully",
+            text: "Edit successfully.",
             type: "success",
             timer: 2000,
             showConfirmButton: false
@@ -385,7 +385,7 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
     function addAlert() {
         swal({
             title: "",
-            text: "Add Successfully",
+            text: "Add successfully.",
             type: "success",
             timer: 2000,
             showConfirmButton: false
