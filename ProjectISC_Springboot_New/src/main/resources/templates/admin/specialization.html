@@ -169,6 +169,7 @@
 														class="fa fa-caret-down"></span> <span
 														ng-show="sortType == 'specializationName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
+													</th>
 													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'active';sortReverse = !sortReverse">
 														Status <span
@@ -177,7 +178,7 @@
 														ng-show="sortType == 'active' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													</th>
+													
 
 													<th style="width: 10%">Action</th>
 												</tr>
@@ -378,17 +379,49 @@
 								<table class="table table-condensed table-hover">
 									<thead>
 										<tr>
-											<th style="width: 25%">&#35;</th>
-											<th style="width: 25%">ID</th>
-											<th style="width: 25%">Name</th>
-											<th style="width: 25%"></th>
+											<th style="width: 5%">&#35;</th>
+                                          <th class="sortable" style="width: 10%"
+                                             ng-click="sortType = 'subjectID';sortReverse = !sortReverse">
+                                             ID <span
+                                                ng-show="sortType == 'subjectID' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'subjectID' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 40%"
+                                             ng-click="sortType = 'subjectName';sortReverse = !sortReverse">
+                                             Name <span
+                                                ng-show="sortType == 'subjectName' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'subjectName' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'credit';sortReverse = !sortReverse">
+                                             Credit <span
+                                                ng-show="sortType == 'credit' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'credit' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'hour';sortReverse = !sortReverse">
+                                             Hour <span
+                                                ng-show="sortType == 'hour' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'hour' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+											<th style="width: 15%"></th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr data-ng-repeat="x in listSubject | filter:filterSubject">
+										<tr data-ng-repeat="x in listSubject | filter:filterSubject| orderBy:sortType:sortReverse">
 											<td ng-bind="$index+1"></td>
 											<td data-ng-bind="x.subjectId"></td>
 											<td data-ng-bind="x.subjectName"></td>
+											<td data-ng-bind="x.credit"></td>
+                                          <td data-ng-bind="x.hour"></td>
 											<td>
 												<button
 													ng-disabled="checkDuplicateSubject(x.id)"
@@ -408,17 +441,50 @@
 								<table class="table table-condensed table-hover">
 									<thead>
 										<tr>
-											<th style="width: 25%">&#35;</th>
-											<th style="width: 25%">ID</th>
-											<th style="width: 25%">Name</th>
-											<th style="width: 25%"></th>
+											<th style="width: 5%">&#35;</th>
+                                          <th class="sortable" style="width: 10%"
+                                             ng-click="sortType = 'row.subjectID';sortReverse = !sortReverse">
+                                             ID <span
+                                                ng-show="sortType == 'row.subjectID' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.subjectID' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 40%"
+                                             ng-click="sortType = 'row.subjectName';sortReverse = !sortReverse">
+                                             Name <span
+                                                ng-show="sortType == 'row.subjectName' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.subjectName' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'row.credit';sortReverse = !sortReverse">
+                                             Credit <span
+                                                ng-show="sortType == 'row.credit' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.credit' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'row.hour';sortReverse = !sortReverse">
+                                             Hour <span
+                                                ng-show="sortType == 'row.hour' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.hour' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+											<th style="width: 15%"></th>
 										</tr>
+										
 									</thead>
 									<tbody>
-										<tr ng-repeat="row in currentSubjects">
+										<tr ng-repeat="row in currentSubjects| orderBy:sortType:sortReverse">
 											<td ng-bind="$index + 1"></td>
 											<td ng-bind="row.subjectId"></td>
 											<td ng-bind="row.subjectName"></td>
+											<td ng-bind="row.credit"></td>
+                                          <td ng-bind="row.hour"></td>
 											<td><button class="btn btn-danger btn-xs"
 													ng-click="deleteSubject(row)">
 													<span class="glyphicon glyphicon-remove"></span>

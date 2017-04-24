@@ -125,10 +125,8 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 			data : $scope.exam
 		}).then(function mySucces(response) {
 			$('#editModal').modal('hide');
-				
-			//getAllEntranceExam();
-			
 			editAlert();
+			getAllEntranceExam();
 			$scope.updatePageIndexes();
 
 			$scope.showList = function(school, index) {
