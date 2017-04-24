@@ -1,4 +1,6 @@
 app.controller('entranceExamCtrl', function($scope, $http, $filter) {
+	var failMessage = 'Oops! Something went wrong, please check your input again';
+	var failMessage_violate_student_foreignKey = "Cannot delete intake that still has student";
 	$scope.rowdata = {
 		availableOptions : [ {
 			id : '15',
@@ -15,7 +17,7 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 		} ],
 		selectedOption : {
 			id : '15',
-			name : '15 rows'
+			name : '15'
 		}
 	};
 	$scope.ChangeRow = function(index) {
@@ -115,8 +117,32 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 			addAlert();
 			$scope.getData(0);
 
-		});
+		},function(response) {
+            if (response.status == 406) {
+                alertFailMessage(failMessage);
+            }
+        });
 	}
+	
+	$scope.addAndClose = function() {
+
+		$http({
+			method : "POST",
+			url : "/admin/api/entrance-exam",
+			data : $scope.exam
+		}).then(function mySucces(response) {
+			$("#addModel").close();
+			getAllEntranceExam();
+			addAlert();
+			$scope.getData(0);
+
+		},function(response) {
+            if (response.status == 406) {
+                alertFailMessage(failMessage);
+            }
+        });
+	}
+	
 	$scope.edit = function edit() {
 
 		$http({
@@ -127,7 +153,11 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 			$('#editModal').modal('hide');
 			getAllEntranceExam();
 			editAlert();
-		});
+		},function(response) {
+            if (response.status == 406) {
+                alertFailMessage(failMessage);
+            }
+        });
 	}
 	$scope.del = function del() {
 
@@ -139,7 +169,11 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 			$('#deleteModal').modal('hide');
 			getAllEntranceExam();
 			deleteAlert();
-		});
+		},function(response) {
+            if (response.status == 404) {
+                alertFailWithConfirm(failMessage_violate_student_foreignKey);
+            }
+        });
 	}
 
 	function delInvalid() {
@@ -192,6 +226,14 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter) {
 			type : "error",
 			timer : alertDuration,
 			showConfirmButton : false
+		})
+	}
+	function alertFailWithConfirm(message) {
+		swal({
+			title : "",
+			text : message,
+			type : "error",
+			showConfirmButton : true
 		})
 	}
 });
