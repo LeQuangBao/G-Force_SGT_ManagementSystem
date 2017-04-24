@@ -140,15 +140,15 @@
 									<input id="filter" type="text" placeholder="Filter"
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
-								<div class="col-md-6 col-md-offset-6">
-									Show: <input type="checkbox" data-ng-model="showBirthday">Birthday</input>
-									<input type="checkbox" data-ng-model="showEmail">Email</input>
-									<input type="checkbox" data-ng-model="showPhone">Phone</input>
-									<input type="checkbox" data-ng-model="showAddress">Address</input>
-									<input type="checkbox" data-ng-model="showSchool">School</input>
-									<input type="checkbox" data-ng-model="showIntake">Intake</input>
-									<input type="checkbox" data-ng-model="showEntranceExam">Entrance
-									exam</input> <input type="checkbox" data-ng-model="showSpecialization">Specialization</input>
+								<div class="col-md-9 col-md-offset-3">
+									<strong>Show :</strong> <input type="checkbox" id="test1" data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
+									<input type="checkbox" id="test4" data-ng-model="showEmail" /> <label for="test4">Email</label>
+									<input type="checkbox" id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
+									<input type="checkbox" id="test3" data-ng-model="showAddress" /> <label for="test3">Address</label>
+									<input type="checkbox" id="school" data-ng-model="showSchool" /> <label for="school">School</label>
+									<input type="checkbox" id="intake" data-ng-model="showIntake" /> <label for="intake">Intake</label>
+									<input type="checkbox" id="entrance" data-ng-model="showEntranceExam" /> <label for="entrance">Entrance Exam</label>
+									<input type="checkbox" id="speci" data-ng-model="showSpecialization" /> <label for="speci">Specialization</label>
 								</div>
 								<div class="x_content">
 									<label for="mySelect">Display </label> <select name="mySelect"
@@ -162,7 +162,7 @@
 											<thead>
 												<tr>
 													<th style="width: 5%">&#35;</th>
-													<th class="sortable" style="width: 15%"
+													<th class="sortable" style="width: 10%"
 														ng-click="sortType = 'studentId';sortReverse = !sortReverse">Student
 														ID <span
 														ng-show="sortType == 'studentId' &amp;&amp; !sortReverse"
@@ -170,7 +170,7 @@
 														ng-show="sortType == 'studentId' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 15%"
+													<th class="sortable" style="width: 7%"
 														ng-click="sortType = 'username';sortReverse = !sortReverse">Username
 														<span
 														ng-show="sortType == 'username' &amp;&amp; !sortReverse"
@@ -178,7 +178,7 @@
 														ng-show="sortType == 'username' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 5%"
 														ng-click="sortType = 'lastName';sortReverse = !sortReverse">Last
 														Name <span
 														ng-show="sortType == 'lastName' &amp;&amp; !sortReverse"
@@ -186,7 +186,7 @@
 														ng-show="sortType == 'lastName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 5%"
 														ng-click="sortType = 'firstName';sortReverse = !sortReverse">First
 														Name <span
 														ng-show="sortType == 'firstName' &amp;&amp; !sortReverse"
@@ -194,7 +194,7 @@
 														ng-show="sortType == 'firstName' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 7%"
 														ng-show="showBirthday"
 														ng-click="sortType = 'birthday';sortReverse = !sortReverse">Birthday
 														<span
@@ -203,7 +203,7 @@
 														ng-show="sortType == 'birthday' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 20%" ng-show="showEmail"
+													<th class="sortable" style="width: 15%" ng-show="showEmail"
 														ng-click="sortType = 'email';sortReverse = !sortReverse">Email
 														<span
 														ng-show="sortType == 'email' &amp;&amp; !sortReverse"
@@ -211,7 +211,7 @@
 														ng-show="sortType == 'email' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%" ng-show="showPhone"
+													<th class="sortable" style="width: 7%" ng-show="showPhone"
 														ng-click="sortType = 'phone';sortReverse = !sortReverse">Phone
 														<span
 														ng-show="sortType == 'phone' &amp;&amp; !sortReverse"
@@ -219,7 +219,7 @@
 														ng-show="sortType == 'phone' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 5%"
 														ng-show="showAddress"
 														ng-click="sortType = 'address';sortReverse = !sortReverse">Address
 														<span
@@ -228,7 +228,7 @@
 														ng-show="sortType == 'address' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 5%"
 														ng-show="showSchool"
 														ng-click="sortType = 'school';sortReverse = !sortReverse">School
 														<span
@@ -237,7 +237,7 @@
 														ng-show="sortType == 'school' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 5%"
 														ng-show="showIntake"
 														ng-click="sortType = 'intake';sortReverse = !sortReverse">Intake
 														<span
@@ -246,7 +246,7 @@
 														ng-show="sortType == 'intake' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 15%"
+													<th class="sortable" style="width: 5%"
 														ng-show="showEntranceExam"
 														ng-click="sortType = 'entranceExam';sortReverse = !sortReverse">Entrance
 														exam <span
@@ -264,7 +264,7 @@
 														ng-show="sortType == 'specialization' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th class="sortable" style="width: 10%"
+													<th class="sortable" style="width: 5%"
 														ng-click="sortType = 'active';sortReverse = !sortReverse">
 														Status <span
 														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
@@ -272,8 +272,8 @@
 														ng-show="sortType == 'active' &amp;&amp; sortReverse"
 														class="fa fa-caret-up"></span>
 													</th>
-													<th style="width: 15%">Action</th>
-													<th style="width: 20%"></th>
+													<th style="width: 6%">Action</th>
+													
 												</tr>
 											</thead>
 											<tbody>
@@ -359,7 +359,7 @@
 					<h4 class="modal-title" id="myModalLabel">Add student</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" name="fileUploadForm"
+					<form class="form-horizontal" name="frmStudentAdd"
 						enctype="multipart/form-data" id="fileUploadForm">
 						<div class="col-md-6">
 
@@ -370,8 +370,8 @@
 									<input id="username" name="username" placeholder=""
 										class="form-control input-md" type="text"
 										ng-model="student.username" ng-required="true" />
-									<div ng-messages="">
-										<div ng-message="required" ng-show="">
+									<div ng-messages="frmStudentAdd.username.$error">
+										<div ng-message="required" ng-show="frmStudentAdd.username.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -386,9 +386,9 @@
 									<input id="lastname" name="lastName" placeholder=""
 										class="form-control input-md" type="text"
 										ng-model="student.lastname" ng-required="true" />
-									<div ng-messages="frmInstructor.lastName.$error">
+									<div ng-messages="frmStudentAdd.lastName.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.lastName.$touched">
+											ng-show="frmStudentAdd.lastName.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -402,9 +402,9 @@
 									<input id="firstname" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="student.firstname" />
-									<div ng-messages="frmInstructor.firstName.$error">
+									<div ng-messages="frmStudentAdd.firstName.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.firstName.$touched">
+											ng-show="frmStudentAdd.firstName.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -418,9 +418,9 @@
 									<input type="password" id="password" name="password"
 										data-ng-model="password" required="required"
 										class="form-control col-md-7 col-xs-12" />
-									<div ng-messages="frmInstructor.password.$error">
+									<div ng-messages="frmStudentAdd.password.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.password.$touched">
+											ng-show="frmStudentAdd.password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -435,12 +435,12 @@
 										name="re_password" required="required"
 										class="form-control col-md-7 col-xs-12" ng-model="newpassword"
 										match-password="password" />
-									<div ng-messages="frmInstructor.re_password.$error">
+									<div ng-messages="frmStudentAdd.re_password.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.re_password.$touched">
+											ng-show="frmStudentAdd.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-										<p ng-bind="ketqua"></p>
+										<p ng-bind="ketqua" style="color: red"></p>
 									</div>
 								</div>
 							</div>
@@ -451,9 +451,9 @@
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="email" ng-required="true"
 										ng-model="student.email" />
-									<div ng-messages="frmInstructor.email.$error">
+									<div ng-messages="frmStudentAdd.email.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.email.$touched">
+											ng-show="frmStudentAdd.email.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -467,9 +467,9 @@
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="student.phone" />
-									<div ng-messages="frmInstructor.phone.$error">
+									<div ng-messages="frmStudentAdd.phone.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.phone.$touched">
+											ng-show="frmStudentAdd.phone.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -483,9 +483,9 @@
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="student.address" />
-									<div ng-messages="frmInstructor.address.$error">
+									<div ng-messages="frmStudentAdd.address.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.address.$touched">
+											ng-show="frmStudentAdd.address.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -587,10 +587,10 @@
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="them()"
-						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required">Add</button>
+						ng-disabled="frmStudentAdd.$invalid">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
 						ng-click="them()"
-						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required"
+						ng-disabled="frmStudentAdd.$invalid"
 						data-dismiss="modal">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -622,9 +622,9 @@
 									<input id="lastname" name="lastName" placeholder=""
 										class="form-control input-md" type="text"
 										ng-model="list_temp_inf_edit.lastname" ng-required="true" />
-									<div ng-messages="frmInstructor.lastName.$error">
+									<div ng-messages="fileUploadForm.lastName.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.lastName.$touched">
+											ng-show="fileUploadForm.lastName.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
@@ -638,9 +638,9 @@
 									<input id="firstname" name="firstName" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="list_temp_inf_edit.firstname" />
-									<div ng-messages="frmInstructor.firstName.$error">
+									<div ng-messages="fileUploadForm.firstName.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.firstName.$touched">
+											ng-show="fileUploadForm.firstName.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -655,9 +655,9 @@
 									<input id="email" name="email" placeholder=""
 										class="form-control input-md" type="email" ng-required="true"
 										ng-model="list_temp_inf_edit.email" />
-									<div ng-messages="frmInstructor.email.$error">
+									<div ng-messages="fileUploadForm.email.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.email.$touched">
+											ng-show="fileUploadForm.email.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -671,9 +671,9 @@
 									<input id="phone" name="phone" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="list_temp_inf_edit.phone" />
-									<div ng-messages="frmInstructor.phone.$error">
+									<div ng-messages="fileUploadForm.phone.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.phone.$touched">
+											ng-show="fileUploadForm.phone.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -687,9 +687,9 @@
 									<input id="adress" name="address" placeholder=""
 										class="form-control input-md" type="text" ng-required="true"
 										ng-model="list_temp_inf_edit.address" />
-									<div ng-messages="frmInstructor.address.$error">
+									<div ng-messages="fileUploadForm.address.$error">
 										<div ng-message="required"
-											ng-show="frmInstructor.address.$touched">
+											ng-show="fileUploadForm.address.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
 
@@ -803,7 +803,7 @@
 
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="edit()"
-						ng-disabled="frmInstructorAdd.schoolId.$error.required || frmInstructorAdd.lastName.$error.required || frmInstructorAdd.firstName.$error.required|| frmInstructorAdd.birthday.$error.required"
+						ng-disabled="fileUploadForm.$invalid"
 						data-dismiss="modal">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -825,7 +825,7 @@
 					<h4 class="modal-title" id="myModalLabel">Detail information</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" name="frmStudentAdd">
+					<form class="form-horizontal" name="frmStudentView">
 						<div class="col-md-6">
 
 							<!-- Text input-->
