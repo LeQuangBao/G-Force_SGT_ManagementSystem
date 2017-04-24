@@ -331,6 +331,10 @@
 									<div ng-message="required" ng-show="formThem.enddate.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
+									<div ng-message="validationError">
+										<p style="color: red">The End date must be greater than
+											the Start date</p>
+									</div>
 								</div>
 							</div>
 						</div>
