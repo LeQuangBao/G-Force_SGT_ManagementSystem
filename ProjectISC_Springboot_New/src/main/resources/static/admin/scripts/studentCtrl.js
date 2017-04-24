@@ -413,8 +413,16 @@ app
 							data : $scope.list_temp_inf_edit
 						}).then(function mySucces(response) {
 							$('#editModal').modal('hide');
-							GetListStudent();
+						
 							editAlert();
+							
+							$scope.updatePageIndexes();
+						
+							$scope.showList = function(index) {
+								return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+								
+							}
+							//GetListStudent();
 						});
 					}
 					// load chi tiet student
@@ -504,7 +512,7 @@ app
 						// console.log($scope.password);
 						// console.log($scope.newpassword);
 						if ($scope.password == $scope.newpassword) {
-							$scope.ketqua = "Match password";
+							$scope.ketqua = "";
 						} else {
 							$scope.ketqua = " Not Match password";
 						}
