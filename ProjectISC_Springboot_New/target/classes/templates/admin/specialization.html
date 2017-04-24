@@ -192,7 +192,7 @@
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button data-toggle="modal" class="btn btn-primary btn-sm"
-															data-target="#myModal_editSubject"
+															data-target="#myModal_editSubject" data-backdrop="static"
 															ng-click="callEditRelevantSubject(x)">
 															<span class="glyphicon glyphicon-th-list"></span>
 														</button>
@@ -360,7 +360,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
+					<button type="button" class="close" ng-click="editRelevantSubject()" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -370,7 +370,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm">
-						<h5>Available course(s)</h5>
+						<h5>Available courses</h5>
 						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
 						<!-- scrollable table -->
 						<div class="well" style="height:200px;overflow:auto">
@@ -402,7 +402,7 @@
 								</table>
 							</div>
 						</div>
-						<h5>Added course(s)</h5>
+						<h5>Added courses</h5>
 						<div class="well" style="height:200px;overflow:auto">
 							<div class="table-responsive">
 								<table class="table table-condensed table-hover">
@@ -430,8 +430,9 @@
 						</div>
 					</form>
 				</div>
+				
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editRelevantSubject()">Close</button>
 				</div>
 			</div>
 		</div>
