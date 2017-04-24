@@ -88,7 +88,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
               error: function () {
                 // Handle upload error
                 $("#upload-file-message").text(
-                    "File not uploaded (perhaps it's too much big)");
+                    "File not uploaded (perhaps it's too big)");
               }
             });
           }
@@ -123,7 +123,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     
             }, function(response) {
             	if(response.status == 406) {            		
-            		alertFailMessage("Oops! Duplicate Username is not allowed.");
+            		alertFailMessage("Oops! Something went wrong, please check your input again.");
             	}
 			});
             
@@ -145,7 +145,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
               error: function () {
                 // Handle upload error
                 $("#upload-file-message").text(
-                    "File not uploaded (perhaps it's too much big)");
+                    "File not uploaded (perhaps it's too big)");
               }
             });
           }
@@ -192,7 +192,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                 	  getAllinstructors();
                 	  editAlert();
              }, function(response) {
-					alertFailMessage("Oops! Duplicate Username is not allowed.");
+					alertFailMessage("Oops! Something went wrong, please check your input again");
 					setTimeout(function() {
 					});
              });
@@ -282,7 +282,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         function deleteAlert(){
     	  	swal({
     	  	  title:"",
-    	  	  text: "Delete Successfully",
+    	  	  text: "Delete successfully",
     	  	  type: "success",
     	  	  timer: 2000,
     	  	  showConfirmButton: false
@@ -291,7 +291,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     	  function editAlert(){
     		  swal({
     		  	  title:"",
-    		  	  text: "Edit Successfully",
+    		  	  text: "Edit successfully",
     		  	  type: "success",
     		  	  timer: 2000,
     		  	  showConfirmButton: false
@@ -300,7 +300,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     	  function addAlert(){
     		  swal({
     		  	  title:"",
-    		  	  text: "Add Successfully",
+    		  	  text: "Add successfully",
     		  	  type: "success",
     		  	  timer: 2000,
     		  	  showConfirmButton: false
@@ -309,7 +309,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     	  function resetAlert(){
     		  swal({
     		  	  title:"",
-    		  	  text: "Reset Successfully",
+    		  	  text: "Reset successfully",
     		  	  type: "success",
     		  	  timer: 2000,
     		  	  showConfirmButton: false

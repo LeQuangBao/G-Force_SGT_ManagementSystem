@@ -94,7 +94,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     
             }, function(response) {
             	if(response.status == 406) {            		
-            		alertFailMessage("Oops! Duplicate ID is not allowed.");
+            		alertFailMessage("Oops! Something went wrong, please check your input again.");
             	}
 			});
             
@@ -132,7 +132,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     
             }, function(response) {
             	if(response.status == 406) {            		
-            		alertFailMessage("Oops! Duplicate ID is not allowed.");
+            		alertFailMessage("Oops! Something went wrong, please check your input again.");
             	}
 			});
             
@@ -167,7 +167,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
                 	  editAlert();
                   } 
              }, function(response) {
-					alertFailMessage("Oops! Duplicate ID is not allowed.");
+					alertFailMessage("Oops! Something went wrong, please check your input again.");
 //					setTimeout(function() {
 //						location.reload();
 //					}, alertDuration);
@@ -240,7 +240,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
         function deleteAlert(){
     	  	swal({
     	  	  title:"",
-    	  	  text: "Delete Successfully",
+    	  	  text: "Delete successfully.",
     	  	  type: "success",
     	  	  timer: 2000,
     	  	  showConfirmButton: false
@@ -249,7 +249,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	  function editAlert(){
     		  swal({
     		  	  title:"",
-    		  	  text: "Edit Successfully",
+    		  	  text: "Edit successfully.",
     		  	  type: "success",
     		  	  timer: 2000,
     		  	  showConfirmButton: false
@@ -258,7 +258,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	  function addAlert(){
     		  swal({
     		  	  title:"",
-    		  	  text: "Add Successfully",
+    		  	  text: "Add successfully.",
     		  	  type: "success",
     		  	  timer: 2000,
     		  	  showConfirmButton: false
