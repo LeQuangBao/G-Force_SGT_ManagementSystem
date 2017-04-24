@@ -6,7 +6,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
 		       {id: '50', name: '50'},
 		       {id: '100', name: '100'}
 		     ],
-		     selectedOption: {id: '15', name: '15 rows'}
+		     selectedOption: {id: '15', name: '15'}
 		    };
     $scope.ChangeRow = function(index) {
         $scope.itemsPerPage = index;
@@ -182,13 +182,11 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
 
     $scope.addSubject = function(subject) {
         $scope.currentSubjects.push(subject);
-        $scope.editRelevantSubject();
     }
 
     $scope.deleteSubject = function(subject) {
         var index = $scope.currentSubjects.indexOf(subject);
         $scope.currentSubjects.splice(index, 1);
-        $scope.editRelevantSubject();
     }
 
     $scope.checkDuplicateSubject = function(id) {
