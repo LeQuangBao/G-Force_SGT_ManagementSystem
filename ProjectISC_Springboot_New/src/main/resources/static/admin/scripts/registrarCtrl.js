@@ -153,9 +153,13 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 $scope.frmRegistrarAdd.phone.$setUntouched();
     	 $scope.frmRegistrarAdd.email.$setUntouched();
     	 $scope.frmRegistrarAdd.address.$setUntouched();
-    	 
+    	 document.getElementById("image").value="";
+    	 document.getElementById("prev_img").src="";
+    	 $scope.prev_img="";
  	 }
- 	
+ 	//set current date for max date - birthday 
+ 	$scope.currentDate={value: new Date()};
+ 	 
 	//view detail
  	$scope.view=[];
 	 $scope.viewRegistrar=function(data){
@@ -198,15 +202,17 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
         });
       }
     $scope.getImage_Edit = function(element) {
-		photofile = element.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $scope.$apply(function() {
-                $scope.prev_img_edit = e.target.result;
-            });
-        };
-        reader.readAsDataURL(photofile);
-        $scope.edit.image=photofile.name;
+    	if(element.files[0]!=null){
+			photofile = element.files[0];
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            $scope.$apply(function() {
+	                $scope.prev_img_edit = e.target.result;
+	            });
+	        };
+	        reader.readAsDataURL(photofile);
+	        $scope.edit.image=photofile.name;
+    	}
 	};
  	$scope.edit = [];
 	 //edit registrar
@@ -225,8 +231,11 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
        })
           .then(function (result) {
            	  $("#myModal_sua").modal("hide");
-           	  getAllRegistrars();
+           	  //getAllRegistrars();
            	  editAlert();
+           	setTimeout(function() {
+           		window.location.reload();
+            }, 1000);
         }, function(response) {
 				alertFailMessage("Oops! Duplicate Username is not allowed.");
 				setTimeout(function() {

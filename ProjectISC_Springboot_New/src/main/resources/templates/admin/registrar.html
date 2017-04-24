@@ -257,7 +257,7 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.lastname"></td>
 													<td data-ng-bind="x.firstname"></td>
-													<td data-ng-bind="x.birthday" ng-show="showBirthday"></td>
+													<td ng-show="showBirthday">{{x.birthday | date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.email" ng-show="showEmail"></td>
 													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
 													<td data-ng-bind="x.address" ng-show="showAddress"></td>
@@ -475,7 +475,7 @@
 
 								<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
 
-								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
+								<img ng-src="{{prev_img}}" height="150" width="100" id="prev_img"/> <input
 									type="file" id="image" name="uploadfile" accept="*"
 									onchange="angular.element(this).scope().getImage(this)"
 									ng-model="image" class="col-md-12" />
@@ -487,7 +487,7 @@
 								<label class="control-label" for="birthday">Birthday</label>
 								<div class="col-md-12">
 									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" ng-model="birthday" />
+										class="form-control input-md" type="date" ng-model="birthday" max="{{currentDate.value | date: 'yyyy-MM-dd'}}"/>
 
 								</div>
 							</div>
@@ -593,7 +593,7 @@
 								<div class="">
 									<input id="birthday" name="birthday" placeholder=""
 										class="form-control input-md" type="date"
-										ng-model="edit.birthday" />
+										ng-model="edit.birthday" max="{{currentDate.value | date: 'yyyy-MM-dd'}}"/>
 
 								</div>
 							</div>
@@ -659,7 +659,7 @@
 									ng-show="prev_img_edit==''" width="100" height="150"
 									class="img-responsive" /> <img ng-src="{{prev_img_edit}}"
 									ng-hide="prev_img_edit==''" width="100" height="150"
-									class="img-responsive" /> <input type="file" id="image_edit"
+									class="img-responsive" id="prev_img_edit"/> <input type="file" id="image_edit"
 									name="uploadfile" accept="*"
 									onchange="angular.element(this).scope().getImage_Edit(this)" />
 
@@ -870,7 +870,7 @@
 
 				<div class="modal-footer">
 					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
-						data-toggle="modal" ng-click="ResetPassword()">Yes</a>
+						data-toggle="modal" ng-click="ResetPassword()" ng-disabled="frmReset.$invalid">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
