@@ -125,7 +125,7 @@
 						<div class="title_right">
 							<div class="form-group pull-right top_search">
 								<button data-toggle="modal" data-target="#myModal_them"
-									type="button" class="btn btn-primary btn-lg">Add</button>
+									type="button" class="btn btn-primary btn-lg" ng-click="ResetForm_Add()">Add</button>
 							</div>
 						</div>
 					</div>
@@ -438,14 +438,14 @@
 								<div class="">
 									<input type="password" ng-keyup="kiemtra()" id="re_password"
 										name="re_password" required="required"
-										class="form-control col-md-7 col-xs-12" ng-model="newpassword"
+										class="form-control col-md-7 col-xs-12" data-ng-model="newpassword"
 										match-password="password" />
 									<div ng-messages="frmStudentAdd.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmStudentAdd.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-										<p ng-bind="ketqua" style="color: red"></p>
+										<p ng-bind="ketqua" id="ketqua" style="color: red"></p>
 									</div>
 								</div>
 							</div>
@@ -560,7 +560,7 @@
 
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="student.status"
-											value="Studying" name="status" /> Studying
+											value="Studying" name="status"  ng-checked="true"/> Studying
 										</label> <br /> <label> <input type="radio"
 											ng-model="student.status" value="Dropped" name="status" />
 											Dropped
@@ -576,7 +576,7 @@
 									<label class="control-label">Gender</label>
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="student.gender"
-											value="0" name="gender" /> Male
+											value="0" name="gender"  ng-checked="true"/> Male
 										</label> <label> <input type="radio"
 											ng-model="student.gender" value="1" name="gender" /> Female
 										</label>

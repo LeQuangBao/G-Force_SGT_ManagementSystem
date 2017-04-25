@@ -346,7 +346,6 @@ app
 						$scope.student.image = $scope.image1;
 						$scope.student.birthday = $scope.birthday;
 						$scope.student.password = $scope.password;
-
 						var numberOfStudent = 0;
 						var Student = $resource('http://localhost:8080/admin/api/Student');
 						Student.query().$promise
@@ -397,11 +396,39 @@ app
 									}).then(function mySucces(response) {
 										GetListStudent();
 										addAlert();
+										 //$scope.ResetForm_Add();
 									});
 
 								})
 
 					};
+					 $scope.ResetForm_Add=function(){
+				    	 $scope.student.username="";
+				    	 $scope.password="";
+				    	 $scope.student.firstname="";
+				    	 $scope.student.lastname="";
+				    	 $scope.newpassword="";
+				    	 $scope.student.email="";
+				    	 $scope.student.phone="";
+				    	 $scope.student.address="";
+				    	 $scope.student.birthday="";
+//				    	 $scope.ketqua="";
+				    	 
+				    	 $scope.active=true;
+				    	 $scope.frmStudentAdd.username.$setUntouched();
+				    	 $scope.frmStudentAdd.lastName.$setUntouched();
+				    	 $scope.frmStudentAdd.firstName.$setUntouched();
+				    	 $scope.frmStudentAdd.password.$setUntouched();
+				    	 $scope.frmStudentAdd.re_password.$setUntouched();
+				    	 $scope.frmStudentAdd.phone.$setUntouched();
+				    	 $scope.frmStudentAdd.email.$setUntouched();
+				    	 $scope.frmStudentAdd.address.$setUntouched();
+				    	 document.getElementById("image").value="";
+				    	 document.getElementById("prev_img").src="";
+				    	 $scope.prev_img="";
+				    	/* $("#ketqua").text="";*/
+				    	 
+				 	 }
 					//						
 
 					// sửa student
@@ -531,7 +558,7 @@ app
 						if ($scope.password == $scope.newpassword) {
 							$scope.ketqua = "";
 						} else {
-							$scope.ketqua = " Not Match password";
+							$scope.ketqua = "Must match the previous field";
 						}
 					}
 					//kiểm tra retype password trong reset password
