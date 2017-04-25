@@ -1024,7 +1024,7 @@
 							<label class=" control-label" for="birthday">Retype
 								password</label>
 							<div class="">
-								<input type="password" id="reNewPassword" name="reNewPassword"
+								<input type="password" id="reNewPassword" name="reNewPassword" ng-keyup="kiemtra_reset()"
 									ng-model="reNewPassword" class="form-control"
 									required="required" match-password="newPassword" />
 								<div ng-messages="frmReset.reNewPassword.$error">
@@ -1032,7 +1032,7 @@
 										ng-show="frmReset.reNewPassword.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
-									<div ng-message="matchPassword">
+									<div ng-bind="matchPassword">
 										<p style="color: red">Must match the previous field</p>
 									</div>
 								</div>
