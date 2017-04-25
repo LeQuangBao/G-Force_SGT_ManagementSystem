@@ -148,7 +148,7 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 					
 					if(numberOfStudent!=0)
 						{
-						alertFailMessage("This entranceExam have student");
+						alertWithConfirm("Cannot delete intake that still has student");
 						$('#deleteModal').modal('hide');
 						getAllEntranceExam();
 						}
@@ -219,5 +219,13 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 		})
 	}
 	
+	function alertWithCongirm(message) {
+		swal({
+			title : "",
+			text : message,
+			type : "error",
+			showConfirmButton : true
+		})
+	}
 	
 });
