@@ -125,7 +125,7 @@
 						<div class="title_right">
 							<div class="form-group pull-right top_search">
 								<button data-toggle="modal" data-target="#myModal_them"
-									type="button" class="btn btn-primary btn-lg" ng-click="ResetForm_Add()">Add</button>
+									type="button" class="btn btn-primary btn-lg" ng-click="loadthem()">Add</button>
 							</div>
 						</div>
 					</div>
@@ -559,13 +559,13 @@
 									<label class="control-label" for="status">Status</label>
 
 									<div class="checkbox">
-										<label> <input type="radio" ng-model="status"
-											value="Studying" name="status" ng-checked="true"/> Studying
-										</label> <br /> <label> <input type="radio"
-											ng-model="status" value="Dropped" name="status" />
+										<label> <input type="radio" ng-model="status" ng-value="Studying"
+											name="status" ng-checked="true" /> Studying
+										</label> <br /> <label> <input type="radio" 
+											ng-model="status" ng-value="Dropped" name="status" />
 											Dropped
-										</label> <br /> <label> <input type="radio"
-											ng-model="status" value="Graduated" name="status" />
+										</label> <br /> <label> <input type="radio" 
+											ng-model="status" ng-value="Graduated" name="status" />
 											Graduated
 										</label>
 									</div>
@@ -576,9 +576,9 @@
 									<label class="control-label">Gender</label>
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="gender"
-											value="0" name="gender" ng-checked="true"  /> Male
+											value="0" name="gender" ng-checked="true" ng-value="0"  /> Male
 										</label> <label> <input type="radio"
-											ng-model="gender" value="1" name="gender" /> Female
+											ng-model="gender" value="1" name="gender" ng-value="1" /> Female
 										</label>
 									</div>
 

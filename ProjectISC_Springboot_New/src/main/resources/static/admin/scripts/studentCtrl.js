@@ -336,14 +336,21 @@ app.controller('studentCtrl',
                 // alert(numberOfStudent);
             });
         }
+        $scope.loadthem=function()
+        {
+        	$scope.gender=1;
+        	//$scope.status="Studying";
+        }
 
         // thêm student
         $scope.them = function() {
+        	
             uploadFile();
             usernameduplicate($scope.student.username);
             $scope.student.image = $scope.image1;
             $scope.student.birthday = $scope.birthday;
             $scope.student.password = $scope.password;
+          
             console.log($scope.gender);
             console.log($scope.status);
 
@@ -359,10 +366,10 @@ app.controller('studentCtrl',
                             }
                         });
                     numberOfStudent = numberOfStudent + 1;
-                    console.log(numberOfStudent);
+                    //console.log(numberOfStudent);
                     var numberstring = numberOfStudent
                         .toString();
-                    console.log(numberstring);
+                    //console.log(numberstring);
                     if (numberstring.length == 1) {
                         numberstring = "000" + numberstring;
                     }
