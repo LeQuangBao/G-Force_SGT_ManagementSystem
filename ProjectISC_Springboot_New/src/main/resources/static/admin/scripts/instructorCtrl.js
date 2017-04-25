@@ -170,6 +170,9 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.frmInstructor.email.$setUntouched();
         	 $scope.frmInstructor.phone.$setUntouched();
         	 $scope.frmInstructor.address.$setUntouched();
+        	 document.getElementById("image").value="";
+        	 document.getElementById("prev_img").src="";
+        	 $scope.prev_img="";
 	    }
 	    $scope.instructor_edit = [];
 	  //edit instructor
