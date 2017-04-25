@@ -474,7 +474,7 @@
 						<div class="col-md-6 form-group">
 							<label class="col-md-2 control-label">Picture</label>
 							<div class="col-md-12 picture">
-								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
+								<img ng-src="{{prev_img}}" height="150" width="100" id="prev_img"/> <input
 									type="file" id="image" name="uploadfile" accept="*"
 									onchange="angular.element(this).scope().getImage(this)"
 									ng-model="image" required="required" />
