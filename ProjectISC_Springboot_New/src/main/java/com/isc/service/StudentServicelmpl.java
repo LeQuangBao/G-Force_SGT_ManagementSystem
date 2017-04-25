@@ -3,11 +3,13 @@ package com.isc.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import com.isc.model.EntranceExam;
+import com.isc.model.Instructor;
 import com.isc.model.Intake;
 import com.isc.model.School;
 import com.isc.model.Specialization;
@@ -32,7 +34,9 @@ public class StudentServicelmpl implements StudentService  {
 	@Transactional
 	public void resetpassword(Student student)
 	{
-		studentDao.resetpassword(student);
+		Student instructorObj = studentDao.getStudent(student.getId());
+		instructorObj.setPassword(new BCryptPasswordEncoder().encode(student.getPassword()));
+		studentDao.updateStudent(instructorObj);
 	}
 
 	@Transactional

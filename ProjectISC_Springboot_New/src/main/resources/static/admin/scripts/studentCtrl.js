@@ -414,15 +414,15 @@ app
 							data : $scope.list_temp_inf_edit
 						}).then(function mySucces(response) {
 							$('#editModal').modal('hide');
-						
+							GetListStudent();
 							editAlert();
 							
-							$scope.updatePageIndexes();
-						
-							$scope.showList = function(index) {
-								return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
-								
-							}
+//							$scope.updatePageIndexes();
+//						
+//							$scope.showList = function(index) {
+//								return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+//								
+//							}
 							//GetListStudent();
 						});
 					}
@@ -434,15 +434,15 @@ app
 					}
 					// reset password
 					$scope.reset = function(data) {
-						$scope.list_temp_inf_reset.password = $scope.newpassword;
+						$scope.list_temp_inf_reset.password = $scope.newPassword;
 						$http({
 							method : "PUT",
-							url : "/admin/api/Student_Reset",
+							url : "http://localhost:8080/admin/api/Student_Reset",
 							data : $scope.list_temp_inf_reset
 						}).then(function mySucces(response) {
-							$('#myModal_reset').modal('hide');
+							$('#myModal_confirmReset').modal('hide');
 							GetListStudent();
-							resetAlert()
+							resetAlert();
 						});
 					}
 					// xóa student
@@ -464,46 +464,53 @@ app
 					// array did filter
 
 					$scope.sua = function(data) {
-						$scope.list_temp_inf_edit = [];
-						$scope.prev_img_edit = '';
-						document.getElementById("image_edit").value = "";
-						$scope.list_temp_inf_edit = data;
-						$scope.list_temp_inf_edit.lastname = data.lastname;
-						$scope.list_temp_inf_edit.firstname = data.firstname;
-						$scope.list_temp_inf_edit.email = data.email;
-						$scope.list_temp_inf_edit.phone = data.phone;
-						$scope.list_temp_inf_edit.address = data.address;
-						$scope.list_temp_inf_edit.status = data.status;
-						$scope.list_temp_inf_edit.image = data.image;
-						$scope.list_temp_inf_edit.birthday = new Date(
-								data.birthday)
-						$scope.list_temp_inf_edit.gender = data.gender == 0 ? '0'
-								: '1';
-						for (var i = 0; i < $scope.list_intake.length; i++) {
-							if (data.intake.intakeName == $scope.list_intake[i].intakeName) {
-								$scope.list_temp_inf_edit.intake = $scope.list_intake[i];
-								break;
-							}
-						}
-						for (var i = 0; i < $scope.list_school.length; i++) {
-							if (data.school.schoolName == $scope.list_school[i].schoolName) {
-								$scope.list_temp_inf_edit.school = $scope.list_school[i];
-								break;
-							}
-						}
-						for (var i = 0; i < $scope.list_entrance_exam.length; i++) {
-							if (data.entranceExam.entranceExamName == $scope.list_entrance_exam[i].entranceExamName) {
-								$scope.list_temp_inf_edit.entranceExam = $scope.list_entrance_exam[i];
-								break;
-							}
-						}
-						for (var i = 0; i < $scope.list_specialization.length; i++) {
-							if (data.specialization.specializationName == $scope.list_specialization[i].specializationName) {
-								$scope.list_temp_inf_edit.specialization = $scope.list_specialization[i];
-								break;
-							}
-						}
+						 $http.get("http://localhost:8080/admin/api/Student/" + data.id).then(
+						            function(response) {
+						            	 $scope.list_temp_inf_edit = [];
+						            	 $scope.prev_img_edit=[];
+						                $scope.list_temp_inf_edit = response.data;
+						               
+										$scope.prev_img_edit = '';
+										document.getElementById("image_edit").value = "";
+										//$scope.list_temp_inf_edit = data;
+										$scope.list_temp_inf_edit.lastname = response.data.lastname;
+										$scope.list_temp_inf_edit.firstname = response.data.firstname;
+										$scope.list_temp_inf_edit.email = response.data.email;
+										$scope.list_temp_inf_edit.phone = response.data.phone;
+										$scope.list_temp_inf_edit.address = response.data.address;
+										$scope.list_temp_inf_edit.status = response.data.status;
+										$scope.list_temp_inf_edit.image = response.data.image;
+										$scope.list_temp_inf_edit.birthday = new Date(
+												response.data.birthday)
+										$scope.list_temp_inf_edit.gender = response.data.gender == 0 ? '0'
+												: '1';
+										for (var i = 0; i < $scope.list_intake.length; i++) {
+											if (response.data.intake.intakeName == $scope.list_intake[i].intakeName) {
+												$scope.list_temp_inf_edit.intake = $scope.list_intake[i];
+												break;
+											}
+										}
+										for (var i = 0; i < $scope.list_school.length; i++) {
+											if (response.data.school.schoolName == $scope.list_school[i].schoolName) {
+												$scope.list_temp_inf_edit.school = $scope.list_school[i];
+												break;
+											}
+										}
+										for (var i = 0; i < $scope.list_entrance_exam.length; i++) {
+											if (response.data.entranceExam.entranceExamName == $scope.list_entrance_exam[i].entranceExamName) {
+												$scope.list_temp_inf_edit.entranceExam = $scope.list_entrance_exam[i];
+												break;
+											}
+										}
+										for (var i = 0; i < $scope.list_specialization.length; i++) {
+											if (response.data.specialization.specializationName == $scope.list_specialization[i].specializationName) {
+												$scope.list_temp_inf_edit.specialization = $scope.list_specialization[i];
+												break;
+											}
+										}
 
+						            });
+						
 					};
 					// lấy dữ liệu để xóa
 					$scope.list_temp_inf_delete = [];
@@ -522,6 +529,16 @@ app
 						// console.log($scope.password);
 						// console.log($scope.newpassword);
 						if ($scope.password == $scope.newpassword) {
+							$scope.ketqua = "";
+						} else {
+							$scope.ketqua = " Not Match password";
+						}
+					}
+					//kiểm tra retype password trong reset password
+					$scope.kiemtra_reset = function() {
+						// console.log($scope.password);
+						// console.log($scope.newpassword);
+						if ($scope.newPassword == $scope.password) {
 							$scope.ketqua = "";
 						} else {
 							$scope.ketqua = " Not Match password";
@@ -555,7 +572,7 @@ app
 						$scope.list_temp_inf_edit.password = $scope.newPassword;
 						$http({
 							method : "PUT",
-							url : "admin/api/Student",
+							url : "admin/api/Student_Reset",
 							data : $scope.list_temp_inf_edit,
 							dataType : "json"
 						}).then(function(result) {
@@ -628,5 +645,7 @@ app
 							showConfirmButton : false
 						});
 					}
+					
 				})
+				
 // );

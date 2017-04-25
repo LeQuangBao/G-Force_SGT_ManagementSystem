@@ -809,7 +809,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="pull-left btn btn-danger"
+					<button type="button" ng-click="resetpasword()" class="pull-left btn btn-danger"
 						data-toggle="modal" data-target="#myModal_confirmReset">Reset
 						password</button>
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
@@ -1044,7 +1044,7 @@
 
 				<div class="modal-footer">
 					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
-						data-toggle="modal" ng-click="ResetPassword()">Yes</a>
+						data-toggle="modal" ng-click="reset()">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
