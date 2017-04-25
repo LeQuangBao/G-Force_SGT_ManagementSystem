@@ -538,10 +538,10 @@ app
 					$scope.kiemtra_reset = function() {
 						// console.log($scope.password);
 						// console.log($scope.newpassword);
-						if ($scope.newPassword == $scope.password) {
-							$scope.ketqua = "";
+						if ($scope.newPassword == $scope.reNewPassword) {
+							$scope.matchPassword = "";
 						} else {
-							$scope.ketqua = " Not Match password";
+							$scope.matchPassword = "Must match the previous field";
 						}
 					}
 					function uploadFile_Edit() {
