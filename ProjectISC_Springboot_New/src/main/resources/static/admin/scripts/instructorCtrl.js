@@ -170,7 +170,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.frmInstructor.email.$setUntouched();
         	 $scope.frmInstructor.phone.$setUntouched();
         	 $scope.frmInstructor.address.$setUntouched();
-        	 document.getElementById("image").value="";
+//        	 document.getElementById("image").value="";
         	 document.getElementById("prev_img").src="";
         	 $scope.prev_img="";
 	    }
@@ -327,8 +327,27 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 					showConfirmButton : false
 				});
 			}
-    	  
-    	  
+    	// Hàm tự động điền các text input trong form Add
+          // Đặt con trỏ vào ô username, bấm Alt + Q
+    	  $scope.autoAdd = function(keyEvent) {    		  
+    	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
+    	        	var random = getRandomInt(1, 10000);
+    		    	 $scope.username="Billgate " + random;
+    	        	 $scope.firstName="Bill " + random;
+    	        	 $scope.lastName="Gate " + random;
+    	        	 $scope.password=random;
+    	        	 $scope.re_password=random;
+    	        	 $scope.email="Billgate" + random + "@gmail.com";
+    	        	 $scope.phone=random * 2;
+    	        	 $scope.address=random;
+    	        	 $scope.birthday=new Date("3/25/1997");
+    	        	 $scope.active=true;
+    	        	$scope.degree="College";
+    	        }
+    	  }
+    	  function getRandomInt (min, max) {
+    		    return Math.floor(Math.random() * (max - min + 1)) + min;
+    		}
 	});
 
 //Compare password and retype password

@@ -98,7 +98,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
         });
       }
 	
- 	//ADD REGISTRAR
+ 	// ADD REGISTRAR
  	 $scope.save = function () {
  		uploadFile();
          $http({
@@ -157,10 +157,10 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 document.getElementById("prev_img").src="";
     	 $scope.prev_img="";
  	 }
- 	//set current date for max date - birthday 
+ 	// set current date for max date - birthday
  	$scope.currentDate={value: new Date()};
  	 
-	//view detail
+	// view detail
  	$scope.view=[];
 	 $scope.viewRegistrar=function(data){
      	$scope.view.username=data.username;
@@ -180,7 +180,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
      }
      
     
- 	//Upload file trong modal Edit
+ 	// Upload file trong modal Edit
     function uploadFile_Edit() {
         $.ajax({
           url: "uploadFile",
@@ -215,7 +215,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	}
 	};
  	$scope.edit = [];
-	 //edit registrar
+	 // edit registrar
 	$scope.update = function () {
 		uploadFile_Edit();
    	var dataRegistrar={id:registrarID,username:$scope.edit.username,lastname:$scope.edit.lastname,
@@ -231,7 +231,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
        })
           .then(function (result) {
            	  $("#myModal_sua").modal("hide");
-           	  //getAllRegistrars();
+           	  // getAllRegistrars();
            	  editAlert();
            	setTimeout(function() {
            		window.location.reload();
@@ -267,7 +267,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
      $scope.deleteRegistrar = function (data) {
          $scope.registrar_delete = data;
      }; 
-     //delete
+     // delete
      $scope.delete=function()
      {
          $http({
@@ -283,7 +283,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
                } 
           });
      }
-   //Reset password
+   // Reset password
      $scope.ResetPassword = function () {
     	
      	var dataRegistrar={id:registrarID,password:$scope.newPassword};
@@ -298,6 +298,28 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
              	  resetAlert();
           });
     }     
+     
+  // Hàm tự động điền các text input trong form Add
+     // Đặt con trỏ vào ô username, bấm Alt + Q
+	  $scope.autoAdd = function(keyEvent) {    		  
+	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
+	        	var random = getRandomInt(1, 10000);
+		    	 $scope.username="Billgate " + random;
+	        	 $scope.firstName="Bill " + random;
+	        	 $scope.lastName="Gate " + random;
+	        	 $scope.password=random;
+	        	 $scope.re_password=random;
+	        	 $scope.email="Billgate" + random + "@gmail.com";
+	        	 $scope.phone=random * 2;
+	        	 $scope.address=random;
+	        	 $scope.birthday=new Date("3/25/1997");
+	        	 $scope.active=true;
+	        	$scope.degree="College";
+	        }
+	  }
+	  function getRandomInt (min, max) {
+		    return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
  
      function deleteAlert(){
  	  	swal({
@@ -346,7 +368,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 			}
  	  
 });
-//Compare password and retype password
+// Compare password and retype password
 app.directive("matchPassword", function(){
 return {
     require: "ngModel",

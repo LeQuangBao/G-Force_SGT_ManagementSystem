@@ -54,13 +54,8 @@
 						<a href="/admin/intake" class="site_title"><i
 							class="fa fa-paw"></i> <span>Administration</span></a>
 					</div>
-
 					<div class="clearfix"></div>
-
-
-
 					<br />
-
 					<!-- sidebar menu -->
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
@@ -336,7 +331,7 @@
 								<label class=" control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="username"
+										class="form-control input-md" type="text" ng-model="username" ng-keydown="autoAdd($event)"
 										ng-required="true" />
 
 									<div ng-messages="frmRegistrarAdd.username.$error">

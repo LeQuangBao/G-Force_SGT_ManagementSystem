@@ -341,9 +341,9 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="">Username</label>
+								<label class="control-label" >Username</label>
 								<div class="">
-									<input id="username" name="username" placeholder=""
+									<input id="username" name="username" placeholder="" ng-keydown="autoAdd($event)"
 										class="form-control input-md" type="text" ng-model="username"
 										ng-required="true" />
 									<div ng-messages="frmInstructor.username.$error">
