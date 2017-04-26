@@ -503,7 +503,7 @@
 						<div class="col-md-6">
 							<label class="col-md-2 control-label"> Picture</label>
 							<div class="col-md-12 picture">
-								<img ng-src="{{prev_img}}" height="150" width="100" /> <input
+								<img ng-src="{{prev_img}}" height="150" width="100" id="prev_img"/> <input
 									type="file" id="uploadfile1" name="uploadfile1"
 									onchange="angular.element(this).scope().getImage(this)"
 									ng-model="uploadfile1" class="col-md-12" />
@@ -561,13 +561,13 @@
 									<label class="control-label" for="status">Status</label>
 
 									<div class="checkbox">
-										<label> <input type="radio" ng-model="status" ng-value="Studying"
-											name="status" ng-checked="true" /> Studying
+										<label> <input type="radio" ng-model="status" value="Studying"
+											name="status"/> Studying
 										</label> <br /> <label> <input type="radio" 
-											ng-model="status" ng-value="Dropped" name="status" />
+											ng-model="status" value="Dropped" name="status" />
 											Dropped
 										</label> <br /> <label> <input type="radio" 
-											ng-model="status" ng-value="Graduated" name="status" />
+											ng-model="status" value="Graduated" name="status" />
 											Graduated
 										</label>
 									</div>
@@ -578,7 +578,7 @@
 									<label class="control-label">Gender</label>
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="gender"
-											value="0" name="gender" ng-checked="true" ng-value="0"  /> Male
+											value="0" name="gender" ng-value="0"  /> Male
 										</label> <label> <input type="radio"
 											ng-model="gender" value="1" name="gender" ng-value="1" /> Female
 										</label>

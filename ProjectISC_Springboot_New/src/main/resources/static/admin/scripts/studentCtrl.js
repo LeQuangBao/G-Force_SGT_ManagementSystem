@@ -336,12 +336,13 @@ app.controller('studentCtrl',
                 // alert(numberOfStudent);
             });
         }
+        $scope.student={};        
         //Reset form Add
         $scope.loadthem=function()
         {
-        	$scope.gender=1;
-        	//$scope.status="Studying";
-        	$scope.student.username="";
+        	$scope.gender=0;
+        	$scope.status="Studying";
+        	 $scope.student.username="";
 	    	 $scope.password="";
 	    	 $scope.student.firstname="";
 	    	 $scope.student.lastname="";
@@ -350,7 +351,10 @@ app.controller('studentCtrl',
 	    	 $scope.student.phone="";
 	    	 $scope.student.address="";
 	    	 $scope.birthday="";
-	    	 $scope.student.intakeName
+	    	 $scope.student.intake="";
+	    	 $scope.student.entranceExam="";
+	    	 $scope.student.school="";
+	    	 $scope.student.specialization="";
 	    	 
 	    	 $scope.active=true;
 	    	 $scope.frmStudentAdd.username.$setUntouched();
@@ -361,7 +365,7 @@ app.controller('studentCtrl',
 	    	 $scope.frmStudentAdd.phone.$setUntouched();
 	    	 $scope.frmStudentAdd.email.$setUntouched();
 	    	 $scope.frmStudentAdd.address.$setUntouched();
-	    	 
+	    	 document.getElementById("uploadfile1").value="";
 	    	 document.getElementById("prev_img").src="";
 	    	 $scope.prev_img="";
         }
@@ -371,6 +375,8 @@ app.controller('studentCtrl',
         	
             uploadFile();
             usernameduplicate($scope.student.username);
+            $scope.student.gender=$scope.gender;
+            $scope.student.status=$scope.status;
             $scope.student.image = $scope.image1;
             $scope.student.birthday = $scope.birthday;
             $scope.student.password = $scope.password;
@@ -421,14 +427,15 @@ app.controller('studentCtrl',
                         numberstring;
 
                     $scope.student.studentId = mahv6;
-                    //									$http({
-                    //										method : "POST",
-                    //										url : "/admin/api/Student",
-                    //										data : $scope.student
-                    //									}).then(function mySucces(response) {
-                    //										GetListStudent();
-                    //										addAlert();
-                    //									});
+					$http({
+						method : "POST",
+						url : "/admin/api/Student",
+						data : JSON.stringify($scope.student),
+						dataType: "json"
+					}).then(function mySucces(response) {
+						GetListStudent();
+						addAlert();
+					});
 
                 })
 
