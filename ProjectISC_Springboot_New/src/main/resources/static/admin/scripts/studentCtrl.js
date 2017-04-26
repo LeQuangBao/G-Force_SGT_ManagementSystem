@@ -368,6 +368,10 @@ app.controller('studentCtrl',
 	    	 document.getElementById("uploadfile1").value="";
 	    	 document.getElementById("prev_img").src="";
 	    	 $scope.prev_img="";
+	    	 $scope.student.intake = $scope.list_intake[0]; 
+	    	 $scope.student.entranceExam= $scope.list_entrance_exam[0];
+	    	 $scope.student.school= $scope.list_school[0];
+	    	 $scope.student.specialization=$scope.list_specialization[0];
         }
 
         // thêm student
