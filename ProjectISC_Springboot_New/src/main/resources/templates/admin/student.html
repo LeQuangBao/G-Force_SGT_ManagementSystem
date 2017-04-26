@@ -436,16 +436,18 @@
 								<label class=" control-label" for="birthday">Retype
 									password</label>
 								<div class="">
-									<input type="password" ng-keyup="kiemtra()" id="re_password"
+									<input type="password" id="re_password"
 										name="re_password" required="required"
-										class="form-control col-md-7 col-xs-12" data-ng-model="newpassword"
+										class="form-control col-md-7 col-xs-12" ng-model="re_password"
 										match-password="password" />
 									<div ng-messages="frmStudentAdd.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmStudentAdd.re_password.$touched">
 											<p style="color: red">This field is required</p>
 										</div>
-										<p ng-bind="ketqua" id="ketqua" style="color: red"></p>
+										<div ng-message="matchPassword">
+											<p style="color: red">Must match the previous field</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -521,7 +523,7 @@
 								<label class="control-label" for="selectbasic">Entrance
 									exam</label>
 								<div class="">
-									<select ng-model="student.entranceExam" class="form-control"
+									<select ng-selected="student.entranceExam" ng-model="student.entranceExam" class="form-control"
 										ng-options="x.entranceExamName for x in list_entrance_exam "
 										name="intake" id="intake" ng-required="true">
 									</select>

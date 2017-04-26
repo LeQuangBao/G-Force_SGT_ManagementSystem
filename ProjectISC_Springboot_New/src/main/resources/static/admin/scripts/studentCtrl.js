@@ -336,10 +336,34 @@ app.controller('studentCtrl',
                 // alert(numberOfStudent);
             });
         }
+        //Reset form Add
         $scope.loadthem=function()
         {
         	$scope.gender=1;
         	//$scope.status="Studying";
+        	$scope.student.username="";
+	    	 $scope.password="";
+	    	 $scope.student.firstname="";
+	    	 $scope.student.lastname="";
+	    	 $scope.re_password="";
+	    	 $scope.student.email="";
+	    	 $scope.student.phone="";
+	    	 $scope.student.address="";
+	    	 $scope.birthday="";
+	    	 $scope.student.intakeName
+	    	 
+	    	 $scope.active=true;
+	    	 $scope.frmStudentAdd.username.$setUntouched();
+	    	 $scope.frmStudentAdd.lastName.$setUntouched();
+	    	 $scope.frmStudentAdd.firstName.$setUntouched();
+	    	 $scope.frmStudentAdd.password.$setUntouched();
+	    	 $scope.frmStudentAdd.re_password.$setUntouched();
+	    	 $scope.frmStudentAdd.phone.$setUntouched();
+	    	 $scope.frmStudentAdd.email.$setUntouched();
+	    	 $scope.frmStudentAdd.address.$setUntouched();
+	    	 
+	    	 document.getElementById("prev_img").src="";
+	    	 $scope.prev_img="";
         }
 
         // thêm student
@@ -409,34 +433,8 @@ app.controller('studentCtrl',
                 })
 
         };
-        /*$scope.ResetForm_Add=function(){
-				    	 $scope.student.username="";
-				    	 $scope.password="";
-				    	 $scope.student.firstname="";
-				    	 $scope.student.lastname="";
-				    	 $scope.newpassword="";
-				    	 $scope.student.email="";
-				    	 $scope.student.phone="";
-				    	 $scope.student.address="";
-				    	 $scope.student.birthday="";
-				    
-				    	 
-				    	 $scope.active=true;
-				    	 $scope.frmStudentAdd.username.$setUntouched();
-				    	 $scope.frmStudentAdd.lastName.$setUntouched();
-				    	 $scope.frmStudentAdd.firstName.$setUntouched();
-				    	 $scope.frmStudentAdd.password.$setUntouched();
-				    	 $scope.frmStudentAdd.re_password.$setUntouched();
-				    	 $scope.frmStudentAdd.phone.$setUntouched();
-				    	 $scope.frmStudentAdd.email.$setUntouched();
-				    	 $scope.frmStudentAdd.address.$setUntouched();
-				    	 document.getElementById("image").value="";
-				    	 document.getElementById("prev_img").src="";
-				    	 $scope.prev_img="";
-				    	 $("#ketqua").text="";
-				    	 
-				 	 }*/
-        //						
+      
+       					
 
         // sửa student
         $scope.edit = function edit() {
@@ -567,16 +565,7 @@ app.controller('studentCtrl',
                 $scope.ketqua = "Must match the previous field";
             }
         }
-        //kiểm tra retype password trong reset password
-        $scope.kiemtra_reset = function() {
-            // console.log($scope.password);
-            // console.log($scope.newpassword);
-            if ($scope.newPassword == $scope.reNewPassword) {
-                $scope.matchPassword = "";
-            } else {
-                $scope.matchPassword = "Must match the previous field";
-            }
-        }
+       
 
         function uploadFile_Edit() {
             $
@@ -708,5 +697,23 @@ app.controller('studentCtrl',
         }
 
     })
+//Compare password and retype password
+app.directive("matchPassword", function(){
+return {
+    require: "ngModel",
+    scope: {
+      otherModelValue: "=matchPassword"
+    },
+    link: function(scope, element, attributes, ngModel) {
 
+      ngModel.$validators.matchPassword = function(modelValue) {
+        return modelValue == scope.otherModelValue;
+      };
+
+      scope.$watch("otherModelValue", function() {
+        ngModel.$validate();
+      });
+    }
+  };
+});
 // );
