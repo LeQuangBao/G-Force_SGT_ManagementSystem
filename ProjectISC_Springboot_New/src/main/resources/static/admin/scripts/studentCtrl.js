@@ -617,16 +617,15 @@ app.controller('studentCtrl',
 	        	
 	        	var random = getRandomInt(1, 10000);
 		    	 $scope.student.username="Billgate" + random;
-	        	 $scope.student.firstName="Bill" + random;
-	        	 $scope.student.lastName="Gate" + random;
+	        	 $scope.student.firstname="Bill" + random;
+	        	 $scope.student.lastname="Gate" + random;
 	        	 $scope.password="123";
 	        	 $scope.re_password="123";
-	        	 $scope.email="Billgate" + random + "@gmail.com";
-	        	 $scope.phone=random * 2;
+	        	 $scope.student.email="Billgate" + random + "@gmail.com";
+	        	 $scope.student.phone=random * 2;
 	        	 $scope.student.address = "Earth, District " + random;
 	        	 $scope.birthday=new Date("3/25/1997");
-	        	 $scope.active=true;
-	        	$scope.degree="College";
+	        	 
 	        }
 	  }
 	  function getRandomInt (min, max) {
