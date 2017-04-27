@@ -506,9 +506,9 @@
 					<!-- <button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()" ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required || frmRegistrarAdd.address.$error.required|| frmRegistrarAdd.phone.$error.required|| frmRegistrarAdd.email.$error.required|| frmRegistrarAdd.password.$error.required|| frmRegistrarAdd.re_password.$error.required">Add</button> -->
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-disabled="frmRegistrarAdd.$invalid" ng-click="save()">Add</button>
+						ng-disabled="frmRegistrarAdd.$invalid" ng-click="save(false)">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="save()" data-dismiss="modal"
+						ng-click="save(true)"
 						ng-disabled="frmRegistrarAdd.$invalid">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 

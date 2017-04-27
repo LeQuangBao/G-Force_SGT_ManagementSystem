@@ -102,7 +102,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	
  	// ADD REGISTRAR
 	$scope.image="";
- 	 $scope.save = function () {
+ 	 $scope.save = function (close) {
  		uploadFile();
  	
  		if($scope.image==="")
@@ -134,6 +134,9 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	   getAllRegistrars();
      	  addAlert();
      	  $scope.ResetForm_Add();
+     	  if(close=true){
+     		  $('#myModal').modal('hide');
+     	  }
        } 
  
         }, function(response) {

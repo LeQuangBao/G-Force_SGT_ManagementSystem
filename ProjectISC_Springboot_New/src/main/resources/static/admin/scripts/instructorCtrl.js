@@ -94,7 +94,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
           }
     	$scope.image="";
 	    // add instructor
-        $scope.save = function () {
+        $scope.save = function (close) {
         	uploadFile();
         	if($scope.image==="")
  			{
@@ -124,6 +124,9 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	  getAllinstructors();
         	  addAlert();
         	  $scope.ResetForm_Add();
+        	  if(close=true){
+        		  $('#myModal').modal('hide');
+        	  }
           } 
     
             }, function(response) {
