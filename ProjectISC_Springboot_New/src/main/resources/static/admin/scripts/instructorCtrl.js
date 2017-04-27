@@ -170,7 +170,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.address="";
         	 $scope.birthday="";
         	 $scope.active=true;
-        	 $scope.degree="college";
+        	 $scope.degree="College";
         	 $scope.frmInstructor.username.$setUntouched();
         	 $scope.frmInstructor.lastName.$setUntouched();
         	 $scope.frmInstructor.firstName.$setUntouched();

@@ -63,7 +63,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
     	
     	
 	    // add school
-        $scope.save = function () {
+        $scope.save = function (close) {
            
             var school_id = document.getElementById("schoolID").value;        
             var school_name = document.getElementById("schoolName").value;
@@ -89,10 +89,12 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
        .then(function (result) {	
           if (result.status == 201) {
 			
-//        	  $("#myModal").modal("hide");
         	  getAllSchools();
         	  addAlert();
         	  $scope.ResetForm_Add();
+        	  if(close==true){
+        		  $("#myModal").modal("hide");
+        	  }
           } 
     
             }, function(response) {
@@ -100,7 +102,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
     	    });
 	    }
         
-        $scope.saveAndClose = function () {
+        /*$scope.saveAndClose = function () {
             
             var school_id = document.getElementById("schoolID").value;        
             var school_name = document.getElementById("schoolName").value;
@@ -135,7 +137,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
             }, function(response) {
     			alertFailMessage("Oops! Something went wrong, please check your input again.");
     	    });
-	    }
+	    }*/
         
         //reset form add
         $scope.ResetForm_Add=function(){

@@ -52,10 +52,10 @@ app.controller('studentCtrl',
 
             $scope.sohocsinh = $scope.listsl.length;
         }
-
+        $scope.list = [];
         // Lấy danh sách Student
         function GetListStudent() {
-            $scope.list = [];
+            
             var Student = $resource('http://localhost:8080/admin/api/Student');
             Student.query().$promise.then(function(listStudent) {
                 $scope.list = listStudent;
@@ -269,7 +269,6 @@ app.controller('studentCtrl',
         $scope.showList = function(index) {
             return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
         }
-
         // upload hình ảnh
         // $scope.stepsModel = [];
 
@@ -325,17 +324,21 @@ app.controller('studentCtrl',
         };
         // kiểm ra trùng username
         function usernameduplicate(username) {
-            var Student = $resource('http://localhost:8080/admin/api/Student');
-            Student.query().$promise.then(function(listStudent) {
+//            var Student = $resource('http://localhost:8080/admin/api/Student');
+//            Student.query().$promise.then(function(listStudent) {
 
-                listStudent.forEach(function(item, index) {
+                $scope.list.forEach(function(item, index) {
                     if (item.username === username) {
-                        alertduplicatestudent();
-                        
+                        //alertduplicatestudent();
+                        $scope.duplicateAlert="Duplicate Username";
                     }
                 });
                 // alert(numberOfStudent);
-            });
+            //});
+        }
+        
+        $scope.hideDuplicateAlert=function(){
+        	$scope.duplicateAlert="";
         }
         $scope.student={};        
         //Reset form Add
@@ -444,7 +447,7 @@ app.controller('studentCtrl',
 					}).then(function mySucces(response) {
 						if(close===true)
 							{
-							$("#myModal_them").hide();
+							$("#myModal_them").modal("hide");
 							}
 						GetListStudent();
 						addAlert();
@@ -695,7 +698,7 @@ app.controller('studentCtrl',
             })
         }
 
-        function alertduplicatestudent() {
+        /*function alertduplicatestudent() {
             swal({
                 title: "",
                 text: "Oops! Something went wrong, please check your input again.",
@@ -703,7 +706,7 @@ app.controller('studentCtrl',
                 timer: alertDuration,
                 showConfirmButton: false
             })
-        }
+        }*/
 
         function resetAlert() {
             swal({

@@ -70,7 +70,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
             }
 
             // add specialization
-            $scope.addSpecialization = function() {
+            $scope.addSpecialization = function(close) {
                 var specializationId = document
                     .getElementById("specializationId_add").value;
                 var specializationName = document
@@ -91,10 +91,12 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                     })
                     .then(
                         function(response) {
-                            // $("#myModal_them").modal("hide");
                             getListSpecializations();
                             alertAddSucess();
                             $scope.ResetForm_Add();
+                            if(close==true){
+                            	$("#myModal_them").modal("hide");
+                            }
                         },
                         function(response) {
                             if (response.status == 406) {
@@ -102,7 +104,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                             }
                         });
             }
-            $scope.addSpecializationAndClose = function() {
+            /*$scope.addSpecializationAndClose = function() {
                 var specializationId = document
                     .getElementById("specializationId_add").value;
                 var specializationName = document
@@ -133,7 +135,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                                 alertFailMessage("Oops! Something went wrong, please check your input again.");
                             }
                         });
-            }
+            }*/
     // update specialization
     $scope.callEditSpecialization = function(data) {
         $http.get("/api/specialization/" + data.id).then(

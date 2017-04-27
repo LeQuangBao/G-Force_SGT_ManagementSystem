@@ -355,9 +355,9 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="them"
-						data-ng-click="Them()" ng-disabled="formThem.$invalid">Add</button>
+						data-ng-click="Them(false)" ng-disabled="formThem.$invalid">Add</button>
 					<button type="button" class="btn btn-default" id="them"
-						data-ng-click="Them2()" ng-disabled="formThem.$invalid">Add and close</button>
+						data-ng-click="Them(true)" ng-disabled="formThem.$invalid">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetForm()">Close</button>
 
