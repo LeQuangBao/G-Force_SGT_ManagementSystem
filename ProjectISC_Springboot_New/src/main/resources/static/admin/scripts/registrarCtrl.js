@@ -75,6 +75,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
         };
         reader.readAsDataURL(photofile);
         $scope.image=photofile.name;
+       
 	};
 	
 	function uploadFile() {
@@ -94,39 +95,48 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
             // Handle upload error
             $("#upload-file-message").text(
                 "File not uploaded (perhaps it's too big)");
+            
           }
         });
       }
 	
  	// ADD REGISTRAR
+	$scope.image="";
  	 $scope.save = function () {
  		uploadFile();
-         $http({
-             method: "POST",
+ 	
+ 		if($scope.image==="")
+ 			{
+ 			$scope.image="noImage.png";
+ 			}
+ 		
+       $http({
+            method: "POST",
             url: "api/registrar",
             data: {
          	   	username: $scope.username,
          	   password: $scope.password,
-         	    firstname : $scope.firstName,
+        	    firstname : $scope.firstName,
                	lastname: $scope.lastName,
                	birthday: $scope.birthday,
-               	email: $scope.email,
-               	phone: $scope.phone,
+              	email: $scope.email,
+              	phone: $scope.phone,
                	address: $scope.address,
-               	image: $scope.image,
-               	status: $scope.active                 	
+              	image: $scope.image,
+               	status: $scope.active,
+               
             },
-            
+           
             dataType: "json"
-         })
-    .then(function (result) {	
+       })
+   .then(function (result) {	
        if (result.status == 201) {
     	   getAllRegistrars();
      	  addAlert();
      	  $scope.ResetForm_Add();
        } 
  
-         }, function(response) {
+        }, function(response) {
          	if(response.status == 406) {            		
          		alertFailMessage("Oops! Something went wrong, please check your input again.");
          	}
@@ -304,7 +314,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	  $scope.autoAdd = function(keyEvent) {    		  
 	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
 	        	var random = getRandomInt(1, 10000);
-		    	 $scope.username="Billgate " + random;
+		    	 $scope.username="Billgate" + random;
 	        	 $scope.firstName="Bill " + random;
 	        	 $scope.lastName="Gate " + random;
 	        	 $scope.password=random;
@@ -314,7 +324,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	        	 $scope.address=random;
 	        	 $scope.birthday=new Date("3/25/1997");
 	        	 $scope.active=true;
-	        	$scope.degree="College";
+	        	
 	        }
 	  }
 	  function getRandomInt (min, max) {
@@ -386,4 +396,19 @@ return {
       });
     }
   };
+});
+app.directive('checkImage', function($http) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            attrs.$observe('ngSrc', function(ngSrc) {
+                $http.get(ngSrc).success(function(){
+                    alert('image exist');
+                }).error(function(){
+                    alert('image not exist');
+                    element.attr('src', '/images/noImage.png'); // set default image
+                });
+            });
+        }
+    };
 });
