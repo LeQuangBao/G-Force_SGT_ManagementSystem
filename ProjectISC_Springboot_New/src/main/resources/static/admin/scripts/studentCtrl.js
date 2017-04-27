@@ -374,11 +374,15 @@ app.controller('studentCtrl',
 	    	 $scope.student.school= $scope.list_school[0];
 	    	 $scope.student.specialization=$scope.list_specialization[0];
         }
-
+        $scope.image1="";
         // thêm student
         $scope.them = function(close) {
         	
             uploadFile();
+            if($scope.image1==="")
+ 			{
+ 			$scope.image1="noImage.png";
+ 			}
             usernameduplicate($scope.student.username);
             $scope.student.gender=$scope.gender;
             $scope.student.status=$scope.status;
@@ -625,7 +629,6 @@ app.controller('studentCtrl',
         // Đặt con trỏ vào ô username, bấm Alt + Q
         $scope.autoAdd = function(keyEvent) {    	
 	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
-	        	
 	        	var random = getRandomInt(1, 10000);
 		    	 $scope.student.username="Billgate" + random;
 	        	 $scope.student.firstname="Bill" + random;
@@ -636,7 +639,6 @@ app.controller('studentCtrl',
 	        	 $scope.student.phone=random * 2;
 	        	 $scope.student.address = "Earth, District " + random;
 	        	 $scope.birthday=new Date("3/25/1997");
-	        	 
 	        }
 	  }
 	  function getRandomInt (min, max) {

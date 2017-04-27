@@ -107,7 +107,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	
  		if($scope.image==="")
  			{
- 			$scope.image="thumb_ph.png";
+ 			$scope.image="noImage.png";
  			}
  		
        $http({
@@ -314,7 +314,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	  $scope.autoAdd = function(keyEvent) {    		  
 	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
 	        	var random = getRandomInt(1, 10000);
-		    	 $scope.username="Billgate " + random;
+		    	 $scope.username="Billgate" + random;
 	        	 $scope.firstName="Bill " + random;
 	        	 $scope.lastName="Gate " + random;
 	        	 $scope.password=random;
@@ -324,7 +324,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	        	 $scope.address=random;
 	        	 $scope.birthday=new Date("3/25/1997");
 	        	 $scope.active=true;
-	        	$scope.degree="College";
+	        	
 	        }
 	  }
 	  function getRandomInt (min, max) {
@@ -406,7 +406,7 @@ app.directive('checkImage', function($http) {
                     alert('image exist');
                 }).error(function(){
                     alert('image not exist');
-                    element.attr('src', '/images/thumb_ph.png'); // set default image
+                    element.attr('src', '/images/noImage.png'); // set default image
                 });
             });
         }
