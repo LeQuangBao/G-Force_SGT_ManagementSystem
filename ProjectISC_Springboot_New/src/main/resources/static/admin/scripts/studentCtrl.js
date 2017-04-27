@@ -373,11 +373,15 @@ app.controller('studentCtrl',
 	    	 $scope.student.school= $scope.list_school[0];
 	    	 $scope.student.specialization=$scope.list_specialization[0];
         }
-
+        $scope.image1="";
         // thêm student
         $scope.them = function() {
         	
             uploadFile();
+            if($scope.image1==="")
+ 			{
+ 			$scope.image1="noImage.png";
+ 			}
             usernameduplicate($scope.student.username);
             $scope.student.gender=$scope.gender;
             $scope.student.status=$scope.status;

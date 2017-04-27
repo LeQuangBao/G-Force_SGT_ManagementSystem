@@ -107,7 +107,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	
  		if($scope.image==="")
  			{
- 			$scope.image="thumb_ph.png";
+ 			$scope.image="noImage.png";
  			}
  		
        $http({
@@ -406,7 +406,7 @@ app.directive('checkImage', function($http) {
                     alert('image exist');
                 }).error(function(){
                     alert('image not exist');
-                    element.attr('src', '/images/thumb_ph.png'); // set default image
+                    element.attr('src', '/images/noImage.png'); // set default image
                 });
             });
         }

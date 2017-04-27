@@ -92,9 +92,14 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
               }
             });
           }
+    	$scope.image="";
 	    // add instructor
         $scope.save = function () {
         	uploadFile();
+        	if($scope.image==="")
+ 			{
+ 			$scope.image="noImage.png";
+ 			}
             $http({
                 method: "POST",
                url: "api/instructor",
