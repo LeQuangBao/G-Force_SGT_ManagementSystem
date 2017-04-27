@@ -331,6 +331,7 @@ app.controller('studentCtrl',
                 listStudent.forEach(function(item, index) {
                     if (item.username === username) {
                         alertduplicatestudent();
+                        
                     }
                 });
                 // alert(numberOfStudent);
@@ -375,7 +376,7 @@ app.controller('studentCtrl',
         }
         $scope.image1="";
         // thêm student
-        $scope.them = function() {
+        $scope.them = function(close) {
         	
             uploadFile();
             if($scope.image1==="")
@@ -441,9 +442,15 @@ app.controller('studentCtrl',
 						data : JSON.stringify($scope.student),
 						dataType: "json"
 					}).then(function mySucces(response) {
+						if(close===true)
+							{
+							$("#myModal_them").hide();
+							}
 						GetListStudent();
 						addAlert();
+						
 					});
+					
 
                 })
 
