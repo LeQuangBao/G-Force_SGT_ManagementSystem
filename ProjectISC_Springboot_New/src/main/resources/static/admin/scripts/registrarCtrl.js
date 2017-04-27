@@ -304,7 +304,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	  $scope.autoAdd = function(keyEvent) {    		  
 	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
 	        	var random = getRandomInt(1, 10000);
-		    	 $scope.username="Billgate " + random;
+		    	 $scope.username="Billgate" + random;
 	        	 $scope.firstName="Bill " + random;
 	        	 $scope.lastName="Gate " + random;
 	        	 $scope.password=random;
@@ -314,7 +314,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	        	 $scope.address=random;
 	        	 $scope.birthday=new Date("3/25/1997");
 	        	 $scope.active=true;
-	        	$scope.degree="College";
+	        	
 	        }
 	  }
 	  function getRandomInt (min, max) {
