@@ -317,9 +317,9 @@ app.controller('studentCtrl',
                     },
                     error: function() {
                         // Handle upload error
-                        $("#upload-file-message")
-                            .text(
-                                "File not uploaded (perhaps it's too big)");
+//                        $("#upload-file-message")
+//                            .text(
+//                                "File not uploaded (perhaps it's too big)");
                     }
                 });
         };
@@ -705,7 +705,6 @@ app.controller('studentCtrl',
                 showConfirmButton: false
             });
         }
-
     })
 //Compare password and retype password
 app.directive("matchPassword", function(){
