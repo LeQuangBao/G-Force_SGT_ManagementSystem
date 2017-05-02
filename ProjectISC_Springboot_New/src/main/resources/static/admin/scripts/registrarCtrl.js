@@ -61,6 +61,25 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  		$scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
  	};
  	$scope.updatePageIndexes();
+ 	 // kiểm ra trùng username
+ 	$scope.list=[];
+    function usernameduplicate(username) {
+//        var Student = $resource('http://localhost:8080/admin/api/Student');
+//        Student.query().$promise.then(function(listStudent) {
+
+            $scope.list.forEach(function(item, index) {
+                if (item.username === username) {
+                    //alertduplicatestudent();
+                    $scope.duplicateAlert="Duplicate Username";
+                }
+            });
+            // alert(numberOfStudent);
+        //});
+    }
+    
+    $scope.hideDuplicateAlert=function(){
+    	$scope.duplicateAlert="";
+    }
  	
  	$scope.showList=function(index){
  		return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
@@ -104,6 +123,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	$scope.image="";
  	 $scope.save = function (close) {
  		uploadFile();
+ 		usernameduplicate($scope.username);
  	
  		if($scope.image==="")
  			{
@@ -140,9 +160,9 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
        } 
  
         }, function(response) {
-         	if(response.status == 406) {            		
-         		alertFailMessage("Oops! Something went wrong, please check your input again.");
-         	}
+//         	if(response.status == 406) {            		
+//         		alertFailMessage("Oops! Something went wrong, please check your input again.");
+//         	}
 			});
          
      }
@@ -152,6 +172,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
     	 $scope.firstName="";
     	 $scope.lastName="";
     	 $scope.re_password="";
+    	 $scope.duplicateAlert="";
     	 $scope.email="";
     	 $scope.phone="";
     	 $scope.address="";

@@ -343,15 +343,17 @@
 							<div class="form-group">
 								<label class="control-label" >Username</label>
 								<div class="">
-									<input id="username" name="username" placeholder="" ng-keydown="autoAdd($event)"
+									<input id="username" name="username" ng-keyup="hideDuplicateAlert()"  placeholder="" ng-keydown="autoAdd($event)"
 										class="form-control input-md" type="text" ng-model="username"
 										ng-required="true" />
 									<div ng-messages="frmInstructor.username.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.username.$touched">
 											<p style="color: red">This field is required</p>
+											
 										</div>
 									</div>
+									<p ng-bind="duplicateAlert" style="color: red" ></p>
 
 								</div>
 							</div>

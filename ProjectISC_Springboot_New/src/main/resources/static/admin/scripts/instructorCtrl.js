@@ -13,6 +13,10 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 			$scope.updatePageIndexes();
 		}
 		
+        
+        $scope.hideDuplicateAlert=function(){
+        	$scope.duplicateAlert="";
+        }
 		var alertDuration = 1800;
 	    function getAllinstructors(){
 			$scope.list=[];
@@ -28,6 +32,23 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     	$scope.listfiltered = function(element) {
             return $filter('filter')(element, $scope.filterTable); 
         };
+     // kiểm tra trùng username
+		$scope.list=[];
+        function usernameduplicate(username) {
+//            var Student = $resource('http://localhost:8080/admin/api/Student');
+//            Student.query().$promise.then(function(listStudent) {
+        		console.log($scope.list);
+                $scope.list.forEach(function(item, index) {
+                    if (item.username === username) {
+                        //alertduplicatestudent();
+                        $scope.duplicateAlert="Duplicate Username";
+                    	
+                    }
+                });
+                // alert(numberOfStudent);
+            //});
+        }
+        
     	$scope.prev_img='';
     	// Phân trang
     	$scope.currentPage = 1;
@@ -96,9 +117,11 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 	    // add instructor
         $scope.save = function (close) {
         	uploadFile();
-        	if($scope.image==="")
- 			{
- 			$scope.image="noImage.png";
+        
+        	usernameduplicate($scope.username);
+       	if($scope.image==="")
+			{
+			$scope.image="noImage.png";
  			}
             $http({
                 method: "POST",
@@ -119,7 +142,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                
                dataType: "json"
             })
-       .then(function (result) {	
+      .then(function (result) {	
           if (result.status == 201) {
         	  getAllinstructors();
         	  addAlert();
@@ -127,12 +150,12 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	  if(close=true){
         		  $('#myModal').modal('hide');
         	  }
-          } 
+         } 
     
             }, function(response) {
-            	if(response.status == 406) {            		
-            		alertFailMessage("Oops! Something went wrong, please check your input again.");
-            	}
+//            	if(response.status == 406) {            		
+//            		alertFailMessage("Oops! Something went wrong, please check your input again.");
+//            	}
 			});
             
         }
@@ -164,6 +187,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.password="";
         	 $scope.firstName="";
         	 $scope.lastName="";
+        	 $scope.duplicateAlert="";
         	 $scope.re_password="";
         	 $scope.email="";
         	 $scope.phone="";
@@ -273,7 +297,10 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                .then(function (result) {
                 	  resetAlert();
              });
-       }      
+       }
+        $scope.hideDuplicateAlert=function(){
+        	$scope.duplicateAlert="";
+        }
         
         // delete instructor
          $scope.deleteInstructor=function()

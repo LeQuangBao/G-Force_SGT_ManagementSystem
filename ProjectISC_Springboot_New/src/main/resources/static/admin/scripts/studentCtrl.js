@@ -348,6 +348,7 @@ app.controller('studentCtrl',
         	$scope.status="Studying";
         	 $scope.student.username="";
 	    	 $scope.password="";
+	    	 $scope.duplicateAlert="";
 	    	 $scope.student.firstname="";
 	    	 $scope.student.lastname="";
 	    	 $scope.re_password="";
