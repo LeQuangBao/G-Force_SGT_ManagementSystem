@@ -71,7 +71,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
             $scope.list.forEach(function(item, index) {
                 if (item.username === username) {
                     //alertduplicatestudent();
-                    $scope.duplicateAlert="Duplicate Username";
+                    $scope.duplicateAlert="Duplicate username";
                     flag=false;
                 }
             });
