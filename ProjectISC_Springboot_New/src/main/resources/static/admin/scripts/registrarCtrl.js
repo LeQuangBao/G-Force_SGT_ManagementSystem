@@ -275,8 +275,8 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
             }, 1000);
         }, function(response) {
 				alertFailMessage("Oops! Something went wrong, please check your input again.");
-				setTimeout(function() {
-				});
+//				setTimeout(function() {
+//				});
         });
   }  
  	 

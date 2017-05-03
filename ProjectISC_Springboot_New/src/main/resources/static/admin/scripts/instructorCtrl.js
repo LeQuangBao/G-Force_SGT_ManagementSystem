@@ -229,6 +229,9 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                 	  $("#myModal_sua").modal("hide");
                 	  getAllinstructors();
                 	  editAlert();
+                		setTimeout(function() {
+                       		window.location.reload();
+                        }, 1000);
              }, function(response) {
 					alertFailMessage("Oops! Something went wrong, please check your input again");
 					setTimeout(function() {
