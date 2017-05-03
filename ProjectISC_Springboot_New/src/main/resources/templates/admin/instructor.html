@@ -73,7 +73,7 @@
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="/admin/school">School</a></li>
 										<li><a href="/admin/specialization">Specialization</a></li>
-										<li><a href="/admin/subject">Subject</a></li>
+										<li><a href="/admin/course">Course</a></li>
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
@@ -343,15 +343,17 @@
 							<div class="form-group">
 								<label class="control-label" >Username</label>
 								<div class="">
-									<input id="username" name="username" placeholder="" ng-keydown="autoAdd($event)"
+									<input id="username" name="username" ng-keyup="hideDuplicateAlert()"  placeholder="" ng-keydown="autoAdd($event)"
 										class="form-control input-md" type="text" ng-model="username"
 										ng-required="true" />
 									<div ng-messages="frmInstructor.username.$error">
 										<div ng-message="required"
 											ng-show="frmInstructor.username.$touched">
 											<p style="color: red">This field is required</p>
+											
 										</div>
 									</div>
+									<p ng-bind="duplicateAlert" style="color: red" ></p>
 
 								</div>
 							</div>
@@ -477,7 +479,7 @@
 								<img ng-src="{{prev_img}}" height="150" width="100" id="prev_img"/> <input
 									type="file" id="image" name="uploadfile" accept="*"
 									onchange="angular.element(this).scope().getImage(this)"
-									ng-model="image" required="required" />
+									ng-model="image"/>
 								<!-- Multiple Radios -->
 
 							</div>
@@ -521,10 +523,9 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="save()" ng-disabled="frmInstructor.$invalid">Add</button>
+						ng-click="save(false)" ng-disabled="frmInstructor.$invalid">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="save()" ng-disabled="frmInstructor.$invalid"
-						data-dismiss="modal">Add and close</button>
+						ng-click="save(true)" ng-disabled="frmInstructor.$invalid">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>

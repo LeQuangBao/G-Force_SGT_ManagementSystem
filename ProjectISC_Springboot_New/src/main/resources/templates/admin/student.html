@@ -371,7 +371,7 @@
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
 								<div class="">
-									<input id="username" name="username" placeholder="" ng-keydown="autoAdd($event)"
+									<input id="username" name="username" placeholder="" ng-keydown="autoAdd($event)" ng-keyup="hideDuplicateAlert()"
 										class="form-control input-md" type="text"
 										ng-model="student.username" ng-required="true" />
 									<div ng-messages="frmStudentAdd.username.$error">
@@ -380,7 +380,7 @@
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
-
+									<p ng-bind="duplicateAlert" style="color: red" ></p>
 								</div>
 							</div>
 
@@ -593,10 +593,10 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="them()" ng-disabled="frmStudentAdd.$invalid">Add</button>
+						ng-click="them(false)" ng-disabled="frmStudentAdd.$invalid">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="them()" ng-disabled="frmStudentAdd.$invalid"
-						data-dismiss="modal">Add and close</button>
+						ng-click="them(true)" ng-disabled="frmStudentAdd.$invalid"
+						>Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>

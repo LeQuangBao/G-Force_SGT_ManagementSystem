@@ -289,9 +289,9 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="addSpecialization()"
+					<button class="btn btn-primary" ng-click="addSpecialization(false)"
 						ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add</button>
-					<button class="btn btn-default" ng-click="addSpecializationAndClose()"
+					<button class="btn btn-default" ng-click="addSpecialization(true)"
 						ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add
 						and close</button>
 					<button class="btn btn-default" data-dismiss="modal">Close</button>

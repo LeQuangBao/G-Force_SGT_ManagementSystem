@@ -146,7 +146,7 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
 
 
     // Thêm mới intake
-    $scope.Them = function() {
+    $scope.Them = function(close) {
         if (Check_Add()) {
             var startdate = new Date($scope.startdate);
             var enddate = new Date($scope.enddate);
@@ -163,15 +163,17 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
                 })
                 .$promise.then(function() {
                     GetListIntake();
-                    // $('#myModal_them').modal('hide');
                     addAlert();
+                    if(close==true){
+                    	$('#myModal_them').modal('hide');
+                    }
                 }, function(response) {
                     alertFailMessage(failMessage);
                 });
         }
     }
     // Nút thêm và đóng
-    $scope.Them2 = function() {
+    /*$scope.Them2 = function() {
         if (Check_Add()) {
             var startdate = new Date($scope.startdate);
             var enddate = new Date($scope.enddate);
@@ -194,7 +196,7 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
                     alertFailMessage(failMessage);
                 });
         } 
-    }
+    }*/
 
     var intakeObj = null;
 

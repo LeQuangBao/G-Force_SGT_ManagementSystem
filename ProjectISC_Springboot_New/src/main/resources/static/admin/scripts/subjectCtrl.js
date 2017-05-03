@@ -62,7 +62,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	}
     	
 	    // add subject
-        $scope.save = function () {
+        $scope.save = function (close) {
             var subject_id = document.getElementById("subjectID").value;        
             var subject_name = $scope.subjectName;
             var credit=document.getElementById("credit").value;
@@ -87,6 +87,9 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
             })
        .then(function (result) {	
           if (result.status == 201) {
+        	  if(close==true){
+        		  $("#myModal").modal("hide");
+        	  }
         	  getAllsubjects();
         	  addAlert();
         	  $scope.ResetForm_Add();
@@ -99,7 +102,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 			});
             
         }
-        $scope.saveAndClose = function () {
+        /*$scope.saveAndClose = function () {
             var subject_id = document.getElementById("subjectID").value;        
             var subject_name = $scope.subjectName;
             var credit=document.getElementById("credit").value;
@@ -136,7 +139,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
             	}
 			});
             
-        }
+        }*/
 	    $scope.ResetForm_Add=function(){
 	    	 $scope.subjectId="";
         	 $scope.subjectName="";

@@ -331,15 +331,17 @@
 								<label class=" control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" type="text" ng-model="username" ng-keydown="autoAdd($event)"
+										class="form-control input-md" ng-keyup="hideDuplicateAlert()" type="text" ng-model="username" ng-keydown="autoAdd($event)"
 										ng-required="true" />
 
 									<div ng-messages="frmRegistrarAdd.username.$error">
 										<div ng-message="required"
 											ng-show="frmRegistrarAdd.username.$touched">
 											<p style="color: red">This field is required</p>
+											
 										</div>
 									</div>
+									<p ng-bind="duplicateAlert" style="color: red" ></p>
 
 								</div>
 							</div>
@@ -506,9 +508,9 @@
 					<!-- <button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()" ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required || frmRegistrarAdd.address.$error.required|| frmRegistrarAdd.phone.$error.required|| frmRegistrarAdd.email.$error.required|| frmRegistrarAdd.password.$error.required|| frmRegistrarAdd.re_password.$error.required">Add</button> -->
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-disabled="frmRegistrarAdd.$invalid" ng-click="save()">Add</button>
+						ng-disabled="frmRegistrarAdd.$invalid" ng-click="save(false)">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="save()" data-dismiss="modal"
+						ng-click="save(true)"
 						ng-disabled="frmRegistrarAdd.$invalid">Add and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
