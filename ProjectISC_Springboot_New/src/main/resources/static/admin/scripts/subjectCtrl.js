@@ -63,6 +63,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
     	
 	    // add subject
         $scope.save = function (close) {
+        	if(id_duplicate_Add(document.getElementById("subjectID").value)){
             var subject_id = document.getElementById("subjectID").value;        
             var subject_name = $scope.subjectName;
             var credit=document.getElementById("credit").value;
@@ -100,7 +101,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
             		alertFailMessage("Oops! Something went wrong, please check your input again.");
             	}
 			});
-            
+        	}
         }
         /*$scope.saveAndClose = function () {
             var subject_id = document.getElementById("subjectID").value;        
@@ -152,9 +153,11 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
         	 $scope.frmsubjectAdd.credit.$setUntouched();
         	 $scope.frmsubjectAdd.hour.$setUntouched();
         	 $scope.frmsubjectAdd.description.$setUntouched();
+        	 $scope.duplicateAlert="";
 	    }
         // edit subject
         $scope.update = function () {
+        	if(id_duplicate_Edit($scope.subject_edit.subjectId)){
         	var subjectObj={id:$scope.subject_edit.id,subjectId:$scope.subject_edit.subjectId, subjectName: $scope.subject_edit.subjectName, credit:$scope.subject_edit.credit, hour:$scope.subject_edit.hour,description:$scope.subject_edit.description ,active:$scope.subject_edit.active};
             $http({
                method: "put",
@@ -175,6 +178,7 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 //						location.reload();
 //					}, alertDuration);
              });
+        	}
        }
         
         $scope.subject_edit = [];
@@ -189,6 +193,8 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
        			$scope.subject_edit.description=response.data.description;
        			$scope.subject_edit.active=response.data.active;
           });
+        	SubID=data.subjectId;
+        	$scope.duplicateAlert="";
         };
         // delete subject
          $scope.delete=function()
@@ -240,6 +246,35 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
         $scope.deletesubject = function (data) {
             $scope.subject_delete = data;
         }; 
+        
+      //Kiểm tra trùng ID
+    	function id_duplicate_Add(id) {
+    		var flag=true;
+              $scope.list.forEach(function(item, index) {
+                  if (item.subjectId === id) {
+                      $scope.duplicateAlert="Duplicate ID";
+                      flag= false;
+                  }
+              });
+              return flag;
+         }
+    	var SubID="";
+    	function id_duplicate_Edit(id) {
+    		var flag=true;
+              $scope.list.forEach(function(item, index) {
+            	  if (id != SubID) {
+    	              if (item.subjectId === id) {
+    	                  $scope.duplicateAlert="Duplicate ID";
+    	                  flag= false;
+    	              }
+            	  }
+              });
+              return flag;
+         }
+    	 $scope.hideDuplicateAlert=function(){
+    		  	$scope.duplicateAlert="";
+    		  }
+        
         function deleteAlert(){
     	  	swal({
     	  	  title:"",

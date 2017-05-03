@@ -35,6 +35,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
      // kiểm tra trùng username
 		$scope.list=[];
         function usernameduplicate(username) {
+        	var flag=true;
 //            var Student = $resource('http://localhost:8080/admin/api/Student');
 //            Student.query().$promise.then(function(listStudent) {
         		console.log($scope.list);
@@ -42,11 +43,12 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                     if (item.username === username) {
                         //alertduplicatestudent();
                         $scope.duplicateAlert="Duplicate Username";
-                    	
+                    	flag=false;
                     }
                 });
                 // alert(numberOfStudent);
             //});
+            return flag;
         }
         
     	$scope.prev_img='';
@@ -118,7 +120,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         $scope.save = function (close) {
         	uploadFile();
         
-        	usernameduplicate($scope.username);
+        	if(usernameduplicate($scope.username)){
        	if($scope.image==="")
 			{
 			$scope.image="noImage.png";
@@ -157,7 +159,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 //            		alertFailMessage("Oops! Something went wrong, please check your input again.");
 //            	}
 			});
-            
+        	}
         }
         //Upload file trong modal Edit
         function uploadFile_Edit() {

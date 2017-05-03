@@ -64,7 +64,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
     	
 	    // add school
         $scope.save = function (close) {
-           
+        	if(id_duplicate_Add(document.getElementById("schoolID").value)){
             var school_id = document.getElementById("schoolID").value;        
             var school_name = document.getElementById("schoolName").value;
             var address=document.getElementById("address").value;
@@ -100,6 +100,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
             }, function(response) {
     			alertFailMessage("Oops! Something went wrong, please check your input again.");
     	    });
+        	}
 	    }
         
         /*$scope.saveAndClose = function () {
@@ -150,9 +151,11 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
      		$scope.frmSchoolAdd.schoolName.$setUntouched();
      		$scope.frmSchoolAdd.address.$setUntouched();
      		$scope.frmSchoolAdd.contact.$setUntouched();
+     		$scope.duplicateAlert="";
         }
         // edit school
         $scope.update = function () {
+        	if(id_duplicate_Edit($scope.school_edit.schoolId)){
         	var schoolObj={id:$scope.school_edit.id,schoolId:$scope.school_edit.schoolId, schoolName: $scope.school_edit.schoolName, address:$scope.school_edit.address, contact:$scope.school_edit.contact, active:($scope.school_edit.active==null?false:($scope.school_edit.active==false?false:true))};
             $http({
                method: "put",
@@ -173,6 +176,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
 //						location.reload();
 //					}, alertDuration);
              });
+        	}
        }
         
         $scope.school_edit = [];
@@ -185,7 +189,9 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
        			$scope.school_edit.contact=response.data.contact;
        			$scope.school_edit.active=response.data.active;
 	       		$scope.school_edit.id=data.id;	
+	       		SchoolID=data.schoolId;
           });
+        	$scope.duplicateAlert="";
         };
         // delete school
          $scope.delete=function()
@@ -217,6 +223,33 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
 		$scope.sortReverse = false;
 		$scope.searchName = '';        
         
+		//Kiểm tra trùng ID
+		function id_duplicate_Add(id) {
+			var flag=true;
+	          $scope.list.forEach(function(item, index) {
+	              if (item.schoolId === id) {
+	                  $scope.duplicateAlert="Duplicate ID";
+	                  flag= false;
+	              }
+	          });
+	          return flag;
+	     }
+		var SchoolID="";
+		function id_duplicate_Edit(id) {
+			var flag=true;
+	          $scope.list.forEach(function(item, index) {
+	        	  if (id != SchoolID) {
+		              if (item.schoolId === id) {
+		                  $scope.duplicateAlert="Duplicate ID";
+		                  flag= false;
+		              }
+	        	  }
+	          });
+	          return flag;
+	     }
+		 $scope.hideDuplicateAlert=function(){
+			  	$scope.duplicateAlert="";
+			  }
         function deleteAlert(){
     	  	swal({
     	  	  title:"",

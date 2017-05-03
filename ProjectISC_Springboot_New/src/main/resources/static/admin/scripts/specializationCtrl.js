@@ -71,6 +71,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
 
             // add specialization
             $scope.addSpecialization = function(close) {
+            	if(id_duplicate_Add(document.getElementById("specializationId_add").value)){
                 var specializationId = document
                     .getElementById("specializationId_add").value;
                 var specializationName = document
@@ -103,6 +104,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                                 alertFailMessage("Oops! Something went wrong, please check your input again.");
                             }
                         });
+            	}
             }
             /*$scope.addSpecializationAndClose = function() {
                 var specializationId = document
@@ -142,9 +144,12 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
             function(response) {
                 $scope.info = response.data;
             });
+        SpecID=data.specializationId;
+        $scope.duplicateAlert="";
     }
 
     $scope.editSpecialization = function() {
+    	if(id_duplicate_Edit($scope.info.specializationId)){
         $http({
                 method: "PUT",
                 url: "/api/specialization",
@@ -162,6 +167,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
                         alertFailMessage("Oops! Something went wrong, please check your input again.");
                     }
                 });
+    	}
     }
 
     // update relevant subjects
@@ -253,6 +259,33 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
     $scope.sortReverse = false;
     $scope.searchName = '';
 
+  //Kiểm tra trùng ID
+	function id_duplicate_Add(id) {
+		var flag=true;
+          $scope.list.forEach(function(item, index) {
+              if (item.specializationId === id) {
+                  $scope.duplicateAlert="Duplicate ID";
+                  flag= false;
+              }
+          });
+          return flag;
+     }
+	var SpecID="";
+	function id_duplicate_Edit(id) {
+		var flag=true;
+          $scope.list.forEach(function(item, index) {
+        	  if (id != SpecID) {
+	              if (item.specializationId === id) {
+	                  $scope.duplicateAlert="Duplicate ID";
+	                  flag= false;
+	              }
+        	  }
+          });
+          return flag;
+     }
+	 $scope.hideDuplicateAlert=function(){
+		  	$scope.duplicateAlert="";
+		  }
     function alertDeleteSucess() {
         swal({
             title: "",
@@ -320,6 +353,6 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
         $scope.active_add = true;
         $scope.formAdd.specializationId_add.$setUntouched();
         $scope.formAdd.specializationName_add.$setUntouched();
-
+        $scope.duplicateAlert="";
     }
 });

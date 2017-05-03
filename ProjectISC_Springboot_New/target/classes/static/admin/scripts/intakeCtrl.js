@@ -325,7 +325,7 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
             $scope.formThem.enddate.$error.validationError = false;
             $scope.formThem.enddate.$valid = true;
         }
-        if ( /* !($scope.formThem.intakeid.$valid) || */ !($scope.formThem.enddate.$valid))
+        if ( !($scope.formThem.intakeid.$valid) ||  !($scope.formThem.enddate.$valid))
             return false;
         return true;
     }
@@ -356,7 +356,7 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
             $scope.formSua._enddate.$error.validationError = false;
             $scope.formSua._enddate.$valid = true;
         }
-        if ( /* !($scope.formSua._id.$valid) || */ !($scope.formSua._enddate.$valid))
+        if ( !($scope.formSua._id.$valid) || !($scope.formSua._enddate.$valid))
             return false;
         return true;
     }

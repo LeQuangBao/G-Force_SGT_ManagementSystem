@@ -287,7 +287,9 @@
 									<div ng-message="required" ng-show="formThem.intakeid.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
-									<!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
+									<div ng-message="validationError">
+										<p style="color:red">Duplicate ID</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -391,7 +393,9 @@
 									<div ng-message="required">
 										<p style="color: red">This field is required</p>
 									</div>
-									<!-- <div ng-message="validationError"><p style="color:red">Intake ID is already exists. Please enter another ID.</p></div> -->
+									<div ng-message="validationError">
+										<p style="color:red">Duplicate ID</p>
+									</div>
 								</div>
 							</div>
 						</div>
