@@ -105,13 +105,16 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 		delInvalid();
 
 	}
-	$scope.add = function add() {
+	$scope.add = function add(close) {
 		if(nameduplicate_Add($scope.exam.entranceExamName)){
 			$http({
 				method : "POST",
 				url : "/admin/api/entrance-exam",
 				data : $scope.exam
 			}).then(function mySucces(response) {
+				if (close) {
+					$("#addModel").modal("hide");
+				}
 				getAllEntranceExam();
 				addAlert();
 				$scope.getData(0);
@@ -189,7 +192,7 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 		var flag=true;
           $scope.list.forEach(function(item, index) {
               if (item.entranceExamName === name) {
-                  $scope.duplicateAlert="Duplicate Name";
+                  $scope.duplicateAlert="Duplicate name";
                   flag= false;
               }
           });
@@ -201,7 +204,7 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
           $scope.list.forEach(function(item, index) {
         	  if (name != entranceExamName) {
 	              if (item.entranceExamName === name) {
-	                  $scope.duplicateAlert="Duplicate Name";
+	                  $scope.duplicateAlert="Duplicate name";
 	                  flag= false;
 	              }
         	  }

@@ -289,7 +289,7 @@
 										<p style="color: red">This field is required</p>
 									</div>
 								</div>
-								<p ng-bind="duplicateAlert" style="color: red" ></p>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
 						</div>
 
@@ -402,7 +402,7 @@
 									id="helpBlock" style="color: red" class="help-block"
 									ng-show="frmSchool.schoolId.$error.required">This field
 									is required</span>
-									<p ng-bind="duplicateAlert" style="color: red" ></p>
+									<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
 						</div>
 
