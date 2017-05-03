@@ -64,6 +64,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	 // kiểm ra trùng username
  	$scope.list=[];
     function usernameduplicate(username) {
+    	var flag=true;
 //        var Student = $resource('http://localhost:8080/admin/api/Student');
 //        Student.query().$promise.then(function(listStudent) {
 
@@ -71,10 +72,12 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
                 if (item.username === username) {
                     //alertduplicatestudent();
                     $scope.duplicateAlert="Duplicate Username";
+                    flag=false;
                 }
             });
             // alert(numberOfStudent);
         //});
+        return flag;
     }
     
     $scope.hideDuplicateAlert=function(){
@@ -123,7 +126,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	$scope.image="";
  	 $scope.save = function (close) {
  		uploadFile();
- 		usernameduplicate($scope.username);
+ 		if(usernameduplicate($scope.username)){
  	
  		if($scope.image==="")
  			{
@@ -164,7 +167,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 //         		alertFailMessage("Oops! Something went wrong, please check your input again.");
 //         	}
 			});
-         
+ 		}
      }
  	 $scope.ResetForm_Add=function(){
     	 $scope.username="";

@@ -280,7 +280,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="schoolID"> ID</label>
 							<div class="col-md-8">
-								<input id="schoolID" name="schoolID" placeholder=""
+								<input id="schoolID" name="schoolID" placeholder="" ng-keyup="hideDuplicateAlert()"
 									class="form-control input-md" type="text" ng-model="schoolId"
 									ng-required="true" />
 								<div ng-messages="frmSchoolAdd.schoolID.$error">
@@ -288,12 +288,8 @@
 										ng-show="frmSchoolAdd.schoolID.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
-									<div ng-message="validationError">
-										<p style="color: red">School ID is already exists. Please
-											enter another ID.</p>
-									</div>
 								</div>
-
+								<p ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
 						</div>
 
@@ -400,13 +396,13 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="schoolID"> ID</label>
 							<div class="col-md-8">
-								<input id="schoolId" name="schoolId" placeholder=""
+								<input id="schoolId" name="schoolId" placeholder="" ng-keyup="hideDuplicateAlert()"
 									class="form-control input-md" type="text"
 									ng-model="school_edit.schoolId" ng-required="true" /> <span
 									id="helpBlock" style="color: red" class="help-block"
 									ng-show="frmSchool.schoolId.$error.required">This field
 									is required</span>
-
+									<p ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
 						</div>
 

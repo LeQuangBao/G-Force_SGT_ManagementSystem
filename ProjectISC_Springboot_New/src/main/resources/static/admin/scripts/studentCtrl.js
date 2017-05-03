@@ -326,15 +326,17 @@ app.controller('studentCtrl',
         function usernameduplicate(username) {
 //            var Student = $resource('http://localhost:8080/admin/api/Student');
 //            Student.query().$promise.then(function(listStudent) {
-
+        		var flag=true;
                 $scope.list.forEach(function(item, index) {
                     if (item.username === username) {
                         //alertduplicatestudent();
                         $scope.duplicateAlert="Duplicate Username";
+                        flag=false;
                     }
                 });
                 // alert(numberOfStudent);
             //});
+             return flag;
         }
         
         $scope.hideDuplicateAlert=function(){
@@ -387,7 +389,7 @@ app.controller('studentCtrl',
  			{
  			$scope.image1="noImage.png";
  			}
-            usernameduplicate($scope.student.username);
+            if(usernameduplicate($scope.student.username)){
             $scope.student.gender=$scope.gender;
             $scope.student.status=$scope.status;
             $scope.student.image = $scope.image1;
@@ -457,7 +459,7 @@ app.controller('studentCtrl',
 					
 
                 })
-
+            }
         };
       
        					

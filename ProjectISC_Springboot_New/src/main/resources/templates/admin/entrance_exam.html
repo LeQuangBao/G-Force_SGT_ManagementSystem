@@ -279,7 +279,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="entranceExamName">Name</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input id="entranceExamName" name="entranceExamName"
+								<input id="entranceExamName" name="entranceExamName" ng-keyup="hideDuplicateAlert()"
 									placeholder="" class="form-control input-md" type="text"
 									ng-model="exam.entranceExamName" ng-required="true" />
 								<div ng-messages="addForm.entranceExamName.$error">
@@ -289,7 +289,7 @@
 									</div>
 
 								</div>
-
+								<p ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
 						</div>
 
@@ -374,7 +374,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="entranceExamName">Name</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input id="entranceExamName" name="entranceExamName"
+								<input id="entranceExamName" name="entranceExamName" ng-keyup="hideDuplicateAlert()"
 									placeholder="" class="form-control input-md" type="text"
 									ng-model="exam.entranceExamName" ng-required="true" />
 								<div ng-messages="editForm.entranceExamName.$error">
@@ -383,7 +383,7 @@
 									</div>
 
 								</div>
-
+								<p ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
 						</div>
 

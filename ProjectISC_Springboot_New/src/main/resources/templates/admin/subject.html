@@ -266,7 +266,7 @@
                      <div class="form-group">
                         <label class="col-md-3 control-label" for="subjectID"> ID</label>
                         <div class="col-md-8">
-                           <input id="subjectID" name="subjectID" placeholder=""
+                           <input id="subjectID" name="subjectID" placeholder="" ng-keyup="hideDuplicateAlert()"
                               class="form-control input-md" type="text" ng-model="subjectId"
                               ng-required="true" />
                            <div ng-messages="frmsubjectAdd.subjectID.$error">
@@ -274,12 +274,13 @@
                                  ng-show="frmsubjectAdd.subjectID.$touched">
                                  <p style="color: red">This field is required</p>
                               </div>
-                              <div ng-message="validationError">
+                              <!-- <div ng-message="validationError">
                                  <p style="color: red">Subject ID is already exists. Please
                                     enter another ID.
                                  </p>
-                              </div>
+                              </div> -->
                            </div>
+                           <p ng-bind="duplicateAlert" style="color: red" ></p>
                         </div>
                      </div>
                      <!-- Text input-->
@@ -396,19 +397,20 @@
                      <div class="form-group">
                         <label class="col-md-4 control-label" for="subjectID">ID</label>
                         <div class="col-md-8">
-                           <input id="subjectId" name="subjectId" placeholder=""
+                           <input id="subjectId" name="subjectId" placeholder="" ng-keyup="hideDuplicateAlert()"
                               class="form-control input-md" type="text"
                               ng-model="subject_edit.subjectId" ng-required="true" />
                            <div ng-messages="frmsubject.subjectId.$error">
                               <div ng-message="required">
                                  <p style="color: red">This field is required</p>
                               </div>
-                              <div ng-message="validationError">
+                              <!-- <div ng-message="validationError">
                                  <p style="color: red">Course ID is already exists. Please
                                     enter another ID.
                                  </p>
-                              </div>
+                              </div> -->
                            </div>
+                           <p ng-bind="duplicateAlert" style="color: red" ></p>
                         </div>
                      </div>
                      <!-- Text input-->
