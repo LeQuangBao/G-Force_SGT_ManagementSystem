@@ -70,7 +70,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
             }
 
             // add specialization
-            $scope.addSpecialization = function() {
+            $scope.addSpecialization = function(close) {
                 var specializationId = document
                     .getElementById("specializationId_add").value;
                 var specializationName = document
