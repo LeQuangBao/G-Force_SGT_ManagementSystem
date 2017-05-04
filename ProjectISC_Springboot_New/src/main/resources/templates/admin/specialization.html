@@ -321,7 +321,7 @@
 								<input type="hidden" ng-model="info.id" /> <input type="text" id="specializationId_edit" ng-keyup="hideDuplicateAlert()"
 									name="specializationId_edit" ng-model="info.specializationId"
 									class="form-control" placeholder="" required="required" /><span
-									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
+									ng-show="formAdd.specializationId_edit.$touched &amp;&amp; formAdd.specializationId_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
 								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
@@ -332,8 +332,9 @@
 								<input type="text" id="specializationName_edit"
 									name="specializationName_edit"
 									ng-model="info.specializationName" class="form-control"
-									placeholder="" required="required" /><span
-									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
+									placeholder="" required="required" />
+									<span
+									ng-show="formAdd.specializationName_edit.$touched &amp;&amp; formAdd.specializationName_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
 							</div>
 						</div>
