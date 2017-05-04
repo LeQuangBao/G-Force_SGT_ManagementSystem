@@ -149,7 +149,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	  getAllinstructors();
         	  addAlert();
         	  $scope.ResetForm_Add();
-        	  if(close=true){
+        	  if(close==true){
         		  $('#myModal').modal('hide');
         	  }
          } 
