@@ -383,7 +383,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
     	        	 $scope.address=random;
     	        	 $scope.birthday=new Date("3/25/1997");
     	        	 $scope.active=true;
-    	        	$scope.degree="college";
+    	        	$scope.degree="College";
     	        }
     	  }
     	  function getRandomInt (min, max) {
