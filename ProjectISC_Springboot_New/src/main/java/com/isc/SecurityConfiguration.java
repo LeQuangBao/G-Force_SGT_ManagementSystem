@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers("/admin/**")
 				.access("hasRole('ROLE_ADMIN')").and().formLogin().loginPage("/login")
 				.successHandler(customSuccessHandler).usernameParameter("username").passwordParameter("password").and()
-				.exceptionHandling().accessDeniedPage("/Access_Denied");
+				.exceptionHandling().accessDeniedPage("/Access_Denied")
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout")).logoutSuccessUrl("/login");
 
 	}
 
