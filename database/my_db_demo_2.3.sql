@@ -172,7 +172,8 @@ INSERT INTO `registrar` (`id`, `username`, `password`, `firstname`, `lastname`, 
 (7, 'tanly', '$2a$06$7CtcY9souNNOLucjCQLsi.bbtSRHM8/92M8u0HmCGVSL3K9Whnb0i', 'Tân', 'Lý Nhật', '1972-09-08', 'tan.lynhat@gmail.com', '0933229522', '333 Đường Số 77, P.Tân Quy,Q.7,TP.HCM ', 'lynhattan.png', 1),
 (8, 'tungo', '$2a$06$T5GXSQdD0kAbuaODqbYk0.7997Tx4fKNM9td3Dk4kKYqogtL2Vhea', 'Tú', 'Ngô Thanh', '1977-11-29', 'tu.ngothanh@gmail.com', '0933229534', '54 Phan Huy Chú, P.10,Q.5,TP.HCM ', 'ngothanhtu.png', 1),
 (9, 'diepbui', '$2a$06$qQpjfdQkLAlqhATRayOq.ONm2Z8/.7fggO0qCfdAp6L.Zrwqat8jy', 'Điệp', 'Bùi Văn', '1978-12-15', 'diep.buivan@gmail.com', '0933229599', '382 Ba Tháng Hai, P.10,Q.10,TP.HCM ', 'buivandiep.png', 1),
-(10, 'dudoan', '$2a$06$Z5RzYzgcaLkolWDHlK4b4ersWYRoaCVfseDAfhKczl23b6AMbNRbq', 'Dự', 'Đoàn', '1980-07-27', 'du.doan@gmail.com', '0933229544', '9 Sư Vạn Hạnh, P.12,Q.10,TP.HCM ', 'doandu.png', 1);
+(10, 'dudoan', '$2a$06$Z5RzYzgcaLkolWDHlK4b4ersWYRoaCVfseDAfhKczl23b6AMbNRbq', 'Dự', 'Đoàn', '1980-07-27', 'du.doan@gmail.com', '0933229544', '9 Sư Vạn Hạnh, P.12,Q.10,TP.HCM ', 'doandu.png', 1),
+(11, 'admin', '$2a$06$iPU1ksF7uJa/JgJStwa.g.3UFXQWtVyFDqkOZcdAc0QtInZJVV/Ae', 'Admin', 'Register', '1980-05-27', 'admin.register@gmail.com', '0933229444', '18 Sư Vạn Hạnh, P.12,Q.10,TP.HCM ', '14484954_1475579339124718_7597719275874361085_n.jpg', 1)
 
 -- --------------------------------------------------------
 
