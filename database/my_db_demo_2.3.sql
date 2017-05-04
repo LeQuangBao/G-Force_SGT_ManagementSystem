@@ -96,15 +96,15 @@ CREATE TABLE `instructor` (
 --
 
 INSERT INTO `instructor` (`id`, `username`, `password`, `firstname`, `lastname`, `birthday`, `email`, `phone`, `address`, `image`, `degree`, `status`) VALUES
-(1, 'namnguyen', '$2y$10$uy4xdQXlWK2jg9WdtldaruQqqRZGQ9E0k8c/KHJe4HRjB2Tfl5PZy', 'Nam', 'Nguyễn Thành', '1961-01-10', 'nam.nguyenthanh@gmail.com', '01285758112', '40 Nguyễn Thị Minh Khai, P.2,Q1,TP.HCM', 'nguyenthanhnam.png', 'doctor', 1),
-(2, 'vanly', '$2y$10$jKqPv5MhLmyf0L1lH4eIuefck3osgX2qsxGheKe0WfXGhuN9qYIIa', 'Vân', 'Lý Thanh', '1972-02-12', 'van.lythanh@gmail.com', '01285758123', '2 Nguyễn Thị Định, P.3,Q2,TP.HCM', 'lythanhvan.png', 'doctor', 1),
-(3, 'trucho', '$2y$10$bFZpWyCh7WpWCVQICkf7Ze/oggyEBCZfWptefjc09fvy3PASvR17W', 'Trúc', 'Hồ Quỳnh', '1983-03-03', 'truc.hoquynh@gmail.com', '01285758134', '12 Nguyễn Đình Chiểu, P.4,Q3,TP.HCM', 'hoquynhtruc.png', 'doctor', 1),
-(4, 'quangvu', '$2y$10$.6Uzh5fN9V6xUmtii7S81.Dl9pmREBISsy.MjUbhyyxscF/8u.Z/G', 'Vũ', 'Quang', '1964-04-26', 'vu.quang@gmail.com', '01285758145', '16 Hoàng Diệu, P.5,Q4,TP.HCM', 'quangvu.jpg', 'doctor', 1),
-(5, 'taima', '$2y$10$JPTixu6BvYRspCJumBoA7Osps9X.p2qAn9rwzAL9E/Szq1uPDoSoW', 'Tài', 'Mã Văn', '1975-05-27', 'tai.mavan@gmail.com', '01285758156', '244 Nguyễn Trãi, P.6,Q5,TP.HCM', 'mavantai.jpg', 'doctor', 1),
-(6, 'hongnguyen', '$2y$10$OH/miFIpHpe/j2hieT7l9OdJgYoBPhVeBJ6LhQi/rc15exnczujfK', 'Hồng', 'Nguyễn Thị', '1986-06-16', 'hong.nguyenthi@gmail.com', '01285758167', '22 Kinh Dương Vương, P.7,Q6,TP.HCM', 'nguyenthihong.jpg', 'Masters', 1),
-(7, 'maitran', '$2y$10$p9oslbzZ4fWzJyABDlG7RO7ax.kfayHuRT0lIsdkCqsif4NNOsssa', 'Mai', 'Trần Xuân', '1967-07-19', 'mai.tranxuan@gmail.com', '01285758178', ' 119 Huỳnh Tấn Phát, P.8,Q7,TP.HCM', 'tranxuanmai.jpg', 'Masters', 1),
-(8, 'daohuynh', '$2y$10$3oQLnNSiUYuyU3W1yN0y2.GHe.h9oQW5dEJNDBdaIS855DFCPeptC', 'Đào', 'Huỳnh Anh', '1978-08-08', 'dao.huynhanh@gmail.com', '01285758189', '120 Phạm Hùng, P.9,Q8,TP.HCM', 'huynhanhdao.jpg', 'Masters', 1),
-(9, 'haingo', '$2y$10$JcGdb7mOiBzSaq7G1K0rtexupf5RLHfvl1WeJN3u4unQXre9ZCCWi', 'Hải', 'Ngô Thanh', '1980-09-22', 'hai.ngothanh@gmail.com', '01285758190', '20 Tăng Nhơn Phú, P.10,Q9,TP.HCM', 'ngothanhhai.jpg', 'Masters', 1),
+(1, 'namnguyen', '$2y$10$uy4xdQXlWK2jg9WdtldaruQqqRZGQ9E0k8c/KHJe4HRjB2Tfl5PZy', 'Nam', 'Nguyễn Thành', '1961-01-10', 'nam.nguyenthanh@gmail.com', '01285758112', '40 Nguyễn Thị Minh Khai, P.2,Q1,TP.HCM', 'nguyenthanhnam.png', 'Doctor', 1),
+(2, 'vanly', '$2y$10$jKqPv5MhLmyf0L1lH4eIuefck3osgX2qsxGheKe0WfXGhuN9qYIIa', 'Vân', 'Lý Thanh', '1972-02-12', 'van.lythanh@gmail.com', '01285758123', '2 Nguyễn Thị Định, P.3,Q2,TP.HCM', 'lythanhvan.png', 'Doctor', 1),
+(3, 'trucho', '$2y$10$bFZpWyCh7WpWCVQICkf7Ze/oggyEBCZfWptefjc09fvy3PASvR17W', 'Trúc', 'Hồ Quỳnh', '1983-03-03', 'truc.hoquynh@gmail.com', '01285758134', '12 Nguyễn Đình Chiểu, P.4,Q3,TP.HCM', 'hoquynhtruc.png', 'Doctor', 1),
+(4, 'quangvu', '$2y$10$.6Uzh5fN9V6xUmtii7S81.Dl9pmREBISsy.MjUbhyyxscF/8u.Z/G', 'Vũ', 'Quang', '1964-04-26', 'vu.quang@gmail.com', '01285758145', '16 Hoàng Diệu, P.5,Q4,TP.HCM', 'quangvu.jpg', 'Doctor', 1),
+(5, 'taima', '$2y$10$JPTixu6BvYRspCJumBoA7Osps9X.p2qAn9rwzAL9E/Szq1uPDoSoW', 'Tài', 'Mã Văn', '1975-05-27', 'tai.mavan@gmail.com', '01285758156', '244 Nguyễn Trãi, P.6,Q5,TP.HCM', 'mavantai.jpg', 'Doctor', 1),
+(6, 'hongnguyen', '$2y$10$OH/miFIpHpe/j2hieT7l9OdJgYoBPhVeBJ6LhQi/rc15exnczujfK', 'Hồng', 'Nguyễn Thị', '1986-06-16', 'hong.nguyenthi@gmail.com', '01285758167', '22 Kinh Dương Vương, P.7,Q6,TP.HCM', 'nguyenthihong.jpg', 'Master', 1),
+(7, 'maitran', '$2y$10$p9oslbzZ4fWzJyABDlG7RO7ax.kfayHuRT0lIsdkCqsif4NNOsssa', 'Mai', 'Trần Xuân', '1967-07-19', 'mai.tranxuan@gmail.com', '01285758178', ' 119 Huỳnh Tấn Phát, P.8,Q7,TP.HCM', 'tranxuanmai.jpg', 'Master', 1),
+(8, 'daohuynh', '$2y$10$3oQLnNSiUYuyU3W1yN0y2.GHe.h9oQW5dEJNDBdaIS855DFCPeptC', 'Đào', 'Huỳnh Anh', '1978-08-08', 'dao.huynhanh@gmail.com', '01285758189', '120 Phạm Hùng, P.9,Q8,TP.HCM', 'huynhanhdao.jpg', 'Master', 1),
+(9, 'haingo', '$2y$10$JcGdb7mOiBzSaq7G1K0rtexupf5RLHfvl1WeJN3u4unQXre9ZCCWi', 'Hải', 'Ngô Thanh', '1980-09-22', 'hai.ngothanh@gmail.com', '01285758190', '20 Tăng Nhơn Phú, P.10,Q9,TP.HCM', 'ngothanhhai.jpg', 'Master', 1),
 (10, 'quyenvo', '$2y$10$OpqtVMbqcJaSyjpNovyYjOTwvoqV0jA6JCWS5d8l965RpX0P05C1i', 'Quyền', 'Võ Văn', '1980-10-02', 'quyen.vovan@gmail.com', '01285758201', '22 Ba Tháng Hai, P.11,Q10,TP.HCM', 'vovanquyen.png', 'University', 1);
 
 -- --------------------------------------------------------
