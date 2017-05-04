@@ -127,15 +127,15 @@ CREATE TABLE `intake` (
 --
 
 INSERT INTO `intake` (`id`, `intake_id`, `intake_name`, `start_date`, `end_date`, `active`) VALUES
-(1, 'ISC01', 'Intake 1', '2017-04-06', '2017-09-30', 1),
-(2, 'ISC02', 'Intake 2', '2017-05-06', '2017-10-30', 1),
-(3, 'ISC03', 'Intake 3', '2017-06-06', '2017-11-30', 1),
-(4, 'ISC04', 'Intake 4', '2017-07-06', '2018-12-30', 1),
-(5, 'ISC05', 'Intake 5', '2017-08-06', '2018-01-30', 1),
-(6, 'ISC06', 'Intake 6', '2017-09-06', '2018-03-01', 1),
-(7, 'ISC07', 'Intake 7', '2017-10-06', '2018-03-30', 1),
-(8, 'ISC08', 'Intake 8', '2017-11-06', '2018-04-30', 1),
-(9, 'ISC09', 'Intake 9', '2017-12-06', '2018-05-30', 1),
+(1, 'ISC01', 'Intake 01', '2017-04-06', '2017-09-30', 1),
+(2, 'ISC02', 'Intake 02', '2017-05-06', '2017-10-30', 1),
+(3, 'ISC03', 'Intake 03', '2017-06-06', '2017-11-30', 1),
+(4, 'ISC04', 'Intake 04', '2017-07-06', '2018-12-30', 1),
+(5, 'ISC05', 'Intake 05', '2017-08-06', '2018-01-30', 1),
+(6, 'ISC06', 'Intake 06', '2017-09-06', '2018-03-01', 1),
+(7, 'ISC07', 'Intake 07', '2017-10-06', '2018-03-30', 1),
+(8, 'ISC08', 'Intake 08', '2017-11-06', '2018-04-30', 1),
+(9, 'ISC09', 'Intake 09', '2017-12-06', '2018-05-30', 1),
 (10, 'ISC10', 'Intake 10', '2018-01-06', '2018-06-30', 1);
 
 -- --------------------------------------------------------
@@ -385,7 +385,7 @@ INSERT INTO `student` (`id`, `student_id`, `username`, `password`, `firstname`, 
 (22, 'ISC02-17-0-0022', 'biluu', '$2a$06$2uVbRTihxKebAuDXQcprJ.3UDE5DvvFQ.JXe/YuxXcBhz2SgkqzO2', 'Bị', 'Lưu', 0, '1995-10-02', 'bi.luu@gmail.com', '0948091543', '300 Tùng Thiện Vương, P.11,Q.8,TP.HCM', 15, 2, 5, 2, 'luubi.png', 'Studying'),
 (23, 'ISC02-17-1-0023', 'binhquan', '$2a$06$p6LENpPbqX0KmxDi/IgZW.eAXmVNe7iz57jCqR9P7h8rGAL4u2ynS', 'Bình', 'Quan Ngân', 1, '1995-03-04', 'binh.quangngan@gmail.com', '0968391034', '133 Quang Trung, P.Đông Hưng Thuận,Q.12,TP.HCM', 17, 2, 5, 5, 'quangnganbinh.png', 'Studying'),
 (24, 'ISC02-17-0-0024', 'bola', '$2a$06$HhYf/M7Nzfo1hVHU6f/P8eog23yBnHJrrDZwLXhpa0z.YEn.AcwAm', 'Bố', 'Lã', 0, '1995-02-16', 'bo.la@gmail.com', '0908291948', '455 Nguyễn Trãi, P.11,Q.5,TP.HCM', 11, 2, 4, 2, 'labo.png', 'Studying'),
-(25, 'ISC02-17-0-0025', 'caihoang', '$2a$06$YmeNwhUL2NCOn2CHNQXyKOmo97mZjUtWQUBajwI0Jzjg9mEHeovnq', 'Cái', 'Hoàng', 0, '1995-06-29', 'cai.hoang@gmail.com', '0928691305', '1009 Phan Văn Trị, P.10,Q.Gò Vấp,TP.HCM', 13, 2, 4, 6, 'hoangcai.png', 'Studying'),
+(25, 'ISC02-17-0-0025', 'caihoang', '$2a$06$YmeNwhUL2NCOn2CHNQXyKOmo97mZjUtWQUBajwI0Jzjg9mEHeovnq', 'Cái', 'Hoàng', 0, '1995-06-29', 'cai.hoang@gmail.com', '0928691305', '1009 Phan Văn Trị, P.10,Q.Gò Vấp,TP.HCM', 13, 2, 4, 6, 'hoangcai.jpg', 'Studying'),
 (26, 'ISC02-17-0-0026', 'duchu', '$2a$06$9PCPb7QF32GkVfLA0WqX6.9EFwN/GsA4FniU.VAq2O78sBXYZ5pui', 'Du', 'Chu', 0, '1995-04-02', 'du.chu@gmail.com', '0918491123', '56 Hoàng Văn Thái, P.Tân Phú ,Q.7,TP.HCM', 12, 2, 4, 4, 'chudu.png', 'Studying'),
 (27, 'ISC02-17-0-0027', 'donhau', '$2a$06$k6uPVkc8PN3DhZCgGd.T9epZJJ16RQcWsRYbQzKr9a2FbIB70SprK', 'Đôn', 'Hạ Hầu', 0, '1995-01-24', 'don.hahau@gmail.com', '0988891203', '167 Nguyễn Trọng Tuyến, P.8,Q.2,TP.HCM', 19, 2, 6, 7, 'hahaudon.png', 'Studying'),
 (28, 'ISC02-17-1-0028', 'huongton', '$2a$06$hxkUQlwvL226tplQJBOzd.giVzBvRlnXg9UUVRPR2ysvJSC6RBbxm', 'Hương', 'Tôn Thượng', 1, '1995-02-02', 'huong.tonthuong@gmail.com', '0998991204', '105 Trần Văn Kiếu, P.10,Q.6,TP.HCM', 20, 2, 6, 8, 'tonthuonghuong.jpg', 'Studying'),
