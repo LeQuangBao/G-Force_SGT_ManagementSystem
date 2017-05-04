@@ -860,15 +860,25 @@
 							<label class=" control-label" for="birthday">New password</label>
 							<div class="">
 								<input type="password" id="password" name="newPassword"
-									data-ng-model="newPassword" class="form-control col-md-6" />
+									data-ng-model="newPassword" class="form-control col-md-6" required="required"/>
+									<div ng-messages="frmResetPassword.newPassword.$error">
+										<div ng-message="required"
+											ng-show="frmResetPassword.newPassword.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
 							</div>
 							<label class=" control-label" for="birthday">Retype new password</label>
 							<div class="">
-								<input type="password" id="password" name="re_newPassword"
-									data-ng-model="re_newPassword" class="form-control col-md-6" match-password="newPassword" />
+								<input type="password" id="re_newPassword" name="re_newPassword"
+									data-ng-model="re_newPassword" class="form-control col-md-6" match-password="newPassword" required="required"/>
 							</div>
 							<div ng-messages="frmResetPassword.re_newPassword.$error">
-								<div ng-message="matchPassword" ng-show="frmResetPassword.re_newPassword.$touched">
+									<div ng-message="required"
+													ng-show="frmResetPassword.re_newPassword.$touched">
+													<p style="color: red">This field is required</p>
+									</div>
+								<div ng-message="matchPassword">
 									<p style="color: red">Must match the previous field</p>
 								</div>
 							</div>
