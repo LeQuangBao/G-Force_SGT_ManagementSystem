@@ -33,9 +33,6 @@ public class MyUserDetailsService implements UserDetailsService {
 		return (UserDetails) buildUserForAuthentication(registrar, authorities);
 	}
 
-	private User buildUserForAuthentication(Registrar registrar, List<GrantedAuthority> authorities) {
-		return new User(registrar.getUsername(), registrar.getPassword(), true, true, true, true, authorities);
-	}
 
 	private List<GrantedAuthority> buildUserAuthority() {
 
@@ -50,4 +47,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		return Result;
 	}
 
+	private User buildUserForAuthentication(Registrar registrar, List<GrantedAuthority> authorities) {
+		return new User(registrar.getUsername(), registrar.getPassword(), true, true, true, true, authorities);
+	}
 }
