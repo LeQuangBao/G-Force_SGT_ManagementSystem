@@ -28,12 +28,16 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 		$http.get("/admin/api/entrance-exam").then(function(response) {
 			$scope.list = response.data;
 		});
+		
+	}
+	function getAllIntake(){
 		$scope.listIntake = [];
 		$http.get("/api/intake").then(function(response) {
 			$scope.listIntake = response.data;
 		});
 	}
 	getAllEntranceExam();
+	getAllIntake();
 	// Sort and filter
 	$scope.sortType = 'entranceExamName';
 	$scope.filterTable = '';
@@ -113,7 +117,7 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 				data : $scope.exam
 			}).then(function mySucces(response) {
 				if (close) {
-					$("#addModel").modal("hide");
+					$("#addModal").modal("hide");
 				}
 				getAllEntranceExam();
 				addAlert();
