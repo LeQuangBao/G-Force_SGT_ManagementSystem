@@ -453,7 +453,7 @@ app.controller('studentCtrl',
 							$("#myModal_them").modal("hide");
 							}
 						GetListStudent();
-						addAlert();
+						addAlert(mahv6);
 						
 					});
 					
@@ -681,13 +681,12 @@ app.controller('studentCtrl',
             });
         }
 
-        function addAlert() {
+        function addAlert(ID) {
             swal({
                 title: "",
-                text: "Add successfully.",
+                text: "Adding student successfully with ID: " + ID,
                 type: "success",
-                timer: 2000,
-                showConfirmButton: false
+                showConfirmButton: true
             });
         }
 
