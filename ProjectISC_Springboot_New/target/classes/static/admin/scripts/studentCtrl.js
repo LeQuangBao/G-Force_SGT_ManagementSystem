@@ -55,7 +55,7 @@ app.controller('studentCtrl',
         $scope.list = [];
         // Lấy danh sách Student
         function GetListStudent() {
-            
+
             var Student = $resource('http://localhost:8080/admin/api/Student');
             Student.query().$promise.then(function(listStudent) {
                 $scope.list = listStudent;
@@ -68,20 +68,21 @@ app.controller('studentCtrl',
 
         // Lấy số lượng student theo intake id, bỏ vào biến
         // countStudent
-        var numberOfStudent = 0;
-
-        function countStudent(intakeId) {
-            var Student = $resource('http://localhost:8080/admin/api/Student');
-            Student.query().$promise.then(function(listStudent) {
-
-                listStudent.forEach(function(item, index) {
-                    if (item.intake.intakeId === intakeId) {
-                        numberOfStudent = numberOfStudent + 1;
-                    }
-                });
-                // alert(numberOfStudent);
-            });
-        }
+        // var numberOfStudent = 0;
+        //
+        // function countStudent(intakeId) {
+        // var Student =
+        // $resource('http://localhost:8080/admin/api/Student');
+        // Student.query().$promise.then(function(listStudent) {
+        //
+        // listStudent.forEach(function(item, index) {
+        // if (item.intake.intakeId === intakeId) {
+        // numberOfStudent = numberOfStudent + 1;
+        // }
+        // });
+        // // alert(numberOfStudent);
+        // });
+        // }
         // countStudent("IN005");
         //					
 
@@ -131,6 +132,30 @@ app.controller('studentCtrl',
 
             });
 
+        }
+        // lọc entrance exam theo intake
+        $scope.filterEntranceExamByIntake_Edit = function(student,
+            onload) {
+            $scope.listEntranceExamForEdit = [];
+            $scope.list_entrance_exam
+                .forEach(function(item, index) {
+                    if (item.intake.id === student.intake.id) {
+                        $scope.listEntranceExamForEdit
+                            .push(item);
+                    }
+                });
+            if (onload) {
+
+                for (var i = 0; i < $scope.list_entrance_exam.length; i++) {
+                    if (response.data.entranceExam.entranceExamName == $scope.list_entrance_exam[i].entranceExamName) {
+                        $scope.list_temp_inf_edit.entranceExam = $scope.list_entrance_exam[i];
+                        break;
+                    }
+                }
+            } else {
+
+                $scope.list_temp_inf_edit.entranceExam = $scope.listEntranceExamForEdit[0];
+            }
         }
 
         GetListStudent();
@@ -225,8 +250,7 @@ app.controller('studentCtrl',
 
             var baseSortType = removeDash($scope.sortType);
             if (label1 == baseSortType) {
-                return capitalizeFirstLetter((makeReadableLabel(baseSortType)) +
-                    ' ' + order);
+                return capitalizeFirstLetter((makeReadableLabel(baseSortType)) + ' ' + order);
             }
             return 'Sort by ' + makeReadableLabel(label1)
         };
@@ -239,8 +263,7 @@ app.controller('studentCtrl',
 
         $scope.itemsPerPage = $scope.rowdata.selectedOption.id;
         $scope.updatePageIndexes = function() {
-            var totalPages = Math.ceil($scope.list.length /
-                $scope.maxPaginationSize);
+            var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
             if (totalPages <= 10) {
                 // less than 10 total pages so show all
                 $scope.firstIndex = 1;
@@ -259,10 +282,8 @@ app.controller('studentCtrl',
                     $scope.lastIndex = $scope.currentPage + 4;
                 }
             }
-            $scope.firstIndex = ($scope.currentPage - 1) *
-                $scope.itemsPerPage;
-            $scope.lastIndex = $scope.currentPage *
-                $scope.itemsPerPage;
+            $scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+            $scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
         };
         $scope.updatePageIndexes();
 
@@ -299,170 +320,165 @@ app.controller('studentCtrl',
 
         // upload file
         function uploadFile() {
-            $
-                .ajax({
-                    type: "POST",
-                    url: "/admin/student/uploadFile",
-                    type: "POST",
-                    data: new FormData($("#fileUploadForm")[0]),
-                    enctype: 'multipart/form-data',
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    success: function() {
-                        // Handle upload success
-                        $("#upload-file-message").text(
-                            "File succesfully uploaded");
-                    },
-                    error: function() {
-                        // Handle upload error
-//                        $("#upload-file-message")
-//                            .text(
-//                                "File not uploaded (perhaps it's too big)");
-                    }
-                });
+            $.ajax({
+                type: "POST",
+                url: "/admin/student/uploadFile",
+                type: "POST",
+                data: new FormData($("#fileUploadForm")[0]),
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function() {
+                    // Handle upload success
+                    $("#upload-file-message").text(
+                        "File succesfully uploaded");
+                },
+                error: function() {
+                    // Handle upload error
+                    // $("#upload-file-message")
+                    // .text(
+                    // "File not uploaded (perhaps it's too big)");
+                }
+            });
         };
         // kiểm ra trùng username
         function usernameduplicate(username) {
-//            var Student = $resource('http://localhost:8080/admin/api/Student');
-//            Student.query().$promise.then(function(listStudent) {
-        		var flag=true;
-                $scope.list.forEach(function(item, index) {
-                    if (item.username === username) {
-                        //alertduplicatestudent();
-                        $scope.duplicateAlert="Duplicate username";
-                        flag=false;
-                    }
-                });
-                // alert(numberOfStudent);
-            //});
-             return flag;
+            // var Student =
+            // $resource('http://localhost:8080/admin/api/Student');
+            // Student.query().$promise.then(function(listStudent) {
+            var flag = true;
+            $scope.list.forEach(function(item, index) {
+                if (item.username === username) {
+                    // alertduplicatestudent();
+                    $scope.duplicateAlert = "Duplicate username";
+                    flag = false;
+                }
+            });
+            // alert(numberOfStudent);
+            // });
+            return flag;
         }
-        
-        $scope.hideDuplicateAlert=function(){
-        	$scope.duplicateAlert="";
+
+        $scope.hideDuplicateAlert = function() {
+            $scope.duplicateAlert = "";
         }
-        $scope.student={};        
-        //Reset form Add
-        $scope.loadthem=function()
-        {
-        	$scope.gender=0;
-        	$scope.status="Studying";
-        	 $scope.student.username="";
-	    	 $scope.password="";
-	    	 $scope.duplicateAlert="";
-	    	 $scope.student.firstname="";
-	    	 $scope.student.lastname="";
-	    	 $scope.re_password="";
-	    	 $scope.student.email="";
-	    	 $scope.student.phone="";
-	    	 $scope.student.address="";
-	    	 $scope.birthday="";
-	    	 $scope.student.intake="";
-	    	 $scope.student.entranceExam="";
-	    	 $scope.student.school="";
-	    	 $scope.student.specialization="";
-	    	 
-	    	 $scope.active=true;
-	    	 $scope.frmStudentAdd.username.$setUntouched();
-	    	 $scope.frmStudentAdd.lastName.$setUntouched();
-	    	 $scope.frmStudentAdd.firstName.$setUntouched();
-	    	 $scope.frmStudentAdd.password.$setUntouched();
-	    	 $scope.frmStudentAdd.re_password.$setUntouched();
-	    	 $scope.frmStudentAdd.phone.$setUntouched();
-	    	 $scope.frmStudentAdd.email.$setUntouched();
-	    	 $scope.frmStudentAdd.address.$setUntouched();
-	    	 document.getElementById("uploadfile1").value="";
-	    	 document.getElementById("prev_img").src="";
-	    	 $scope.prev_img="";
-	    	 $scope.student.intake = $scope.list_intake[0]; 
-	    	 $scope.student.entranceExam= $scope.list_entrance_exam[0];
-	    	 $scope.student.school= $scope.list_school[0];
-	    	 $scope.student.specialization=$scope.list_specialization[0];
+        $scope.student = {};
+        // Reset form Add
+        $scope.loadthem = function() {
+            $scope.gender = 0;
+            $scope.status = "Studying";
+            $scope.student.username = "";
+            $scope.password = "";
+            $scope.duplicateAlert = "";
+            $scope.student.firstname = "";
+            $scope.student.lastname = "";
+            $scope.re_password = "";
+            $scope.student.email = "";
+            $scope.student.phone = "";
+            $scope.student.address = "";
+            $scope.birthday = "";
+            $scope.student.intake = "";
+            $scope.student.entranceExam = "";
+            $scope.student.school = "";
+            $scope.student.specialization = "";
+
+            $scope.active = true;
+            $scope.frmStudentAdd.username.$setUntouched();
+            $scope.frmStudentAdd.lastName.$setUntouched();
+            $scope.frmStudentAdd.firstName.$setUntouched();
+            $scope.frmStudentAdd.password.$setUntouched();
+            $scope.frmStudentAdd.re_password.$setUntouched();
+            $scope.frmStudentAdd.phone.$setUntouched();
+            $scope.frmStudentAdd.email.$setUntouched();
+            $scope.frmStudentAdd.address.$setUntouched();
+            document.getElementById("uploadfile1").value = "";
+            document.getElementById("prev_img").src = "";
+            $scope.prev_img = "";
+            $scope.student.intake = $scope.list_intake[0];
+            $scope.student.entranceExam = $scope.list_entrance_exam[0];
+            $scope.student.school = $scope.list_school[0];
+            $scope.student.specialization = $scope.list_specialization[0];
         }
-        $scope.image1="";
+        $scope.image1 = "";
         // thêm student
         $scope.them = function(close) {
-        	
+
             uploadFile();
-            if($scope.image1==="")
- 			{
- 			$scope.image1="noImage.png";
- 			}
-            if(usernameduplicate($scope.student.username)){
-            $scope.student.gender=$scope.gender;
-            $scope.student.status=$scope.status;
-            $scope.student.image = $scope.image1;
-            $scope.student.birthday = $scope.birthday;
-            $scope.student.password = $scope.password;
-          
-            console.log($scope.gender);
-            console.log($scope.status);
+            if ($scope.image1 === "") {
+                $scope.image1 = "noImage.png";
+            }
+            if (usernameduplicate($scope.student.username)) {
+                $scope.student.gender = $scope.gender;
+                $scope.student.status = $scope.status;
+                $scope.student.image = $scope.image1;
+                $scope.student.birthday = $scope.birthday;
+                $scope.student.password = $scope.password;
 
-            var numberOfStudent = 0;
-            var Student = $resource('http://localhost:8080/admin/api/Student');
-            Student.query().$promise
-                .then(function(listStudent) {
+                console.log($scope.gender);
+                console.log($scope.status);
 
-                    listStudent
-                        .forEach(function(item, index) {
-                            if (item.intake.intakeId === $scope.student.intake.intakeId) {
-                                numberOfStudent = numberOfStudent + 1;
-                            }
-                        });
-                    numberOfStudent = numberOfStudent + 1;
-                    //console.log(numberOfStudent);
-                    var numberstring = numberOfStudent
-                        .toString();
-                    //console.log(numberstring);
-                    if (numberstring.length == 1) {
-                        numberstring = "000" + numberstring;
-                    }
-                    if (numberstring.length == 2) {
-                        numberstring = "00" + numberstring;
-                    }
-                    if (numberstring.length == 3) {
-                        numberstring = "0" + numberstring;
-                    }
-                    if (numberstring.length == 4) {
-                        numberstring = numberstring;
-                    }
-                    // hai số cuối của năm
-                    var date = new Date();
-                    var year = date.getFullYear().toString();
-                    //
+                var numberOfStudent = 0;
+                var Student = $resource('http://localhost:8080/admin/api/Student');
+                Student.query().$promise
+                    .then(function(listStudent) {
 
-                    // dem so luong hoc sinh trong 1 intake
-                    // var numberstudent = "";
+                        listStudent
+                            .forEach(function(item, index) {
+                                if (item.intake.intakeId === $scope.student.intake.intakeId) {
+                                    numberOfStudent = numberOfStudent + 1;
+                                }
+                            });
+                        numberOfStudent = numberOfStudent + 1;
+                        // console.log(numberOfStudent);
+                        var numberstring = numberOfStudent
+                            .toString();
+                        // console.log(numberstring);
+                        if (numberstring.length == 1) {
+                            numberstring = "000" + numberstring;
+                        }
+                        if (numberstring.length == 2) {
+                            numberstring = "00" + numberstring;
+                        }
+                        if (numberstring.length == 3) {
+                            numberstring = "0" + numberstring;
+                        }
+                        if (numberstring.length == 4) {
+                            numberstring = numberstring;
+                        }
+                        // hai số cuối của năm
+                        var date = new Date();
+                        var year = date.getFullYear()
+                            .toString();
+                        //
 
-                    // mã học viên
-                    var mahv6 = $scope.student.intake.intakeId +
-                        "-" + year.substr(2, 4) + "-" +
-                        $scope.student.gender + "-" +
-                        numberstring;
+                        // dem so luong hoc sinh trong 1 intake
+                        // var numberstudent = "";
 
-                    $scope.student.studentId = mahv6;
-					$http({
-						method : "POST",
-						url : "/admin/api/Student",
-						data : JSON.stringify($scope.student),
-						dataType: "json"
-					}).then(function mySucces(response) {
-						if(close===true)
-							{
-							$("#myModal_them").modal("hide");
-							}
-						GetListStudent();
-						addAlert(mahv6);
-						
-					});
-					
+                        // mã học viên
+                        var mahv6 = $scope.student.intake.intakeId + "-" + year.substr(2, 4) + "-" + $scope.student.gender + "-" + numberstring;
 
-                })
+                        $scope.student.studentId = mahv6;
+                        $http({
+                            method: "POST",
+                            url: "/admin/api/Student",
+                            data: JSON
+                                .stringify($scope.student),
+                            dataType: "json"
+                        }).then(
+                            function mySucces(response) {
+                                if (close === true) {
+                                    $("#myModal_them")
+                                        .modal("hide");
+                                }
+                                GetListStudent();
+                                addAlert(mahv6);
+
+                            });
+
+                    })
             }
         };
-      
-       					
 
         // sửa student
         $scope.edit = function edit() {
@@ -477,13 +493,14 @@ app.controller('studentCtrl',
                 GetListStudent();
                 editAlert();
 
-                //							$scope.updatePageIndexes();
+                // $scope.updatePageIndexes();
                 //						
-                //							$scope.showList = function(index) {
-                //								return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+                // $scope.showList = function(index) {
+                // return ((index >= $scope.firstIndex) && (index <
+                // $scope.lastIndex));
                 //								
-                //							}
-                //GetListStudent();
+                // }
+                // GetListStudent();
             });
         }
         // load chi tiet student
@@ -510,8 +527,7 @@ app.controller('studentCtrl',
             console.log($scope.list_temp_inf_delete.id);
             $http({
                 method: "DELETE",
-                url: "/admin/api/Student/" +
-                    $scope.list_temp_inf_delete.id
+                url: "/admin/api/Student/" + $scope.list_temp_inf_delete.id
 
             }).then(function mySucces(response) {
                 $('#myModal_xoa').modal('hide');
@@ -523,52 +539,67 @@ app.controller('studentCtrl',
         // array did filter
 
         $scope.sua = function(data) {
-            $http.get("http://localhost:8080/admin/api/Student/" + data.id).then(
-                function(response) {
-                    $scope.list_temp_inf_edit = [];
-                    $scope.prev_img_edit = [];
-                    $scope.list_temp_inf_edit = response.data;
+            $http
+                .get(
+                    "http://localhost:8080/admin/api/Student/" + data.id)
+                .then(
+                    function(response) {
+                        $scope.list_temp_inf_edit = [];
+                        $scope.prev_img_edit = [];
+                        $scope.list_temp_inf_edit = response.data;
 
-                    $scope.prev_img_edit = '';
-                    document.getElementById("image_edit").value = "";
-                    //$scope.list_temp_inf_edit = data;
-                    $scope.list_temp_inf_edit.lastname = response.data.lastname;
-                    $scope.list_temp_inf_edit.firstname = response.data.firstname;
-                    $scope.list_temp_inf_edit.email = response.data.email;
-                    $scope.list_temp_inf_edit.phone = response.data.phone;
-                    $scope.list_temp_inf_edit.address = response.data.address;
-                    $scope.list_temp_inf_edit.status = response.data.status;
-                    $scope.list_temp_inf_edit.image = response.data.image;
-                    $scope.list_temp_inf_edit.birthday = new Date(
-                        response.data.birthday)
-                    $scope.list_temp_inf_edit.gender = response.data.gender == 0 ? '0' :
-                        '1';
-                    for (var i = 0; i < $scope.list_intake.length; i++) {
-                        if (response.data.intake.intakeName == $scope.list_intake[i].intakeName) {
-                            $scope.list_temp_inf_edit.intake = $scope.list_intake[i];
-                            break;
+                        $scope.prev_img_edit = '';
+                        document
+                            .getElementById("image_edit").value = "";
+                        // $scope.list_temp_inf_edit = data;
+                        $scope.list_temp_inf_edit.lastname = response.data.lastname;
+                        $scope.list_temp_inf_edit.firstname = response.data.firstname;
+                        $scope.list_temp_inf_edit.email = response.data.email;
+                        $scope.list_temp_inf_edit.phone = response.data.phone;
+                        $scope.list_temp_inf_edit.address = response.data.address;
+                        $scope.list_temp_inf_edit.status = response.data.status;
+                        $scope.list_temp_inf_edit.image = response.data.image;
+                        $scope.list_temp_inf_edit.birthday = new Date(
+                            response.data.birthday)
+                        $scope.list_temp_inf_edit.gender = response.data.gender == 0 ? '0' : '1';
+                        for (var i = 0; i < $scope.list_intake.length; i++) {
+                            if (response.data.intake.intakeName == $scope.list_intake[i].intakeName) {
+                                $scope.list_temp_inf_edit.intake = $scope.list_intake[i];
+                                break;
+                            }
                         }
-                    }
-                    for (var i = 0; i < $scope.list_school.length; i++) {
-                        if (response.data.school.schoolName == $scope.list_school[i].schoolName) {
-                            $scope.list_temp_inf_edit.school = $scope.list_school[i];
-                            break;
+                        for (var i = 0; i < $scope.list_school.length; i++) {
+                            if (response.data.school.schoolName == $scope.list_school[i].schoolName) {
+                                $scope.list_temp_inf_edit.school = $scope.list_school[i];
+                                break;
+                            }
                         }
-                    }
-                    for (var i = 0; i < $scope.list_entrance_exam.length; i++) {
-                        if (response.data.entranceExam.entranceExamName == $scope.list_entrance_exam[i].entranceExamName) {
-                            $scope.list_temp_inf_edit.entranceExam = $scope.list_entrance_exam[i];
-                            break;
-                        }
-                    }
-                    for (var i = 0; i < $scope.list_specialization.length; i++) {
-                        if (response.data.specialization.specializationName == $scope.list_specialization[i].specializationName) {
-                            $scope.list_temp_inf_edit.specialization = $scope.list_specialization[i];
-                            break;
-                        }
-                    }
 
-                });
+                        $scope
+                            .filterEntranceExamByIntake_Edit(
+                                response.data, true);
+                        // for (var i = 0; i <
+                        // $scope.list_entrance_exam.length;
+                        // i++) {
+                        // if
+                        // (response.data.entranceExam.entranceExamName
+                        // ==
+                        // $scope.list_entrance_exam[i].entranceExamName)
+                        // {
+                        // $scope.list_temp_inf_edit.entranceExam
+                        // = $scope.list_entrance_exam[i];
+                        // break;
+                        // }
+                        // }
+
+                        for (var i = 0; i < $scope.list_specialization.length; i++) {
+                            if (response.data.specialization.specializationName == $scope.list_specialization[i].specializationName) {
+                                $scope.list_temp_inf_edit.specialization = $scope.list_specialization[i];
+                                break;
+                            }
+                        }
+
+                    });
 
         };
         // lấy dữ liệu để xóa
@@ -593,7 +624,6 @@ app.controller('studentCtrl',
                 $scope.ketqua = "Must match the previous field";
             }
         }
-       
 
         function uploadFile_Edit() {
             $
@@ -633,23 +663,24 @@ app.controller('studentCtrl',
         }
         // Hàm tự động điền các text input trong form Add
         // Đặt con trỏ vào ô username, bấm Alt + Q
-        $scope.autoAdd = function(keyEvent) {    	
-	        if (keyEvent.keyCode == 81 && keyEvent.altKey) {
-	        	var random = getRandomInt(1, 10000);
-		    	 $scope.student.username="Billgate" + random;
-	        	 $scope.student.firstname="Bill" + random;
-	        	 $scope.student.lastname="Gate" + random;
-	        	 $scope.password="123";
-	        	 $scope.re_password="123";
-	        	 $scope.student.email="Billgate" + random + "@gmail.com";
-	        	 $scope.student.phone=random * 2;
-	        	 $scope.student.address = "Earth, District " + random;
-	        	 $scope.birthday=new Date("3/25/1997");
-	        }
-	  }
-	  function getRandomInt (min, max) {
-		    return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
+        $scope.autoAdd = function(keyEvent) {
+            if (keyEvent.keyCode == 81 && keyEvent.altKey) {
+                var random = getRandomInt(1, 10000);
+                $scope.student.username = "Billgate" + random;
+                $scope.student.firstname = "Bill" + random;
+                $scope.student.lastname = "Gate" + random;
+                $scope.password = "123";
+                $scope.re_password = "123";
+                $scope.student.email = "Billgate" + random + "@gmail.com";
+                $scope.student.phone = random * 2;
+                $scope.student.address = "Earth, District " + random;
+                $scope.birthday = new Date("3/25/1997");
+            }
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 
         function deleteAlert() {
             swal({
@@ -700,15 +731,12 @@ app.controller('studentCtrl',
             })
         }
 
-        /*function alertduplicatestudent() {
-            swal({
-                title: "",
-                text: "Oops! Something went wrong, please check your input again.",
-                type: "error",
-                timer: alertDuration,
-                showConfirmButton: false
-            })
-        }*/
+        /*
+         * function alertduplicatestudent() { swal({ title: "",
+         * text: "Oops! Something went wrong, please check your
+         * input again.", type: "error", timer: alertDuration,
+         * showConfirmButton: false }) }
+         */
 
         function resetAlert() {
             swal({
@@ -720,23 +748,23 @@ app.controller('studentCtrl',
             });
         }
     })
-//Compare password and retype password
-app.directive("matchPassword", function(){
-return {
-    require: "ngModel",
-    scope: {
-      otherModelValue: "=matchPassword"
-    },
-    link: function(scope, element, attributes, ngModel) {
+// Compare password and retype password
+app.directive("matchPassword", function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=matchPassword"
+        },
+        link: function(scope, element, attributes, ngModel) {
 
-      ngModel.$validators.matchPassword = function(modelValue) {
-        return modelValue == scope.otherModelValue;
-      };
+            ngModel.$validators.matchPassword = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
 
-      scope.$watch("otherModelValue", function() {
-        ngModel.$validate();
-      });
-    }
-  };
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
 });
 // );
