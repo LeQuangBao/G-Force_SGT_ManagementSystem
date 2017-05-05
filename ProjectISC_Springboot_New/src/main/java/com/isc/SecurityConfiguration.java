@@ -12,9 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-//annotation nay dung de xac dinh class nay de cau hinh
+
 @Configuration
-//anno nay kich hoat spring security
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -26,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//phan quyen request
+
 		http.csrf().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers("/admin/**")
 				.access("hasRole('ROLE_ADMIN')").and().formLogin().loginPage("/login")
 				.successHandler(customSuccessHandler).usernameParameter("username").passwordParameter("password").and()
@@ -39,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-//PassEncoder lam nhiem vu ma hoa pass, to use it , it must be 'bean'
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
