@@ -733,7 +733,7 @@
 									<label class="control-label" for="selectbasic">Intake</label>
 									<div class="">
 										<select ng-model="list_temp_inf_edit.intake"
-											ng-change="filterEntranceExamByIntake_Edit(list_temp_inf_edit)"
+											ng-change="filterEntranceExamByIntake_Edit(list_temp_inf_edit, false)"
 											class="form-control"
 											ng-options="x.intakeName for x in list_intake" name="intake"
 											id="intake" ng-required="true">
@@ -746,7 +746,7 @@
 									<div class="">
 										<select ng-model="list_temp_inf_edit.entranceExam"
 											class="form-control"
-											ng-options="x.entranceExamName for x in list_entrance_exam"
+											ng-options="x.entranceExamName for x in listEntranceExamForEdit"
 											name="entranceExam" id="entranceExam" ng-required="true">
 										</select>
 									</div>

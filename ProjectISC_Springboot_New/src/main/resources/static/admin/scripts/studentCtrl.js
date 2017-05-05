@@ -133,8 +133,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
 
     }
     // lọc entrance exam theo intake
-    $scope.filterEntranceExamByIntake_Edit = function(student,
-        onload) {
+    $scope.filterEntranceExamByIntake_Edit = function(student, onload) {
         $scope.listEntranceExamForEdit = [];
         $scope.list_entrance_exam
             .forEach(function(item, index) {
@@ -590,13 +589,17 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
                     }
                 }
 
-                for (var i = 0; i < $scope.list_entrance_exam.length; i++) {
-                    if (response.data.entranceExam.entranceExamName ==
-                        $scope.list_entrance_exam[i].entranceExamName) {
-                        $scope.list_temp_inf_edit.entranceExam = $scope.list_entrance_exam[i];
-                        break;
-                    }
-                }
+                
+//                for (var i = 0; i < $scope.list_entrance_exam.length; i++) {
+//                    if (response.data.entranceExam.entranceExamName ==
+//                        $scope.list_entrance_exam[i].entranceExamName) {
+//                        $scope.list_temp_inf_edit.entranceExam = $scope.list_entrance_exam[i];
+//                        break;
+//                    }
+//                }
+                
+                // filter extrance exam by intake
+                $scope.filterEntranceExamByIntake_Edit(response.data, true);
 
                 for (var i = 0; i < $scope.list_specialization.length; i++) {
                     if (response.data.specialization.specializationName == $scope.list_specialization[i].specializationName) {
