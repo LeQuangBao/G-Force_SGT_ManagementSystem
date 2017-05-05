@@ -146,17 +146,18 @@
 										class="form-control" data-ng-model="filterTable"></input>
 								</div>
 								<div class="col-md-6 col-md-offset-6">
-									
-										<strong>Show :</strong> <input type="checkbox" id="test1" data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
-									
-										<input type="checkbox" id="test4" data-ng-model="showEmail" /> <label for="test4">Email</label>
-									
-									
-										<input type="checkbox" id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
-								
-									
-										<input type="checkbox" id="test3" data-ng-model="showAddress" /> <label for="test3">Address</label>
-									
+
+									<strong>Show :</strong> <input type="checkbox" id="test1"
+										data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
+
+									<input type="checkbox" id="test4" data-ng-model="showEmail" />
+									<label for="test4">Email</label> <input type="checkbox"
+										id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
+
+
+									<input type="checkbox" id="test3" data-ng-model="showAddress" />
+									<label for="test3">Address</label>
+
 									<!-- Show: <input type="checkbox" data-ng-model="showBirthday">Birthday</input> -->
 									<!-- <input type="checkbox" data-ng-model="showEmail">Email</input>
 									<input type="checkbox" data-ng-model="showPhone">Phone</input>
@@ -252,7 +253,8 @@
 													<td data-ng-bind="x.username"></td>
 													<td data-ng-bind="x.lastname"></td>
 													<td data-ng-bind="x.firstname"></td>
-													<td ng-show="showBirthday">{{x.birthday | date:'MM/dd/yyyy'}}</td>
+													<td ng-show="showBirthday">{{x.birthday |
+														date:'MM/dd/yyyy'}}</td>
 													<td data-ng-bind="x.email" ng-show="showEmail"></td>
 													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
 													<td data-ng-bind="x.address" ng-show="showAddress"></td>
@@ -331,17 +333,18 @@
 								<label class=" control-label" for="">Username</label>
 								<div class="">
 									<input id="username" name="username" placeholder=""
-										class="form-control input-md" ng-keyup="hideDuplicateAlert()" type="text" ng-model="username" ng-keydown="autoAdd($event)"
+										class="form-control input-md" ng-keyup="hideDuplicateAlert()"
+										type="text" ng-model="username" ng-keydown="autoAdd($event)"
 										ng-required="true" />
 
 									<div ng-messages="frmRegistrarAdd.username.$error">
 										<div ng-message="required"
 											ng-show="frmRegistrarAdd.username.$touched">
 											<p style="color: red">This field is required</p>
-											
+
 										</div>
 									</div>
-									<p ng-bind="duplicateAlert" style="color: red" ></p>
+									<p ng-bind="duplicateAlert" style="color: red"></p>
 
 								</div>
 							</div>
@@ -400,7 +403,8 @@
 								<div class="">
 									<input type="password" id="re_password" name="re_password"
 										data-ng-model="re_password" required="required"
-										class="form-control col-md-7 col-xs-12" match-password="password"/>
+										class="form-control col-md-7 col-xs-12"
+										match-password="password" />
 									<div ng-messages="frmRegistrarAdd.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmRegistrarAdd.re_password.$touched">
@@ -431,36 +435,19 @@
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Phone</label>
-								<div class="">
-									<input id="phone" name="phone" placeholder=""
-										class="form-control input-md" type="tel" ng-required="true"
-										ng-model="phone" />
-									<div ng-messages="frmRegistrarAdd.phone.$error">
-										<div ng-message="required"
-											ng-show="frmRegistrarAdd.phone.$touched">
-											<p style="color: red">This field is required</p>
-										</div>
-
+								<label class=" control-label" for="birthday">Phone</label> <input
+									id="phone" name="phone" placeholder=""
+									class="form-control input-md" type="tel" ng-required="true"
+									ng-model="phone" />
+								<div ng-messages="frmRegistrarAdd.phone.$error">
+									<div ng-message="required"
+										ng-show="frmRegistrarAdd.phone.$touched">
+										<p style="color: red">This field is required</p>
 									</div>
+
 								</div>
 							</div>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Address</label>
-								<div class="">
-									<input id="adress" name="address" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="address" />
-									<div ng-messages="frmRegistrarAdd.address.$error">
-										<div ng-message="required"
-											ng-show="frmRegistrarAdd.address.$touched">
-											<p style="color: red">This field is required</p>
-										</div>
 
-									</div>
-								</div>
-							</div>
 
 
 
@@ -469,40 +456,55 @@
 							<label class=" control-label" style="margin-top: 9px;" for="">
 								Picture</label>
 							<div class=" picture">
-
-								<!-- <img src="production/images/img.jpg" width="" class="img-responsive"/> -->
-
-								<img ng-src="{{prev_img}}" height="150" width="100" id="prev_img"/> <input
-									type="file" id="image" name="uploadfile" accept="*"
+								<img ng-src="{{prev_img}}" height="150" width="100"
+									id="prev_img" /> <input type="file" id="image"
+									name="uploadfile" accept="*"
 									onchange="angular.element(this).scope().getImage(this)"
-									ng-model="image" class="col-md-12" />
+									ng-model="image" />
 								<!-- Multiple Radios -->
 
 							</div>
 
 							<div class="form-group">
-								<label class="control-label" for="birthday">Birthday</label>
-								<div class="col-md-12">
-									<input id="birthday" name="birthday" placeholder=""
-										class="form-control input-md" type="date" ng-model="birthday" max="{{currentDate.value | date: 'yyyy-MM-dd'}}"/>
+								<label class="control-label" for="birthday">Birthday</label> <input
+									id="birthday" name="birthday" placeholder=""
+									class="form-control input-md" type="date" ng-model="birthday"
+									max="{{currentDate.value | date: 'yyyy-MM-dd'}}" />
 
-								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="control-label" for="status">Status</label>
-								<div class="col-md-12">
-									<div class="checkbox">
-										<label> <input type="radio" ng-model="active"
-											ng-value="true" ng-checked="true" /> Active
-										</label> <label> <input type="radio" ng-model="active"
-											ng-value="false" /> Inactive
-										</label>
-									</div>
+								<div class="checkbox">
+									<label> <input type="radio" ng-model="active"
+										ng-value="true" ng-checked="true" /> Active
+									</label> <label> <input type="radio" ng-model="active"
+										ng-value="false" /> Inactive
+									</label>
 								</div>
 							</div>
 						</div>
 					</form>
+				</div>
+				<div class="modal-body row">
+					<div class="col-md-12">
+						<!-- Text input-->
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Address</label>
+							<div class="">
+								<input id="adress" name="address" placeholder=""
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="address" />
+								<div ng-messages="frmRegistrarAdd.address.$error">
+									<div ng-message="required"
+										ng-show="frmRegistrarAdd.address.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<!-- <button id="btnSave" name="btnSave" class="btn btn-primary"
@@ -510,8 +512,8 @@
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-disabled="frmRegistrarAdd.$invalid" ng-click="save(false)">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="save(true)"
-						ng-disabled="frmRegistrarAdd.$invalid">Add and close</button>
+						ng-click="save(true)" ng-disabled="frmRegistrarAdd.$invalid">Add
+						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -535,23 +537,6 @@
 						id="upload-file-form-edit">
 						<div class="col-md-6">
 							<input type="hidden" name="id" ng-model="registrar_edit.id" />
-							
-							<!-- Text input-->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label class="control-label" for="">Username</label> -->
-<!-- 								<div class=""> -->
-<!-- 									<input id="username" name="username" placeholder="" -->
-<!-- 										class="form-control input-md" type="text" -->
-<!-- 										ng-model="edit.username" ng-required="true" /> -->
-<!-- 									<div ng-messages="frmRegistrarEdit.username.$error"> -->
-<!-- 										<div ng-message="required" -->
-<!-- 											ng-show="frmRegistrarEdit.username.$touched"> -->
-<!-- 											<p style="color: red">This field is required</p> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-
-<!-- 								</div> -->
-<!-- 							</div> -->
 
 							<!-- Text input-->
 							<div class="form-group">
@@ -591,7 +576,8 @@
 								<div class="">
 									<input id="birthday" name="birthday" placeholder=""
 										class="form-control input-md" type="date"
-										ng-model="edit.birthday" max="{{currentDate.value | date: 'yyyy-MM-dd'}}"/>
+										ng-model="edit.birthday"
+										max="{{currentDate.value | date: 'yyyy-MM-dd'}}" />
 
 								</div>
 							</div>
@@ -627,22 +613,6 @@
 									</div>
 								</div>
 							</div>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class=" control-label" for="address">Address</label>
-								<div class="">
-									<input id="adress" name="address" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="edit.address" />
-									<div ng-messages="frmRegistrarEdit.address.$error">
-										<div ng-message="required"
-											ng-show="frmRegistrarEdit.address.$touched">
-											<p style="color: red">This field is required</p>
-										</div>
-
-									</div>
-								</div>
-							</div>
 
 
 
@@ -657,8 +627,8 @@
 									ng-show="prev_img_edit==''" width="100" height="150"
 									class="img-responsive" /> <img ng-src="{{prev_img_edit}}"
 									ng-hide="prev_img_edit==''" width="100" height="150"
-									class="img-responsive" id="prev_img_edit"/> <input type="file" id="image_edit"
-									name="uploadfile" accept="*"
+									class="img-responsive" id="prev_img_edit" /> <input
+									type="file" id="image_edit" name="uploadfile" accept="*"
 									onchange="angular.element(this).scope().getImage_Edit(this)" />
 
 								<!-- Multiple Radios -->
@@ -677,6 +647,26 @@
 									</label>
 								</div>
 
+							</div>
+						</div>
+						<div class="modal-body row">
+							<div class="col-md-12">
+								<!-- Text input-->
+								<div class="form-group">
+									<label class=" control-label" for="address">Address</label>
+									<div class="">
+										<input id="adress" name="address" placeholder=""
+											class="form-control input-md" type="text" ng-required="true"
+											ng-model="edit.address" />
+										<div ng-messages="frmRegistrarEdit.address.$error">
+											<div ng-message="required"
+												ng-show="frmRegistrarEdit.address.$touched">
+												<p style="color: red">This field is required</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -773,23 +763,14 @@
 
 								</div>
 							</div>
-							<!-- Text input-->
-							<div class="form-group">
-								<label class=" control-label" for="birthday">Address</label>
-								<div class="">
-									<input id="adress" name="address" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="view.address" readonly="readonly" />
 
-								</div>
-							</div>
 
 
 						</form>
 					</div>
 					<div class="col-md-6">
-						<label class="col-md-2 control-label" style="margin-top: 9px;" for="">
-							Picture</label>
+						<label class="col-md-2 control-label" style="margin-top: 9px;"
+							for=""> Picture</label>
 						<div class="col-md-12 picture">
 
 							<img ng-src="http://localhost:8080/admin/images/{{view.image}}"
@@ -807,6 +788,20 @@
 						</div>
 					</div>
 				</div>
+				<!-- Text input-->
+				<div class="modal-body row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Address</label>
+							<div class="">
+								<input id="adress" name="address" placeholder=""
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="view.address" readonly="readonly" />
+
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="modal-footer">
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -815,7 +810,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Modal confirmReset -->
 	<div class="modal fade" id="myModal_confirmReset" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
@@ -831,8 +826,8 @@
 
 				<div class="modal-body row">
 					<form class="form-horizontal" name="frmReset">
-					<div class="form-group" >
-						<label class=" control-label" for="birthday">New password</label>
+						<div class="form-group">
+							<label class=" control-label" for="birthday">New password</label>
 							<div class="">
 								<input type="password" id="newPassword" name="newPassword"
 									ng-model="newPassword" class="form-control "
@@ -845,30 +840,33 @@
 								</div>
 							</div>
 						</div>
-					<div class="form-group">
-						<label class=" control-label" for="birthday">Retype password</label>
-						<div class="">
-							<input type="password" id="reNewPassword" name="reNewPassword"
-								ng-model="reNewPassword" class="form-control"
-								required="required" match-password="newPassword"/>
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Retype
+								password</label>
+							<div class="">
+								<input type="password" id="reNewPassword" name="reNewPassword"
+									ng-model="reNewPassword" class="form-control"
+									required="required" match-password="newPassword" />
 								<div ng-messages="frmReset.reNewPassword.$error">
-										<div ng-message="required"
-											ng-show="frmReset.reNewPassword.$touched">
-											<p style="color: red">This field is required</p>
-										</div>
-										<div ng-message="matchPassword">
-											<p style="color: red">Must match the previous field</p>
-										</div>
+									<div ng-message="required"
+										ng-show="frmReset.reNewPassword.$touched">
+										<p style="color: red">This field is required</p>
 									</div>
-								
+									<div ng-message="matchPassword">
+										<p style="color: red">Must match the previous field</p>
+									</div>
+								</div>
+
+							</div>
 						</div>
-					</div>
 					</form>
 				</div>
 
 				<div class="modal-footer">
 					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
-						data-toggle="modal" ng-click="frmReset.$invalid || ResetPassword()" ng-disabled="frmReset.$invalid">Yes</a>
+						data-toggle="modal"
+						ng-click="frmReset.$invalid || ResetPassword()"
+						ng-disabled="frmReset.$invalid">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
