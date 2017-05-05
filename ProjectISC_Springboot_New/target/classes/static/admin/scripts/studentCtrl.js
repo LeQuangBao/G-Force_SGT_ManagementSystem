@@ -139,7 +139,7 @@ app.controller('studentCtrl',
         GetListschool();
         GetListentrance_Exam();
 
-        $scope.sortType = 'studentId';
+        $scope.sortType = 'firstName';
         $scope.filterTable = '';
         // filter list
         $scope.listfiltered = function(element) {

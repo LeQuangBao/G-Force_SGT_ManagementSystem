@@ -26,7 +26,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
 	    });
 	    }
 	    getAllinstructors();
-	    $scope.sortType = 'lastName';
+	    $scope.sortType = 'firstName';
     	$scope.filterTable = '';
 	 // Tìm kiếm theo tên
     	$scope.listfiltered = function(element) {

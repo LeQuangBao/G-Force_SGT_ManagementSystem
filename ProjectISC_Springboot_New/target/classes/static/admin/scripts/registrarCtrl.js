@@ -26,7 +26,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	    });
 	    }
 	 getAllRegistrars();
-	 $scope.sortType = 'userName';
+	 $scope.sortType = 'firstName';
 	 $scope.filterTable = '';
 	// Tìm kiếm theo tên
  	$scope.listfiltered = function(element) {
