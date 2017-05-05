@@ -125,7 +125,8 @@
 						<div class="title_right">
 							<div class="form-group pull-right top_search">
 								<button data-toggle="modal" data-target="#myModal_them"
-									type="button" class="btn btn-primary btn-lg" ng-click="loadthem()">Add</button>
+									type="button" class="btn btn-primary btn-lg"
+									ng-click="loadthem()">Add</button>
 							</div>
 						</div>
 					</div>
@@ -371,7 +372,8 @@
 							<div class="form-group">
 								<label class=" control-label" for="">Username</label>
 								<div class="">
-									<input id="username" name="username" placeholder="" ng-keydown="autoAdd($event)" ng-keyup="hideDuplicateAlert()"
+									<input id="username" name="username" placeholder=""
+										ng-keydown="autoAdd($event)" ng-keyup="hideDuplicateAlert()"
 										class="form-control input-md" type="text"
 										ng-model="student.username" ng-required="true" />
 									<div ng-messages="frmStudentAdd.username.$error">
@@ -380,7 +382,7 @@
 											<p style="color: red">This field is required</p>
 										</div>
 									</div>
-									<p ng-bind="duplicateAlert" style="color: red" ></p>
+									<p ng-bind="duplicateAlert" style="color: red"></p>
 								</div>
 							</div>
 
@@ -436,10 +438,9 @@
 								<label class=" control-label" for="birthday">Retype
 									password</label>
 								<div class="">
-									<input type="password" id="re_password"
-										name="re_password" required="required"
-										class="form-control col-md-7 col-xs-12" ng-model="re_password"
-										match-password="password" />
+									<input type="password" id="re_password" name="re_password"
+										required="required" class="form-control col-md-7 col-xs-12"
+										ng-model="re_password" match-password="password" />
 									<div ng-messages="frmStudentAdd.re_password.$error">
 										<div ng-message="required"
 											ng-show="frmStudentAdd.re_password.$touched">
@@ -487,9 +488,9 @@
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Address</label>
 								<div class="">
-									<input id="adress" name="address" placeholder=""
+									<textarea id="adress" name="address" rows="6"
 										class="form-control input-md" type="text" ng-required="true"
-										ng-model="student.address" />
+										ng-model="student.address"></textarea>
 									<div ng-messages="frmStudentAdd.address.$error">
 										<div ng-message="required"
 											ng-show="frmStudentAdd.address.$touched">
@@ -503,8 +504,9 @@
 						<div class="col-md-6">
 							<label class="col-md-2 control-label"> Picture</label>
 							<div class="col-md-12 picture">
-								<img ng-src="{{prev_img}}" height="150" width="100" id="prev_img"/> <input
-									type="file" id="uploadfile1" name="uploadfile1"
+								<img ng-src="{{prev_img}}" height="150" width="100"
+									id="prev_img" /> <input type="file" id="uploadfile1"
+									name="uploadfile1"
 									onchange="angular.element(this).scope().getImage(this)"
 									ng-model="uploadfile1" class="col-md-12" />
 								<p id="upload-file-message"></p>
@@ -523,19 +525,10 @@
 								<label class="control-label" for="selectbasic">Entrance
 									exam</label>
 								<div class="">
-									<select ng-selected="student.entranceExam" ng-model="student.entranceExam" class="form-control"
+									<select ng-selected="student.entranceExam"
+										ng-model="student.entranceExam" class="form-control"
 										ng-options="x.entranceExamName for x in list_entrance_exam "
 										name="intake" id="intake" ng-required="true">
-									</select>
-								</div>
-							</div>
-
-							<div class="form-group col-md-12">
-								<label class="control-label">School</label>
-								<div class="">
-									<select ng-model="student.school" class="form-control"
-										ng-options="x.schoolName for x in list_school" name="intake"
-										id="intake" ng-required="true">
 									</select>
 								</div>
 							</div>
@@ -549,6 +542,16 @@
 									</select>
 								</div>
 							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label">School</label>
+								<div class="">
+									<select ng-model="student.school" class="form-control"
+										ng-options="x.schoolName for x in list_school" name="intake"
+										id="intake" ng-required="true">
+									</select>
+								</div>
+							</div>
+
 
 							<div class="form-group col-md-12">
 								<label class="control-label" for="birthday">Birthday</label>
@@ -561,14 +564,12 @@
 									<label class="control-label" for="status">Status</label>
 
 									<div class="checkbox">
-										<label> <input type="radio" ng-model="status" value="Studying"
-											name="status"/> Studying
-										</label> <br /> <label> <input type="radio" 
-											ng-model="status" value="Dropped" name="status" />
-											Dropped
-										</label> <br /> <label> <input type="radio" 
-											ng-model="status" value="Graduated" name="status" />
-											Graduated
+										<label> <input type="radio" ng-model="status"
+											value="Studying" name="status" /> Studying
+										</label> <br /> <label> <input type="radio" ng-model="status"
+											value="Dropped" name="status" /> Dropped
+										</label> <br /> <label> <input type="radio" ng-model="status"
+											value="Graduated" name="status" /> Graduated
 										</label>
 									</div>
 
@@ -578,9 +579,9 @@
 									<label class="control-label">Gender</label>
 									<div class="checkbox">
 										<label> <input type="radio" ng-model="gender"
-											value="0" name="gender" ng-value="0"  /> Male
-										</label> <label> <input type="radio"
-											ng-model="gender" value="1" name="gender" ng-value="1" /> Female
+											value="0" name="gender" ng-value="0" /> Male
+										</label> <label> <input type="radio" ng-model="gender"
+											value="1" name="gender" ng-value="1" /> Female
 										</label>
 									</div>
 
@@ -595,8 +596,8 @@
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="them(false)" ng-disabled="frmStudentAdd.$invalid">Add</button>
 					<button id="btnSave" name="btnSave" class="btn btn-default"
-						ng-click="them(true)" ng-disabled="frmStudentAdd.$invalid"
-						>Add and close</button>
+						ng-click="them(true)" ng-disabled="frmStudentAdd.$invalid">Add
+						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -681,14 +682,13 @@
 									</div>
 								</div>
 							</div>
-							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Address</label>
+								<label class="control-label" for="birthday">Birthday</label>
 								<div class="">
-									<input id="adress" name="address" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="list_temp_inf_edit.address" />
-									<div ng-messages="editForm.address.$error">
+									<input id="birthday" name="birthday" placeholder=""
+										ng-model="list_temp_inf_edit.birthday"
+										class="form-control input-md" type="date" ng-required="true" />
+									<div ng-messages="editForm.birthday.$error">
 										<div ng-message="required">
 											<p style="color: red">This field is required</p>
 										</div>
@@ -696,44 +696,25 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group ">
-								<label class="control-label" for="selectbasic">Entrance
-									exam</label>
-								<div class="">
-									<select ng-model="list_temp_inf_edit.entranceExam"
-										class="form-control"
-										ng-options="x.entranceExamName for x in list_entrance_exam "
-										name="entranceExam" id="entranceExam" ng-required="true">
-									</select>
-								</div>
-							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Address</label>
+									<textarea id="adress" name="address" rows="6"
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="list_temp_inf_edit.address" ></textarea>
+									<div ng-messages="editForm.address.$error">
+										<div ng-message="required">
+											<p style="color: red">This field is required</p>
+										</div>
 
-							<div class="form-group">
-								<label class="control-label">School</label>
-								<div class="">
-									<select ng-model="list_temp_inf_edit.school"
-										class="form-control"
-										ng-options="x.schoolName for x in list_school" name="school"
-										id="school" ng-required="true">
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label" for="selectbasic">Intake</label>
-								<div class="">
-									<select ng-model="list_temp_inf_edit.intake"
-										class="form-control"
-										ng-options="x.intakeName for x in list_intake" name="intake"
-										id="intake" ng-required="true">
-									</select>
-								</div>
+									</div>
 							</div>
 
 
 
 						</div>
 						<div class="col-md-6">
-							<label class="col-md-2 control-label"> Picture</label>
+							<label class="col-md-2 control-label">Picture</label>
 							<div class="col-md-12 picture">
 								<img
 									ng-src="http://localhost:8080/admin/images/{{list_temp_inf_edit.image}}"
@@ -748,20 +729,29 @@
 
 
 							<div class="form-group col-md-12">
-								<div class="form-group">
-									<label class="control-label" for="birthday">Birthday</label>
-									<div class="">
-										<input id="birthday" name="birthday" placeholder=""
-											ng-model="list_temp_inf_edit.birthday"
-											class="form-control input-md" type="date" ng-required="true" />
-										<div ng-messages="editForm.birthday.$error">
-											<div ng-message="required">
-												<p style="color: red">This field is required</p>
-											</div>
 
-										</div>
+								<div class="form-group">
+									<label class="control-label" for="selectbasic">Intake</label>
+									<div class="">
+										<select ng-model="list_temp_inf_edit.intake"
+											class="form-control"
+											ng-options="x.intakeName for x in list_intake" name="intake"
+											id="intake" ng-required="true">
+										</select>
 									</div>
 								</div>
+								<div class="form-group ">
+									<label class="control-label" for="selectbasic">Entrance
+										exam</label>
+									<div class="">
+										<select ng-model="list_temp_inf_edit.entranceExam"
+											class="form-control"
+											ng-options="x.entranceExamName for x in list_entrance_exam "
+											name="entranceExam" id="entranceExam" ng-required="true">
+										</select>
+									</div>
+								</div>
+
 								<div class="form-group">
 									<label class="control-label">Specialization</label>
 									<div class="">
@@ -772,6 +762,17 @@
 										</select>
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="control-label">School</label>
+									<div class="">
+										<select ng-model="list_temp_inf_edit.school"
+											class="form-control"
+											ng-options="x.schoolName for x in list_school" name="school"
+											id="school" ng-required="true">
+										</select>
+									</div>
+								</div>
+
 
 								<div class="form-group">
 									<label class="control-label" for="status">Status</label>
@@ -802,25 +803,20 @@
 											Female
 										</label>
 									</div>
-
-
 								</div>
 							</div>
-
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" ng-click="resetpasword()" class="pull-left btn btn-danger"
-						data-toggle="modal" data-target="#myModal_confirmReset">Reset
-						password</button>
+					<button type="button" ng-click="resetpasword()"
+						class="pull-left btn btn-danger" data-toggle="modal"
+						data-target="#myModal_confirmReset">Reset password</button>
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="edit()" ng-disabled="editForm.$invalid"
 						data-dismiss="modal">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -848,14 +844,14 @@
 										class="form-control input-md" type="text"
 										ng-model="chitiet.username" readonly="readonly"
 										ng-required="true" />
-									
+
 
 								</div>
 							</div>
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName"> Lastname</label>
+								<label class="control-label" for="lastName">Lastname</label>
 								<div class="">
 									<input id="lastName" name="lastName" placeholder=""
 										class="form-control input-md" type="text"
@@ -877,9 +873,9 @@
 							<div class="form-group">
 								<label class="control-label" for="birthday">Birthday</label>
 								<div class="">
-								<input id="birthday" name="birthday"
-									class="form-control input-md" type="text"
-									ng-model="chitiet.birthday" readonly="readonly" />
+									<input id="birthday" name="birthday"
+										class="form-control input-md" type="text"
+										ng-model="chitiet.birthday" readonly="readonly" />
 									<!-- <p>{{chitiet.birthday}}</p> -->
 								</div>
 							</div>
@@ -887,29 +883,29 @@
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Email</label>
 								<div class="">
-								<input id="email" name="email" placeholder=""
-									class="form-control input-md" type="text" ng-model="chitiet.email"
-									readonly="readonly" />
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="chitiet.email" readonly="readonly" />
 									<!-- <p>{{chitiet.email}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Phone</label>
+								<label class=" control-label" for="phone">Phone</label>
 								<div class="">
-								<input id="phone" name="phone" placeholder=""
-									class="form-control input-md" type="tel" ng-model="chitiet.phone"
-									readonly="readonly" />
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="tel"
+										ng-model="chitiet.phone" readonly="readonly" />
 									<!-- <p>{{chitiet.phone}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Address</label>
+								<label class="control-label" for="address">Address</label>
 								<div class="">
-								<input id="adress" name="address" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="chitiet.address" readonly="readonly" />
+									<textarea id="adress" name="address" placeholder="" rows="5"
+										class="form-control input-md" type="text"
+										ng-model="chitiet.address" readonly="readonly" ></textarea>
 									<!-- <p>{{chitiet.address}}</p> -->
 								</div>
 							</div>
@@ -928,51 +924,63 @@
 
 								</div>
 							</div>
-
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="lastName">School</label>
+								<label class="control-label" for="birthday">Intake</label>
 								<div class="col-md-12">
-								<select id="selectbasic" name="selectbasic" class="form-control"
-									readonly="readonly">
-									<option ng-bind="chitiet.school.schoolName"></option>
-								</select>
-									<!-- <p>{{chitiet.school.schoolName}}</p> -->
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.intake.intakeName"></option>
+									</select>
+									<!-- <p>{{chitiet.intake.intakeName}}</p> -->
 								</div>
 							</div>
 
+
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="firstName">Entrance exam</label>
+								<label class="control-label" >Entrance
+									exam</label>
 								<div class="col-md-12">
-								<select id="selectbasic" name="selectbasic" class="form-control"
-									readonly="readonly">
-									<option ng-bind="chitiet.entranceExam.entranceExamName"></option>
-								</select>
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.entranceExam.entranceExamName"></option>
+									</select>
 									<!-- <p>{{chitiet.entranceExam.entranceExamName}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" for="birthday">Intake</label>
+								<label class="control-label" >Specialization</label>
 								<div class="col-md-12">
-								<select id="selectbasic" name="selectbasic" class="form-control"
-									readonly="readonly">
-									<option ng-bind="chitiet.intake.intakeName"></option>
-								</select>
-									<!-- <p>{{chitiet.intake.intakeName}}</p> -->
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.specialization.specializationName"></option>
+									</select>
+									<!-- <p>{{chitiet.entranceExam.entranceExamName}}</p> -->
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Gender</label>
+								<label class="control-label" for="school">School</label>
+								<div class="col-md-12">
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.school.schoolName"></option>
+									</select>
+									<!-- <p>{{chitiet.school.schoolName}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="gender">Gender</label>
 								<div class="col-md-12">
 									<p>{{chitiet.gender ? 'Female' : 'Male'}}</p>
 								</div>
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class=" control-label" for="birthday">Status</label>
+								<label class=" control-label" for="status">Status</label>
 								<div class="col-md-12">
 									<p>{{chitiet.status}}</p>
 								</div>
@@ -1045,8 +1053,9 @@
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok"  data-target="#myModal_reset"
-						data-toggle="modal" ng-click="frmReset.$invalid||reset()" ng-disabled="frmReset.$invalid">Yes</a>
+					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
+						data-toggle="modal" ng-click="frmReset.$invalid||reset()"
+						ng-disabled="frmReset.$invalid">Yes</a>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
