@@ -439,3 +439,8 @@ app.directive('checkImage', function($http) {
         }
     };
 });
+//Chu thich cua nut phan action
+$(document).ready(function(){
+    $('[data-toggle="onhover"]');   
+     
+});

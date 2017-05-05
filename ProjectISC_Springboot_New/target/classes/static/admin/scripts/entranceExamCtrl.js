@@ -267,3 +267,8 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 	}
 	
 });
+//Chu thich cua nut phan action
+$(document).ready(function(){
+    $('[data-toggle="onhover"]');   
+     
+});

@@ -356,3 +356,8 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
         $scope.duplicateAlert="";
     }
 });
+// Chu thich cua nut phan action
+$(document).ready(function(){
+    $('[data-toggle="onhover"]');   
+     
+});
