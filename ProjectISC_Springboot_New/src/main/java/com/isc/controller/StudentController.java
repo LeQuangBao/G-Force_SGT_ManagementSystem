@@ -102,6 +102,13 @@ public class StudentController {
 	public ResponseEntity<Void> updateStudent(@RequestBody Student Student) {
 		try {
 			
+			Student student1;
+			student1=service.getStudent(Student.getId());
+			String image=student1.getImage();
+		    String directory = "src\\main\\resources\\static\\admin\\images";
+		    String filepath = Paths.get(directory, image).toString();
+		    File file=new File(filepath);
+		    file.delete();    
 			service.updateStudent(Student);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

@@ -60,6 +60,12 @@ public class InstructorController {
 	@RequestMapping(value = "admin/api/instructor", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateInstructor(@RequestBody Instructor instructor) {
 		try {
+			Instructor instructor1=service.getInstructor(instructor.getId());
+			String image=instructor1.getImage();
+			 String directory = "src\\main\\resources\\static\\admin\\images";
+			 String filepath = Paths.get(directory, image).toString();
+			   File file=new File(filepath);
+			    file.delete();    
 			service.updateInstructor(instructor);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

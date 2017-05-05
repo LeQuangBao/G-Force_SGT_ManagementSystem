@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.isc.model.Registrar;
+import com.isc.model.Student;
 import com.isc.service.RegistrarService;
 
 @RestController
@@ -53,10 +54,15 @@ public class RegistrarController {
 	}
 	@RequestMapping(value="admin/api/registrar",method=RequestMethod.PUT)
 	public ResponseEntity<Void>updateRegistrar(@RequestBody Registrar registrar){
-		
-			service.updateRegistrar(registrar);
-		
+		Registrar resgistrar1;
+		resgistrar1=service.getRegistrar(registrar.getId());
+		String image= resgistrar1.getImage();
+	    String directory = "src\\main\\resources\\static\\admin\\images";
+	    String filepath = Paths.get(directory, image).toString();
+	    File file=new File(filepath);
+	    file.delete();    
 			
+			service.updateRegistrar(registrar);
 		
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
