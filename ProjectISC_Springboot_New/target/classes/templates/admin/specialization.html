@@ -369,6 +369,8 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
 						Edit relevant courses for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
+						<br/>
+						(<label ng-bind="info_editRelevantSubject.specializationName"></label>)
 					</h4>
 				</div>
 				<div class="modal-body">
@@ -418,15 +420,14 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr data-ng-repeat="x in listSubject | filter:filterSubject| orderBy:sortType:sortReverse">
+										<tr data-ng-repeat="x in listSubject | filter:filterSubject| orderBy:sortType:sortReverse" ng-show="!checkDuplicateSubject(x.id)">
 											<td ng-bind="$index+1"></td>
 											<td data-ng-bind="x.subjectId"></td>
 											<td data-ng-bind="x.subjectName"></td>
 											<td data-ng-bind="x.credit"></td>
                                           <td data-ng-bind="x.hour"></td>
 											<td>
-												<button
-													ng-disabled="checkDuplicateSubject(x.id)"
+												<button													
 													type="button" ng-click="addSubject(x)"
 													class="btn btn-primary btn-xs">
 													<span class="glyphicon glyphicon-plus"></span>
