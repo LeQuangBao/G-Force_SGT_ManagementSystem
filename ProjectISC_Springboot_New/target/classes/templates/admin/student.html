@@ -514,7 +514,7 @@
 								<label class="control-label" for="selectbasic">Intake</label>
 								<div class="">
 									<select ng-model="student.intake" class="form-control"
-										ng-change="filterEntranceExamByIntake_Add(student.intake.id)"
+										ng-change="filterEntranceExamByIntake_Add()"
 										ng-options="x.intakeName for x in list_intake" name="intake"
 										id="intake" ng-required="true">
 									</select>
@@ -746,7 +746,7 @@
 									<div class="">
 										<select ng-model="list_temp_inf_edit.entranceExam"
 											class="form-control"
-											ng-options="x.entranceExamName for x in listEntranceExamForEdit"
+											ng-options="x.entranceExamName for x in list_entrance_exam"
 											name="entranceExam" id="entranceExam" ng-required="true">
 										</select>
 									</div>
