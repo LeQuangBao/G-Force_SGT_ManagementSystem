@@ -260,20 +260,20 @@
 													<td data-ng-bind="x.address" ng-show="showAddress"></td>
 													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
 													<td>
-														<button type="button" ng-click="viewRegistrar(x)"
+														<button type="button" ng-click="viewRegistrar(x)"  title="View detail informations"
 															class="btn btn-success btn-sm" data-toggle="modal"
 															data-target="#myModal_detail">
-															<span class="glyphicon glyphicon-eye-open" data-toggle="onhover"  title="View detail informations"></span>
+															<span class="glyphicon glyphicon-eye-open" data-toggle="onhover" ></span>
 														</button>
-														<button type="button" ng-click="editRegistrar(x)"
+														<button type="button" ng-click="editRegistrar(x)"   title="Edit"
 															class="btn btn-primary btn-sm" data-toggle="modal"
 															data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit" data-toggle="onhover"  title="Edit"></span>
+															<span class="glyphicon glyphicon-edit" data-toggle="onhover"></span>
 														</button>
-														<button type="button" ng-click="deleteRegistrar(x)"
+														<button type="button" ng-click="deleteRegistrar(x)" title="Delete"
 															data-toggle="modal" class="btn btn-danger btn-sm"
 															data-target="#myModal_xoa">
-															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  title="Delete"></span>
+															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  ></span>
 														</button>
 
 													</td>
