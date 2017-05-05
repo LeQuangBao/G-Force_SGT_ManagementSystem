@@ -25,12 +25,17 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.isc.model.Instructor;
 import com.isc.service.InstructorService;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 public class InstructorController {
 	@Autowired
 	private InstructorService service;
 		
+	Instructor instructorObj=new Instructor();
+	
 	@RequestMapping(value = "admin/api/instructor", method = RequestMethod.GET)
 	public ResponseEntity<List<Instructor>> getAllInstructors() {
 		return new ResponseEntity<>(service.getAllInstructors(), HttpStatus.OK);
@@ -50,6 +55,7 @@ public class InstructorController {
 	@RequestMapping(value = "admin/api/instructor", method = RequestMethod.POST)
 	public ResponseEntity<Void> addInstructor(@RequestBody Instructor instructor) {
 		try {
+			instructor.setImage(instructorObj.getImage());
 			service.addInstructor(instructor);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -61,6 +67,7 @@ public class InstructorController {
 	public ResponseEntity<Void> updateInstructor(@RequestBody Instructor instructor) {
 		try {
 			Instructor instructor1=service.getInstructor(instructor.getId());
+			instructor1.setImage(instructorObj.getImage());
 			String image=instructor1.getImage();
 			 String directory = "src\\main\\resources\\static\\admin\\images";
 			 String filepath = Paths.get(directory, image).toString();
@@ -99,8 +106,13 @@ public class InstructorController {
 	      @RequestParam("uploadfile") MultipartFile uploadfile) {
 	    
 	    try {
-	      // Get the filename and build the local file path
-	      String filename = uploadfile.getOriginalFilename();
+	    	Date todayDate = new Date();
+	    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
+	    	String today = dateFormat.format(todayDate);
+	      // Get the filename 
+	      String filename = today+"_"+uploadfile.getOriginalFilename();
+	      instructorObj.setImage(filename);
+	      // Build the local file path
 	      String directory = "src\\main\\resources\\static\\admin\\images";
 	      String filepath = Paths.get(directory, filename).toString();
 	      

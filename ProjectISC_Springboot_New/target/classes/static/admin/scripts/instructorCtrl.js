@@ -146,12 +146,13 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
             })
       .then(function (result) {	
           if (result.status == 201) {
-        	  getAllinstructors();
-        	  addAlert();
-        	  $scope.ResetForm_Add();
         	  if(close==true){
         		  $('#myModal').modal('hide');
         	  }
+        	  getAllinstructors();
+        	  addAlert();
+        	  $scope.ResetForm_Add();
+        	  
          } 
     
             }, function(response) {
@@ -205,7 +206,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         	 $scope.frmInstructor.email.$setUntouched();
         	 $scope.frmInstructor.phone.$setUntouched();
         	 $scope.frmInstructor.address.$setUntouched();
-//        	 document.getElementById("image").value="";
+        	 document.getElementById("image").value="";
         	 document.getElementById("prev_img").src="";
         	 $scope.prev_img="";
 	    }
