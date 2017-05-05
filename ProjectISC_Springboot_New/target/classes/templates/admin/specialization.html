@@ -192,20 +192,20 @@
 													<td data-ng-bind="x.specializationName"></td>
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
-														<button data-toggle="modal" class="btn btn-primary btn-sm" title="Add course(s)"
+														<button data-toggle="modal" class="btn btn-primary btn-sm"
 															data-target="#myModal_editSubject" data-backdrop="static"
 															ng-click="callEditRelevantSubject(x)">
-															<span class="glyphicon glyphicon-th-list"  data-toggle="onhover"  ></span>
+															<span class="glyphicon glyphicon-th-list"  data-toggle="onhover"  title="Add course(s)"></span>
 														</button>
 													<button class="btn btn-primary btn-sm"
-															ng-click="callEditSpecialization(x)" data-toggle="modal" title="Edit"
+															ng-click="callEditSpecialization(x)" data-toggle="modal"
 															data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit"  data-toggle="onhover"  ></span>
+															<span class="glyphicon glyphicon-edit"  data-toggle="onhover"  title="Edit"></span>
 														</button>
-														<button data-toggle="modal" class="btn btn-danger btn-sm" title="Delete"
+														<button data-toggle="modal" class="btn btn-danger btn-sm"
 															data-target="#myModal_xoa"
 															ng-click="callDeleteSpecialization(x)" >
-															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  ></span>
+															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  title="Delete"></span>
 														</button></td>
 												</tr>
 											</tbody>

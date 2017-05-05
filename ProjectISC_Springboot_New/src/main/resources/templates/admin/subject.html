@@ -37,7 +37,6 @@
       <link href="build/css/custom.min.css" rel="stylesheet" />
       <link href="js/sweetalert.css" rel="stylesheet" />
       <link href="build/css/style.css" rel="stylesheet" />
-      
    </head>
    <body class="nav-md" ng-app="myApp" ng-controller="subjectCtrl">
       <div class="container body">
@@ -201,21 +200,20 @@
                                           <td data-ng-bind="x.description"></td>
                                           <td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
                                           <td>
-                                             <button type="button" ng-click="viewRelevantSpecialization(x)"  title="View specializations"
-                                                class="btn btn-success btn-sm " data-toggle="modal"
+                                             <button type="button" ng-click="viewRelevantSpecialization(x)"
+                                                class="btn btn-success btn-sm" data-toggle="modal"
                                                 data-target="#myModal_viewRelevantSpecialization">
-                                             <span class="glyphicon glyphicon-th-list" data-toggle="onhover" ></span>
-                                             
+                                             <span class="glyphicon glyphicon-th-list" data-toggle="onhover"  title="View specializations"></span>
                                              </button>
-                                             <button type="button" ng-click="editsubject(x)" title="Edit"
+                                             <button type="button" ng-click="editsubject(x)"
                                                 class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#myModal_sua">
-                                             <span class="glyphicon glyphicon-edit" data-toggle="onhover"  ></span>
+                                             <span class="glyphicon glyphicon-edit" data-toggle="onhover"  title="Edit"></span>
                                              </button>
-                                             <button type="button" ng-click="deletesubject(x)" title="Delete"
+                                             <button type="button" ng-click="deletesubject(x)"
                                                 data-toggle="modal" class="btn btn-danger btn-sm"
                                                 data-target="#myModal_xoa">
-                                             <span class="glyphicon glyphicon-remove" data-toggle="onhover"  ></span>
+                                             <span class="glyphicon glyphicon-remove" data-toggle="onhover"  title="Delete"></span>
                                              </button>
                                           </td>
                                        </tr>
