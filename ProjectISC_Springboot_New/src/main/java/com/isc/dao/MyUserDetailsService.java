@@ -33,7 +33,6 @@ public class MyUserDetailsService implements UserDetailsService {
 		return (UserDetails) buildUserForAuthentication(registrar, authorities);
 	}
 
-
 	private List<GrantedAuthority> buildUserAuthority() {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
@@ -48,6 +47,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	}
 
 	private User buildUserForAuthentication(Registrar registrar, List<GrantedAuthority> authorities) {
-		return new User(registrar.getUsername(), registrar.getPassword(), true, true, true, true, authorities);
+		return new User(registrar.getUsername(), registrar.getPassword(), registrar.isStatus(), true, true, true,
+				authorities);
 	}
 }
