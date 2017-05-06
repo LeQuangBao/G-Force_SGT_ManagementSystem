@@ -327,6 +327,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
 });
 // Chu thich cua nut phan action
 $(document).ready(function(){
-    $('[data-toggle="onhover"]');   
+    $('[data-toggle="tooltip"]').tooltip();   
      
 });
+
