@@ -373,7 +373,7 @@
 									<input id="username" name="username" placeholder=""
 										ng-keydown="autoAdd($event)" ng-keyup="hideDuplicateAlert()"
 										class="form-control input-md" type="text"
-										ng-model="student.username" ng-required="true" />
+										ng-model="student.username" ng-required="false" />
 									<div ng-messages="frmStudentAdd.username.$error">
 										<div ng-message="required"
 											ng-show="frmStudentAdd.username.$touched">
@@ -619,7 +619,23 @@
 					<form class="form-horizontal" name="editForm"
 						enctype="multipart/form-data" id="upload-file-form-edit">
 						<div class="col-md-6">
-
+							<!--- text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										ng-keydown="autoAdd($event)" ng-keyup="hideDuplicateAlert()"
+										class="form-control input-md" type="text"
+										ng-model="list_temp_inf_edit.username" ng-required="false" />
+									<div ng-messages="editForm.username.$error">
+										<div ng-message="required"
+											ng-show="editForm.username.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+									<p ng-bind="duplicateAlert" style="color: red"></p>
+								</div>
+							</div>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="control-label" for="lastName"> Last Name</label>
@@ -813,7 +829,7 @@
 						class="pull-left btn btn-danger" data-toggle="modal"
 						data-target="#myModal_confirmReset">Reset password</button>
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
-						ng-click="edit()" ng-disabled="editForm.$invalid"
+						ng-click="edit(false)" ng-disabled="editForm.$invalid"
 						data-dismiss="modal">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>

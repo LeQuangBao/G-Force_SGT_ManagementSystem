@@ -503,7 +503,6 @@ ALTER TABLE `specialization_subject`
 ALTER TABLE `student`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `student_id` (`student_id`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `student_id_2` (`student_id`),
   ADD KEY `school` (`school`),
   ADD KEY `intake` (`intake`),

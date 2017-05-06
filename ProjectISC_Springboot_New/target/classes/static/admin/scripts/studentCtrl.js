@@ -23,34 +23,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
         $scope.updatePageIndexes();
     }
     var alertDuration = 1800;
-    // danh sanh student co intake
-    function CountListStudent() {
-        $scope.listsl = [];
-        $http.get("http://localhost:8080/admin/api/Student")
-            .then(
-                function(response) {
-                    response.data.forEach(function(
-                        item, index) {
-                        var flag = false;
-                        item.student.forEach(function(
-                            item2, index) {
-                            if (item2.intake.id === 1) {
-                                flag = true;
-                            }
-                        });
-                        if (flag === true) {
-                            $scope.list.push(item);
-                        }
-                    });
-                });
-        // console.log($scope.listsl);
-    }
 
-    CountListStudent();
-    $scope.Clicktest = function() {
-
-        $scope.sohocsinh = $scope.listsl.length;
-    }
     $scope.list = [];
     // Lấy danh sách Student
     function GetListStudent() {
@@ -365,11 +338,14 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
         // Student.query().$promise.then(function(listStudent) {
         var flag = true;
         $scope.list.forEach(function(item, index) {
-            if (item.username === username) {
-                // alertduplicatestudent();
-                $scope.duplicateAlert = "Duplicate username";
-                flag = false;
-            }
+        	if (username !="")
+        		{
+		            if (item.username === username) {
+		                // alertduplicatestudent();
+		                $scope.duplicateAlert = "Duplicate username";
+		                flag = false;
+		            }
+        		}
         });
         // alert(numberOfStudent);
         // });
@@ -425,15 +401,83 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
         if ($scope.image1 === "") {
             $scope.image1 = "noImage.png";
         }
-        if (usernameduplicate($scope.student.username)) {
-            $scope.student.gender = $scope.gender;
-            $scope.student.status = $scope.status;
-            $scope.student.image = $scope.image1;
-            $scope.student.birthday = $scope.birthday;
-            $scope.student.password = $scope.password;
+        if ( $scope.student.username==null)
+        	{
+        		$scope.student.username ="";
+        		$scope.student.gender = $scope.gender;
+	            $scope.student.status = $scope.status;
+	            $scope.student.image = $scope.image1;
+	            $scope.student.birthday = $scope.birthday;
+	            $scope.student.password = $scope.password;
+	            var numberOfStudent = 0;
+	            var Student = $resource('http://localhost:8080/admin/api/Student');
+	            Student.query().$promise
+	                .then(function(listStudent) {
 
-            console.log($scope.gender);
-            console.log($scope.status);
+	                    listStudent
+	                        .forEach(function(item, index) {
+	                            if (item.intake.intakeId === $scope.student.intake.intakeId) {
+	                                numberOfStudent = numberOfStudent + 1;
+	                            }
+	                        });
+	                    numberOfStudent = numberOfStudent + 1;
+	                    // console.log(numberOfStudent);
+	                    var numberstring = numberOfStudent
+	                        .toString();
+	                    // console.log(numberstring);
+	                    if (numberstring.length == 1) {
+	                        numberstring = "000" + numberstring;
+	                    }
+	                    if (numberstring.length == 2) {
+	                        numberstring = "00" + numberstring;
+	                    }
+	                    if (numberstring.length == 3) {
+	                        numberstring = "0" + numberstring;
+	                    }
+	                    if (numberstring.length == 4) {
+	                        numberstring = numberstring;
+	                    }
+	                    // hai số cuối của năm
+	                    var date = new Date();
+	                    var year = date.getFullYear()
+	                        .toString();
+	                    //
+
+	                    // dem so luong hoc sinh trong 1 intake
+	                    // var numberstudent = "";
+
+	                    // mã học viên
+	                    var mahv6 = $scope.student.intake.intakeId + "-" + year.substr(2, 4) + "-" + $scope.student.gender + "-" + numberstring;
+
+	                    $scope.student.studentId = mahv6;
+	                    $http({
+	                        method: "POST",
+	                        url: "/admin/api/Student",
+	                        data: JSON
+	                            .stringify($scope.student),
+	                        dataType: "json"
+	                    }).then(
+	                        function mySucces(response) {
+	                            if (close === true) {
+	                                $("#myModal_them")
+	                                    .modal("hide");
+	                            }
+	                            GetListStudent();
+	                            addAlert(mahv6);
+
+	                        });
+
+	                })
+
+        	}
+        else{
+        	if (usernameduplicate($scope.student.username)) {
+        		
+        		$scope.student.gender = $scope.gender;
+	            $scope.student.status = $scope.status;
+	            $scope.student.image = $scope.image1;
+	            $scope.student.birthday = $scope.birthday;
+	            $scope.student.password = $scope.password;
 
             var numberOfStudent = 0;
             var Student = $resource('http://localhost:8080/admin/api/Student');
@@ -494,13 +538,24 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
                         });
 
                 })
+        	}
         }
     };
 
     // sửa student
     $scope.edit = function edit() {
         uploadFile_Edit();
-
+        if( $scope.list_temp_inf_edit.username== null)
+    	{
+    	$scope.list_temp_inf_edit.username = "";
+    	}
+    else
+    	{
+    	if(usernameduplicate($scope.list_temp_inf_edit.username)==false)
+    		{
+    		$scope.list_temp_inf_edit.username = null;
+    		}
+    	}
         $http({
             method: "PUT",
             url: "/admin/api/Student",
@@ -566,6 +621,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
                 document
                     .getElementById("image_edit").value = "";
                 // $scope.list_temp_inf_edit = data;
+                $scope.list_temp_inf_edit.username = response.data.username;               		
                 $scope.list_temp_inf_edit.lastname = response.data.lastname;
                 $scope.list_temp_inf_edit.firstname = response.data.firstname;
                 $scope.list_temp_inf_edit.email = response.data.email;
@@ -609,6 +665,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
                 }
 
             });
+
 
     };
     // lấy dữ liệu để xóa
