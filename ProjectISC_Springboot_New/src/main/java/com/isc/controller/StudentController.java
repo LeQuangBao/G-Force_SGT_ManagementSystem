@@ -1,5 +1,6 @@
 package com.isc.controller;
 
+import java.util.Date;
 //import java.io.BufferedOutputStream;
 //import java.io.File;
 //import java.io.FileOutputStream;
@@ -35,6 +36,8 @@ import java.io.File;
 //import java.io.IOException;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 //import javax.servlet.RequestDispatcher;
 //import javax.servlet.ServletException;
@@ -52,8 +55,8 @@ import javax.servlet.http.Part;
 @RestController
 public class StudentController {
 //	private static final long serialVersionUID = 1L;
-	 
-
+	Student studentObj=new Student(); 
+	
 	@Autowired
 	private StudentService service;
 
@@ -76,7 +79,7 @@ public class StudentController {
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.POST)
 	public ResponseEntity<Void> addStudent(@RequestBody Student Student) {
 		try {
-			
+			Student.setImage(studentObj.getImage());
 			service.addStudent(Student);
 			      
 	     }
@@ -104,6 +107,7 @@ public class StudentController {
 			
 			Student student1;
 			student1=service.getStudent(Student.getId());
+			student1.setImage(studentObj.getImage());
 			String image=student1.getImage();
 		    String directory = "src\\main\\resources\\static\\admin\\images";
 		    String filepath = Paths.get(directory, image).toString();
@@ -147,8 +151,13 @@ public class StudentController {
 	      @RequestParam("uploadfile1") MultipartFile uploadfile) {
 	    
 	    try {
-	      // Get the filename and build the local file path
-	      String filename = uploadfile.getOriginalFilename();
+	    	Date todayDate = new Date();
+	    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
+	    	String today = dateFormat.format(todayDate);
+	      // Get the filename 
+	      String filename = today+"_"+uploadfile.getOriginalFilename();
+	      studentObj.setImage(filename);
+	      // Build the local file path
 	      String directory = "src\\main\\resources\\static\\admin\\images";
 	      String filepath = Paths.get(directory, filename).toString();
 	      

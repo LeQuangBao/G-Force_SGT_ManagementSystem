@@ -100,7 +100,7 @@ public class InstructorController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
-	@RequestMapping(value = "admin/uploadFile", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/instructor/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	  public ResponseEntity<?> uploadFile(
 	      @RequestParam("uploadfile") MultipartFile uploadfile) {

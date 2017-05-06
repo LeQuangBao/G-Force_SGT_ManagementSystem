@@ -272,20 +272,20 @@
 
 													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
 													<td>
-														<button type="button" ng-click="viewInstructor(x)" title="View detail informations"
+														<button type="button" ng-click="viewInstructor(x)" data-tooltip ="tooltip" title="View detail informations"
 															class="btn btn-success btn-sm" data-toggle="modal"
 															data-target="#myModal_detail">
-															<span class="glyphicon glyphicon-eye-open" data-toggle="onhover"  ></span>
+															<span class="glyphicon glyphicon-eye-open"   ></span>
 														</button>
-														<button type="button" ng-click="getInstructor(x)"  title="Edit"
+														<button type="button" ng-click="getInstructor(x)" data-tooltip ="tooltip" title="Edit"
 															class="btn btn-primary btn-sm" data-toggle="modal"
 															data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit" data-toggle="onhover" ></span>
+															<span class="glyphicon glyphicon-edit"  ></span>
 														</button>
-														<button type="button" ng-click="getInstructorID(x)" title="Delete"
+														<button type="button" ng-click="getInstructorID(x)" data-tooltip ="tooltip" title="Delete"
 															data-toggle="modal" class="btn btn-danger btn-sm"
 															data-target="#myModal_xoa">
-															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  ></span>
+															<span class="glyphicon glyphicon-remove"   ></span>
 														</button>
 
 													</td>
@@ -496,6 +496,22 @@
 									</select>
 								</div>
 							</div>
+							<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="birthday">Address</label>
+							<div class="col-md-12">
+								<textarea id="address" name="address" rows="6"
+									class="form-control input-md" type="text" required="required"
+									ng-model="address"></textarea>
+								<div ng-messages="frmInstructor.address.$error">
+									<div ng-message="required"
+										ng-show="frmInstructor.address.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+
+								</div>
+							</div>
+						</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="status">Status</label>
 								<div class="col-md-12">
@@ -511,26 +527,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="modal-body row">
-					<div class="col-md-12">
-						<!-- Text input-->
-						<div class="form-group">
-							<label class=" control-label" for="birthday">Address</label>
-							<div class="">
-								<input id="address" name="address" placeholder=""
-									class="form-control input-md" type="text" required="required"
-									ng-model="address" />
-								<div ng-messages="frmInstructor.address.$error">
-									<div ng-message="required"
-										ng-show="frmInstructor.address.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="modal-footer">
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save(false)" ng-disabled="frmInstructor.$invalid">Add</button>
@@ -668,6 +665,21 @@
 								</div>
 							</div>
 							<div class="form-group">
+									<label class="col-md-2 control-label" for="address">Address</label>
+									<div class="col-md-12">
+										<textarea id="adress" name="address" placeholder="" rows="6"
+											class="form-control input-md" type="text" ng-required="true"
+											ng-model="instructor_edit.address"></textarea>
+										<div ng-messages="frmInstructor_edit.address.$error">
+											<div ng-message="required"
+												ng-show="frmInstructor_edit.address.$touched">
+												<p style="color: red">This field is required</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							<div class="form-group">
 								<label class="col-md-2 control-label" for="status">Status</label>
 
 								<div class="col-md-12 checkbox">
@@ -682,26 +694,7 @@
 
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								Text input
-								<div class="form-group">
-									<label class=" control-label" for="birthday">Address</label>
-									<div class="">
-										<input id="adress" name="address" placeholder=""
-											class="form-control input-md" type="text" ng-required="true"
-											ng-model="instructor_edit.address" />
-										<div ng-messages="frmInstructor_edit.address.$error">
-											<div ng-message="required"
-												ng-show="frmInstructor_edit.address.$touched">
-												<p style="color: red">This field is required</p>
-											</div>
-
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+								
 					</form>
 				</div>
 				<div class="modal-footer">

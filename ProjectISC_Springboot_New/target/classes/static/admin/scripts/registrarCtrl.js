@@ -96,13 +96,13 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
             });
         };
         reader.readAsDataURL(photofile);
-        $scope.image=photofile.name;
+        //$scope.image=photofile.name;
        
 	};
 	
 	function uploadFile() {
         $.ajax({
-          url: "uploadFile",
+          url: "registrar/uploadFile",
           type: "POST",
           data: new FormData($("#upload-file-form")[0]),
           enctype: 'multipart/form-data',
@@ -145,7 +145,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
               	email: $scope.email,
               	phone: $scope.phone,
                	address: $scope.address,
-              	image: $scope.image,
+              	image: "",
                	status: $scope.active,
                
             },
@@ -154,12 +154,13 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
        })
    .then(function (result) {	
        if (result.status == 201) {
+    	   if(close=true){
+      		  $('#myModal').modal('hide');
+      	  }
     	   getAllRegistrars();
      	  addAlert();
      	  $scope.ResetForm_Add();
-     	  if(close=true){
-     		  $('#myModal').modal('hide');
-     	  }
+     	  
        } 
  
         }, function(response) {
@@ -220,7 +221,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
  	// Upload file trong modal Edit
     function uploadFile_Edit() {
         $.ajax({
-          url: "uploadFile",
+          url: "registrar/uploadFile",
           type: "POST",
           data: new FormData($("#upload-file-form-edit")[0]),
           enctype: 'multipart/form-data',
@@ -440,7 +441,9 @@ app.directive('checkImage', function($http) {
     };
 });
 //Chu thich cua nut phan action
-$(document).ready(function(){
-    $('[data-toggle="onhover"]');   
-     
+$(document).ready(function() {
+    $('body').tooltip({
+        selector: "[data-tooltip=tooltip]",
+        container: "body"
+    });
 });

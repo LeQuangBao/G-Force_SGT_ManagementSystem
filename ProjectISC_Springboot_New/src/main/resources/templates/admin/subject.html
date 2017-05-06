@@ -200,20 +200,23 @@
                                           <td data-ng-bind="x.description"></td>
                                           <td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
                                           <td>
-                                             <button type="button" ng-click="viewRelevantSpecialization(x)" title="View specializations"
+                                             <button type="button" ng-click="viewRelevantSpecialization(x)"
                                                 class="btn btn-success btn-sm" data-toggle="modal"
+                                                data-tooltip ="tooltip" title="View specializations"
                                                 data-target="#myModal_viewRelevantSpecialization" >
-                                             <span class="glyphicon glyphicon-th-list" data-toggle="onhover"  ></span>
+                                             <span class="glyphicon glyphicon-th-list"   ></span>
                                              </button>
                                              <button type="button" ng-click="editsubject(x)"
-                                                class="btn btn-primary btn-sm" data-toggle="modal"  title="Edit"
+                                                class="btn btn-primary btn-sm" data-toggle="modal" 
+                                                data-tooltip ="tooltip" title="Edit"
                                                 data-target="#myModal_sua">
-                                             <span class="glyphicon glyphicon-edit" data-toggle="onhover" ></span>
+                                             <span class="glyphicon glyphicon-edit"  ></span>
                                              </button>
                                              <button type="button" ng-click="deletesubject(x)"
-                                                data-toggle="modal" class="btn btn-danger btn-sm" title="Delete"
+                                                data-toggle="modal" class="btn btn-danger btn-sm" 
+                                                data-tooltip ="tooltip" title="Delete"
                                                 data-target="#myModal_xoa">
-                                             <span class="glyphicon glyphicon-remove" data-toggle="onhover"  ></span>
+                                             <span class="glyphicon glyphicon-remove"   ></span>
                                              </button>
                                           </td>
                                        </tr>
