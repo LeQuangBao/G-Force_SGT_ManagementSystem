@@ -405,8 +405,10 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
     }
 });
 //Chu thich cua nut phan action
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-     
+$(document).ready(function() {
+    $('body').tooltip({
+        selector: "[data-tooltip=tooltip]",
+        container: "body"
+    });
 });
 

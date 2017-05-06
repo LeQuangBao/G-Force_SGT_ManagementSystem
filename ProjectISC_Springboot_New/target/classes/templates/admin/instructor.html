@@ -272,20 +272,20 @@
 
 													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
 													<td>
-														<button type="button" ng-click="viewInstructor(x)" title="View detail informations"
+														<button type="button" ng-click="viewInstructor(x)" data-tooltip ="tooltip" title="View detail informations"
 															class="btn btn-success btn-sm" data-toggle="modal"
 															data-target="#myModal_detail">
-															<span class="glyphicon glyphicon-eye-open" data-toggle="tooltip"  ></span>
+															<span class="glyphicon glyphicon-eye-open"   ></span>
 														</button>
-														<button type="button" ng-click="getInstructor(x)"  title="Edit"
+														<button type="button" ng-click="getInstructor(x)" data-tooltip ="tooltip" title="Edit"
 															class="btn btn-primary btn-sm" data-toggle="modal"
 															data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit" data-toggle="tooltip" ></span>
+															<span class="glyphicon glyphicon-edit"  ></span>
 														</button>
-														<button type="button" ng-click="getInstructorID(x)" title="Delete"
+														<button type="button" ng-click="getInstructorID(x)" data-tooltip ="tooltip" title="Delete"
 															data-toggle="modal" class="btn btn-danger btn-sm"
 															data-target="#myModal_xoa">
-															<span class="glyphicon glyphicon-remove" data-toggle="tooltip"  ></span>
+															<span class="glyphicon glyphicon-remove"   ></span>
 														</button>
 
 													</td>

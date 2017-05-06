@@ -303,17 +303,17 @@
 														ng-show="showSpecialization"></td>
 													<td data-ng-bind="x.status"></td>
 													<td>
-														<button data-toggle="modal" class="btn btn-success btn-sm" title="View detail informations"
+														<button data-toggle="modal" class="btn btn-success btn-sm" data-tooltip ="tooltip" title="View detail informations"
 															data-target="#myModal_detail" ng-click="chitiet1(x)">
-															<span class="glyphicon glyphicon-eye-open" data-toggle="tooltip"  ></span>
+															<span class="glyphicon glyphicon-eye-open"   ></span>
 														</button> 
-														<button class="btn btn-primary btn-sm" ng-click="sua(x)" title="Edit"
+														<button class="btn btn-primary btn-sm" ng-click="sua(x)" data-tooltip ="tooltip" title="Edit"
 															data-toggle="modal" data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit" data-toggle="tooltip"  ></span>
+															<span class="glyphicon glyphicon-edit"   ></span>
 														</button>
-														<button data-toggle="modal" class="btn btn-danger btn-sm" title="Delete"
+														<button data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete"
 															data-target="#myModal_xoa" ng-click="xoa(x)">
-															<span class="glyphicon glyphicon-remove" data-toggle="tooltip"  ></span>
+															<span class="glyphicon glyphicon-remove"   ></span>
 														</button>
 													</td>
 												</tr>

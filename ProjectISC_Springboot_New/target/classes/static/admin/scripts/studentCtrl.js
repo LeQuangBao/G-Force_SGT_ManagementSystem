@@ -778,8 +778,10 @@ app.directive("matchPassword", function() {
 });
 // );
 //Chu thich cua nut phan action
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-     
+$(document).ready(function() {
+    $('body').tooltip({
+        selector: "[data-tooltip=tooltip]",
+        container: "body"
+    });
 });
 
