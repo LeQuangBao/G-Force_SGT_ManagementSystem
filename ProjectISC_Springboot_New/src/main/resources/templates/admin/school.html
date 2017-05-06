@@ -216,14 +216,14 @@
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button type="button" ng-click="editSchool(x)"
-															class="btn btn-primary btn-sm" data-toggle="modal"
+															class="btn btn-primary btn-sm" data-toggle="modal"  title="Edit"
 															data-target="#myModal_sua" >
-															<span class="glyphicon glyphicon-edit" data-toggle="onhover"  title="Edit"></span>
+															<span class="glyphicon glyphicon-edit" data-toggle="tooltip" ></span>
 														</button>
 														<button type="button" ng-click="deleteSchool(x)"
-															data-toggle="modal" class="btn btn-danger btn-sm"
+															data-toggle="modal" class="btn btn-danger btn-sm"  title="Delete"
 															data-target="#myModal_xoa" >
-															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  title="Delete"></span>
+															<span class="glyphicon glyphicon-remove" data-toggle="tooltip"  ></span>
 														</button>
 
 													</td>

@@ -212,14 +212,14 @@
 													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button class="btn btn-primary btn-sm"
-															data-ng-click="GetIntake(x)" data-toggle="modal"
+															data-ng-click="GetIntake(x)" data-toggle="modal" title="Edit"
 															data-target="#myModal_sua" href="#myModal_sua">
-															<span class="glyphicon glyphicon-edit" data-toggle="onhover"  title="Edit"></span>
+															<span class="glyphicon glyphicon-edit" data-toggle="tooltip"  ></span>
 														</button>
 														<button class="btn btn-danger btn-sm"
-															data-target="#myModal_xoa" href="#myModal_xoa"
+															data-target="#myModal_xoa" href="#myModal_xoa" title="Delete"
 															data-ng-click="GetIntakeObj(x)" data-toggle="modal">
-															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  title="Delete"></span>
+															<span class="glyphicon glyphicon-remove" data-toggle="tooltip"  ></span>
 														</button>
 
 													</td>
