@@ -4,6 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ import com.isc.service.RegistrarService;
 public class RegistrarController {
 	@Autowired
 	private RegistrarService service;
+	
+	Registrar registrarObj=new Registrar();
+	
 	@RequestMapping(value="admin/api/registrar",method=RequestMethod.GET)
 	public ResponseEntity<List<Registrar>>getAllRegistrars(){
 		return new ResponseEntity<>(service.getAllRegistrars(),HttpStatus.OK);
@@ -45,6 +51,7 @@ public class RegistrarController {
 	@RequestMapping(value="admin/api/registrar", method=RequestMethod.POST)
 	public ResponseEntity<Void> addRegistrar(@RequestBody Registrar registrar){
 		try {
+			registrar.setImage(registrarObj.getImage());
 			service.addRegistrar(registrar);
 			
 		} catch (Exception e) {
@@ -54,9 +61,10 @@ public class RegistrarController {
 	}
 	@RequestMapping(value="admin/api/registrar",method=RequestMethod.PUT)
 	public ResponseEntity<Void>updateRegistrar(@RequestBody Registrar registrar){
-		Registrar resgistrar1;
-		resgistrar1=service.getRegistrar(registrar.getId());
-		String image= resgistrar1.getImage();
+		Registrar registrar1;
+		registrar1=service.getRegistrar(registrar.getId());
+		registrar1.setImage(registrarObj.getImage());
+		String image= registrar1.getImage();
 	    String directory = "src\\main\\resources\\static\\admin\\images";
 	    String filepath = Paths.get(directory, image).toString();
 	    File file=new File(filepath);
@@ -86,4 +94,33 @@ public class RegistrarController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	@RequestMapping(value = "admin/registrar/uploadFile", method = RequestMethod.POST)
+	@ResponseBody
+	  public ResponseEntity<?> uploadFile(
+	      @RequestParam("uploadfile") MultipartFile uploadfile) {
+	    
+	    try {
+	    	Date todayDate = new Date();
+	    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
+	    	String today = dateFormat.format(todayDate);
+	      // Get the filename 
+	      String filename = today+"_"+uploadfile.getOriginalFilename();
+	      registrarObj.setImage(filename);
+	      // Build the local file path
+	      String directory = "src\\main\\resources\\static\\admin\\images";
+	      String filepath = Paths.get(directory, filename).toString();
+	      
+	      // Save the file locally
+	      BufferedOutputStream stream =
+	          new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+	      stream.write(uploadfile.getBytes());
+	      stream.close();
+	    }
+	    catch (Exception e) {
+	      System.out.println(e.getMessage());
+	      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    return new ResponseEntity<>(HttpStatus.OK);
+	  } // method uploadFile
 }

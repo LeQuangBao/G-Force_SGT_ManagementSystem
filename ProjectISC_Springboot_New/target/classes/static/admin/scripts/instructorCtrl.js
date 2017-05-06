@@ -93,11 +93,11 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                 });
             };
             reader.readAsDataURL(photofile);
-            $scope.image=photofile.name;
+            //$scope.image=photofile.name;
     	};
     	function uploadFile() {
             $.ajax({
-              url: "uploadFile",
+              url: "instructor/uploadFile",
               type: "POST",
               data: new FormData($("#fileUploadForm")[0]),
               enctype: 'multipart/form-data',
@@ -137,7 +137,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
                   	email: $scope.email,
                   	phone: $scope.phone,
                   	address: $scope.address,
-                  	image: $scope.image,
+                  	image: "",
                   	degree: $scope.degree,
                   	status: $scope.active                 	
                },
@@ -165,7 +165,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter) {
         //Upload file trong modal Edit
         function uploadFile_Edit() {
             $.ajax({
-              url: "uploadFile",
+              url: "instructor/uploadFile",
               type: "POST",
               data: new FormData($("#upload-file-form-edit")[0]),
               enctype: 'multipart/form-data',
