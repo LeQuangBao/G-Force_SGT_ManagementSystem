@@ -261,19 +261,19 @@
 													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
 													<td>
 														<button type="button" ng-click="viewRegistrar(x)"
-															class="btn btn-success btn-sm" data-toggle="modal"
+															class="btn btn-success btn-sm" data-toggle="modal"  title="View detail informations"
 															data-target="#myModal_detail">
-															<span class="glyphicon glyphicon-eye-open" data-toggle="onhover"  title="View detail informations"></span>
+															<span class="glyphicon glyphicon-eye-open" data-toggle="onhover" ></span>
 														</button>
-														<button type="button" ng-click="editRegistrar(x)"
+														<button type="button" ng-click="editRegistrar(x)" title="Edit"
 															class="btn btn-primary btn-sm" data-toggle="modal"
 															data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit" data-toggle="onhover"  title="Edit"></span>
+															<span class="glyphicon glyphicon-edit" data-toggle="onhover"  ></span>
 														</button>
-														<button type="button" ng-click="deleteRegistrar(x)"
+														<button type="button" ng-click="deleteRegistrar(x)" title="Delete"
 															data-toggle="modal" class="btn btn-danger btn-sm"
 															data-target="#myModal_xoa">
-															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  title="Delete"></span>
+															<span class="glyphicon glyphicon-remove" data-toggle="onhover"  ></span>
 														</button>
 
 													</td>
@@ -422,7 +422,7 @@
 								<label class=" control-label" for="email">Email</label>
 								<div class="">
 									<input id="email" name="email" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
+										class="form-control input-md" type="email" ng-required="true"
 										ng-model="email" />
 									<div ng-messages="frmRegistrarAdd.email.$error">
 										<div ng-message="required"
@@ -586,7 +586,7 @@
 								<label class=" control-label" for="email">Email</label>
 								<div class="">
 									<input id="email" name="email" placeholder=""
-										class="form-control input-md" type="text" ng-required="true"
+										class="form-control input-md" type="email" ng-required="true"
 										ng-model="edit.email" />
 									<div ng-messages="frmRegistrarEdit.email.$error">
 										<div ng-message="required"
