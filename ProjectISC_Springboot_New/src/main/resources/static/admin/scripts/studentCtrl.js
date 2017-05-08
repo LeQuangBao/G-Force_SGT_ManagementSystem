@@ -243,7 +243,20 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
         }
         return 'Sort by ' + makeReadableLabel(label1)
     };
+    
+    // filter by intake
+    function createNewListIntake() {
+    	 $scope.listIntakeForFilter = [];
+         var Intake = $resource('http://localhost:8080/admin/api/StudentIntake');
+         Intake.query().$promise.then(function(listintake) {
 
+             $scope.listIntakeForFilter = listintake;
+
+         });
+//         var intakeAll = {intakeName : "All"};
+//    	$scope.listIntakeForFilter.push(intakeAll);
+    }
+    
     // Phân trang
     $scope.currentPage = 1;
     // max size of the pagination bar
@@ -281,7 +294,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
     }
     // upload hình ảnh
     // $scope.stepsModel = [];
-
+   
     $scope.getImage = function(element) {
         photofile = element.files[0];
         var reader = new FileReader();

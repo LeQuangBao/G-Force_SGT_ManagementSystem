@@ -162,6 +162,13 @@
 										ng-model="rowdata.selectedOption"
 										ng-change="ChangeRow(rowdata.selectedOption.id)">
 									</select> <label> rows</label>
+									<br/>
+									<label for="mySelect">Filter by intake</label> <select name="mySelect"
+										id="mySelect"
+										ng-options="x.intakeName for x in list_intake"
+										ng-model="filterByIntake"
+										ng-change="c()">
+									</select>
 									<div class="table-responsive">
 										<table class="table table-condensed table-hover">
 											<thead>
@@ -283,7 +290,7 @@
 												<tr
 													data-ng-repeat="x in (listfiltered(list)) |
 													orderBy:sortType:sortReverse"
-													data-ng-show="showList($index)">
+													data-ng-show="showList($index) &amp;&amp; (filterByIntake.intakeName === x.intake.intakeName || filterByIntake.intakeName === 'All')">
 													<td ng-bind="$index+1"><input type="hidden"
 														ng-model="x.id" /></td>
 													<td data-ng-bind="x.studentId"></td>
