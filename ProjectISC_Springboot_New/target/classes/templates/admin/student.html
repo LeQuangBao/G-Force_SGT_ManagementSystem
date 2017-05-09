@@ -288,9 +288,10 @@
 											</thead>
 											<tbody>
 												<tr
-													data-ng-repeat="x in (listfiltered(list)) |
+													data-ng-repeat="x in (listfiltered(list, filterByIntake.intakeName)) |
 													orderBy:sortType:sortReverse"
-													data-ng-show="showList($index) &amp;&amp; (filterByIntake.intakeName === x.intake.intakeName || filterByIntake.intakeName === 'All')">
+													data-ng-show="showList($index)">
+<!-- 													data-ng-show="showList($index) || (filterByIntake.intakeName === x.intake.intakeName || filterByIntake.intakeName === 'All')"> -->
 													<td ng-bind="$index+1"><input type="hidden"
 														ng-model="x.id" /></td>
 													<td data-ng-bind="x.studentId"></td>
