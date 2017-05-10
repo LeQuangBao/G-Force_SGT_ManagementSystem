@@ -6,19 +6,26 @@ import java.io.File;
 //import java.io.IOException;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 //import java.io.BufferedOutputStream;
 //import java.io.File;
 //import java.io.FileOutputStream;
 //import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 //import javax.servlet.RequestDispatcher;
 //import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,16 +48,16 @@ import com.isc.model.School;
 import com.isc.model.Specialization;
 import com.isc.model.Student;
 import com.isc.service.StudentService;
- 
+
 @WebServlet("/uploadFile")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-       maxFileSize = 1024 * 1024 * 10, // 10MB
-       maxRequestSize = 1024 * 1024 * 50) // 50MB
+		maxFileSize = 1024 * 1024 * 10, // 10MB
+		maxRequestSize = 1024 * 1024 * 50) // 50MB
 @RestController
 public class StudentController {
-//	private static final long serialVersionUID = 1L;
-	Student studentObj=new Student(); 
-	
+	// private static final long serialVersionUID = 1L;
+	Student studentObj = new Student();
+
 	@Autowired
 	private StudentService service;
 
@@ -75,18 +82,19 @@ public class StudentController {
 		try {
 			Student.setImage(studentObj.getImage());
 			service.addStudent(Student);
-			      
-	     }
-			
+
+		}
+
 		catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
-		return new ResponseEntity<>(HttpStatus.CREATED);   
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
+
 	@RequestMapping(value = "admin/api/Student_Reset", method = RequestMethod.PUT)
 	public ResponseEntity<Void> resetpassword(@RequestBody Student Student) {
 		try {
-			
+
 			service.resetpassword(Student);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -94,19 +102,18 @@ public class StudentController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateStudent(@RequestBody Student Student) {
 		try {
-			
+
 			Student student1;
-			student1=service.getStudent(Student.getId());
+			student1 = service.getStudent(Student.getId());
 			student1.setImage(studentObj.getImage());
-			String image=student1.getImage();
-		    String directory = "src\\main\\resources\\static\\admin\\images";
-		    String filepath = Paths.get(directory, image).toString();
-		    File file=new File(filepath);
-		    file.delete();    
+			String image = student1.getImage();
+			String directory = "src\\main\\resources\\static\\admin\\images";
+			String filepath = Paths.get(directory, image).toString();
+			File file = new File(filepath);
+			file.delete();
 			service.updateStudent(Student);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -116,65 +123,92 @@ public class StudentController {
 
 	@RequestMapping(value = "admin/api/Student/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStudent(@PathVariable int id) {
-		//try {
-			service.deleteStudent(id);
-		//} catch (Exception ex) {
-			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		//}
+		// try {
+		service.deleteStudent(id);
+		// } catch (Exception ex) {
+		// return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		// }
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+
 	@RequestMapping(value = "admin/api/StudentIntake", method = RequestMethod.GET)
 	public ResponseEntity<List<Intake>> getAllIntake() {
 		return new ResponseEntity<>(service.getallintake(), HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "admin/api/StudentSchool", method = RequestMethod.GET)
 	public ResponseEntity<List<School>> getAllSchool() {
 		return new ResponseEntity<>(service.getallSchool(), HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "admin/api/StudentEntranceExam", method = RequestMethod.GET)
 	public ResponseEntity<List<EntranceExam>> getAllEntranceExam() {
 		return new ResponseEntity<>(service.getallentranceexam(), HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "admin/api/StudentSpecialization", method = RequestMethod.GET)
 	public ResponseEntity<List<Specialization>> getAllSpecilization() {
 		return new ResponseEntity<>(service.getallspecialization(), HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "admin/student/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
-	 public ResponseEntity<?> uploadFile(
-	      @RequestParam("uploadfile1") MultipartFile uploadfile) {
-	    
-	    try {
-	    	Date todayDate = new Date();
-	    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
-	    	String today = dateFormat.format(todayDate);
-	      // Get the filename 
-	      String filename = today+"_"+uploadfile.getOriginalFilename();
-	      studentObj.setImage(filename);
-	      // Build the local file path
-	      String directory = "src\\main\\resources\\static\\admin\\images";
-	      String filepath = Paths.get(directory, filename).toString();
-	      
-	      // Save the file locally
-	      BufferedOutputStream stream =
-	          new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-	      stream.write(uploadfile.getBytes());
-	      stream.close();
-	    }
-	    catch (Exception e) {
-	      System.out.println(e.getMessage());
-	      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	    }
-	    
-	    return new ResponseEntity<>(HttpStatus.OK);
-	  } // method uploadFile
-	@RequestMapping(value = "admin/api/export", method = RequestMethod.GET)
-	public ModelAndView getExcel() {
-		List<Student> studentlist = service.getAllStudents();
-		return new ModelAndView("StudentListView", "studentlist", studentlist);
+	public ResponseEntity<?> uploadFile(@RequestParam("uploadfile1") MultipartFile uploadfile) {
+
+		try {
+			Date todayDate = new Date();
+			DateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
+			String today = dateFormat.format(todayDate);
+			// Get the filename
+			String filename = today + "_" + uploadfile.getOriginalFilename();
+			studentObj.setImage(filename);
+			// Build the local file path
+			String directory = "src\\main\\resources\\static\\admin\\images";
+			String filepath = Paths.get(directory, filename).toString();
+
+			// Save the file locally
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+			stream.write(uploadfile.getBytes());
+			stream.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(HttpStatus.OK);
+	} // method uploadFile
+
+	@RequestMapping(value = "admin/api/student/export", method = RequestMethod.GET)
+	public ModelAndView getMyData(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		Map<String, Object> model = new HashMap<String, Object>();
+		// get data from student
+		List<Student> students = service.getAllStudents();
+		// Sheet Name
+		model.put("sheetname", "TestSheetName");
+		// Headers List
+		List<String> headers = new ArrayList<String>();
+		headers.add("Id");
+		headers.add("First Name");
+		headers.add("Last Name");
+		headers.add("Email");
+
+		model.put("headers", headers);
+		// Results Table (List<Object[]>)
+		List<List<String>> results = new ArrayList<List<String>>();
+		// for loop each student
+		for (Student s : students) {
+			List<String> elements = new ArrayList<>();
+			elements.add(s.getStudentId());
+			elements.add(s.getFirstname());
+			elements.add(s.getLastname());
+			elements.add(s.getEmail());
+			results.add(elements);
+		}
+
+		model.put("results", results);
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-disposition", "attachment; filename=myfile.xls");
+		return new ModelAndView(new MyExcelView(), model);
 	}
 
-	
-
-	
 }
