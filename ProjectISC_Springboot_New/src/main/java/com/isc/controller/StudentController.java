@@ -1,5 +1,13 @@
 package com.isc.controller;
 
+import java.io.BufferedOutputStream;
+// upload hinh2
+import java.io.File;
+//import java.io.IOException;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 //import java.io.BufferedOutputStream;
 //import java.io.File;
@@ -7,11 +15,14 @@ import java.util.Date;
 //import java.util.ArrayList;
 import java.util.List;
 
+//import javax.servlet.RequestDispatcher;
+//import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 //import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,32 +32,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.isc.model.Student;
 import com.isc.model.EntranceExam;
 import com.isc.model.Intake;
 //import com.isc.model.MyUploadForm;
 import com.isc.model.School;
 import com.isc.model.Specialization;
+import com.isc.model.Student;
 import com.isc.service.StudentService;
-
-import java.io.BufferedOutputStream;
-// upload hinh2
-import java.io.File;
-//import java.io.IOException;
-import java.io.FileOutputStream;
-import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-//import javax.servlet.RequestDispatcher;
-//import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
  
 @WebServlet("/uploadFile")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
@@ -174,6 +168,11 @@ public class StudentController {
 	    
 	    return new ResponseEntity<>(HttpStatus.OK);
 	  } // method uploadFile
+	@RequestMapping(value = "admin/api/export", method = RequestMethod.GET)
+	public ModelAndView getExcel() {
+		List<Student> studentlist = service.getAllStudents();
+		return new ModelAndView("StudentListView", "studentlist", studentlist);
+	}
 
 	
 
