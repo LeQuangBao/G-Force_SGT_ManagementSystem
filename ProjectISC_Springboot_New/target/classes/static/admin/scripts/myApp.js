@@ -1,1 +1,1 @@
-var app = angular.module('myApp', ['ui.bootstrap','ngResource','ngMessages']);
+var app = angular.module('myApp', ['ui.bootstrap','ngResource','ngMessages', 'ngTable']);

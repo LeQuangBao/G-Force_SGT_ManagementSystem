@@ -1,4 +1,6 @@
-app.controller('specializationCtrl', function($scope, $http, $filter) {
+app.controller('specializationCtrl', function($scope, $http, $filter, NgTableParams) {
+	
+    $scope.tableData = [];
 	$scope.rowdata = {
 		     availableOptions: [
 		       {id: '15', name: '15'},
@@ -21,6 +23,8 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
         $http.get("http://localhost:8080/api/specialization")
             .then(function(response) {
                 $scope.list = response.data;
+                $scope.tableData = response.data;
+                $scope.tableParams = new NgTableParams({}, { data: $scope.tableData});
             })
     }
     getListSpecializations();
@@ -324,6 +328,8 @@ app.controller('specializationCtrl', function($scope, $http, $filter) {
         $scope.formAdd.specializationName_add.$setUntouched();
         $scope.duplicateAlert="";
     }
+    
+    
 });
 // Chu thich cua nut phan action
 $(document).ready(function() {
