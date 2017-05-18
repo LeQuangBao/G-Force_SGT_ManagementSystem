@@ -1,15 +1,42 @@
 app.controller('specializationCtrl', function($scope, $http, $filter, NgTableParams) {
-	
-    $scope.tableData = [];
-	$scope.rowdata = {
-		     availableOptions: [
-		       {id: '15', name: '15'},
-		       {id: '30', name: '30'},
-		       {id: '50', name: '50'},
-		       {id: '100', name: '100'}
-		     ],
-		     selectedOption: {id: '15', name: '15'}
-		    };
+
+    function configMainTable() {
+    	// data get from getListSpecialiation()
+    	$scope.table_specialization = {
+    			
+    	paginationPageSizes: [25, 50, 75],
+        paginationPageSize: 25,
+        columnDefs: [
+          { name: 'ID' },
+          { name: 'Name' },
+          { name: 'Action' }
+          ]
+    	};
+    }
+    configMainTable();
+    $scope.rowdata = {
+        availableOptions: [{
+                id: '15',
+                name: '15'
+            },
+            {
+                id: '30',
+                name: '30'
+            },
+            {
+                id: '50',
+                name: '50'
+            },
+            {
+                id: '100',
+                name: '100'
+            }
+        ],
+        selectedOption: {
+            id: '15',
+            name: '15'
+        }
+    };
     $scope.ChangeRow = function(index) {
         $scope.itemsPerPage = index;
         $scope.updatePageIndexes();
@@ -22,125 +49,124 @@ app.controller('specializationCtrl', function($scope, $http, $filter, NgTablePar
         $scope.list = [];
         $http.get("http://localhost:8080/api/specialization")
             .then(function(response) {
-                $scope.list = response.data;
-                $scope.tableData = response.data;
-                $scope.tableParams = new NgTableParams({}, { data: $scope.tableData});
+                $scope.list = response.data;   
+                $scope.table_specialization.data = response.data;
             })
     }
     getListSpecializations();
 
-            // $scope.sortType = 'specializationName';
-            $scope.filterTable = '';
-            
-            // Tìm kiếm theo tên
-            $scope.listfiltered = function(element) {
-                return $filter('filter')(element, $scope.filterTable); 
-            };	
-            // Phân trang
-            $scope.currentPage = 1;
-            // max size of the pagination bar
-            $scope.maxPaginationSize = 10;
-            $scope.itemsPerPage = 15;
-            $scope.updatePageIndexes = function() {
-                var totalPages = Math.ceil($scope.list.length /
-                    $scope.maxPaginationSize);
-                if (totalPages <= 10) {
-                    // less than 10 total pages so show all
-                    $scope.firstIndex = 1;
-                    $scope.lastIndex = totalPages;
-                } else {
-                    // more than 10 total pages so calculate start and
-                    // end pages
-                    if ($scope.currentPage <= 6) {
-                        $scope.firstIndex = 1;
-                        $scope.lastIndex = 10;
-                    } else if ($scope.currentPage + 4 >= totalPages) {
-                        $scope.firstIndex = totalPages - 9;
-                        $scope.lastIndex = totalPages;
-                    } else {
-                        $scope.firstIndex = $scope.currentPage - 5;
-                        $scope.lastIndex = $scope.currentPage + 4;
+    // $scope.sortType = 'specializationName';
+    $scope.filterTable = '';
+
+    // Tìm kiếm theo tên
+    $scope.listfiltered = function(element) {
+        return $filter('filter')(element, $scope.filterTable);
+    };
+    // Phân trang
+    $scope.currentPage = 1;
+    // max size of the pagination bar
+    $scope.maxPaginationSize = 10;
+    $scope.itemsPerPage = 15;
+    $scope.updatePageIndexes = function() {
+        var totalPages = Math.ceil($scope.list.length /
+            $scope.maxPaginationSize);
+        if (totalPages <= 10) {
+            // less than 10 total pages so show all
+            $scope.firstIndex = 1;
+            $scope.lastIndex = totalPages;
+        } else {
+            // more than 10 total pages so calculate start and
+            // end pages
+            if ($scope.currentPage <= 6) {
+                $scope.firstIndex = 1;
+                $scope.lastIndex = 10;
+            } else if ($scope.currentPage + 4 >= totalPages) {
+                $scope.firstIndex = totalPages - 9;
+                $scope.lastIndex = totalPages;
+            } else {
+                $scope.firstIndex = $scope.currentPage - 5;
+                $scope.lastIndex = $scope.currentPage + 4;
+            }
+        }
+        $scope.firstIndex = ($scope.currentPage - 1) *
+            $scope.itemsPerPage;
+        $scope.lastIndex = $scope.currentPage *
+            $scope.itemsPerPage;
+    };
+    $scope.updatePageIndexes();
+
+    $scope.showList = function(index) {
+        return (index >= $scope.firstIndex) && (index < $scope.lastIndex);
+    }
+
+    // add specialization
+    $scope.addSpecialization = function(close) {
+        if (id_duplicate_Add(document.getElementById("specializationId_add").value)) {
+            var specializationId = document
+                .getElementById("specializationId_add").value;
+            var specializationName = document
+                .getElementById("specializationName_add").value;
+            var activeElement = $scope.active_add;
+            $http({
+                    method: "POST",
+                    url: "/api/specialization",
+                    data: {
+                        specializationId: specializationId,
+                        specializationName: specializationName,
+                        active: activeElement
+                    },
+                    dataType: "json",
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                }
-                $scope.firstIndex = ($scope.currentPage - 1) *
-                    $scope.itemsPerPage;
-                $scope.lastIndex = $scope.currentPage *
-                    $scope.itemsPerPage;
-            };
-            $scope.updatePageIndexes();
-
-            $scope.showList = function(index) {
-                return (index >= $scope.firstIndex) && (index < $scope.lastIndex);
-            }
-
-            // add specialization
-            $scope.addSpecialization = function(close) {
-            	if(id_duplicate_Add(document.getElementById("specializationId_add").value)){
-                var specializationId = document
-                    .getElementById("specializationId_add").value;
-                var specializationName = document
-                    .getElementById("specializationName_add").value;
-                var activeElement = $scope.active_add;
-                $http({
-                        method: "POST",
-                        url: "/api/specialization",
-                        data: {
-                            specializationId: specializationId,
-                            specializationName: specializationName,
-                            active: activeElement
-                        },
-                        dataType: "json",
-                        headers: {
-                            'Content-Type': 'application/json'
+                })
+                .then(
+                    function(response) {
+                        getListSpecializations();
+                        alertAddSucess();
+                        $scope.ResetForm_Add();
+                        if (close == true) {
+                            $("#myModal_them").modal("hide");
                         }
-                    })
-                    .then(
-                        function(response) {
-                            getListSpecializations();
-                            alertAddSucess();
-                            $scope.ResetForm_Add();
-                            if(close==true){
-                            	$("#myModal_them").modal("hide");
-                            }
-                        },
-                        function(response) {
-                            if (response.status == 406) {
-                                alertFailMessage("Oops! Something went wrong, please check your input again.");
-                            }
-                        });
-            	}
-            }
-            
+                    },
+                    function(response) {
+                        if (response.status == 406) {
+                            alertFailMessage("Oops! Something went wrong, please check your input again.");
+                        }
+                    });
+        }
+    }
+
     // update specialization
     $scope.callEditSpecialization = function(data) {
         $http.get("/api/specialization/" + data.id).then(
             function(response) {
                 $scope.info = response.data;
             });
-        SpecID=data.specializationId;
-        $scope.duplicateAlert="";
+        SpecID = data.specializationId;
+        $scope.duplicateAlert = "";
     }
 
     $scope.editSpecialization = function() {
-    	if(id_duplicate_Edit($scope.info.specializationId)){
-        $http({
-                method: "PUT",
-                url: "/api/specialization",
-                data: JSON.stringify($scope.info),
-                dataType: "json",
-            })
-            .then(
-                function(response) {
-                	$("#myModal_sua").modal("hide");
-                    getListSpecializations();
-                    alertEditSucess();
-                },
-                function(response) {
-                    if (response.status == 406) {
-                        alertFailMessage("Oops! Something went wrong, please check your input again.");
-                    }
-                });
-    	}
+        if (id_duplicate_Edit($scope.info.specializationId)) {
+            $http({
+                    method: "PUT",
+                    url: "/api/specialization",
+                    data: JSON.stringify($scope.info),
+                    dataType: "json",
+                })
+                .then(
+                    function(response) {
+                        $("#myModal_sua").modal("hide");
+                        getListSpecializations();
+                        alertEditSucess();
+                    },
+                    function(response) {
+                        if (response.status == 406) {
+                            alertFailMessage("Oops! Something went wrong, please check your input again.");
+                        }
+                    });
+        }
     }
 
     // update relevant subjects
@@ -198,7 +224,7 @@ app.controller('specializationCtrl', function($scope, $http, $filter, NgTablePar
             })
             .then(
                 function(response) {
-//                    alertEditSucess();
+                    //                    alertEditSucess();
                 },
                 function(response) {
                     if (response.status == 406) {
@@ -232,33 +258,35 @@ app.controller('specializationCtrl', function($scope, $http, $filter, NgTablePar
     $scope.sortReverse = false;
     $scope.searchName = '';
 
-  //Kiểm tra trùng ID
-	function id_duplicate_Add(id) {
-		var flag=true;
-          $scope.list.forEach(function(item, index) {
-              if (item.specializationId === id) {
-                  $scope.duplicateAlert="Duplicate ID";
-                  flag= false;
-              }
-          });
-          return flag;
-     }
-	var SpecID="";
-	function id_duplicate_Edit(id) {
-		var flag=true;
-          $scope.list.forEach(function(item, index) {
-        	  if (id != SpecID) {
-	              if (item.specializationId === id) {
-	                  $scope.duplicateAlert="Duplicate ID";
-	                  flag= false;
-	              }
-        	  }
-          });
-          return flag;
-     }
-	 $scope.hideDuplicateAlert=function(){
-		  	$scope.duplicateAlert="";
-		  }
+    //Kiểm tra trùng ID
+    function id_duplicate_Add(id) {
+        var flag = true;
+        $scope.list.forEach(function(item, index) {
+            if (item.specializationId === id) {
+                $scope.duplicateAlert = "Duplicate ID";
+                flag = false;
+            }
+        });
+        return flag;
+    }
+    var SpecID = "";
+
+    function id_duplicate_Edit(id) {
+        var flag = true;
+        $scope.list.forEach(function(item, index) {
+            if (id != SpecID) {
+                if (item.specializationId === id) {
+                    $scope.duplicateAlert = "Duplicate ID";
+                    flag = false;
+                }
+            }
+        });
+        return flag;
+    }
+    $scope.hideDuplicateAlert = function() {
+        $scope.duplicateAlert = "";
+    }
+
     function alertDeleteSucess() {
         swal({
             title: "",
@@ -326,10 +354,10 @@ app.controller('specializationCtrl', function($scope, $http, $filter, NgTablePar
         $scope.active_add = true;
         $scope.formAdd.specializationId_add.$setUntouched();
         $scope.formAdd.specializationName_add.$setUntouched();
-        $scope.duplicateAlert="";
+        $scope.duplicateAlert = "";
     }
-    
-    
+
+
 });
 // Chu thich cua nut phan action
 $(document).ready(function() {
@@ -338,4 +366,3 @@ $(document).ready(function() {
         container: "body"
     });
 });
-
