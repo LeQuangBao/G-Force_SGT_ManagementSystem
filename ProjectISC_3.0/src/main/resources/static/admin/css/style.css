@@ -1,0 +1,29 @@
+#filter {
+	margin-bottom: 1em;
+}
+.pagination {
+	margin: 0 0 1em;
+}
+.table {
+	font-size: 0.9em;
+	table-layout: fixed;
+}
+th.sortable {
+	cursor: pointer;
+}
+th.sortable:hover {
+	background: #EEE;
+}
+.caret-blank {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+}
+.caret-up {
+	border-bottom: 8px solid #333;
+}
+.caret-down {
+	border-top: 8px solid #333;
+}

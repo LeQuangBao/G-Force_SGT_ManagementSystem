@@ -1,0 +1,975 @@
+<div class="">
+	<div class="page-title">
+		<div class="title_left">
+			<h3>Student management</h3>
+		</div>
+
+		<div class="title_right">
+			<div class="form-group pull-right top_search">
+				<button data-toggle="modal" data-target="#myModal_them"
+					type="button" class="btn btn-primary btn-lg" ng-click="loadthem()">Add</button>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<div class="clearfix"></div>
+				</div>
+				<div class="col-md-6 pull-right">
+					<input id="filter" type="text" placeholder="Filter"
+						class="form-control" data-ng-model="filterTable"></input>
+				</div>
+				<div class="col-md-9 col-md-offset-3">
+					<strong>Show :</strong> <input type="checkbox" id="test1"
+						data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
+					<input type="checkbox" id="test4" data-ng-model="showEmail" /> <label
+						for="test4">Email</label> <input type="checkbox" id="test2"
+						data-ng-model="showPhone" /> <label for="test2">Phone</label> <input
+						type="checkbox" id="test3" data-ng-model="showAddress" /> <label
+						for="test3">Address</label> <input type="checkbox" id="school"
+						data-ng-model="showSchool" /> <label for="school">School</label>
+					<input type="checkbox" id="intake" data-ng-model="showIntake" /> <label
+						for="intake">Intake</label> <input type="checkbox" id="entrance"
+						data-ng-model="showEntranceExam" /> <label for="entrance">Entrance
+						Exam</label> <input type="checkbox" id="speci"
+						data-ng-model="showSpecialization" /> <label for="speci">Specialization</label>
+				</div>
+				<div class="x_content">
+					<label for="mySelect">Display </label> <select name="mySelect"
+						id="mySelect"
+						ng-options="option.name for option in rowdata.availableOptions track by option.id"
+						ng-model="rowdata.selectedOption"
+						ng-change="ChangeRow(rowdata.selectedOption.id)">
+					</select> <label> rows</label> <br /> <label for="mySelect">Filter
+						by intake</label> <select name="mySelect" id="mySelect"
+						ng-options="x.intakeName for x in list_intake"
+						ng-model="filterByIntake" ng-change="c()">
+					</select>
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th style="width: 3%">&#35;</th>
+									<th class="sortable" style="width: 5%"
+										ng-click="sortType = 'studentId';sortReverse = !sortReverse">Student
+										ID <span
+										ng-show="sortType == 'studentId' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'studentId' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 7%"
+										ng-click="sortType = 'username';sortReverse = !sortReverse">Username
+										<span ng-show="sortType == 'username' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'username' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%"
+										ng-click="sortType = 'lastName';sortReverse = !sortReverse">Last
+										Name <span
+										ng-show="sortType == 'lastName' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'lastName' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%"
+										ng-click="sortType = 'firstName';sortReverse = !sortReverse">First
+										Name <span
+										ng-show="sortType == 'firstName' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'firstName' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 7%" ng-show="showBirthday"
+										ng-click="sortType = 'birthday';sortReverse = !sortReverse">Birthday
+										<span ng-show="sortType == 'birthday' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'birthday' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 12%" ng-show="showEmail"
+										ng-click="sortType = 'email';sortReverse = !sortReverse">Email
+										<span ng-show="sortType == 'email' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'email' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 7%" ng-show="showPhone"
+										ng-click="sortType = 'phone';sortReverse = !sortReverse">Phone
+										<span ng-show="sortType == 'phone' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'phone' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%" ng-show="showAddress"
+										ng-click="sortType = 'address';sortReverse = !sortReverse">Address
+										<span ng-show="sortType == 'address' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'address' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%" ng-show="showSchool"
+										ng-click="sortType = 'school';sortReverse = !sortReverse">School
+										<span ng-show="sortType == 'school' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'school' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%" ng-show="showIntake"
+										ng-click="sortType = 'intake';sortReverse = !sortReverse">Intake
+										<span ng-show="sortType == 'intake' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'intake' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%"
+										ng-show="showEntranceExam"
+										ng-click="sortType = 'entranceExam';sortReverse = !sortReverse">Entrance
+										exam <span
+										ng-show="sortType == 'entranceExam' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'entranceExam' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 8%"
+										ng-show="showSpecialization"
+										ng-click="sortType = 'specialization';sortReverse = !sortReverse">Specialization
+										<span
+										ng-show="sortType == 'specialization' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'specialization' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th class="sortable" style="width: 5%"
+										ng-click="sortType = 'active';sortReverse = !sortReverse">
+										Status <span
+										ng-show="sortType == 'active' &amp;&amp; !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'active' &amp;&amp; sortReverse"
+										class="fa fa-caret-up"></span>
+									</th>
+									<th style="width: 6%">Action</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									data-ng-repeat="x in (listfiltered(list, filterByIntake.intakeName)) |
+													orderBy:sortType:sortReverse"
+									data-ng-show="showList($index)">
+									<!-- 													data-ng-show="showList($index) || (filterByIntake.intakeName === x.intake.intakeName || filterByIntake.intakeName === 'All')"> -->
+									<td ng-bind="$index+1"><input type="hidden"
+										ng-model="x.id" /></td>
+									<td data-ng-bind="x.studentId"></td>
+									<td data-ng-bind="x.username"></td>
+									<td data-ng-bind="x.lastname"></td>
+									<td data-ng-bind="x.firstname"></td>
+									<td ng-show="showBirthday">{{x.birthday |
+										date:'MM/dd/yyyy'}}</td>
+									<td data-ng-bind="x.email" ng-show="showEmail"></td>
+									<td data-ng-bind="x.phone" ng-show="showPhone"></td>
+									<td data-ng-bind="x.address" ng-show="showAddress"></td>
+									<td data-ng-bind="x.school.schoolName" ng-show="showSchool"></td>
+									<td data-ng-bind="x.intake.intakeName" ng-show="showIntake"></td>
+									<td data-ng-bind="x.entranceExam.entranceExamName"
+										ng-show="showEntranceExam"></td>
+									<td data-ng-bind="x.specialization.specializationName"
+										ng-show="showSpecialization"></td>
+									<td data-ng-bind="x.status"></td>
+									<td>
+										<button data-toggle="modal" class="btn btn-success btn-sm"
+											data-tooltip="tooltip" title="View detail informations"
+											data-target="#myModal_detail" ng-click="chitiet1(x)">
+											<span class="glyphicon glyphicon-eye-open"></span>
+										</button>
+										<button class="btn btn-primary btn-sm" ng-click="sua(x)"
+											data-tooltip="tooltip" title="Edit" data-toggle="modal"
+											data-target="#myModal_sua">
+											<span class="glyphicon glyphicon-edit"></span>
+										</button>
+										<button data-toggle="modal" class="btn btn-danger btn-sm"
+											data-tooltip="tooltip" title="Delete"
+											data-target="#myModal_xoa" ng-click="xoa(x)">
+											<span class="glyphicon glyphicon-remove"></span>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<a href="http://localhost:8080/admin/api/export">Export excel
+							list</a>
+					</div>
+					<div class='pull-right'>
+						<uib-pagination
+							data-total-items="(list | filter:filterTable).length"
+							data-ng-model="currentPage" data-ng-change="updatePageIndexes()"
+							data-max-size="maxPaginationSize"
+							data-items-per-page="itemsPerPage" data-boundary-links="true"
+							data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
+							data-first-text="&laquo;" data-last-text="&raquo;">
+						</uib-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal thêm -->
+	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add student</h4>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmStudentAdd"
+						enctype="multipart/form-data" id="fileUploadForm">
+						<div class="col-md-6">
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										ng-keydown="autoAdd($event)" ng-keyup="hideDuplicateAlert()"
+										class="form-control input-md" type="text"
+										ng-model="student.username" ng-required="false" />
+									<div ng-messages="frmStudentAdd.username.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.username.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+									<p ng-bind="duplicateAlert" style="color: red"></p>
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName"> Last Name</label>
+								<div class="">
+									<input id="lastname" name="lastName" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="student.lastname" ng-required="true" />
+									<div ng-messages="frmStudentAdd.lastName.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.lastName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">First Name</label>
+								<div class="">
+									<input id="firstname" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="student.firstname" />
+									<div ng-messages="frmStudentAdd.firstName.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.firstName.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Password</label>
+								<div class="">
+									<input type="password" id="password" name="password"
+										data-ng-model="password" required="required"
+										class="form-control col-md-7 col-xs-12" />
+									<div ng-messages="frmStudentAdd.password.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Retype
+									password</label>
+								<div class="">
+									<input type="password" id="re_password" name="re_password"
+										required="required" class="form-control col-md-7 col-xs-12"
+										ng-model="re_password" match-password="password" />
+									<div ng-messages="frmStudentAdd.re_password.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.re_password.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+										<div ng-message="matchPassword">
+											<p style="color: red">Must match the previous field</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Email</label>
+								<div class="">
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="email" ng-required="true"
+										ng-model="student.email" />
+									<div ng-messages="frmStudentAdd.email.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.email.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Phone</label>
+								<div class="">
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="student.phone" />
+									<div ng-messages="frmStudentAdd.phone.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.phone.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Address</label>
+								<div class="">
+									<textarea id="adress" name="address" rows="6"
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="student.address"></textarea>
+									<div ng-messages="frmStudentAdd.address.$error">
+										<div ng-message="required"
+											ng-show="frmStudentAdd.address.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label class="col-md-2 control-label"> Picture</label>
+							<div class="col-md-12 picture">
+								<img ng-src="{{prev_img}}" height="150" width="100"
+									id="prev_img" /> <input type="file" id="uploadfile1"
+									name="uploadfile1"
+									onchange="angular.element(this).scope().getImage(this)"
+									ng-model="uploadfile1" class="col-md-12" />
+								<p id="upload-file-message"></p>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label" for="selectbasic">Intake</label>
+								<div class="">
+									<select ng-model="student.intake" class="form-control"
+										ng-change="filterEntranceExamByIntake_Add()"
+										ng-options="x.intakeName for x in list_intake" name="intake"
+										id="intake" ng-required="true">
+									</select>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label" for="selectbasic">Entrance
+									exam</label>
+								<div class="">
+									<select ng-selected="student.entranceExam"
+										ng-model="student.entranceExam" class="form-control"
+										ng-options="x.entranceExamName for x in listEntranceExamForAdd"
+										name="intake" id="intake" ng-required="true">
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label">Specialization</label>
+								<div class="">
+									<select ng-model="student.specialization" class="form-control"
+										ng-options="x.specializationName for x in list_specialization"
+										name="intake" id="intake" ng-required="true">
+									</select>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label">School</label>
+								<div class="">
+									<select ng-model="student.school" class="form-control"
+										ng-options="x.schoolName for x in list_school" name="intake"
+										id="intake" ng-required="true">
+									</select>
+								</div>
+							</div>
+
+
+							<div class="form-group col-md-12">
+								<label class="control-label" for="birthday">Birthday</label>
+								<div class="">
+									<input id="birthday" name="birthday" placeholder=""
+										ng-model="birthday" class="form-control input-md" type="date" />
+
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="status">Status</label>
+
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="status"
+											value="Studying" name="status" /> Studying
+										</label> <br /> <label> <input type="radio" ng-model="status"
+											value="Dropped" name="status" /> Dropped
+										</label> <br /> <label> <input type="radio" ng-model="status"
+											value="Graduated" name="status" /> Graduated
+										</label>
+									</div>
+
+
+								</div>
+								<div class="form-group">
+									<label class="control-label">Gender</label>
+									<div class="checkbox">
+										<label> <input type="radio" ng-model="gender"
+											value="0" name="gender" ng-value="0" /> Male
+										</label> <label> <input type="radio" ng-model="gender"
+											value="1" name="gender" ng-value="1" /> Female
+										</label>
+									</div>
+
+
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="them(false)" ng-disabled="frmStudentAdd.$invalid">Add</button>
+					<button id="btnSave" name="btnSave" class="btn btn-default"
+						ng-click="them(true)" ng-disabled="frmStudentAdd.$invalid">Add
+						and close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal sửa -->
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Edit student</h4>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" name="editForm"
+						enctype="multipart/form-data" id="upload-file-form-edit">
+						<div class="col-md-6">
+							<!--- text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										ng-keydown="autoAdd($event)" ng-keyup="hideDuplicateAlert()"
+										class="form-control input-md" type="text"
+										ng-model="list_temp_inf_edit.username" ng-required="false" />
+									<div ng-messages="editForm.username.$error">
+										<div ng-message="required"
+											ng-show="editForm.username.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+									<p ng-bind="duplicateAlert" style="color: red"></p>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName"> Last Name</label>
+								<div class="">
+									<input id="lastname" name="lastName" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="list_temp_inf_edit.lastname" ng-required="true" />
+									<div ng-messages="editForm.lastName.$error">
+										<div ng-message="required">
+											<p style="color: red">This field is required</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">First Name</label>
+								<div class="">
+									<input id="firstname" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="list_temp_inf_edit.firstname" />
+									<div ng-messages="editForm.firstName.$error">
+										<div ng-message="required">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Email</label>
+								<div class="">
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="email" ng-required="true"
+										ng-model="list_temp_inf_edit.email" />
+									<div ng-messages="editForm.email.$error">
+										<div ng-message="required">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Phone</label>
+								<div class="">
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="list_temp_inf_edit.phone" />
+									<div ng-messages="editForm.phone.$error">
+										<div ng-message="required">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="birthday">Birthday</label>
+								<div class="">
+									<input id="birthday" name="birthday" placeholder=""
+										ng-model="list_temp_inf_edit.birthday"
+										class="form-control input-md" type="date" ng-required="true" />
+									<div ng-messages="editForm.birthday.$error">
+										<div ng-message="required">
+											<p style="color: red">This field is required</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Address</label>
+								<textarea id="adress" name="address" rows="6"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="list_temp_inf_edit.address"></textarea>
+								<div ng-messages="editForm.address.$error">
+									<div ng-message="required">
+										<p style="color: red">This field is required</p>
+									</div>
+
+								</div>
+							</div>
+
+
+
+						</div>
+						<div class="col-md-6">
+							<label class="col-md-2 control-label">Picture</label>
+							<div class="col-md-12 picture">
+								<img
+									ng-src="http://localhost:8080/admin/images/{{list_temp_inf_edit.image}}"
+									ng-show="prev_img_edit==''" width="100" height="150"
+									class="img-responsive" /> <img ng-src="{{prev_img_edit}}"
+									ng-hide="prev_img_edit==''" width="100" height="150"
+									class="img-responsive" /> <input type="file" id="image_edit"
+									name="uploadfile" accept="*"
+									onchange="angular.element(this).scope().getImage_Edit(this)" />
+
+							</div>
+
+
+							<div class="form-group col-md-12">
+
+								<div class="form-group">
+									<label class="control-label" for="selectbasic">Intake</label>
+									<div class="">
+										<select ng-model="list_temp_inf_edit.intake"
+											ng-change="filterEntranceExamByIntake_Edit(list_temp_inf_edit, false)"
+											class="form-control"
+											ng-options="x.intakeName for x in list_intake" name="intake"
+											id="intake" ng-required="true">
+										</select>
+									</div>
+								</div>
+								<div class="form-group ">
+									<label class="control-label" for="selectbasic">Entrance
+										exam</label>
+									<div class="">
+										<select ng-model="list_temp_inf_edit.entranceExam"
+											class="form-control"
+											ng-options="x.entranceExamName for x in listEntranceExamForEdit"
+											name="entranceExam" id="entranceExam" ng-required="true">
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Specialization</label>
+									<div class="">
+										<select ng-model="list_temp_inf_edit.specialization"
+											class="form-control"
+											ng-options="x.specializationName for x in list_specialization"
+											name="specialization" id="specialization" ng-required="true">
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">School</label>
+									<div class="">
+										<select ng-model="list_temp_inf_edit.school"
+											class="form-control"
+											ng-options="x.schoolName for x in list_school" name="school"
+											id="school" ng-required="true">
+										</select>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="control-label" for="status">Status</label>
+
+									<div class="checkbox">
+										<label> <input type="radio"
+											ng-model="list_temp_inf_edit.status" value="Studying"
+											name="status" /> Studying
+										</label> <br /> <label> <input type="radio"
+											ng-model="list_temp_inf_edit.status" value="Dropped"
+											name="status" /> Dropped
+										</label> <br /> <label> <input type="radio"
+											ng-model="list_temp_inf_edit.status" value="Graduated"
+											name="status" /> Graduated
+										</label>
+									</div>
+
+
+								</div>
+								<div class="form-group">
+									<label class="control-label">Gender</label>
+									<div class="checkbox">
+										<label> <input type="radio"
+											ng-model="list_temp_inf_edit.gender" value="0" name="gender" />
+											Male
+										</label> <label> <input type="radio"
+											ng-model="list_temp_inf_edit.gender" value="1" name="gender" />
+											Female
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" ng-click="resetpasword()"
+						class="pull-left btn btn-danger" data-toggle="modal"
+						data-target="#myModal_confirmReset">Reset password</button>
+					<button id="btnSave" name="btnSave" class="btn btn-primary"
+						ng-click="edit(false)" ng-disabled="editForm.$invalid"
+						data-dismiss="modal">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal xem chi tiết -->
+	<div class="modal fade" id="myModal_detail" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Detail information</h4>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmStudentView">
+						<div class="col-md-6">
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Username</label>
+								<div class="">
+									<input id="username" name="username" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="chitiet.username" readonly="readonly"
+										ng-required="true" />
+
+
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="lastName">Lastname</label>
+								<div class="">
+									<input id="lastName" name="lastName" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="chitiet.lastname" readonly="readonly"
+										ng-required="true" />
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="firstName">Firstname</label>
+								<div class="">
+									<input id="firstName" name="firstName" placeholder=""
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="chitiet.firstname" readonly="readonly" />
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="birthday">Birthday</label>
+								<div class="">
+									<input id="birthday" name="birthday"
+										class="form-control input-md" type="text"
+										ng-model="chitiet.birthday" readonly="readonly" />
+									<!-- <p>{{chitiet.birthday}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="birthday">Email</label>
+								<div class="">
+									<input id="email" name="email" placeholder=""
+										class="form-control input-md" type="text"
+										ng-model="chitiet.email" readonly="readonly" />
+									<!-- <p>{{chitiet.email}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="phone">Phone</label>
+								<div class="">
+									<input id="phone" name="phone" placeholder=""
+										class="form-control input-md" type="tel"
+										ng-model="chitiet.phone" readonly="readonly" />
+									<!-- <p>{{chitiet.phone}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="address">Address</label>
+								<div class="">
+									<textarea id="adress" name="address" placeholder="" rows="5"
+										class="form-control input-md" type="text"
+										ng-model="chitiet.address" readonly="readonly"></textarea>
+									<!-- <p>{{chitiet.address}}</p> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="">Picture</label>
+								<div class=" picture">
+
+									<img
+										ng-src="http://localhost:8080/admin/images/{{chitiet.image}}"
+										width="100" height="150" class="img-responsive" />
+									<!-- Multiple Radios -->
+
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="birthday">Intake</label>
+								<div class="col-md-12">
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.intake.intakeName"></option>
+									</select>
+									<!-- <p>{{chitiet.intake.intakeName}}</p> -->
+								</div>
+							</div>
+
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label">Entrance exam</label>
+								<div class="col-md-12">
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.entranceExam.entranceExamName"></option>
+									</select>
+									<!-- <p>{{chitiet.entranceExam.entranceExamName}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label">Specialization</label>
+								<div class="col-md-12">
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.specialization.specializationName"></option>
+									</select>
+									<!-- <p>{{chitiet.entranceExam.entranceExamName}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="school">School</label>
+								<div class="col-md-12">
+									<select id="selectbasic" name="selectbasic"
+										class="form-control" readonly="readonly">
+										<option ng-bind="chitiet.school.schoolName"></option>
+									</select>
+									<!-- <p>{{chitiet.school.schoolName}}</p> -->
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="gender">Gender</label>
+								<div class="col-md-12">
+									<p>{{chitiet.gender ? 'Female' : 'Male'}}</p>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class=" control-label" for="status">Status</label>
+								<div class="col-md-12">
+									<p>{{chitiet.status}}</p>
+								</div>
+							</div>
+							<!-- Text input-->
+
+						</div>
+
+					</form>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal confirmReset -->
+	<div class="modal fade" id="myModal_confirmReset" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm reset
+						password</h4>
+				</div>
+
+				<div class="modal-body row">
+					<form class="form-horizontal" name="frmReset">
+						<div class="form-group">
+							<label class=" control-label" for="birthday">New password</label>
+							<div class="">
+								<input type="password" id="newPassword" name="newPassword"
+									ng-model="newPassword" class="form-control "
+									required="required" />
+								<div ng-messages="frmReset.newPassword.$error">
+									<div ng-message="required"
+										ng-show="frmReset.newPassword.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class=" control-label" for="birthday">Retype
+								password</label>
+							<div class="">
+								<input type="password" id="reNewPassword" name="reNewPassword"
+									ng-model="reNewPassword" class="form-control"
+									required="required" match-password="newPassword" />
+								<div ng-messages="frmReset.reNewPassword.$error">
+									<div ng-message="required"
+										ng-show="frmReset.reNewPassword.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+									<div ng-message="matchPassword">
+										<p style="color: red">Must match the previous field</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" data-target="#myModal_reset"
+						data-toggle="modal" ng-click="frmReset.$invalid||reset()"
+						ng-disabled="frmReset.$invalid">Yes</a>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal xóa -->
+	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<input type="hidden" ng-model="student_delete.id"></input>
+
+					<p>Are you sure you want to delete this?</p>
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" ng-click="deleteStudent()">Yes</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
