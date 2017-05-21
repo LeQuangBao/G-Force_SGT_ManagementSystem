@@ -25,10 +25,15 @@ public class AdminController {
 		return "admin/specialization";
 	}
 	
-	@RequestMapping(value = "/admin/course")
+	@RequestMapping(value = "/admin/subject")
 	public String subject() {
 		return "admin/subject";
 	}
+//	@RequestMapping(value = "/admin/courses")
+//	public String courses() {
+//		return "admin/courses";
+//	}
+	
 	@RequestMapping(value = "/admin/instructor")
 	public String instructor() {
 		return "admin/instructor";

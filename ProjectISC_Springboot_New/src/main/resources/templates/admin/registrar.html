@@ -136,155 +136,51 @@
 					<div class="clearfix"></div>
 
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-
-
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
 									<input id="filter" type="text" placeholder="Filter"
-										class="form-control" data-ng-model="filterTable"></input>
+										class="form-control" data-ng-model="filterTable" ng-change="refreshData(filterTable)"></input>
 								</div>
-								<div class="col-md-6 col-md-offset-6">
-
+								<!-- <div class="col-md-9 col-md-offset-3">
 									<strong>Show :</strong> <input type="checkbox" id="test1"
 										data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
-
 									<input type="checkbox" id="test4" data-ng-model="showEmail" />
 									<label for="test4">Email</label> <input type="checkbox"
 										id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
-
-
 									<input type="checkbox" id="test3" data-ng-model="showAddress" />
-									<label for="test3">Address</label>
-
-									<!-- Show: <input type="checkbox" data-ng-model="showBirthday">Birthday</input> -->
-									<!-- <input type="checkbox" data-ng-model="showEmail">Email</input>
-									<input type="checkbox" data-ng-model="showPhone">Phone</input>
-									<input type="checkbox" data-ng-model="showAddress">Address</input> -->
-								</div>
+									<label for="test3">Address</label> <input type="checkbox"
+										id="school" data-ng-model="showSchool" /> <label for="school">School</label>
+									<input type="checkbox" id="intake" data-ng-model="showIntake" />
+									<label for="intake">Intake</label> <input type="checkbox"
+										id="entrance" data-ng-model="showEntranceExam" /> <label
+										for="entrance">Entrance Exam</label> <input type="checkbox"
+										id="speci" data-ng-model="showSpecialization" /> <label
+										for="speci">Specialization</label>
+								</div> -->
 								<div class="x_content">
-
-									<label for="mySelect">Display </label> <select name="mySelect"
+									<!-- <label for="mySelect">Display </label> <select name="mySelect"
 										id="mySelect"
 										ng-options="option.name for option in rowdata.availableOptions track by option.id"
 										ng-model="rowdata.selectedOption"
 										ng-change="ChangeRow(rowdata.selectedOption.id)">
 									</select> <label> rows</label>
+									<br/>
+									<label for="mySelect">Filter by intake</label> <select name="mySelect"
+										id="mySelect"
+										ng-options="x.intakeName for x in list_intake"
+										ng-model="filterByIntake"
+										ng-change="c()">
+									</select> -->
 									<div class="table-responsive">
-										<table class="table table-condensed table-hover">
-											<thead>
-												<tr>
-													<th style="width: 3%">&#35;</th>
-													<th class="sortable" style="width: 15%"
-														ng-click="sortType = 'userName';sortReverse = !sortReverse">Username
-														<span
-														ng-show="sortType == 'userName' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'userName' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 15%"
-														ng-click="sortType = 'lastName';sortReverse = !sortReverse">Last
-														Name <span
-														ng-show="sortType == 'lastName' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'lastName' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														ng-click="sortType = 'firstName';sortReverse = !sortReverse">First
-														Name <span
-														ng-show="sortType == 'firstName' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'firstName' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														ng-show="showBirthday"
-														ng-click="sortType = 'birthday';sortReverse = !sortReverse">Birthday
-														<span
-														ng-show="sortType == 'birthday' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'birthday' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 25%" ng-show="showEmail"
-														ng-click="sortType = 'email';sortReverse = !sortReverse">Email
-														<span
-														ng-show="sortType == 'email' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'email' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%" ng-show="showPhone"
-														ng-click="sortType = 'phone';sortReverse = !sortReverse">Phone
-														<span
-														ng-show="sortType == 'phone' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'phone' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														ng-show="showAddress"
-														ng-click="sortType = 'address';sortReverse = !sortReverse">Address
-														<span
-														ng-show="sortType == 'address' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'address' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														ng-click="sortType = 'active';sortReverse = !sortReverse">Status
-														<span
-														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'active' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th style="width: 10%">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr
-													data-ng-repeat="x in listfiltered(list) |  orderBy:sortType:sortReverse"
-													data-ng-show="showList($index)">
-													<td ng-bind="$index+1"></td>
-													<td data-ng-bind="x.username"></td>
-													<td data-ng-bind="x.lastname"></td>
-													<td data-ng-bind="x.firstname"></td>
-													<td ng-show="showBirthday">{{x.birthday |
-														date:'MM/dd/yyyy'}}</td>
-													<td data-ng-bind="x.email" ng-show="showEmail"></td>
-													<td data-ng-bind="x.phone" ng-show="showPhone"></td>
-													<td data-ng-bind="x.address" ng-show="showAddress"></td>
-													<td data-ng-bind="x.status ? 'Active' : 'Inactive'"></td>
-													<td>
-														<button type="button" ng-click="viewRegistrar(x)"
-															class="btn btn-success btn-sm" data-toggle="modal" data-tooltip ="tooltip" title="View detail informations"
-															data-target="#myModal_detail">
-															<span class="glyphicon glyphicon-eye-open"  ></span>
-														</button>
-														<button type="button" ng-click="editRegistrar(x)" data-tooltip ="tooltip" title="Edit"
-															class="btn btn-primary btn-sm" data-toggle="modal"
-															data-target="#myModal_sua">
-															<span class="glyphicon glyphicon-edit"   ></span>
-														</button>
-														<button type="button" ng-click="deleteRegistrar(x)" data-tooltip ="tooltip" title="Delete"
-															data-toggle="modal" class="btn btn-danger btn-sm"
-															data-target="#myModal_xoa">
-															<span class="glyphicon glyphicon-remove"   ></span>
-														</button>
-
-													</td>
-												</tr>
-											</tbody>
-										</table>
-
+										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+										
+										<a href="http://localhost:8080/admin/api/student/export">Export excel list</a>
 									</div>
-									<div class='pull-right'>
+									<!-- <div class='pull-right'>
 										<uib-pagination
 											data-total-items="(list | filter:filterTable).length"
 											data-ng-model="currentPage"
@@ -294,8 +190,7 @@
 											data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
 											data-first-text="&laquo;" data-last-text="&raquo;">
 										</uib-pagination>
-									</div>
-
+									</div> -->
 								</div>
 							</div>
 						</div>

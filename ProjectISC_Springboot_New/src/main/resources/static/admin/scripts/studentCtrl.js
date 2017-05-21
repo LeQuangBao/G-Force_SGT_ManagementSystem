@@ -26,7 +26,6 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     $scope.list =[];
     // Lấy danh sách Student
     function GetListStudent() {
-
         var Student = $resource('http://localhost:8080/admin/api/Student');
         Student.query().$promise.then(function(listStudent) {
             $scope.list = listStudent;
