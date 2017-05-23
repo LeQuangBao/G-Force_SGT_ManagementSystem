@@ -275,7 +275,7 @@
 							<label class="control-label col-sm-3">ID</label>
 							<div class="col-sm-8">
 								<input type="hidden" ng-model="info.id" /> <input type="text" id="SessionId_edit" ng-keyup="hideDuplicateAlert()"
-									name="SessionId_edit" ng-model="info.SessionId"
+									name="SessionId_edit" ng-model="info.id"
 									class="form-control" placeholder="" required="required" /><span
 									ng-show="editForm1.SessionId_edit.$touched &amp;&amp; editForm1.SessionId_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
@@ -287,7 +287,7 @@
 							<div class="col-sm-8">
 								<input type="text" id="SessionName_edit"
 									name="SessionName_edit"
-									ng-model="info.SessionName" class="form-control"
+									ng-model="info.sessionName" class="form-control"
 									placeholder="" required="required" /><span
 									ng-show="editForm1.SessionName_edit.$touched &amp;&amp; editForm1.SessionName_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
