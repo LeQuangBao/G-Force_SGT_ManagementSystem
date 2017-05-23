@@ -1,4 +1,4 @@
-app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
+app.controller('intakeCtrl', function($scope, $http, $filter, $resource, uiGridConstants) {
 	var failMessage = 'Oops! Something went wrong, please check your input again.';
     $scope.rowdata = {
         availableOptions: [{
@@ -60,9 +60,17 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
     	    columnDefs: [
     		      { name: 'intakeId',displayName:'Intake Id' },
     		      { name: 'intakeName', displayName : 'Intake Name' },
-    		      { name: 'startDate', visible : true },
-    		      { name: 'endDate', visible : true },
-    		      { name: 'active', visible : true },
+    		      { name: 'startDate', visible : true, cellFilter: 'date:"MM/dd/yyyy"' },
+    		      { name: 'endDate', visible : true, cellFilter: 'date:"MM/dd/yyyy"' },
+    		      { name: 'active', displayName:'Status', visible : true,
+    		          cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.active == 0 ? "Inactive" : "Active"}}</div>',
+    		          filter: {
+    		          type: uiGridConstants.filter.SELECT,
+    		          selectOptions: [
+    		              { value: 'true', label: 'Active' },
+    		              { value: 'false', label: 'Inactive' }
+    		          ]
+    		      }},
     		      { name: 'Action',enableSorting: false,enableFiltering: false,
     		             cellTemplate:'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.GetIntake(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
     		            	 			+'<button ng-click="grid.appScope.GetIntake(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'

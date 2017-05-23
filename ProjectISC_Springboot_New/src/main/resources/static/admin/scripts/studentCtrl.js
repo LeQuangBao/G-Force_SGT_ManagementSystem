@@ -170,7 +170,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     		      { name: 'username' },
     		      { name: 'lastname', displayName : 'Last Name' },
     		      { name: 'firstname', displayName : 'First Name'},
-    		      { name: 'birthday', visible : false },
+    		      { name: 'birthday', visible : false, cellFilter: 'date:"MM/dd/yyyy"' },
     		      { name: 'email', visible : false },
     		      { name: 'phone', visible : false },
     		      { name: 'address', visible : false },
@@ -178,7 +178,13 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     		      { name: 'intake.intakeName', displayName : 'Intake', visible : false },
     		      { name: 'entranceExam.entranceExamName',displayName : 'Extrance exam', visible : false },
     		      { name: 'specialization.specializationName',displayName : 'Specialization', visible : false },
-    		      { name: 'status'},
+    		      { name: 'status', filter: {
+    		          type: uiGridConstants.filter.SELECT,
+    		          selectOptions: [
+    		              { value: 'true', label: 'Active' },
+    		              { value: 'false', label: 'Inactive' }
+    		          ]
+    		      }},
     		      { name: 'Action',enableSorting: false,enableFiltering: false,
     		             cellTemplate:'<button ng-click="grid.appScope.chitiet1(row.entity)" data-toggle="modal" class="btn btn-success btn-sm" data-tooltip ="tooltip" title="View detail informations" data-target="#myModal_detail"><span class="glyphicon glyphicon-eye-open"></span></button>' 
     		            	 			+'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.sua(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'

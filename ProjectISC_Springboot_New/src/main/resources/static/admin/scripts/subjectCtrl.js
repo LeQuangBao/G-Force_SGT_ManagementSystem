@@ -1,4 +1,4 @@
-app.controller('subjectCtrl', function($scope, $http,$filter) {
+app.controller('subjectCtrl', function($scope, $http,$filter, uiGridConstants) {
 		$scope.rowdata = {
 			     availableOptions: [
 			    	 {id: '15', name: '15'},
@@ -57,8 +57,16 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 							displayName : 'Description'
 						},
 						{
-							name : 'active',
-							visible : true
+							name : 'active', displayName:'Status', 
+							visible : true, 
+							cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.active == 0 ? "Inactive" : "Active"}}</div>',
+							filter: {
+			    		          type: uiGridConstants.filter.SELECT,
+			    		          selectOptions: [
+			    		              { value: 'true', label: 'Active' },
+			    		              { value: 'false', label: 'Inactive' }
+			    		          ]
+			    		      }
 						},
 						{
 							name : 'Action',
