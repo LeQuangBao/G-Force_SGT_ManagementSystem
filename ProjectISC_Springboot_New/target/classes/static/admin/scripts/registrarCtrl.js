@@ -200,7 +200,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 //	 // Tìm kiếm theo tên
 //    	$scope.listfiltered = function(element) {
 //            return $filter('filter')(element, $scope.filterTable); 
-        };
+        //};
  	$scope.updatePageIndexes();
  	 // kiểm ra trùng username
  	$scope.list=[];

@@ -12,58 +12,59 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isc.model.Session;
+import com.isc.service.SessionService;
 //import com.isc.service.SessionService;
 
 @RestController
 public class SessionController {
-//	@Autowired
-//	private SessionService service;
-//
-//	@RequestMapping(value = "/api/session", method = RequestMethod.GET)
-//	public ResponseEntity<List<Session>> Sessions() {
-//		return new ResponseEntity<>(service.getAllSessions(), HttpStatus.OK);
-//	}
-//
-//	@RequestMapping(value = "/api/session/{id}", method = RequestMethod.GET)
-//	public ResponseEntity<Session> getSession(@PathVariable int id) {
-//		Session session;
-//		try {
-//			session = service.getSession(id);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//		return new ResponseEntity<>(session, HttpStatus.OK);
-//	}
-//
-//	@RequestMapping(value = "api/session", method = RequestMethod.POST)
-//	public ResponseEntity<Void> addSession(@RequestBody Session session) {
-//		try {
-//			service.addSession(session);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-//		}
-//		return new ResponseEntity<>(HttpStatus.CREATED);
-//	}
-//
-//	
-//	@RequestMapping(value = "api/session/{id}", method = RequestMethod.DELETE)
-//	public ResponseEntity<Void> deleteSession(@PathVariable int id) {
-//		try{
-//			service.deleteSession(id);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-//	}
-//	
-//	@RequestMapping(value = "/api/session", method = RequestMethod.PUT)
-//	public ResponseEntity<Void> updateSession(@RequestBody Session session){
-//		try {
-//			service.updateSession(session);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-//		}
-//		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-//	}
+@Autowired
+private SessionService service;
+
+	@RequestMapping(value = "/api/session", method = RequestMethod.GET)
+	public ResponseEntity<List<Session>> Sessions() {
+		return new ResponseEntity<>(service.getAllSessions(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/api/session/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Session> getSession(@PathVariable int id) {
+		Session session;
+		try {
+			session = service.getSession(id);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(session, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "api/session", method = RequestMethod.POST)
+	public ResponseEntity<Void> addSession(@RequestBody Session session) {
+		try {
+			service.addSession(session);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+	
+	@RequestMapping(value = "api/session/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteSession(@PathVariable int id) {
+		try{
+			service.deleteSession(id);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/api/session", method = RequestMethod.PUT)
+	public ResponseEntity<Void> updateSession(@RequestBody Session session){
+		try {
+			service.updateSession(session);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
 
 }

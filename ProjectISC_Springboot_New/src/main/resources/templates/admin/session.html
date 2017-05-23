@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Session management</title>
+
+<base href="http://localhost:8080/admin/" />
+
+<!-- Bootstrap -->
+<link href="vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<!-- Font Awesome -->
+<link href="vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" />
+<!-- NProgress -->
+<link href="vendors/nprogress/nprogress.css" rel="stylesheet" />
+<!-- iCheck -->
+<link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+<!-- Datatables -->
+<link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link href="build/css/custom.min.css" rel="stylesheet" />
+<link href="build/css/style.css" rel="stylesheet" />
+<link href="css/ui-grid.css" rel="stylesheet" />
+<link href="js/sweetalert.css" rel="stylesheet" />
+</head>
+
+<body data-ng-app="myApp" data-ng-controller="SessionCtrl"
+	class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div class="left_col scroll-view">
+					<div class="navbar nav_title" style="border: 0;">
+						<a href="/admin/intake" class="site_title"><i
+							class="fa fa-paw"></i> <span>Administration</span></a>
+					</div>
+					<div class="clearfix"></div>
+					<br />
+					<!-- sidebar menu -->
+					<div id="sidebar-menu"
+						class="main_menu_side hidden-print main_menu">
+						<div class="menu_section">
+
+							<ul class="nav side-menu">
+								<li><a><i class="fa fa-home"></i>Manage <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/intake">Intake</a></li>
+										<li><a href="/admin/school">School</a></li>
+										<li><a href="/admin/course">Course</a></li>
+										<li><a href="/admin/registrar">Registrar</a></li>
+										<li><a href="/admin/instructor">Instructor</a></li>
+										<li><a href="/admin/student">Student</a></li>
+										<li><a href="/admin/entrance-exam">Entrance exam</a></li>
+										<li><a href="/admin/timetable">Timetable</a></li>
+										<li><a href="/admin/session">Session</a></li>
+									</ul></li>
+							</ul>
+						</div>
+
+
+					</div>
+					<!-- /sidebar menu -->
+
+					<!-- /menu footer buttons -->
+
+					<!-- /menu footer buttons -->
+				</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div class="nav_menu">
+					<nav>
+						<div class="nav toggle">
+							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+						</div>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class=""><a href="javascript:;"
+								class="user-profile dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"> <img src="production/images/img.jpg"
+									alt="" />Admin <span class=" fa fa-angle-down"></span>
+							</a>
+								<ul class="dropdown-menu dropdown-usermenu pull-right">
+									<li><a href="javascript:;"> Profile</a></li>
+
+
+									<li><a href="logout"><i
+											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+								</ul></li>
+
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Session management</h3>
+						</div>
+
+						<div class="title_right">
+							<div class="form-group pull-right top_search">
+								<button data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg"
+									ng-click="ResetForm_Add()">Add</button>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-md-6 pull-right">
+									<input id="filter" type="text" placeholder="Filter"
+										class="form-control" data-ng-model="filterTable" ng-change="refreshData(filterTable)"></input>
+								</div>
+								<!-- <div class="col-md-9 col-md-offset-3">
+									<strong>Show :</strong> <input type="checkbox" id="test1"
+										data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
+									<input type="checkbox" id="test4" data-ng-model="showEmail" />
+									<label for="test4">Email</label> <input type="checkbox"
+										id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
+									<input type="checkbox" id="test3" data-ng-model="showAddress" />
+									<label for="test3">Address</label> <input type="checkbox"
+										id="school" data-ng-model="showSchool" /> <label for="school">School</label>
+									<input type="checkbox" id="intake" data-ng-model="showIntake" />
+									<label for="intake">Intake</label> <input type="checkbox"
+										id="entrance" data-ng-model="showEntranceExam" /> <label
+										for="entrance">Entrance Exam</label> <input type="checkbox"
+										id="speci" data-ng-model="showSession" /> <label
+										for="speci">Session</label>
+								</div> -->
+								<div class="x_content">
+									<!-- <label for="mySelect">Display </label> <select name="mySelect"
+										id="mySelect"
+										ng-options="option.name for option in rowdata.availableOptions track by option.id"
+										ng-model="rowdata.selectedOption"
+										ng-change="ChangeRow(rowdata.selectedOption.id)">
+									</select> <label> rows</label>
+									<br/>
+									<label for="mySelect">Filter by intake</label> <select name="mySelect"
+										id="mySelect"
+										ng-options="x.intakeName for x in list_intake"
+										ng-model="filterByIntake"
+										ng-change="c()">
+									</select> -->
+									<div class="table-responsive">
+										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+										
+									</div>
+									<!-- <div class='pull-right'>
+										<uib-pagination
+											data-total-items="(list | filter:filterTable).length"
+											data-ng-model="currentPage"
+											data-ng-change="updatePageIndexes()"
+											data-max-size="maxPaginationSize"
+											data-items-per-page="itemsPerPage" data-boundary-links="true"
+											data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
+											data-first-text="&laquo;" data-last-text="&raquo;">
+										</uib-pagination>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Gentelella - Bootstrap Admin Template by <a
+						href="https://colorlib.com">Colorlib</a>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+	<!-- Modal thêm -->
+	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add Session</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" name="formAdd">
+						<div class="form-group">
+							<label class="control-label col-sm-3">ID</label>
+							<div class="col-sm-8">
+								<input type="text" id="SessionId_add"
+									name="SessionId_add" class="form-control" placeholder="" ng-keyup="hideDuplicateAlert()"
+									ng-model="SessionId_add" required="required" /> <span
+									ng-show="formAdd.SessionId_add.$touched &amp;&amp; formAdd.SessionId_add.$invalid">
+									<p style="color: red">This field is required</p></span>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">Name</label>
+							<div class="col-sm-8">
+								<input type="text" id="SessionName_add"
+									name="SessionName_add" ng-model="SessionName_add"
+									class="form-control" placeholder="" required="required" /> <span
+									ng-show="formAdd.SessionName_add.$touched &amp;&amp; formAdd.SessionName_add.$invalid">
+									<p style="color: red">This field is required</p></span>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="addSession(false)"
+						ng-disabled="formAdd.SessionName_add.$error.required || formAdd.SessionId_add.$error.required">Add</button>
+					<button class="btn btn-default" ng-click="addSession(true)"
+						ng-disabled="formAdd.SessionName_add.$error.required || formAdd.SessionId_add.$error.required">Add
+						and close</button>
+					<button class="btn btn-default" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal sửa -->
+	<div class="modal fade" id="myModal_sua" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Edit Session</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" name="editForm1">
+						<div class="form-group">
+							<label class="control-label col-sm-3">ID</label>
+							<div class="col-sm-8">
+								<input type="hidden" ng-model="info.id" /> <input type="text" id="SessionId_edit" ng-keyup="hideDuplicateAlert()"
+									name="SessionId_edit" ng-model="info.SessionId"
+									class="form-control" placeholder="" required="required" /><span
+									ng-show="editForm1.SessionId_edit.$touched &amp;&amp; editForm1.SessionId_edit.$invalid"><p
+										style="color: red">This field is required</p></span>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">Name</label>
+							<div class="col-sm-8">
+								<input type="text" id="SessionName_edit"
+									name="SessionName_edit"
+									ng-model="info.SessionName" class="form-control"
+									placeholder="" required="required" /><span
+									ng-show="editForm1.SessionName_edit.$touched &amp;&amp; editForm1.SessionName_edit.$invalid"><p
+										style="color: red">This field is required</p></span>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="editSession()"
+						ng-disabled="editForm1.SessionName_edit.$error.required || editForm1.SessionId_edit.$error.required">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="refreshList()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal edit subject -->
+<!-- 	<div class="modal fade" id="myModal_editSubject" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="editRelevantSubject()" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						Edit relevant courses for: <label ng-bind="info_editRelevantSubject.SessionId"></label>
+						<br/>
+						(<label ng-bind="info_editRelevantSubject.SessionName"></label>)
+					</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" name="editForm">
+						<h5>Available courses</h5>
+						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
+						scrollable table
+						<div class="well" style="height:200px;overflow:auto">
+							<div class="table-responsive" ng-model="filterController">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th style="width: 5%">&#35;</th>
+                                          <th class="sortable" style="width: 10%"
+                                             ng-click="sortType = 'subjectID';sortReverse = !sortReverse">
+                                             ID <span
+                                                ng-show="sortType == 'subjectID' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'subjectID' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 40%"
+                                             ng-click="sortType = 'subjectName';sortReverse = !sortReverse">
+                                             Name <span
+                                                ng-show="sortType == 'subjectName' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'subjectName' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'credit';sortReverse = !sortReverse">
+                                             Credit <span
+                                                ng-show="sortType == 'credit' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'credit' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'hour';sortReverse = !sortReverse">
+                                             Hour <span
+                                                ng-show="sortType == 'hour' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'hour' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+											<th style="width: 15%"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat="x in listSubject | filter:filterSubject| orderBy:sortType:sortReverse" ng-show="!checkDuplicateSubject(x.id)">
+											<td ng-bind="$index+1"></td>
+											<td data-ng-bind="x.subjectId"></td>
+											<td data-ng-bind="x.subjectName"></td>
+											<td data-ng-bind="x.credit"></td>
+                                          <td data-ng-bind="x.hour"></td>
+											<td>
+												<button													
+													type="button" ng-click="addSubject(x)"
+													class="btn btn-primary btn-xs">
+													<span class="glyphicon glyphicon-plus"></span>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<h5>Added courses</h5>
+						<div class="well" style="height:200px;overflow:auto">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th style="width: 5%">&#35;</th>
+                                          <th class="sortable" style="width: 10%"
+                                             ng-click="sortType = 'row.subjectID';sortReverse = !sortReverse">
+                                             ID <span
+                                                ng-show="sortType == 'row.subjectID' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.subjectID' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 40%"
+                                             ng-click="sortType = 'row.subjectName';sortReverse = !sortReverse">
+                                             Name <span
+                                                ng-show="sortType == 'row.subjectName' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.subjectName' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'row.credit';sortReverse = !sortReverse">
+                                             Credit <span
+                                                ng-show="sortType == 'row.credit' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.credit' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+                                          <th class="sortable" style="width: 15%"
+                                             ng-click="sortType = 'row.hour';sortReverse = !sortReverse">
+                                             Hour <span
+                                                ng-show="sortType == 'row.hour' &amp;&amp; !sortReverse"
+                                                class="fa fa-caret-down"></span> <span
+                                                ng-show="sortType == 'row.hour' &amp;&amp; sortReverse"
+                                                class="fa fa-caret-up"></span>
+                                          </th>
+											<th style="width: 15%"></th>
+										</tr>
+										
+									</thead>
+									<tbody>
+										<tr ng-repeat="row in currentSubjects| orderBy:sortType:sortReverse">
+											<td ng-bind="$index + 1"></td>
+											<td ng-bind="row.subjectId"></td>
+											<td ng-bind="row.subjectName"></td>
+											<td ng-bind="row.credit"></td>
+                                          <td ng-bind="row.hour"></td>
+											<td><button class="btn btn-danger btn-xs"
+													ng-click="deleteSubject(row)">
+													<span class="glyphicon glyphicon-remove"></span>
+												</button></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editRelevantSubject()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- Modal xóa -->
+	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+				</div>
+
+				<div class="modal-body">
+					<!-- 					<input type="hidden" ng-model="Session_delete.id"></input> -->
+					<p>Are you sure you want to delete this?</p>
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-ok" ng-click="deleteSession()">Yes</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="vendors/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script src="js/angular-ui.min.js"></script>
+	<script src="js/angular-resource.min.js"></script>
+	<script src="js/angular-messages.min.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
+	<!-- Sweet alert -->
+
+	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
+	<!-- Bootstrap -->
+	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/myApp.js"></script>
+	<script type="text/javascript" src="scripts/sessionCtrl.js"></script>
+	<!-- FastClick -->
+	<script src="vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="vendors/nprogress/nprogress.js"></script>
+	<!-- iCheck -->
+	<script src="vendors/iCheck/icheck.min.js"></script>
+	<!-- Datatables -->
+	<script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script
+		src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script
+		src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+	<script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+	<script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+	<script
+		src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+	<script
+		src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+	<script
+		src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script
+		src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+	<script
+		src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+	<script src="vendors/jszip/dist/jszip.min.js"></script>
+	<script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+	<script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="build/js/custom.min.js"></script>
+<script src="js/ui-grid.js"></script>
+</body>
+</html>
