@@ -41,6 +41,7 @@
 <link href="build/css/custom.min.css" rel="stylesheet" />
 <link href="build/css/style.css" rel="stylesheet" />
 <link href="build/css/ng-table.min.css" rel="stylesheet" />
+<link href="css/ui-grid.css" rel="stylesheet" />
 <link href="js/sweetalert.css" rel="stylesheet" />
 </head>
 
@@ -74,6 +75,8 @@
 										<li><a href="/admin/instructor">Instructor</a></li>
 										<li><a href="/admin/student">Student</a></li>
 										<li><a href="/admin/entrance-exam">Entrance exam</a></li>
+										<li><a href="/admin/timetable">Timetable</a></li>
+										<li><a href="/admin/session">Session</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -140,96 +143,48 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-
-
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
-
 									<input id="filter" type="text" placeholder="Filter"
-										class="form-control" data-ng-model="filterTable"></input>
+										class="form-control" data-ng-model="filterTable" ng-change="refreshData(filterTable)"></input>
 								</div>
+								<!-- <div class="col-md-9 col-md-offset-3">
+									<strong>Show :</strong> <input type="checkbox" id="test1"
+										data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
+									<input type="checkbox" id="test4" data-ng-model="showEmail" />
+									<label for="test4">Email</label> <input type="checkbox"
+										id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
+									<input type="checkbox" id="test3" data-ng-model="showAddress" />
+									<label for="test3">Address</label> <input type="checkbox"
+										id="school" data-ng-model="showSchool" /> <label for="school">School</label>
+									<input type="checkbox" id="intake" data-ng-model="showIntake" />
+									<label for="intake">Intake</label> <input type="checkbox"
+										id="entrance" data-ng-model="showEntranceExam" /> <label
+										for="entrance">Entrance Exam</label> <input type="checkbox"
+										id="speci" data-ng-model="showSpecialization" /> <label
+										for="speci">Specialization</label>
+								</div> -->
 								<div class="x_content">
-
-									<label for="mySelect">Display </label> <select name="mySelect"
+									<!-- <label for="mySelect">Display </label> <select name="mySelect"
 										id="mySelect"
 										ng-options="option.name for option in rowdata.availableOptions track by option.id"
 										ng-model="rowdata.selectedOption"
 										ng-change="ChangeRow(rowdata.selectedOption.id)">
 									</select> <label> rows</label>
+									<br/>
+									<label for="mySelect">Filter by intake</label> <select name="mySelect"
+										id="mySelect"
+										ng-options="x.intakeName for x in list_intake"
+										ng-model="filterByIntake"
+										ng-change="c()">
+									</select> -->
 									<div class="table-responsive">
-										<table class="table table-condensed table-hover ">
-											<thead>
-												<tr>
-													<th style="width: 3%">&#35;</th>
-													<th style="width: 10%" class="sortable"
-														data-ng-click="sortType = 'id';sortReverse = !sortReverse">ID <span
-														ng-show="sortType == 'id' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'id' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 30%"
-														data-ng-click="sortType = 'intakeName';sortReverse = !sortReverse">Name <span
-														ng-show="sortType == 'intakeName' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'intakeName' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														data-ng-click="sortType = 'startDate';sortReverse = !sortReverse">Start Date <span
-														ng-show="sortType == 'startDate' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span><span
-														ng-show="sortType == 'startDate' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 10%"
-														data-ng-click="sortType = 'endDate';sortReverse = !sortReverse">End Date <span
-														ng-show="sortType == 'endDate' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span> <span
-														ng-show="sortType == 'endDate' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th class="sortable" style="width: 15%"
-														data-ng-click="sortType = 'active';sortReverse = !sortReverse">Status <span
-														ng-show="sortType == 'active' &amp;&amp; !sortReverse"
-														class="fa fa-caret-down"></span><span
-														ng-show="sortType == 'active' &amp;&amp; sortReverse"
-														class="fa fa-caret-up"></span>
-													</th>
-													<th style="width: 15%">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr
-													data-ng-repeat="x in (listfiltered(list)) | orderBy:sortType:sortReverse"
-													data-ng-show="showList($index)">
-													<td class="table-row-index" ng-bind="$index+1"><input
-														type="hidden" data-ng-model="x.id" /></td>
-													<td data-ng-bind="x.intakeId"></td>
-													<td data-ng-bind="x.intakeName"></td>
-													<td>{{x.startDate | date:'MM/dd/yyyy'}}</td>
- 													<td>{{x.endDate | date:'MM/dd/yyyy'}}</td>
-													<td data-ng-bind="x.active ? 'Active' : 'Inactive'"></td>
-													<td>
-														<button class="btn btn-primary btn-sm"
-															data-ng-click="GetIntake(x)" data-toggle="modal" data-tooltip ="tooltip" title="Edit"
-															data-target="#myModal_sua" href="#myModal_sua">
-															<span class="glyphicon glyphicon-edit"   ></span>
-														</button>
-														<button class="btn btn-danger btn-sm"
-															data-target="#myModal_xoa" href="#myModal_xoa" data-tooltip ="tooltip" title="Delete"
-															data-ng-click="GetIntakeObj(x)" data-toggle="modal">
-															<span class="glyphicon glyphicon-remove"   ></span>
-														</button>
-
-													</td>
-
-												</tr>
-											</tbody>
-										</table>
+										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+										
+										<a href="http://localhost:8080/admin/api/student/export">Export excel list</a>
 									</div>
-									<div class='pull-right'>
+									<!-- <div class='pull-right'>
 										<uib-pagination
 											data-total-items="(list | filter:filterTable).length"
 											data-ng-model="currentPage"
@@ -239,8 +194,7 @@
 											data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
 											data-first-text="&laquo;" data-last-text="&raquo;">
 										</uib-pagination>
-									</div>
-
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -533,6 +487,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-<script src="build/js/ng-table.min.js"></script>
+<script src="js/ui-grid.js"></script>
 </body>
 </html>

@@ -38,10 +38,49 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource) {
                 value.endDate = $filter('date')(value.endDate, "MM/dd/yyyy");
             });
             $scope.list = listIntake;
+    		$scope.gridOptions.data = listIntake;
+            
         });
 
     }
     GetListIntake();
+    // tạo dữ liệu cho table
+    $scope.gridOptions = {
+    		noUnselect : true,
+    		multiSelect: false,
+    		enableRowSelection: true,
+    		enableRowHeaderSelection: false,
+    	    enableSelectAll: false,
+    	    enableGridMenu: true,
+    		enableFiltering: true,
+    		enableColumnResize: true,
+    		enableColumnMenus: false,
+    	    paginationPageSizes: [15, 30, 50, 100],
+    	    paginationPageSize: 15,
+    	    columnDefs: [
+    		      { name: 'intakeId',displayName:'Intake Id' },
+    		      { name: 'intakeName', displayName : 'Intake Name' },
+    		      { name: 'startDate', visible : true },
+    		      { name: 'endDate', visible : true },
+    		      { name: 'active', visible : true },
+    		      { name: 'Action',enableSorting: false,enableFiltering: false,
+    		             cellTemplate:'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.GetIntake(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
+    		            	 			+'<button ng-click="grid.appScope.GetIntake(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'
+    		      }
+    		    ]
+    	  };
+    // lọc toàn bộ dữ liệu
+    $scope.refreshData = function (termObj) {
+        $scope.gridOptions.data = $scope.list;
+
+        while (termObj) {
+            var oSearchArray = termObj.split(' ');
+            $scope.gridOptions.data = $filter('filter')($scope.gridOptions.data, oSearchArray[0], undefined);
+            oSearchArray.shift();
+            termObj = (oSearchArray.length !== 0) ? oSearchArray.join(' ') : '';
+        }
+    };
+    
 
     $scope.sortType = 'intakeName';
     $scope.filterTable = '';

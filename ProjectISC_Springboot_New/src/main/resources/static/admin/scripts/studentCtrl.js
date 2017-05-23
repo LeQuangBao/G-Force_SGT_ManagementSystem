@@ -1,4 +1,4 @@
-app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
+app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridConstants) {
     $scope.rowdata = {
         availableOptions: [{
             id: '15',
@@ -23,21 +23,20 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
         $scope.updatePageIndexes();
     }
     var alertDuration = 1800;
-
-    $scope.list = [];
+    $scope.list =[];
     // Lấy danh sách Student
     function GetListStudent() {
-
         var Student = $resource('http://localhost:8080/admin/api/Student');
         Student.query().$promise.then(function(listStudent) {
             $scope.list = listStudent;
+            $scope.gridOptions.data = listStudent;
             listAllStudent = listStudent;
             console.log($scope.list);
 
         });
 
-    }
-
+    }  
+    
     // Lấy số lượng student theo intake id, bỏ vào biến
     // countStudent
     // var numberOfStudent = 0;
@@ -152,7 +151,54 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
     GetListspecialization();
     GetListschool();
     GetListentrance_Exam();
+    
+    //Tạo dữ liệu cho table
+    $scope.gridOptions = {
+    		noUnselect : true,
+    		multiSelect: false,
+    		enableRowSelection: true,
+    		enableRowHeaderSelection: false,
+    	    enableSelectAll: false,
+    	    enableGridMenu: true,
+    		enableFiltering: true,
+    		enableColumnResize: true,
+    		enableColumnMenus: false,
+    	    paginationPageSizes: [15, 30, 50, 100],
+    	    paginationPageSize: 15,
+    	    columnDefs: [
+    		      { name: 'studentId', displayName : 'Student ID'},
+    		      { name: 'username' },
+    		      { name: 'lastname', displayName : 'Last Name' },
+    		      { name: 'firstname', displayName : 'First Name'},
+    		      { name: 'birthday', visible : false },
+    		      { name: 'email', visible : false },
+    		      { name: 'phone', visible : false },
+    		      { name: 'address', visible : false },
+    		      { name: 'school.schoolName', displayName : 'School', visible : false },
+    		      { name: 'intake.intakeName', displayName : 'Intake', visible : false },
+    		      { name: 'entranceExam.entranceExamName',displayName : 'Extrance exam', visible : false },
+    		      { name: 'specialization.specializationName',displayName : 'Specialization', visible : false },
+    		      { name: 'status'},
+    		      { name: 'Action',enableSorting: false,enableFiltering: false,
+    		             cellTemplate:'<button ng-click="grid.appScope.chitiet1(row.entity)" data-toggle="modal" class="btn btn-success btn-sm" data-tooltip ="tooltip" title="View detail informations" data-target="#myModal_detail"><span class="glyphicon glyphicon-eye-open"></span></button>' 
+    		            	 			+'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.sua(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
+    		            	 			+'<button ng-click="grid.appScope.xoa(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'
+    		      }
+    		    ]
+    	  };
+    
+    //Filter all data
+    $scope.refreshData = function (termObj) {
+        $scope.gridOptions.data = $scope.list;
 
+        while (termObj) {
+            var oSearchArray = termObj.split(' ');
+            $scope.gridOptions.data = $filter('filter')($scope.gridOptions.data, oSearchArray[0], undefined);
+            oSearchArray.shift();
+            termObj = (oSearchArray.length !== 0) ? oSearchArray.join(' ') : '';
+        }
+    };
+    
     $scope.sortType = 'firstName';
     $scope.filterTable = '';
     // filter list
@@ -588,11 +634,11 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
             // GetListStudent();
         });
     }
+    
     // load chi tiet student
     $scope.chitiet = [];
     $scope.chitiet1 = function(data) {
-        $scope.chitiet = data;
-        console.log($scope.chitiet.image);
+        $scope.chitiet =  data;
     }
     // reset password
     $scope.reset = function(data) {
@@ -684,7 +730,6 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource) {
     // lấy dữ liệu để xóa
     $scope.list_temp_inf_delete = [];
     $scope.xoa = function(data) {
-
         $scope.list_temp_inf_delete = data;
         console.log($scope.list_temp_inf_delete);
     }
