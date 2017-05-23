@@ -43,6 +43,21 @@ app.controller('subjectCtrl', function($scope, $http,$filter, uiGridConstants) {
 						{
 							name : 'subjectName',
 							displayName : 'Subject Name'
+// <<<<<<< HEAD
+// =======
+						// },
+						// {
+							// name : 'credit',
+							// displayName : 'Credit'
+						// },
+						// {
+							// name : 'hour',
+							// displayName : 'Hour'
+						// },
+						// {
+							// name : 'description',
+							// displayName : 'Description'
+// >>>>>>> origin/master2
 						},
 						{
 							name : 'credit',
