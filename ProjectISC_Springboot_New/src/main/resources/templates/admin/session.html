@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Specialization management</title>
+<title>Session management</title>
 
 <base href="http://localhost:8080/admin/" />
 
@@ -44,7 +44,7 @@
 <link href="js/sweetalert.css" rel="stylesheet" />
 </head>
 
-<body data-ng-app="myApp" data-ng-controller="specializationCtrl"
+<body data-ng-app="myApp" data-ng-controller="SessionCtrl"
 	class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -67,7 +67,6 @@
 									<ul class="nav child_menu">
 										<li><a href="/admin/intake">Intake</a></li>
 										<li><a href="/admin/school">School</a></li>
-										<li><a href="/admin/specialization">Specialization </a></li>
 										<li><a href="/admin/course">Course</a></li>
 										<li><a href="/admin/registrar">Registrar</a></li>
 										<li><a href="/admin/instructor">Instructor</a></li>
@@ -123,13 +122,12 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Specialization management</h3>
+							<h3>Session management</h3>
 						</div>
 
 						<div class="title_right">
 							<div class="form-group pull-right top_search">
-								<button data-toggle="modal" data-target="#myModal_them"
-									type="button" class="btn btn-primary btn-lg"
+								<button data-toggle="modal" data-target="#myModal_them" type="button" class="btn btn-primary btn-lg"
 									ng-click="ResetForm_Add()">Add</button>
 							</div>
 						</div>
@@ -138,13 +136,13 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
-								<!-- <div class="x_title">
+								<div class="x_title">
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6 pull-right">
 									<input id="filter" type="text" placeholder="Filter"
 										class="form-control" data-ng-model="filterTable" ng-change="refreshData(filterTable)"></input>
-								</div> -->
+								</div>
 								<!-- <div class="col-md-9 col-md-offset-3">
 									<strong>Show :</strong> <input type="checkbox" id="test1"
 										data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
@@ -158,8 +156,8 @@
 									<label for="intake">Intake</label> <input type="checkbox"
 										id="entrance" data-ng-model="showEntranceExam" /> <label
 										for="entrance">Entrance Exam</label> <input type="checkbox"
-										id="speci" data-ng-model="showSpecialization" /> <label
-										for="speci">Specialization</label>
+										id="speci" data-ng-model="showSession" /> <label
+										for="speci">Session</label>
 								</div> -->
 								<div class="x_content">
 									<!-- <label for="mySelect">Display </label> <select name="mySelect"
@@ -178,7 +176,6 @@
 									<div class="table-responsive">
 										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
 										
-										<a href="http://localhost:8080/admin/api/student/export">Export excel list</a>
 									</div>
 									<!-- <div class='pull-right'>
 										<uib-pagination
@@ -221,48 +218,38 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add specialization</h4>
+					<h4 class="modal-title" id="myModalLabel">Add Session</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="formAdd">
 						<div class="form-group">
 							<label class="control-label col-sm-3">ID</label>
 							<div class="col-sm-8">
-								<input type="text" id="specializationId_add"
-									name="specializationId_add" class="form-control" placeholder="" ng-keyup="hideDuplicateAlert()"
-									ng-model="specializationId_add" required="required" /> <span
-									ng-show="formAdd.specializationId_add.$touched &amp;&amp; formAdd.specializationId_add.$invalid"><p
-										style="color: red">This field is required</p></span>
+								<input type="text" id="SessionId_add"
+									name="SessionId_add" class="form-control" placeholder="" ng-keyup="hideDuplicateAlert()"
+									ng-model="SessionId_add" required="required" /> <span
+									ng-show="formAdd.SessionId_add.$touched &amp;&amp; formAdd.SessionId_add.$invalid">
+									<p style="color: red">This field is required</p></span>
 								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-3">Name</label>
 							<div class="col-sm-8">
-								<input type="text" id="specializationName_add"
-									name="specializationName_add" ng-model="specializationName_add"
+								<input type="text" id="SessionName_add"
+									name="SessionName_add" ng-model="SessionName_add"
 									class="form-control" placeholder="" required="required" /> <span
-									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
-										style="color: red">This field is required</p></span>
+									ng-show="formAdd.SessionName_add.$touched &amp;&amp; formAdd.SessionName_add.$invalid">
+									<p style="color: red">This field is required</p></span>
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3 col-md-3">Status</label>
-							<div class="col-sm-8 col-md-8" style="padding:6px">
-								 <input type="radio" ng-model="active_add"
-									ng-value="true" ng-checked="true" /> Active
-								 <input type="radio" ng-model="active_add"
-									ng-value="false" /> Inactive
-							</div>
-
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="addSpecialization(false)"
-						ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add</button>
-					<button class="btn btn-default" ng-click="addSpecialization(true)"
-						ng-disabled="formAdd.specializationName_add.$error.required || formAdd.specializationId_add.$error.required">Add
+					<button class="btn btn-primary" ng-click="addSession(false)"
+						ng-disabled="formAdd.SessionName_add.$error.required || formAdd.SessionId_add.$error.required">Add</button>
+					<button class="btn btn-default" ng-click="addSession(true)"
+						ng-disabled="formAdd.SessionName_add.$error.required || formAdd.SessionId_add.$error.required">Add
 						and close</button>
 					<button class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -280,17 +267,17 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Edit specialization</h4>
+					<h4 class="modal-title" id="myModalLabel">Edit Session</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm1">
 						<div class="form-group">
 							<label class="control-label col-sm-3">ID</label>
 							<div class="col-sm-8">
-								<input type="hidden" ng-model="info.id" /> <input type="text" id="specializationId_edit" ng-keyup="hideDuplicateAlert()"
-									name="specializationId_edit" ng-model="info.specializationId"
+								<input type="hidden" ng-model="info.id" /> <input type="text" id="SessionId_edit" ng-keyup="hideDuplicateAlert()"
+									name="SessionId_edit" ng-model="info.id"
 									class="form-control" placeholder="" required="required" /><span
-									ng-show="editForm1.specializationId_edit.$touched &amp;&amp; editForm1.specializationId_edit.$invalid"><p
+									ng-show="editForm1.SessionId_edit.$touched &amp;&amp; editForm1.SessionId_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
 								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
 							</div>
@@ -298,28 +285,19 @@
 						<div class="form-group">
 							<label class="control-label col-sm-3">Name</label>
 							<div class="col-sm-8">
-								<input type="text" id="specializationName_edit"
-									name="specializationName_edit"
-									ng-model="info.specializationName" class="form-control"
+								<input type="text" id="SessionName_edit"
+									name="SessionName_edit"
+									ng-model="info.sessionName" class="form-control"
 									placeholder="" required="required" /><span
-									ng-show="editForm1.specializationName_edit.$touched &amp;&amp; editForm1.specializationName_edit.$invalid"><p
+									ng-show="editForm1.SessionName_edit.$touched &amp;&amp; editForm1.SessionName_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3">Status</label>
-							<div class="col-sm-9 col-md-9" style="padding:6px">
-								<input type="radio" ng-model="info.active" ng-value="true" />
-								Active <input type="radio" ng-model="info.active"
-									ng-value="false" /> Inactive
-
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" ng-click="editSpecialization()"
-						ng-disabled="editForm1.specializationName_edit.$error.required || editForm1.specializationId_edit.$error.required">Save</button>
+					<button class="btn btn-primary" ng-click="editSession()"
+						ng-disabled="editForm1.SessionName_edit.$error.required || editForm1.SessionId_edit.$error.required">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="refreshList()">Close</button>
 				</div>
@@ -327,7 +305,7 @@
 		</div>
 	</div>
 	<!-- Modal edit subject -->
-	<div class="modal fade" id="myModal_editSubject" tabindex="-1"
+<!-- 	<div class="modal fade" id="myModal_editSubject" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -337,16 +315,16 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						Edit relevant courses for: <label ng-bind="info_editRelevantSubject.specializationId"></label>
+						Edit relevant courses for: <label ng-bind="info_editRelevantSubject.SessionId"></label>
 						<br/>
-						(<label ng-bind="info_editRelevantSubject.specializationName"></label>)
+						(<label ng-bind="info_editRelevantSubject.SessionName"></label>)
 					</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="editForm">
 						<h5>Available courses</h5>
 						<input type="text" placeholder="Filter"	class="form-control" data-ng-model="filterSubject"></input>
-						<!-- scrollable table -->
+						scrollable table
 						<div class="well" style="height:200px;overflow:auto">
 							<div class="table-responsive" ng-model="filterController">
 								<table class="table table-condensed table-hover">
@@ -474,7 +452,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- Modal xóa -->
 	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -488,12 +466,12 @@
 				</div>
 
 				<div class="modal-body">
-					<!-- 					<input type="hidden" ng-model="specialization_delete.id"></input> -->
+					<!-- 					<input type="hidden" ng-model="Session_delete.id"></input> -->
 					<p>Are you sure you want to delete this?</p>
 				</div>
 
 				<div class="modal-footer">
-					<a class="btn btn-danger btn-ok" ng-click="deleteSpecialization()">Yes</a>
+					<a class="btn btn-danger btn-ok" ng-click="deleteSession()">Yes</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 
 				</div>
@@ -514,7 +492,7 @@
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/specializationCtrl.js"></script>
+	<script type="text/javascript" src="scripts/sessionCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->

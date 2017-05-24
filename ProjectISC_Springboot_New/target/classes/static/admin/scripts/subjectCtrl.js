@@ -1,4 +1,4 @@
-app.controller('subjectCtrl', function($scope, $http,$filter) {
+app.controller('subjectCtrl', function($scope, $http,$filter, uiGridConstants) {
 		$scope.rowdata = {
 			     availableOptions: [
 			    	 {id: '15', name: '15'},
@@ -37,24 +37,59 @@ app.controller('subjectCtrl', function($scope, $http,$filter) {
 				paginationPageSize : 15,
 				columnDefs : [
 						{
-							name : 'specializationId',
-							displayName : 'Specialization Id'
+							name : 'subjectId',
+							displayName : 'Subject Id'
 						},
 						{
-							name : 'specializationName',
-							displayName : 'specialization Name'
+							name : 'subjectName',
+							displayName : 'Subject Name'
+// <<<<<<< HEAD
+// =======
+						// },
+						// {
+							// name : 'credit',
+							// displayName : 'Credit'
+						// },
+						// {
+							// name : 'hour',
+							// displayName : 'Hour'
+						// },
+						// {
+							// name : 'description',
+							// displayName : 'Description'
+// >>>>>>> origin/master2
 						},
 						{
-							name : 'active',
-							visible : true
+							name : 'credit',
+							displayName : 'Credit'
+						},
+						{
+							name : 'hour',
+							displayName : 'Hour'
+						},
+						{
+							name : 'description',
+							displayName : 'Description'
+						},
+						{
+							name : 'active', displayName:'Status', 
+							visible : true, 
+							cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.active == 0 ? "Inactive" : "Active"}}</div>',
+							filter: {
+			    		          type: uiGridConstants.filter.SELECT,
+			    		          selectOptions: [
+			    		              { value: 'true', label: 'Active' },
+			    		              { value: 'false', label: 'Inactive' }
+			    		          ]
+			    		      }
 						},
 						{
 							name : 'Action',
 							enableSorting : false,
 							enableFiltering : false,
-							cellTemplate : '<button type="button" ng-click="viewRelevantSpecialization(x)"class="btn btn-success btn-sm" data-toggle="modal"data-tooltip ="tooltip" title="View specializations"data-target="#myModal_viewRelevantSpecialization" ><span class="glyphicon glyphicon-th-list"></span></button>'
-                                 +'<button type="button" ng-click="editsubject(x)"class="btn btn-primary btn-sm" data-toggle="modal" data-tooltip ="tooltip" title="Edit"data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"  ></span></button>'
-                                 +'<button type="button" ng-click="deletesubject(x)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete"data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"   ></span></button>'
+							cellTemplate : '<button type="button" ng-click="grid.appScope.viewRelevantSpecialization(x)"class="btn btn-success btn-sm" data-toggle="modal"data-tooltip ="tooltip" title="View specializations"data-target="#myModal_viewRelevantSpecialization" ><span class="glyphicon glyphicon-th-list"></span></button>'
+                                 +'<button type="button" ng-click="grid.appScope.editsubject(x)"class="btn btn-primary btn-sm" data-toggle="modal" data-tooltip ="tooltip" title="Edit"data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"  ></span></button>'
+                                 +'<button type="button" ng-click="grid.appScope.deletesubject(x)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete"data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"   ></span></button>'
 						} ]
 			};
 			// lọc toàn bộ dữ liệu

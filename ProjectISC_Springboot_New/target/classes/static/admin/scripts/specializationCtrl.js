@@ -1,4 +1,4 @@
-app.controller('specializationCtrl',function($scope, $http, $filter) {
+app.controller('specializationCtrl',function($scope, $http, $filter, uiGridConstants) {
 //
 //					function configMainTable() {
 //						// data get from getListSpecialiation()
@@ -79,8 +79,16 @@ app.controller('specializationCtrl',function($scope, $http, $filter) {
 									displayName : 'specialization Name'
 								},
 								{
-									name : 'active',
-									visible : true
+									name : 'active', displayName:'Status', 
+									visible : true, 
+									cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.active == 0 ? "Inactive" : "Active"}}</div>',
+									filter: {
+					    		          type: uiGridConstants.filter.SELECT,
+					    		          selectOptions: [
+					    		              { value: 'true', label: 'Active' },
+					    		              { value: 'false', label: 'Inactive' }
+					    		          ]
+					    		      }
 								},
 								{
 									name : 'Action',

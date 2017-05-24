@@ -1,4 +1,4 @@
-app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
+app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource, uiGridConstants) {
 	$scope.rowdata = {
 		availableOptions : [ {
 			id : '15',
@@ -32,15 +32,22 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
 			
 		});
 		
-	}
+	}	
+	
+	//List json Intake object for dropdown 
+	var list_intake=[];
 	function getAllIntake(){
-		$scope.listIntake = [];
+		$scope.listIntake=[];
 		$http.get("/api/intake").then(function(response) {
-			$scope.listIntake = response.data;
+			$scope.listIntake=response.data;
+			$scope.listIntake.forEach(function(intake, index) {
+				list_intake.push({'value':intake.intakeName,'label':intake.intakeName});
+		    });
 		});
 	}
 	getAllEntranceExam();
 	getAllIntake();
+	
 	// tạo dữ liệu cho table
 	$scope.gridOptions = {
     		noUnselect : true,
@@ -57,9 +64,12 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource) {
     	    columnDefs: [
 
     		      { name: 'entranceExamName', displayName : ' Name' },
-    		      { name: 'startDate', visible : true },
+    		      { name: 'startDate', visible : true, cellFilter: 'date:"MM/dd/yyyy"' },
     		      { name: 'description', visible : true },
-    		      { name: 'intake.intakeName', displayName : 'School', visible : true },
+    		      { name: 'intake.intakeName', displayName : 'Intake', visible : true, filter: {
+    		          type: uiGridConstants.filter.SELECT,
+    		          selectOptions: list_intake
+    		      } },
     		      { name: 'Action',enableSorting: false,enableFiltering: false,
     		             cellTemplate:'<button ng-click="grid.appScope.getStudents(row.entity.id)" data-toggle="modal" class="btn btn-success btn-sm" data-tooltip ="tooltip" title="View detail informations" data-target="#studentModal"><span class="glyphicon glyphicon-eye-open"></span></button>' 
     		            	 			+'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.getData(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-edit"></span></button>'
