@@ -17,7 +17,7 @@ public class RoomDaoImpl implements RoomDao {
 	@Override
 	public List<Room> getAllRooms() {
 		// TODO Auto-generated method stub
-		return sessionFactory.getCurrentSession().createQuery("from Rooom").list();
+		return sessionFactory.getCurrentSession().createQuery("from Room").list();
 	}
 
 	@Override
