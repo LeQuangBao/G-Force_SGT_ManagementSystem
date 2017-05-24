@@ -282,14 +282,13 @@ app
 						$http.get("/api/session/" + data.id).then(
 								function(response) {
 									$scope.info = response.data;
-									console.log(response.data);
 								});
 						//SpecID = data.sessionId;
 						$scope.duplicateAlert = "";
 					}
 
 					$scope.editSession = function() {
-						if (id_duplicate_Edit($scope.info.SessionId)) {
+//						if (id_duplicate_Edit($scope.info.SessionId)) {
 							$http({
 								method : "PUT",
 								url : "/api/session",
@@ -307,7 +306,7 @@ app
 													alertFailMessage("Oops! Something went wrong, please check your input again.");
 												}
 											});
-						}
+						//}
 					}
 					// update relevant subjects
 					$scope.currentSubjects = [];
