@@ -1,6 +1,6 @@
 app
 		.controller(
-				'specializationCtrl',
+				'timetableCtrl',
 				function($scope, $http, $filter) {
 					//
 					// function configMainTable() {
@@ -23,7 +23,7 @@ app
 					var deleteSpecialization = "";
 					var alertDuration = 1800;
 
-					// get list specializations
+					// get list timetable
 					function getListTimetable() {
 						$scope.list = [];
 						$http.get("http://localhost:8080/api/timetable").then(
@@ -33,7 +33,27 @@ app
 
 								})
 					}
+					// get list intake
+					function getListIntake() {
+						$scope.list_intake = [];
+						$http.get("http://localhost:8080/api/intake").then(
+								function(response) {
+									$scope.list_intake = response.data;
+
+								})
+					}
+					// get list session
+					function getListSession() {
+						$scope.list_session = [];
+						$http.get("http://localhost:8080/api/session").then(
+								function(response) {
+									$scope.list_session = response.data;
+
+								})
+					}
 					getListTimetable();
+					getListIntake();
+					getListSession();
 					// tạo dữ liệu cho table
 					$scope.gridOptions = {
 						noUnselect : true,
@@ -53,12 +73,12 @@ app
 									displayName : 'Name'
 								},
 								{
-									name : 'specializationName',
-									displayName : 'specialization Name'
+									name : 'intake',
+									displayName : 'Intake'
 								},
 								{
-									name : 'active',
-									visible : true
+									name : 'session',
+									displayName : 'Session'
 								},
 								{
 									name : 'Action',
@@ -84,6 +104,134 @@ app
 									: '';
 						}
 					};
+					$scope.filterTable = '';
+
+					  $scope.sortType = 'specializationName';
+					    $scope.filterTable = '';
+					    // filter list
+					    $scope.listfiltered = function(element) {
+					        return $filter('filter')(element, $scope.filterTable);
+					    };
+
+					    function matchFirstChar(c, string) {
+					        return (string.charAt(0) == c);
+					    }
+
+					    function removeFirstChar(string) {
+					        return string.slice(1);
+					    }
+
+					    function removeDash(label) {
+					        if (matchFirstChar('-', label)) {
+					            return removeFirstChar(label);
+					        }
+					        return label;
+					    }
+
+					    function addDash(label) {
+					        if (!matchFirstChar('-', label)) {
+					            return '-' + label;
+					        }
+					        return label;
+					    }
+
+					    // formatting functions
+					    // for displaying table headers and tooltips
+					    function capitalizeFirstLetter(string) {
+					        return string.charAt(0).toUpperCase() + string.slice(1);
+					    }
+
+					    function makeReadableLabel(label) {
+					        var formatted = label;
+					        switch (label) {
+					            case 'specializationName':
+					                formatted = 'specialization name';
+					                break;
+//					            case 'lastName':
+//					                formatted = 'last name';
+					        }
+					        return formatted;
+					    }
+
+					    // sort functions
+					    // add or remove '-' to sort up or down
+					    $scope.sortReverse = function(set) {
+					        set = set || false;
+					        if (set || !matchFirstChar('-', $scope.sortType)) {
+					            $scope.sortType = addDash($scope.sortType);
+					        } else {
+					            $scope.sortType = removeDash($scope.sortType);
+					        }
+					    };
+
+					    // sort a column with a single data attribute
+					    $scope.singleSort = function(label) {
+					        if ($scope.sortType == label) {
+					            $scope.sortReverse();
+					        } else {
+					            $scope.sortType = label;
+					        }
+					    };
+					    $scope.sortDescend = function(label1, label2) {
+					        label2 = label2 || '';
+					        return ($scope.sortType == label1 || $scope.sortType == label2);
+					    };
+
+					    $scope.sortAscend = function(label1, label2) {
+					        label2 = label2 || '';
+					        return ($scope.sortType == ('-' + label1) || $scope.sortType == ('-' + label2));
+					    };
+
+					    // show a tooltip displaying how a column is sorted
+					    $scope.sortTooltip = function(label1) {
+
+					        var order = 'descending';
+					        if (matchFirstChar('-', $scope.sortType)) {
+					            order = 'ascending';
+					        }
+
+					        var baseSortType = removeDash($scope.sortType);
+					        if (label1 == baseSortType) {
+					            return capitalizeFirstLetter((makeReadableLabel(baseSortType)) + ' ' + order);
+					        }
+					        return 'Sort by ' + makeReadableLabel(label1)
+					    };
+//					    // Phân trang
+//					    $scope.currentPage = 1;
+//					    // max size of the pagination bar
+//					    $scope.maxPaginationSize = 10;
+//					    // calculate total pages
+//
+//					    $scope.itemsPerPage = $scope.rowdata.selectedOption.id;
+//					    $scope.updatePageIndexes = function() {
+//					        var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
+//					        if (totalPages <= 10) {
+//					            // less than 10 total pages so show all
+//					            $scope.firstIndex = 1;
+//					            $scope.lastIndex = totalPages;
+//					        } else {
+//					            // more than 10 total pages so calculate start and
+//					            // end pages
+//					            if ($scope.currentPage <= 6) {
+//					                $scope.firstIndex = 1;
+//					                $scope.lastIndex = 10;
+//					            } else if ($scope.currentPage + 4 >= totalPages) {
+//					                $scope.firstIndex = totalPages - 9;
+//					                $scope.lastIndex = totalPages;
+//					            } else {
+//					                $scope.firstIndex = $scope.currentPage - 5;
+//					                $scope.lastIndex = $scope.currentPage + 4;
+//					            }
+//					        }
+//					        $scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+//					        $scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
+//					    };
+//					    $scope.updatePageIndexes();
+//
+//					    $scope.showList = function(index) {
+//					        return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
+//					    }
+//					    
 
 					// function makeReadableLabel(label) {
 					// var formatted = label;
@@ -99,8 +247,32 @@ app
 
 					// add timetable
 					$scope.addTimetable = function() {
-
-					}
+							$http({
+								method : "POST",
+								url : "/api/timetable",
+								data : $scope.timetable,
+								dataType : "json",
+								headers : {
+									'Content-Type' : 'application/json'
+								}
+							})
+									.then(
+											function(response) {
+												getListTimetable();
+												alertAddSucess();
+												$scope.ResetForm_Add();
+												if (close == true) {
+													$("#myModal_them").modal(
+															"hide");
+												}
+											},
+											function(response) {
+												if (response.status == 406) {
+													alertFailMessage("Oops! Something went wrong, please check your input again.");
+												}
+											});
+						}
+					
 
 					// update timetable
 					$scope.callEditTiametable = function(data) {
@@ -113,7 +285,25 @@ app
 					}
 
 					$scope.editTimetable = function() {
-						
+						if (id_duplicate_Edit($scope.info.specializationId)) {
+							$http({
+								method : "PUT",
+								url : "/api/timetable",
+								data : JSON.stringify($scope.info),
+								dataType : "json",
+							})
+									.then(
+											function(response) {
+												$("#myModal_sua").modal("hide");
+												getListTimetable();
+												alertEditSucess();
+											},
+											function(response) {
+												if (response.status == 406) {
+													alertFailMessage("Oops! Something went wrong, please check your input again.");
+												}
+											});
+						}
 					}
 					
 					// delete timetable
@@ -228,20 +418,20 @@ app
 						})
 					}
 					// reset form add
-//					$scope.ResetForm_Add = function() {
-//						$scope.specializationId_add = "";
-//						$scope.specializationName_add = "";
+					$scope.ResetForm_Add = function() {
+						$scope.timetable.timetableName = "";
 //						$scope.active_add = true;
-//						$scope.formAdd.specializationId_add.$setUntouched();
-//						$scope.formAdd.specializationName_add.$setUntouched();
+						//$scope.formAdd.specializationId_add.$setUntouched();
+						$scope.formAdd.timetable.timetableName.$setUntouched();
 //						$scope.duplicateAlert = "";
 //					}
 
-				});
-// Chu thich cua nut phan action
+				}
+//// Chu thich cua nut phan action
 $(document).ready(function() {
 	$('body').tooltip({
 		selector : "[data-tooltip=tooltip]",
 		container : "body"
 	});
+});
 });

@@ -38,6 +38,11 @@ public class AdminController {
 	public String buildTimetable() {
 		return "admin/buildTimetable";
 	}
+	@RequestMapping(value = "/admin/timetable")
+	public String Timetable() {
+		return "admin/timetable";
+	}
+	
 	
 	
 	@RequestMapping(value = "/admin/course")
