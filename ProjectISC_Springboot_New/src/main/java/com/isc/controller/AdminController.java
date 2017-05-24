@@ -52,5 +52,8 @@ public class AdminController {
 		return "admin/registrar";
 	}
 
-	
+	@RequestMapping(value = "/admin/room")
+	public String room() {
+		return "admin/room";
+	}
 }
