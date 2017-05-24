@@ -38,6 +38,11 @@ public class AdminController {
 	public String buildTimetable() {
 		return "admin/buildTimetable";
 	}
+	@RequestMapping(value = "/admin/timetable")
+	public String Timetable() {
+		return "admin/timetable";
+	}
+	
 	
 	
 	@RequestMapping(value = "/admin/course")
@@ -63,5 +68,8 @@ public class AdminController {
 		return "admin/registrar";
 	}
 
-	
+	@RequestMapping(value = "/admin/room")
+	public String room() {
+		return "admin/room";
+	}
 }

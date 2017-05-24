@@ -51,3 +51,5 @@ ProjectISC_Springboot_New/target/classes/META-INF/maven/com.isc/demo/pom.propert
 ProjectISC_Springboot_New/target/classes/application.properties
 *.MF
 ProjectISC_Springboot_New/target/classes/META-INF/maven/com.isc/demo/pom.properties
+ProjectISC_Springboot_New/src/main/java/com/isc/dao/TimetableDao.java
+ProjectISC_Springboot_New/src/main/java/com/isc/dao/TimetableDao.java

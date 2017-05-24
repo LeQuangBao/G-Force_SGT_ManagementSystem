@@ -44,7 +44,7 @@
 <link href="js/sweetalert.css" rel="stylesheet" />
 </head>
 
-<body data-ng-app="myApp" data-ng-controller="specializationCtrl"
+<body data-ng-app="myApp" data-ng-controller="buildTimetableCtrl"
 	class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -125,16 +125,173 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>Build timetable</h3>
-							<br/>
-						<p>Show: front end</p>
-						<input type="checkbox"/>
+
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-8 col-sm-12 col-xs-12">
-							<div class="col-md-12 col-sm-12 col-xs-12"></div>
+					<div class="clearfix"></div>
+					<div class="x_panel">
+						<div class="x_content">
+
+							<div class="row">
+							<h4 class="text-center">Pick class</h4>
+							<div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Pick</th>
+										<th>Name</th>
+										<th>Course</th>
+										<th>Instructor</th>
+										<th>Room</th>
+										<th style="padding-bottom: 1px;"><span
+											class="btn btn-primary btn-xs glyphicon glyphicon-plus"></span></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="clickable">
+										<td><input type="radio" name="pickCourse" /></td>
+										<td>FE 1</td>
+										<td>FrontEnd</td>
+										<td>Nguyễn Thành Nam</td>
+										<td>201</td>
+										<td><span
+											class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span
+											class="btn btn-danger btn-xs glyphicon glyphicon-remove"></span></td>
+									</tr>
+									<tr class="clickable">
+										<td><input type="radio" name="pickCourse"  /></td>
+										<td>FE 2</td>
+										<td>FrontEnd</td>
+										<td>Quang Vũ</td>
+										<td>101</td>
+										<td><span
+											class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span
+											class="btn btn-danger btn-xs glyphicon glyphicon-remove"></span></td>
+									</tr>
+									<tr class="clickable">
+										<td><input type="radio" name="pickCourse"  /></td>
+										<td>Onjob Training</td>
+										<td>Onjob Training</td>
+										<td>Ngô Thanh Hải</td>
+										<td>102</td>
+										<td><span
+											class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span
+											class="btn btn-danger btn-xs glyphicon glyphicon-remove"></span></td>
+									</tr>
+									<tr class="clickable">
+										<td><input type="radio" name="pickCourse"  /></td>
+										<td>BackEnd</td>
+										<td>Back End</td>
+										<td>Trần Xuân Mai</td>
+										<td>103</td>
+										<td><span
+											class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span
+											class="btn btn-danger btn-xs glyphicon glyphicon-remove"></span></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="text-center">
+							<h4>Pick action
+							</h4>
+							<ul class="pagination">
+								<li class="active"><a>Add</a></li>
+								<li><a>Remove</a></li>
+							</ul>
+							</div>
 						</div>
-						<div class="col-md-4 col-sm-12 col-xs-12"></div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+									<h4 class="text-center">Add/Remove picked class to timetable</h4>
+										<p>
+											Show: FE 1 <input type="checkbox" checked="checked" /> FE 2
+											<input type="checkbox" checked="checked" /> BackEnd <input
+												type="checkbox" /> Onjob - Training <input type="checkbox"
+												checked="checked" />
+										</p>
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th width="10%"></th>
+														<th width="12%">Mon - 6/1</th>
+														<th width="12%">Tue - 6/2</th>
+														<th width="12%">Wed - 6/3</th>
+														<th width="12%">Thu - 6/4</th>
+														<th width="12%">Fri - 6/5</th>
+														<th width="12%">Sat - 6/6</th>
+														<th width="12%">Sun - 6/7</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>7:30 - 9:30</td>
+														<td class="clickable">FE 1, FE 2</td>
+														<td class="clickable">FE 1, FE 2</td>
+														<td class="clickable">FE 1</td>
+														<td class="clickable">Onjob training</td>
+														<td class="clickable">Onjob training</td>
+														<td class="clickable"></td>
+														<td class="clickable"></td>
+													</tr>
+													<tr>
+														<td class="clickable">9:30 - 11:30</td>
+														<td class="clickable">FE 2</td>
+														<td class="clickable">FE 2</td>
+														<td class="clickable"></td>
+														<td class="clickable"></td>
+														<td class="clickable"></td>
+														<td class="clickable"></td>
+														<td class="clickable"></td>
+													</tr>
+													<tr>
+														<td>13:00 - 15:00</td>
+														<td class="clickable">FE 1, FE 2</td>
+														<td class="clickable">FE 1, FE 2</td>
+														<td class="clickable">FE 1</td>
+														<td class="clickable">Onjob training</td>
+														<td class="clickable">Onjob training</td>
+														<td class="clickable"></td>
+														<td class="clickable"></td>
+													</tr>
+													<tr>
+														<td>15:00 - 17:00</td>
+														<td class="clickable">FE 2</td>
+														<td class="clickable">FE 2</td>
+														<td class="clickable">FE 1</td>
+														<td class="clickable"></td>
+														<td class="clickable">Onjob training</td>
+														<td class="clickable"></td>
+														<td class="clickable"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 text-center">
+						<p>Week
+							<ul class="pagination clickable">
+								<li class="active"><a>1</a></li>
+								<li><a>2</a></li>
+								<li><a>3</a></li>
+								<li><a>4</a></li>
+								<li><a>5</a></li>
+								<li><a>6</a></li>
+								<li><a>7</a></li>
+								<li><a>8</a></li>
+								<li><a>9</a></li>
+								<li><a>10</a></li>
+								<li><a>11</a></li>
+								<li><a>12</a></li>
+								<li><a>13</a></li>
+								<li><a>14</a></li>
+								<li><a>15</a></li>
+							</ul>
+						</p>
+						</div>
+						
 					</div>
 				</div>
 			</div>

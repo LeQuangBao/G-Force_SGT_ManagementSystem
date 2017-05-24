@@ -117,7 +117,7 @@ app.controller('specializationCtrl',function($scope, $http, $filter, uiGridConst
 					// $scope.sortType = 'specializationName';
 					$scope.filterTable = '';
 
-					  $scope.sortType = 'schoolName';
+					  $scope.sortType = 'specializationName';
 					    $scope.filterTable = '';
 					    // filter list
 					    $scope.listfiltered = function(element) {

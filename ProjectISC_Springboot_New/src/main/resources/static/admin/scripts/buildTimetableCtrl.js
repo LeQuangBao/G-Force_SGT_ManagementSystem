@@ -1,21 +1,4 @@
-app.controller('specializationCtrl',function($scope, $http, $filter, uiGridConstants) {
-//
-//					function configMainTable() {
-//						// data get from getListSpecialiation()
-//						$scope.table_specialization = {
-//
-//							paginationPageSizes : [ 25, 50, 75 ],
-//							paginationPageSize : 25,
-//							columnDefs : [ {
-//								name : 'ID'
-//							}, {
-//								name : 'Name'
-//							}, {
-//								name : 'Action'
-//							} ]
-//						};
-//					}
-//					configMainTable();
+app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConstants) {
 					$scope.rowdata = {
 						availableOptions : [ {
 							id : '15',
@@ -117,7 +100,7 @@ app.controller('specializationCtrl',function($scope, $http, $filter, uiGridConst
 					// $scope.sortType = 'specializationName';
 					$scope.filterTable = '';
 
-					  $scope.sortType = 'specializationName';
+					  $scope.sortType = 'schoolName';
 					    $scope.filterTable = '';
 					    // filter list
 					    $scope.listfiltered = function(element) {
