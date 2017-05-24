@@ -143,59 +143,12 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
-								<!-- <div class="x_title">
-									<div class="clearfix"></div>
-								</div> -->
-								<!-- <div class="col-md-6 pull-right">
-									<input id="filter" type="text" placeholder="Filter"
-										class="form-control" data-ng-model="filterTable" ng-change="refreshData(filterTable)"></input>
-								</div> -->
-								<!-- <div class="col-md-9 col-md-offset-3">
-									<strong>Show :</strong> <input type="checkbox" id="test1"
-										data-ng-model="showBirthday" /> <label for="test1">Birthday</label>
-									<input type="checkbox" id="test4" data-ng-model="showEmail" />
-									<label for="test4">Email</label> <input type="checkbox"
-										id="test2" data-ng-model="showPhone" /> <label for="test2">Phone</label>
-									<input type="checkbox" id="test3" data-ng-model="showAddress" />
-									<label for="test3">Address</label> <input type="checkbox"
-										id="school" data-ng-model="showSchool" /> <label for="school">School</label>
-									<input type="checkbox" id="intake" data-ng-model="showIntake" />
-									<label for="intake">Intake</label> <input type="checkbox"
-										id="entrance" data-ng-model="showEntranceExam" /> <label
-										for="entrance">Entrance Exam</label> <input type="checkbox"
-										id="speci" data-ng-model="showSpecialization" /> <label
-										for="speci">Specialization</label>
-								</div> -->
 								<div class="x_content">
-									<!-- <label for="mySelect">Display </label> <select name="mySelect"
-										id="mySelect"
-										ng-options="option.name for option in rowdata.availableOptions track by option.id"
-										ng-model="rowdata.selectedOption"
-										ng-change="ChangeRow(rowdata.selectedOption.id)">
-									</select> <label> rows</label>
-									<br/>
-									<label for="mySelect">Filter by intake</label> <select name="mySelect"
-										id="mySelect"
-										ng-options="x.intakeName for x in list_intake"
-										ng-model="filterByIntake"
-										ng-change="c()">
-									</select> -->
 									<div class="table-responsive">
 										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
 										
 										<a href="http://localhost:8080/admin/api/student/export">Export excel list</a>
 									</div>
-									<!-- <div class='pull-right'>
-										<uib-pagination
-											data-total-items="(list | filter:filterTable).length"
-											data-ng-model="currentPage"
-											data-ng-change="updatePageIndexes()"
-											data-max-size="maxPaginationSize"
-											data-items-per-page="itemsPerPage" data-boundary-links="true"
-											data-previous-text="&lsaquo;" data-next-text="&rsaquo;"
-											data-first-text="&laquo;" data-last-text="&raquo;">
-										</uib-pagination>
-									</div> -->
 								</div>
 							</div>
 						</div>
