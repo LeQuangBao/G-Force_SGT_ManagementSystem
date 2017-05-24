@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated May 21, 2017 8:37:07 PM by Hibernate Tools 5.2.1.Final
+// Generated May 24, 2017 1:26:03 PM by Hibernate Tools 5.2.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -27,10 +27,10 @@ public class Time implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Iclass iclass;
+	private Room room;
 	private SessionDetail sessionDetail;
 	private Date date;
 	private Integer altInstructor;
-	private Integer altRoom;
 
 	public Time() {
 	}
@@ -41,12 +41,12 @@ public class Time implements java.io.Serializable {
 		this.date = date;
 	}
 
-	public Time(Iclass iclass, SessionDetail sessionDetail, Date date, Integer altInstructor, Integer altRoom) {
+	public Time(Iclass iclass, Room room, SessionDetail sessionDetail, Date date, Integer altInstructor) {
 		this.iclass = iclass;
+		this.room = room;
 		this.sessionDetail = sessionDetail;
 		this.date = date;
 		this.altInstructor = altInstructor;
-		this.altRoom = altRoom;
 	}
 
 	@Id
@@ -69,6 +69,16 @@ public class Time implements java.io.Serializable {
 
 	public void setIclass(Iclass iclass) {
 		this.iclass = iclass;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "alt_room")
+	public Room getRoom() {
+		return this.room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -98,15 +108,6 @@ public class Time implements java.io.Serializable {
 
 	public void setAltInstructor(Integer altInstructor) {
 		this.altInstructor = altInstructor;
-	}
-
-	@Column(name = "alt_room")
-	public Integer getAltRoom() {
-		return this.altRoom;
-	}
-
-	public void setAltRoom(Integer altRoom) {
-		this.altRoom = altRoom;
 	}
 
 }
