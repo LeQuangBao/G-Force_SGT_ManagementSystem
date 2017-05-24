@@ -11,6 +11,22 @@
 th.sortable {
 	cursor: pointer;
 }
+.clickable {
+	cursor: pointer;
+}
+
+td.clickable:hover {
+	cursor:pointer;
+	background-color: #EEE;
+}
+ul.clickable > li > a:hover {
+	cursor:pointer;
+	background-color: #EEE;
+}
+tr.clickable:hover {
+	cursor:pointer;
+	background-color: #EEE;
+}
 th.sortable:hover {
 	background: #EEE;
 }
