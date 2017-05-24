@@ -1,4 +1,4 @@
-app.controller('registrarCtrl', function($scope, $http,$filter) {
+app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants) {
 	$scope.rowdata = {
 		     availableOptions: [
 
@@ -45,11 +45,19 @@ app.controller('registrarCtrl', function($scope, $http,$filter) {
 	    		      { name: 'username',displayName:'User Name' },
 	    		      { name: 'lastname', displayName : 'Last Name' },
 	    		      { name: 'firstname', displayName : 'First Name'},
-	    		      { name: 'birthday', visible : false },
+	    		      { name: 'birthday', visible : false, cellFilter: 'date:"MM/dd/yyyy"' },
 	    		      { name: 'email', visible : false },
 	    		      { name: 'phone', visible : false },
 	    		      { name: 'address', visible : false },
-	    		      { name: 'status'},
+	    		      { name: 'status',
+	    		          cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.status == 0 ? "Inactive" : "Active"}}</div>',
+	    		          filter: {
+	    		          type: uiGridConstants.filter.SELECT,
+	    		          selectOptions: [
+	    		              { value: 'true', label: 'Active' },
+	    		              { value: 'false', label: 'Inactive' }
+	    		          ]
+	    		      }},
 	    		      { name: 'Action',enableSorting: false,enableFiltering: false,
 	    		             cellTemplate:'<button ng-click="grid.appScope.viewRegistrar(row.entity)" data-toggle="modal" class="btn btn-success btn-sm" data-tooltip ="tooltip" title="View detail informations" data-target="#myModal_detail"><span class="glyphicon glyphicon-eye-open"></span></button>' 
 	    		            	 			+'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.editRegistrar(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'

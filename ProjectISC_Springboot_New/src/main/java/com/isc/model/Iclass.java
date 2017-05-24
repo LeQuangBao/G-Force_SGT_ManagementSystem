@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated May 21, 2017 8:37:07 PM by Hibernate Tools 5.2.1.Final
+// Generated May 24, 2017 1:26:03 PM by Hibernate Tools 5.2.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,35 +21,31 @@ import javax.persistence.Table;
 @Table(name = "iclass", catalog = "my_db")
 public class Iclass implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
+	private Room room;
 	private Subject subject;
 	private Timetable timetable;
 	private String iclassName;
 	private int instructor;
-	private int room;
 	private Set<Time> times = new HashSet<Time>(0);
 
 	public Iclass() {
 	}
 
-	public Iclass(Subject subject, Timetable timetable, String iclassName, int instructor, int room) {
+	public Iclass(Room room, Subject subject, Timetable timetable, String iclassName, int instructor) {
+		this.room = room;
 		this.subject = subject;
 		this.timetable = timetable;
 		this.iclassName = iclassName;
 		this.instructor = instructor;
-		this.room = room;
 	}
 
-	public Iclass(Subject subject, Timetable timetable, String iclassName, int instructor, int room, Set<Time> times) {
+	public Iclass(Room room, Subject subject, Timetable timetable, String iclassName, int instructor, Set<Time> times) {
+		this.room = room;
 		this.subject = subject;
 		this.timetable = timetable;
 		this.iclassName = iclassName;
 		this.instructor = instructor;
-		this.room = room;
 		this.times = times;
 	}
 
@@ -63,6 +59,16 @@ public class Iclass implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "room", nullable = false)
+	public Room getRoom() {
+		return this.room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -101,15 +107,6 @@ public class Iclass implements java.io.Serializable {
 
 	public void setInstructor(int instructor) {
 		this.instructor = instructor;
-	}
-
-	@Column(name = "room", nullable = false)
-	public int getRoom() {
-		return this.room;
-	}
-
-	public void setRoom(int room) {
-		this.room = room;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iclass")
