@@ -31,7 +31,7 @@ public class Session implements java.io.Serializable {
 	public Session() {
 	}
 
-	public Session(String sessionName) {
+	public Session(String sessionNsame) {
 		this.sessionName = sessionName;
 	}
 

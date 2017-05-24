@@ -282,13 +282,14 @@ app
 						$http.get("/api/session/" + data.id).then(
 								function(response) {
 									$scope.info = response.data;
+									console.log(response.data);
 								});
-						SpecID = data.sessionId;
+						//SpecID = data.sessionId;
 						$scope.duplicateAlert = "";
 					}
 
 					$scope.editSession = function() {
-						if (id_duplicate_Edit($scope.info.sessionId)) {
+						if (id_duplicate_Edit($scope.info.SessionId)) {
 							$http({
 								method : "PUT",
 								url : "/api/session",
