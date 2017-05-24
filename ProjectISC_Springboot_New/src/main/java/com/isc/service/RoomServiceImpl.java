@@ -34,9 +34,9 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Transactional
-	public void editRoom(Room room) {
+	public void updateRoom(Room room) {
 		// TODO Auto-generated method stub
-		roomDao.editRoom(room);
+		roomDao.updateRoom(room);
 	}
 
 	@Transactional

@@ -33,7 +33,7 @@ public class RoomDaoImpl implements RoomDao {
 	}
 
 	@Override
-	public void editRoom(Room room) {
+	public void updateRoom(Room room) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().update(room);
 	}
