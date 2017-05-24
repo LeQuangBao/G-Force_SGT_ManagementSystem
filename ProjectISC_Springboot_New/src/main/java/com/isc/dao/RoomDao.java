@@ -13,5 +13,5 @@ public interface RoomDao {
 	
 	public void editRoom(Room room);
 	
-	public void deleteRoom(Room room);
+	public void deleteRoom(int roomId);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.isc.dao.RoomDao;
 import com.isc.model.Room;
@@ -14,33 +15,33 @@ public class RoomServiceImpl implements RoomService {
 	@Autowired
 	private RoomDao roomDao;
 
-	@Override
+	@Transactional
 	public List<Room> getAllRooms() {
 		// TODO Auto-generated method stub
-		return null;
+		return roomDao.getAllRooms();
 	}
 
-	@Override
+	@Transactional
 	public Room getRoom(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return roomDao.getRoom(id);
 	}
 
-	@Override
+	@Transactional
 	public void addRoom(Room room) {
 		// TODO Auto-generated method stub
-		
+		roomDao.addRoom(room);
 	}
 
-	@Override
+	@Transactional
 	public void editRoom(Room room) {
 		// TODO Auto-generated method stub
-		
+		roomDao.editRoom(room);
 	}
 
-	@Override
-	public void deleteRoom(Room room) {
+	@Transactional
+	public void deleteRoom(int roomId) {
 		// TODO Auto-generated method stub
-		
+		roomDao.deleteRoom(roomId);
 	}
 }

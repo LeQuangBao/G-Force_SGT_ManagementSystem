@@ -12,5 +12,5 @@ public interface RoomService {
 	
 	 public void editRoom(Room room);
 	
-	 public void deleteRoom(Room room);
+	 public void deleteRoom(int roomId);
 }

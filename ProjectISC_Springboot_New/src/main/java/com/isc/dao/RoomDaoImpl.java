@@ -17,30 +17,30 @@ public class RoomDaoImpl implements RoomDao {
 	@Override
 	public List<Room> getAllRooms() {
 		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("from Rooom").list();
 	}
 
 	@Override
 	public Room getRoom(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().load(Room.class, id);
 	}
 
 	@Override
 	public void addRoom(Room room) {
 		// TODO Auto-generated method stub
-		
+		sessionFactory.getCurrentSession().save(room);
 	}
 
 	@Override
 	public void editRoom(Room room) {
 		// TODO Auto-generated method stub
-		
+		sessionFactory.getCurrentSession().update(room);
 	}
 
 	@Override
-	public void deleteRoom(Room room) {
+	public void deleteRoom(int roomId) {
 		// TODO Auto-generated method stub
-		
+		sessionFactory.getCurrentSession().delete(getRoom(roomId));
 	}
 }
