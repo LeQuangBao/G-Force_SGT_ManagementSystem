@@ -239,20 +239,22 @@ app
 
 					// add session
 					$scope.addSession = function(close) {
-						if (id_duplicate_Add(document
-								.getElementById("SessionId_add").value)) {
-							var sessionId = document
-									.getElementById("SessionId_add").value;
+//						if (id_duplicate_Add(document
+//								.getElementById("SessionId_add").value)) {
+//							var sessionId = document
+//									.getElementById("SessionId_add").value;
 							var sessionName = document
 									.getElementById("SessionName_add").value;
-							var activeElement = $scope.active_add;
+//							console.log(sessionId);
+//							console.log(sessionName);
+							//var activeElement = $scope.active_add;
 							$http({
 								method : "POST",
 								url : "/api/session",
 								data : {
-									sessionId : sessionId,
+									//sessionId : sessionId,
 									sessionName : sessionName,
-									active : activeElement
+									//active : activeElement
 								},
 								dataType : "json",
 								headers : {
@@ -274,7 +276,7 @@ app
 													alertFailMessage("Oops! Something went wrong, please check your input again.");
 												}
 											});
-						}
+//						
 					}
 
 					// update session
@@ -489,9 +491,9 @@ app
 					}
 					// reset form add
 					$scope.ResetForm_Add = function() {
-						 $scope.SessionId_add = "";
+						 //$scope.SessionId_add = "";
 						 $scope.SessionName_add = "";
-						 $scope.formAdd.SessionId_add.$setUntouched();
+						 //$scope.formAdd.SessionId_add.$setUntouched();
 						 $scope.formAdd.SessionName_add.$setUntouched();
 						 $scope.duplicateAlert = "";
 					}
