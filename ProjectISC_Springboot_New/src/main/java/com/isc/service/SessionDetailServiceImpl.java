@@ -1,5 +1,7 @@
 package com.isc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,5 +25,18 @@ public class SessionDetailServiceImpl implements SessionDetailService {
 		// TODO Auto-generated method stub
 		return sessiondetailDao.getSessionDetail(id);
 	}
+	
+
+	@Transactional
+	public void addSessionDetail(SessionDetail sessiondetail) {
+		sessiondetailDao.addSessiondetail(sessiondetail);
+		
+	}
+
+	@Override
+	public List<SessionDetail> getlistsessiondetail(int id) {
+		return sessiondetailDao.getlistsessiondetail(id);
+	}
+	
 
 }

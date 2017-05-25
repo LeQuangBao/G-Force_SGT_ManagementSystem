@@ -41,5 +41,29 @@ public class SessionDetailController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	@RequestMapping(value = "/api/sessiondetail1/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<SessionDetail>> getSessionDetail1(@PathVariable int id) {
+		List<SessionDetail> sessiondetail;
+		try {
+			sessiondetail = service.getlistsessiondetail(id);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<SessionDetail>>(sessiondetail, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/api/sessiondetail1", method = RequestMethod.POST)
+	public ResponseEntity<List<SessionDetail>> addsessiondetail(SessionDetail sessiondetail) {
+		try {
+			service.addSessionDetail(sessiondetail);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
+
+	
+	
 
 }
