@@ -1,256 +1,79 @@
 app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConstants) {
-					$scope.rowdata = {
-						availableOptions : [ {
-							id : '15',
-							name : '15'
-						}, {
-							id : '30',
-							name : '30'
-						}, {
-							id : '50',
-							name : '50'
-						}, {
-							id : '100',
-							name : '100'
-						} ],
-						selectedOption : {
-							id : '15',
-							name : '15'
-						}
-					};
-					$scope.ChangeRow = function(index) {
-						$scope.itemsPerPage = index;
-						$scope.updatePageIndexes();
-					}
-					var deleteSpecialization = "";
-					var alertDuration = 1800;
-
-					// get list specializations
-					function getListSpecializations() {
-						$scope.list = [];
-						$http
-								.get("http://localhost:8080/api/specialization")
-								.then(
-										function(response) {
-											$scope.list = response.data;
-//											$scope.table_specialization.data = response.data;
-											$scope.gridOptions.data = response.data;
-
+	var classObj=null;
+	$scope.iclass_edit={};
+	var alertDuration = 1800;
+	var url_split=window.location.href.split("/");
+	var idTimetable=url_split[url_split.length-1];
+					//get timetable
+					function getTimetableObj() {
+						$scope.timetable = {};
+						$http.get("http://localhost:8080/api/timetable/"+idTimetable)
+								.then(function(response) {
+											$scope.timetable = response.data;
 										})
 					}
-					getListSpecializations();
-					// tạo dữ liệu cho table
-					$scope.gridOptions = {
-						noUnselect : true,
-						multiSelect : false,
-						enableRowSelection : true,
-						enableRowHeaderSelection : false,
-						enableSelectAll : false,
-						enableGridMenu : true,
-						enableFiltering : true,
-						enableColumnResize : true,
-						enableColumnMenus : false,
-						paginationPageSizes : [ 15, 30, 50, 100 ],
-						paginationPageSize : 15,
-						columnDefs : [
-								{
-									name : 'specializationId',
-									displayName : 'Specialization Id'
-								},
-								{
-									name : 'specializationName',
-									displayName : 'specialization Name'
-								},
-								{
-									name : 'active', displayName:'Status', 
-									visible : true, 
-									cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.active == 0 ? "Inactive" : "Active"}}</div>',
-									filter: {
-					    		          type: uiGridConstants.filter.SELECT,
-					    		          selectOptions: [
-					    		              { value: 'true', label: 'Active' },
-					    		              { value: 'false', label: 'Inactive' }
-					    		          ]
-					    		      }
-								},
-								{
-									name : 'Action',
-									enableSorting : false,
-									enableFiltering : false,
-									cellTemplate :'<button data-toggle="modal" class="btn btn-primary btn-sm" data-target="#myModal_editSubject" data-backdrop="static"ng-click="grid.appScope.callEditRelevantSubject(row.entity)" data-tooltip ="tooltip" title="Add course(s)"><span class="glyphicon glyphicon-th-list"></button>'
-										+'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.callEditSpecialization(row.entity)" data-tooltip ="tooltip" title="Edit"data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
-											+ '<button ng-click="grid.appScope.callDeleteSpecialization(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'
-								} ]
-					};
-					// lọc toàn bộ dữ liệu
-					$scope.refreshData = function(termObj) {
-						$scope.gridOptions.data = $scope.list;
-
-						while (termObj) {
-							var oSearchArray = termObj.split(' ');
-							$scope.gridOptions.data = $filter('filter')(
-									$scope.gridOptions.data, oSearchArray[0],
-									undefined);
-							oSearchArray.shift();
-							termObj = (oSearchArray.length !== 0) ? oSearchArray
-									.join(' ')
-									: '';
-						}
-					};
-					// $scope.sortType = 'specializationName';
-					$scope.filterTable = '';
-
-					  $scope.sortType = 'schoolName';
-					    $scope.filterTable = '';
-					    // filter list
-					    $scope.listfiltered = function(element) {
-					        return $filter('filter')(element, $scope.filterTable);
-					    };
-
-					    function matchFirstChar(c, string) {
-					        return (string.charAt(0) == c);
-					    }
-
-					    function removeFirstChar(string) {
-					        return string.slice(1);
-					    }
-
-					    function removeDash(label) {
-					        if (matchFirstChar('-', label)) {
-					            return removeFirstChar(label);
-					        }
-					        return label;
-					    }
-
-					    function addDash(label) {
-					        if (!matchFirstChar('-', label)) {
-					            return '-' + label;
-					        }
-					        return label;
-					    }
-
-					    // formatting functions
-					    // for displaying table headers and tooltips
-					    function capitalizeFirstLetter(string) {
-					        return string.charAt(0).toUpperCase() + string.slice(1);
-					    }
-
-					    function makeReadableLabel(label) {
-					        var formatted = label;
-					        switch (label) {
-					            case 'specializationName':
-					                formatted = 'specialization name';
-					                break;
-//					            case 'lastName':
-//					                formatted = 'last name';
-					        }
-					        return formatted;
-					    }
-
-					    // sort functions
-					    // add or remove '-' to sort up or down
-					    $scope.sortReverse = function(set) {
-					        set = set || false;
-					        if (set || !matchFirstChar('-', $scope.sortType)) {
-					            $scope.sortType = addDash($scope.sortType);
-					        } else {
-					            $scope.sortType = removeDash($scope.sortType);
-					        }
-					    };
-
-					    // sort a column with a single data attribute
-					    $scope.singleSort = function(label) {
-					        if ($scope.sortType == label) {
-					            $scope.sortReverse();
-					        } else {
-					            $scope.sortType = label;
-					        }
-					    };
-					    $scope.sortDescend = function(label1, label2) {
-					        label2 = label2 || '';
-					        return ($scope.sortType == label1 || $scope.sortType == label2);
-					    };
-
-					    $scope.sortAscend = function(label1, label2) {
-					        label2 = label2 || '';
-					        return ($scope.sortType == ('-' + label1) || $scope.sortType == ('-' + label2));
-					    };
-
-					    // show a tooltip displaying how a column is sorted
-					    $scope.sortTooltip = function(label1) {
-
-					        var order = 'descending';
-					        if (matchFirstChar('-', $scope.sortType)) {
-					            order = 'ascending';
-					        }
-
-					        var baseSortType = removeDash($scope.sortType);
-					        if (label1 == baseSortType) {
-					            return capitalizeFirstLetter((makeReadableLabel(baseSortType)) + ' ' + order);
-					        }
-					        return 'Sort by ' + makeReadableLabel(label1)
-					    };
-					    // Phân trang
-					    $scope.currentPage = 1;
-					    // max size of the pagination bar
-					    $scope.maxPaginationSize = 10;
-					    // calculate total pages
-
-					    $scope.itemsPerPage = $scope.rowdata.selectedOption.id;
-					    $scope.updatePageIndexes = function() {
-					        var totalPages = Math.ceil($scope.list.length / $scope.maxPaginationSize);
-					        if (totalPages <= 10) {
-					            // less than 10 total pages so show all
-					            $scope.firstIndex = 1;
-					            $scope.lastIndex = totalPages;
-					        } else {
-					            // more than 10 total pages so calculate start and
-					            // end pages
-					            if ($scope.currentPage <= 6) {
-					                $scope.firstIndex = 1;
-					                $scope.lastIndex = 10;
-					            } else if ($scope.currentPage + 4 >= totalPages) {
-					                $scope.firstIndex = totalPages - 9;
-					                $scope.lastIndex = totalPages;
-					            } else {
-					                $scope.firstIndex = $scope.currentPage - 5;
-					                $scope.lastIndex = $scope.currentPage + 4;
-					            }
-					        }
-					        $scope.firstIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
-					        $scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
-					    };
-					    $scope.updatePageIndexes();
-
-					    $scope.showList = function(index) {
-					        return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
-					    }
-					    
-					// add specialization
-					$scope.addSpecialization = function(close) {
-						if (id_duplicate_Add(document
-								.getElementById("specializationId_add").value)) {
-							var specializationId = document
-									.getElementById("specializationId_add").value;
-							var specializationName = document
-									.getElementById("specializationName_add").value;
-							var activeElement = $scope.active_add;
+					// get list subjects
+					function getListSubjects() {
+						$scope.listSubject = [];
+						$http.get("http://localhost:8080/api/subject")
+								.then(function(response) {
+											$scope.listSubject = response.data;
+										})
+					}
+					// get list instructors
+					function getListInstructors() {
+						$scope.listInstructor = [];
+						$http.get("http://localhost:8080/admin/api/instructor")
+								.then(function(response) {
+											$scope.listInstructor = response.data;
+										})
+					}
+					// get list rooms
+					function getListRooms() {
+						$scope.listRoom = [];
+						$http.get("http://localhost:8080/api/room")
+								.then(function(response) {
+											$scope.listRoom = response.data;
+										})
+					}
+					// get list classes with timetable id
+					function getListClasses() {
+						$scope.listClass = [];
+						var list_class=[];
+						$http.get("http://localhost:8080/admin/api/class")
+								.then(function(response) {
+									list_class= response.data;
+									list_class.forEach(function(iclass, index) {
+										if(iclass.timetable.id==idTimetable){
+											$scope.listClass.push(iclass);
+										}
+								    });	
+								});							
+					}
+					getTimetableObj();
+					getListSubjects();
+					getListInstructors();
+					getListRooms();
+					getListClasses();
+					   
+					// add class
+					$scope.addClass = function(close) {
 							$http({
 								method : "POST",
-								url : "/api/specialization",
+								url : "api/class",
 								data : {
-									specializationId : specializationId,
-									specializationName : specializationName,
-									active : activeElement
+									iclassName:$scope.iclassName,
+									instructor:$scope.instructor,
+									room:$scope.room,
+									subject:$scope.subject,
+									timetable:$scope.timetable
 								},
 								dataType : "json",
 								headers : {
 									'Content-Type' : 'application/json'
 								}
-							})
-									.then(
-											function(response) {
-												getListSpecializations();
+							}).then(function(response) {
+												getListClasses();
 												alertAddSucess();
 												$scope.ResetForm_Add();
 												if (close == true) {
@@ -264,30 +87,32 @@ app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConst
 												}
 											});
 						}
-					}
-
-					// update specialization
-					$scope.callEditSpecialization = function(data) {
-						$http.get("/api/specialization/" + data.id).then(
+					
+					//get class object
+					$scope.getClassObj = function(data) {
+						$http.get("api/class/" + data.id).then(
 								function(response) {
-									$scope.info = response.data;
+									$scope.className_edit = response.data;
+									$scope.subject_edit=response.data.subject;
+									$scope.instructor_edit=response.data.instructor;
+									$scope.room_edit=response.data.room;
+									console.log(response.data.subject);
 								});
-						SpecID = data.specializationId;
-						$scope.duplicateAlert = "";
+						//$scope.subject_edit=$scope.iclass_edit.subject.subjectName;
+						classObj = data;
 					}
-
-					$scope.editSpecialization = function() {
-						if (id_duplicate_Edit($scope.info.specializationId)) {
+					// update class
+					$scope.editClass = function() {
 							$http({
 								method : "PUT",
-								url : "/api/specialization",
-								data : JSON.stringify($scope.info),
+								url : "api/class",
+								data : JSON.stringify($scope.iclass_edit),
 								dataType : "json",
 							})
 									.then(
 											function(response) {
 												$("#myModal_sua").modal("hide");
-												getListSpecializations();
+												getListClasses();
 												alertEditSucess();
 											},
 											function(response) {
@@ -296,126 +121,23 @@ app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConst
 												}
 											});
 						}
-					}
 
-					// update relevant subjects
-					$scope.currentSubjects = [];
-					$scope.filterSubject = '';
-					$scope.callEditRelevantSubject = function(data) {
-						$scope.info_editRelevantSubject = data;
-						getAllSubjects();
-						$scope.currentSubjects = [];
-						data.subjects.forEach(function(item, index) {
-							$scope.currentSubjects.push(item);
-						});
-					}
-
-					function getAllSubjects() {
-						$http.get("/api/subject").then(function(response) {
-							$scope.listSubject = response.data;
-						});
-					}
-
-					$scope.addSubject = function(subject) {
-						$scope.currentSubjects.push(subject);
-					}
-
-					$scope.deleteSubject = function(subject) {
-						var index = $scope.currentSubjects.indexOf(subject);
-						$scope.currentSubjects.splice(index, 1);
-					}
-
-					$scope.checkDuplicateSubject = function(id) {
-						var flag = false;
-						angular.forEach($scope.currentSubjects, function(value,
-								key) {
-							if (value.id === id) {
-								flag = true;
-							}
-						});
-						return flag;
-					}
-
-					$scope.editRelevantSubject = function() {
-						$scope.info_editRelevantSubject.subjects = [];
-						$scope.currentSubjects
-								.forEach(function(item, index) {
-									$scope.info_editRelevantSubject.subjects
-											.push(item);
-								});
-						$http(
-								{
-									method : "PUT",
-									url : "/api/specialization",
-									data : JSON
-											.stringify($scope.info_editRelevantSubject),
-									contentType : 'application/json; charset=UTF-8',
-									dataType : "json",
-								})
-								.then(
-										function(response) {
-											// alertEditSucess();
-										},
-										function(response) {
-											if (response.status == 406) {
-												alertFailMessage("Oops! Something went wrong, please check your input again.");
-											}
-										});
-					}
-					// delete specialization
-					$scope.callDeleteSpecialization = function(data) {
-						deleteSpecialization = data;
-					}
-					$scope.deleteSpecialization = function() {
-						$http(
-								{
+					// delete class
+					$scope.deleteClass = function() {
+						$http({
 									method : "DELETE",
-									url : "/api/specialization/"
-											+ deleteSpecialization.id,
+									url : "api/class/"
+											+ classObj.id,
 									dataType : "json",
 								}).then(function(result) {
 							if (result.status == 202) {
+								getListClasses();
 								$("#myModal_xoa").modal("hide");
-								getListSpecializations();
 								alertDeleteSucess();
 							}
 						}, function(response) {
 							alertFail();
 						});
-					}
-
-					// Sort and filter
-					$scope.sortType = 'specializationName';
-					$scope.sortReverse = false;
-					$scope.searchName = '';
-
-					// Kiểm tra trùng ID
-					function id_duplicate_Add(id) {
-						var flag = true;
-						$scope.list.forEach(function(item, index) {
-							if (item.specializationId === id) {
-								$scope.duplicateAlert = "Duplicate ID";
-								flag = false;
-							}
-						});
-						return flag;
-					}
-					var SpecID = "";
-
-					function id_duplicate_Edit(id) {
-						var flag = true;
-						$scope.list.forEach(function(item, index) {
-							if (id != SpecID) {
-								if (item.specializationId === id) {
-									$scope.duplicateAlert = "Duplicate ID";
-									flag = false;
-								}
-							}
-						});
-						return flag;
-					}
-					$scope.hideDuplicateAlert = function() {
-						$scope.duplicateAlert = "";
 					}
 
 					function alertDeleteSucess() {
@@ -480,14 +202,35 @@ app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConst
 					}
 					// reset form add
 					$scope.ResetForm_Add = function() {
-						$scope.specializationId_add = "";
-						$scope.specializationName_add = "";
-						$scope.active_add = true;
-						$scope.formAdd.specializationId_add.$setUntouched();
-						$scope.formAdd.specializationName_add.$setUntouched();
-						$scope.duplicateAlert = "";
+						$scope.iclassName = "";
+						$scope.subject = "";
+						$scope.instructor = "";
+						$scope.room= "";
 					}
 
+					$scope.myTimetable = { 
+							date: ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+							session: ["7:30 - 9:30", "9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00"] 
+						};
+					
+					$scope.Mon = "Mon";
+					$scope.Tue = "Tue";
+					$scope.Wed = "Wed";
+					$scope.Thu = "Thu";
+					$scope.Fri = "Fri";
+					$scope.Sat = "Sat";
+					$scope.Sun = "Sun";
+					$scope.cellClicked = function(date, session) {
+					}
+					function updateDay(listSevenDay) {
+						$scope.Mon = listSevenDay[0];
+						$scope.Tue = listSevenDay[1];
+						$scope.Wed = listSevenDay[2];
+						$scope.Thu = listSevenDay[3];
+						$scope.Fri = listSevenDay[4];
+						$scope.Sat = listSevenDay[5];
+						$scope.Sun = listSevenDay[6];
+					}
 				});
 // Chu thich cua nut phan action
 $(document).ready(function() {
