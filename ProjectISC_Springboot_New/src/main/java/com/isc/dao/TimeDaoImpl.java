@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.isc.model.Time;
 
-
+@Repository
 public class TimeDaoImpl implements TimeDao{
 	@Autowired
 	private SessionFactory session;
