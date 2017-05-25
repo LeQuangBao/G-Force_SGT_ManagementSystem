@@ -39,7 +39,7 @@ public class ClassController {
 	public ResponseEntity<Void>addClass(@RequestBody Iclass iclass)
 	{
 		try {
-			classService.updateIClass(iclass);
+			classService.addIClass(iclass);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}

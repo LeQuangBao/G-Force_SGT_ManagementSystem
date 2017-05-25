@@ -1,6 +1,7 @@
 package com.isc.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -29,8 +30,8 @@ public class AdminController {
 	public String session() {
 		return "admin/session";
 	}
-	@RequestMapping(value = "/admin/buildTimetable")
-	public String buildTimetable() {
+	@RequestMapping(value = "/admin/buildTimetable/{id}")
+	public String buildTimetable(@PathVariable("id") int id) {
 		return "admin/buildTimetable";
 	}
 

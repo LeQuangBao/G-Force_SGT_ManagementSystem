@@ -140,7 +140,7 @@ public class Subject implements java.io.Serializable {
 	public void setSpecializations(Set<Specialization> specializations) {
 		this.specializations = specializations;
 	}
-
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
 	public Set<Iclass> getIclasses() {
 		return this.iclasses;
