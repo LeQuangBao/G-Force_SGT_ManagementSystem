@@ -372,16 +372,16 @@ app
 					{
 						$http({
 							method : "DELETE",
-							url : "api/detailsession/" + deleteSessionDetail.id,
+							url : "api/sessiondetail/" + deleteSessionDetail.id,
 							dataType : "json",
 						}).then(function(result) {
 							if (result.status == 202) {
-								$("#myModal_xoa").modal("hide");
-								getListSessionsDetail1(deleteSessionDetail.session.id);
+								//$("#myModal_xoachitiet").modal("hide");
+								//getListSessionsDetail1(deleteSessionDetail.session.id);
 								alertDeleteSucess();
 							}
 						}, function(response) {
-							alertFail();
+							//alertFail();
 						});
 					}
 					// update relevant subjects

@@ -33,7 +33,7 @@ public class SessionDetailServiceImpl implements SessionDetailService {
 		
 	}
 
-	@Override
+	@Transactional
 	public List<SessionDetail> getlistsessiondetail(int id) {
 		return sessiondetailDao.getlistsessiondetail(id);
 	}

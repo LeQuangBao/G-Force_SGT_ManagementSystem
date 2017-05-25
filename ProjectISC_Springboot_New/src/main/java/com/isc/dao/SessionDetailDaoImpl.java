@@ -39,14 +39,12 @@ public class SessionDetailDaoImpl implements SessionDetailDao{
 		sessionFactory.getCurrentSession().save(sessiondetail);
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<SessionDetail> getlistsessiondetail(int id){
 		List<SessionDetail> list=new ArrayList<SessionDetail>();
-		Session session=sessionFactory.openSession();
-		Transaction transaction=null;
-		transaction=(Transaction) session.beginTransaction();
-		list=session.createQuery("select a from SessionDetail a where a.session.id= :id").setInteger("id", id).list();
-		session.close();
+		list=sessionFactory.getCurrentSession().createQuery("select a from SessionDetail a where a.session.id= :id").setInteger("id", id).list();
+	
 		return list;
 	}
 

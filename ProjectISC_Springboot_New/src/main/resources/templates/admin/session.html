@@ -329,24 +329,29 @@
 										style="color: red">This field is required</p></span> -->
 							</div>
 							<button class="btn btn-primary" ng-click="addSessionDetail()">
-							<span class="glyphicon glyphicon-plus"></span></button>
-							
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+
 						</div>
 						<div class="form-group">
-							<table>
-								<tr ng-repeat="x in list_sessiondetail_1">
-									<td>{{x.timeStart}}</td>
-									<td>{{x.timeEnd}}</td>
-									<td>
-										<button ng-click="callDeleteSessionDetail(x)"
-											data-toggle="modal" class="btn btn-danger btn-sm"
-											data-tooltip="tooltip" title="Delete"
-											data-target="#myModal_xoachitiet">
-											<span class="glyphicon glyphicon-remove"></span>
-										</button>
-									</td>
-								</tr>
-							</table>
+							<label class="control-label col-sm-3">List Detail</label>
+							<div class="col-sm-8">
+								<table class="table">
+									<tr ng-repeat="x in list_sessiondetail_1">
+										<td>{{x.timeStart}}</td>
+										<td>{{x.timeEnd}}</td>
+										<td>
+											<button ng-click="callDeleteSessionDetail(x)"
+												data-toggle="modal" class="btn btn-danger btn-sm"
+												data-tooltip="tooltip" title="Delete"
+												data-target="#myModal_xoachitiet">
+												<span class="glyphicon glyphicon-remove"></span>
+											</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+
 						</div>
 					</form>
 				</div>
