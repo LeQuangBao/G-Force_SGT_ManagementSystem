@@ -227,7 +227,7 @@ app
 //					        $scope.lastIndex = $scope.currentPage * $scope.itemsPerPage;
 //					    };
 //					    $scope.updatePageIndexes();
-//
+//s
 //					    $scope.showList = function(index) {
 //					        return ((index >= $scope.firstIndex) && (index < $scope.lastIndex));
 //					    }
