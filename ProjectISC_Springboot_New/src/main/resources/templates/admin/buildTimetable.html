@@ -232,6 +232,7 @@ input[type="checkbox"]:checked+i:before {
 										</tbody>
 									</table>
 								</div>
+
 								<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 									<h4>Pick action</h4>
 									<div class="container" style="margin-left: 200px">
@@ -258,7 +259,7 @@ input[type="checkbox"]:checked+i:before {
 											<option>102</option>
 											<option>201</option>
 										</select>
-									</div>
+								</div>
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<div class="col-md-12 col-sm-12 col-xs-12">
@@ -298,56 +299,19 @@ input[type="checkbox"]:checked+i:before {
 											<table class="table table-bordered">
 												<thead>
 													<tr>
-														<th width="10%"></th>
-														<th width="12%">Mon - 6/1</th>
-														<th width="12%">Tue - 6/2</th>
-														<th width="12%">Wed - 6/3</th>
-														<th width="12%">Thu - 6/4</th>
-														<th width="12%">Fri - 6/5</th>
-														<th width="12%">Sat - 6/6</th>
-														<th width="12%">Sun - 6/7</th>
+														<th ng-repeat="x in myTimetable.date" width="12%">{{x}}</th>														
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td>7:30 - 9:30</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-													</tr>
-													<tr>
-														<td class="clickable">9:30 - 11:30</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-													</tr>
-													<tr>
-														<td>13:00 - 15:00</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-													</tr>
-													<tr>
-														<td>15:00 - 17:00</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable">FE 1</td>
-														<td class="clickable"></td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
+													<tr ng-repeat="x in myTimetable.session">
+														<td ng-bind="x"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Tue, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Wed, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Thu, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Fri, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Sat, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Sun, x)" class="clickable"></td>
 													</tr>
 												</tbody>
 											</table>
@@ -394,6 +358,7 @@ input[type="checkbox"]:checked+i:before {
 			<!-- /footer content -->
 		</div>
 	</div>
+	
 	<!-- Modal thêm -->
 	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -538,7 +503,7 @@ input[type="checkbox"]:checked+i:before {
 					<form class="form-horizontal" name="editForm">
 						<h5>Available courses</h5>
 						<input type="text" placeholder="Filter" class="form-control"
-							data-ng-model="filterSubject"></input>
+							data-ng-model="filterSubject"/>
 						<!-- scrollable table -->
 						<div class="well" style="height: 200px; overflow: auto">
 							<div class="table-responsive" ng-model="filterController">
@@ -716,7 +681,7 @@ input[type="checkbox"]:checked+i:before {
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/specializationCtrl.js"></script>
+	<script type="text/javascript" src="scripts/buildTimetableCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->

@@ -141,6 +141,7 @@ public class Subject implements java.io.Serializable {
 		this.specializations = specializations;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
 	public Set<Iclass> getIclasses() {
 		return this.iclasses;

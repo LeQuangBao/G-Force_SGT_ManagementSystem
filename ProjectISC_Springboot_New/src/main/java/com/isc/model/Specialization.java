@@ -104,7 +104,7 @@ public class Specialization implements java.io.Serializable {
 	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
-
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "specialization_subject", catalog = "my_db", joinColumns = {
 			@JoinColumn(name = "specialization", nullable = false, updatable = false) }, inverseJoinColumns = {
