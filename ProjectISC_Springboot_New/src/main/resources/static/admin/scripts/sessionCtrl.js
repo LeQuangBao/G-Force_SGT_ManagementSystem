@@ -57,6 +57,59 @@ app
 
 								})
 					}
+					// get list session detail by session id
+					$scope.list_sessiondetail=[];
+					function getListSessionsDetail1(id) {
+						$scope.list = [];
+						$http.get("http://localhost:8080//api/sessiondetail1/"+id).then(
+								function(response) {
+									$scope.list_sessiondetail_1 = response.data;
+									// $scope.table_session.data =
+									// response.data;
+									// .gridOptions.data = response.data;
+
+								})
+					}
+					
+					// add session detail
+					$scope.addSessionDetail = function() {
+						
+						var start_time=$scope.timestart;
+						var end_time=$scope.timeend;
+						console.log($scope.timestart);
+						console.log($scope.timeend);
+						console.log($scope.info);
+//							$http({
+//								method : "POST",
+//								url : "/api/sessiondetail1",
+//								data : {
+//									timeStart:start_time,
+//									timeEnd:end_time,
+//									session:$scope.info
+//								},
+//								dataType : "json",
+//								headers : {
+//									'Content-Type' : 'application/json'
+//								}
+//							})
+//									.then(
+//											function(response) {
+//												getListSessionsDetail1($scope.info.id);
+//												alertAddSucess();
+////												$scope.ResetForm_Add();
+////												if (close == true) {
+////													$("#myModal_them").modal(
+////															"hide");
+////												}
+//											},
+//											function(response) {
+//												if (response.status == 406) {
+//													alertFailMessage("Oops! Something went wrong, please check your input again.");
+//												}
+//											});
+////						
+					}
+
 					getListSessions();
 					// tạo dữ liệu cho table
 					$scope.gridOptions = {
@@ -239,22 +292,17 @@ app
 
 					// add session
 					$scope.addSession = function(close) {
-//						if (id_duplicate_Add(document
-//								.getElementById("SessionId_add").value)) {
-//							var sessionId = document
-//									.getElementById("SessionId_add").value;
 							var sessionName = document
 									.getElementById("SessionName_add").value;
-//							console.log(sessionId);
-//							console.log(sessionName);
-							//var activeElement = $scope.active_add;
+
+							// var activeElement = $scope.active_add;
 							$http({
 								method : "POST",
 								url : "/api/session",
 								data : {
-									//sessionId : sessionId,
+									// sessionId : sessionId,
 									sessionName : sessionName,
-									//active : activeElement
+									// active : activeElement
 								},
 								dataType : "json",
 								headers : {
@@ -285,15 +333,19 @@ app
 								function(response) {
 									$scope.info = response.data;
 								});
-						//SpecID = data.sessionId;
+						$http.get("http://localhost:8080//api/sessiondetail1/"+data.id).then(
+								function(response) {
+									$scope.list_sessiondetail_1 = response.data;
+									// $scope.table_session.data =
+									// response.data;
+									// .gridOptions.data = response.data;
+
+								})
+						// SpecID = data.sessionId;
 						$scope.duplicateAlert = "";
 					}
 
 					$scope.editSession = function() {
-//						if (id_duplicate_Edit($scope.info.SessionId)) {
-						$scope.info.sessionDetails.timeStart=$scope.timestart;
-						$scope.info.sessionDetails.timeEnd=$scope.timeend;
-				
 							$http({
 								method : "PUT",
 								url : "/api/session",
@@ -311,7 +363,7 @@ app
 													alertFailMessage("Oops! Something went wrong, please check your input again.");
 												}
 											});
-//						//}
+// //}
 					}
 					$scope.callDeleteSessionDetail = function(data) {
 						deleteSessionDetail = data;
@@ -320,12 +372,12 @@ app
 					{
 						$http({
 							method : "DELETE",
-							url : "api/detailsession/" + deleteSessionDetail.sessionDetails.id,
+							url : "api/detailsession/" + deleteSessionDetail.id,
 							dataType : "json",
 						}).then(function(result) {
 							if (result.status == 202) {
 								$("#myModal_xoa").modal("hide");
-								getListSessions();
+								getListSessionsDetail1(deleteSessionDetail.session.id);
 								alertDeleteSucess();
 							}
 						}, function(response) {
@@ -333,16 +385,16 @@ app
 						});
 					}
 					// update relevant subjects
-//					$scope.currentSubjects = [];
-//					$scope.filterSubject = '';
-//					$scope.callEditRelevantSubject = function(data) {
-//						$scope.info_editRelevantSubject = data;
-//						getAllSubjects();
-//						$scope.currentSubjects = [];
-//						data.subjects.forEach(function(item, index) {
-//							$scope.currentSubjects.push(item);
-//						});
-//					}
+// $scope.currentSubjects = [];
+// $scope.filterSubject = '';
+// $scope.callEditRelevantSubject = function(data) {
+// $scope.info_editRelevantSubject = data;
+// getAllSubjects();
+// $scope.currentSubjects = [];
+// data.subjects.forEach(function(item, index) {
+// $scope.currentSubjects.push(item);
+// });
+// }
 
 					// function getAllSubjects() {
 					// $http.get("/api/subject").then(function(response) {
@@ -513,12 +565,14 @@ app
 					}
 					// reset form add
 					$scope.ResetForm_Add = function() {
-						 //$scope.SessionId_add = "";
+						 // $scope.SessionId_add = "";
 						 $scope.SessionName_add = "";
-						 //$scope.formAdd.SessionId_add.$setUntouched();
+						 // $scope.formAdd.SessionId_add.$setUntouched();
 						 $scope.formAdd.SessionName_add.$setUntouched();
 						 $scope.duplicateAlert = "";
 					}
+					// reset form edit
+				
 
 				});
 // Chu thich cua nut phan action

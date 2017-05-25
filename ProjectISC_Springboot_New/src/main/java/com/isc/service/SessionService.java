@@ -3,6 +3,7 @@ package com.isc.service;
 import java.util.List;
 
 import com.isc.model.Session;
+import com.isc.model.SessionDetail;
 
 public interface SessionService {
 	public List<Session> getAllSessions();

@@ -1,5 +1,12 @@
 package com.isc.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.SystemException;
+import javax.transaction.Transaction;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,6 +33,21 @@ public class SessionDetailDaoImpl implements SessionDetailDao{
 	public SessionDetail getSessionDetail(int id) {
 		 return (SessionDetail) sessionFactory.getCurrentSession().load(SessionDetail.class, id);
 		
+	}
+	@Override
+	public void addSessiondetail(SessionDetail sessiondetail) {
+		sessionFactory.getCurrentSession().save(sessiondetail);
+		
+	}
+	@Override
+	public List<SessionDetail> getlistsessiondetail(int id){
+		List<SessionDetail> list=new ArrayList<SessionDetail>();
+		Session session=sessionFactory.openSession();
+		Transaction transaction=null;
+		transaction=(Transaction) session.beginTransaction();
+		list=session.createQuery("select a from SessionDetail a where a.session.id= :id").setInteger("id", id).list();
+		session.close();
+		return list;
 	}
 
 }
