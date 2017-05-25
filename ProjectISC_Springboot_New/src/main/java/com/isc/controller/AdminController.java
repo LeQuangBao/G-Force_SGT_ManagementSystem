@@ -29,10 +29,6 @@ public class AdminController {
 	public String session() {
 		return "admin/session";
 	}
-	@RequestMapping(value = "/admin/room")
-	public String room() {
-		return "admin/room";
-	}
 	
 	@RequestMapping(value = "/admin/buildTimetable")
 	public String buildTimetable() {
