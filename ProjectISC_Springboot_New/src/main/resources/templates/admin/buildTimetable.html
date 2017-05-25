@@ -199,11 +199,11 @@
 										</ul>
 										<h4>
 											Use alternate: <input type="checkbox" />
-											<br/> <select>
+											<br/> <select class="form-control">
 												<option>Nguyễn Thành Nam</option>
 												<option>Quang Vũ</option>
 												<option>Trần Xuân Mai</option>
-											</select> / <select>
+											</select> <br/> <select class="form-control">
 												<option>101</option>
 												<option>102</option>
 												<option>201</option>
@@ -224,56 +224,19 @@
 											<table class="table table-bordered">
 												<thead>
 													<tr>
-														<th width="10%"></th>
-														<th width="12%">Mon - 6/1</th>
-														<th width="12%">Tue - 6/2</th>
-														<th width="12%">Wed - 6/3</th>
-														<th width="12%">Thu - 6/4</th>
-														<th width="12%">Fri - 6/5</th>
-														<th width="12%">Sat - 6/6</th>
-														<th width="12%">Sun - 6/7</th>
+														<th ng-repeat="x in myTimetable.date" width="12%">{{x}}</th>														
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td>7:30 - 9:30</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-													</tr>
-													<tr>
-														<td class="clickable">9:30 - 11:30</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-													</tr>
-													<tr>
-														<td>13:00 - 15:00</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1, FE 2</td>
-														<td class="clickable">FE 1</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
-													</tr>
-													<tr>
-														<td>15:00 - 17:00</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable">FE 2</td>
-														<td class="clickable">FE 1</td>
-														<td class="clickable"></td>
-														<td class="clickable">Onjob training</td>
-														<td class="clickable"></td>
-														<td class="clickable"></td>
+													<tr ng-repeat="x in myTimetable.session">
+														<td ng-bind="x"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Tue, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Wed, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Thu, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Fri, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Sat, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Sun, x)" class="clickable"></td>
 													</tr>
 												</tbody>
 											</table>
@@ -636,7 +599,7 @@
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/specializationCtrl.js"></script>
+	<script type="text/javascript" src="scripts/buildTimetableCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
