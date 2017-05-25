@@ -32,7 +32,7 @@ public class SessionDetailController {
 	}
 
 	
-	@RequestMapping(value = "api/sessiondetail/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/sessiondetail/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteSessionDetail(@PathVariable int id) {
 		try{
 			service.deleteSessionDetail(id);
