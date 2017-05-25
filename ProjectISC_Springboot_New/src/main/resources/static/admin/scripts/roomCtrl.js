@@ -123,7 +123,7 @@ app.controller('roomCtrl',function($scope, $http, $filter, uiGridConstants) {
 	function roomId_duplicate_Add(id) {
 		var flag = true;
 		$scope.list.forEach(function(item, index) {
-			if (item.roomId === id) {
+			if (item.roomId == id) {
 				$scope.duplicateAlert = "Duplicate Name";
 				flag = false;
 			}
@@ -136,7 +136,7 @@ app.controller('roomCtrl',function($scope, $http, $filter, uiGridConstants) {
 		var flag = true;
 		$scope.list.forEach(function(item, index) {
 			if (id != roomID) {
-				if (item.roomId === id) {
+				if (item.roomId == id) {
 					$scope.duplicateAlert = "Duplicate Name";
 					flag = false;
 				}

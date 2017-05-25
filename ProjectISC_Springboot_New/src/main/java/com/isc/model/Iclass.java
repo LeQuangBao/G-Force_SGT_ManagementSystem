@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated May 24, 2017 1:26:03 PM by Hibernate Tools 5.2.1.Final
+// Generated May 25, 2017 9:10:17 AM by Hibernate Tools 5.2.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,30 +22,31 @@ import javax.persistence.Table;
 public class Iclass implements java.io.Serializable {
 
 	private Integer id;
+	private Instructor instructor;
 	private Room room;
 	private Subject subject;
 	private Timetable timetable;
 	private String iclassName;
-	private int instructor;
 	private Set<Time> times = new HashSet<Time>(0);
 
 	public Iclass() {
 	}
 
-	public Iclass(Room room, Subject subject, Timetable timetable, String iclassName, int instructor) {
+	public Iclass(Instructor instructor, Room room, Subject subject, Timetable timetable, String iclassName) {
+		this.instructor = instructor;
 		this.room = room;
 		this.subject = subject;
 		this.timetable = timetable;
 		this.iclassName = iclassName;
-		this.instructor = instructor;
 	}
 
-	public Iclass(Room room, Subject subject, Timetable timetable, String iclassName, int instructor, Set<Time> times) {
+	public Iclass(Instructor instructor, Room room, Subject subject, Timetable timetable, String iclassName,
+			Set<Time> times) {
+		this.instructor = instructor;
 		this.room = room;
 		this.subject = subject;
 		this.timetable = timetable;
 		this.iclassName = iclassName;
-		this.instructor = instructor;
 		this.times = times;
 	}
 
@@ -59,6 +60,16 @@ public class Iclass implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "instructor", nullable = false)
+	public Instructor getInstructor() {
+		return this.instructor;
+	}
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -98,15 +109,6 @@ public class Iclass implements java.io.Serializable {
 
 	public void setIclassName(String iclassName) {
 		this.iclassName = iclassName;
-	}
-
-	@Column(name = "instructor", nullable = false)
-	public int getInstructor() {
-		return this.instructor;
-	}
-
-	public void setInstructor(int instructor) {
-		this.instructor = instructor;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iclass")

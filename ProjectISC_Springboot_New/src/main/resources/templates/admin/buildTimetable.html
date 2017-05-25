@@ -133,8 +133,8 @@
 						<div class="x_content">
 
 							<div class="row">
+								<div class="col-md-8 col-sm-12 col-xs-12">
 								<h4 class="text-center">Pick class</h4>
-								<div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
 									<table class="table">
 										<thead>
 											<tr>
@@ -143,8 +143,8 @@
 												<th>Course</th>
 												<th>Instructor</th>
 												<th>Room</th>
-												<th style="padding-bottom: 1px;"><span
-													class="btn btn-primary btn-xs glyphicon glyphicon-plus"></span></th>
+												<th style="padding-bottom: 1px;"><span data-toggle="modal" data-target="#myModal_them" ng-click="ResetForm_Add()"
+													class="btn btn-primary btn-xs glyphicon glyphicon-plus" ></span></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -190,14 +190,26 @@
 											</tr>
 										</tbody>
 									</table>
-									<div class="text-center">
+								</div>
+									<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 										<h4>Pick action</h4>
-										<ul class="pagination">
+										<ul class="pagination clickable">
 											<li class="active"><a>Add</a></li>
 											<li><a>Remove</a></li>
 										</ul>
+										<h4>
+											Use alternate: <input type="checkbox" />
+											<br/> <select>
+												<option>Nguyễn Thành Nam</option>
+												<option>Quang Vũ</option>
+												<option>Trần Xuân Mai</option>
+											</select> / <select>
+												<option>101</option>
+												<option>102</option>
+												<option>201</option>
+											</select>
+										</h4>
 									</div>
-								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<h4 class="text-center">Add/Remove picked class to
@@ -318,41 +330,46 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add specialization</h4>
+					<h4 class="modal-title" id="myModalLabel">Add class</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" name="formAdd">
 						<div class="form-group">
-							<label class="control-label col-sm-3">ID</label>
-							<div class="col-sm-8">
-								<input type="text" id="specializationId_add"
-									name="specializationId_add" class="form-control" placeholder=""
-									ng-keyup="hideDuplicateAlert()" ng-model="specializationId_add"
-									required="required" /> <span
-									ng-show="formAdd.specializationId_add.$touched &amp;&amp; formAdd.specializationId_add.$invalid"><p
-										style="color: red">This field is required</p></span>
-								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
-									style="color: red"></p>
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="control-label col-sm-3">Name</label>
 							<div class="col-sm-8">
-								<input type="text" id="specializationName_add"
-									name="specializationName_add" ng-model="specializationName_add"
-									class="form-control" placeholder="" required="required" /> <span
-									ng-show="formAdd.specializationName_add.$touched &amp;&amp; formAdd.specializationName_add.$invalid"><p
+								<input type="text" id="iclass_name_add"
+									name="specializationId_add" class="form-control" placeholder="" ng-model="iclass_name_add"
+									required="required" /> <span
+									ng-show="formAdd.iclass_name_add.$touched &amp;&amp; formAdd.iclass_name_add.$invalid"><p
 										style="color: red">This field is required</p></span>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3 col-md-3">Status</label>
-							<div class="col-sm-8 col-md-8" style="padding: 6px">
-								<input type="radio" ng-model="active_add" ng-value="true"
-									ng-checked="true" /> Active <input type="radio"
-									ng-model="active_add" ng-value="false" /> Inactive
-							</div>
-
+						<div class="form-group col-md-12">
+								<label class="control-label">Course</label>
+								<div class="">
+									<select ng-model="student.specialization" class="form-control"
+										ng-options="x.specializationName for x in list_specialization"
+										name="intake" id="intake" ng-required="true">
+									</select>
+								</div>
+						</div>
+						<div class="form-group col-md-12">
+								<label class="control-label">Instructor</label>
+								<div class="">
+									<select ng-model="student.specialization" class="form-control"
+										ng-options="x.specializationName for x in list_specialization"
+										name="intake" id="intake" ng-required="true">
+									</select>
+								</div>
+						</div>
+						<div class="form-group col-md-12">
+								<label class="control-label">Room</label>
+								<div class="">
+									<select ng-model="student.specialization" class="form-control"
+										ng-options="x.specializationName for x in list_specialization"
+										name="intake" id="intake" ng-required="true">
+									</select>
+								</div>
 						</div>
 					</form>
 				</div>

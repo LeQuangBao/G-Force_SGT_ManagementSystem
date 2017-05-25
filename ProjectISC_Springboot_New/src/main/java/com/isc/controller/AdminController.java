@@ -19,46 +19,46 @@ public class AdminController {
 	public String school() {
 		return "admin/school";
 	}
-	
+
 	@RequestMapping(value = "/admin/specialization")
 	public String specialization() {
 		return "admin/specialization";
 	}
-	
+
 	@RequestMapping(value = "/admin/session")
 	public String session() {
 		return "admin/session";
 	}
-	
 	@RequestMapping(value = "/admin/buildTimetable")
 	public String buildTimetable() {
 		return "admin/buildTimetable";
 	}
+
 	@RequestMapping(value = "/admin/timetable")
 	public String Timetable() {
 		return "admin/timetable";
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/admin/course")
 	public String courses() {
 		return "admin/subject";
 	}
-	
+
 	@RequestMapping(value = "/admin/instructor")
 	public String instructor() {
 		return "admin/instructor";
 	}
+
 	@RequestMapping(value = "/admin/entrance-exam")
 	public String entranceExam() {
 		return "admin/entrance_exam";
 	}
-	
+
 	@RequestMapping(value = "/admin/student")
 	public String student() {
 		return "admin/student";
 	}
+
 	@RequestMapping(value = "/admin/registrar")
 	public String registrar() {
 		return "admin/registrar";
