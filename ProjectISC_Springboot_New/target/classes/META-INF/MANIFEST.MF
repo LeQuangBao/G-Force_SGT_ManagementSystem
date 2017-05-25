@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: ProjectISC_Springboot
 Implementation-Version: 1.0.0
-Built-By: Sora
+Built-By: Alviss Inugami
 Implementation-Vendor-Id: com.isc
 Build-Jdk: 1.8.0_131
 Implementation-URL: http://projects.spring.io/spring-boot/demo/
