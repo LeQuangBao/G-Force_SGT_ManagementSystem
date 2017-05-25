@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -65,6 +66,7 @@ public class Room implements java.io.Serializable {
 	public void setRoomId(int roomId) {
 		this.roomId = roomId;
 	}
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
 	public Set<Time> getTimes() {
 		return this.times;
@@ -73,7 +75,7 @@ public class Room implements java.io.Serializable {
 	public void setTimes(Set<Time> times) {
 		this.times = times;
 	}
-	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
 	public Set<Iclass> getIclasses() {
 		return this.iclasses;
