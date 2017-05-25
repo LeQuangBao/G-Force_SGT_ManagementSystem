@@ -1,5 +1,7 @@
 package com.isc.model;
-// Generated May 24, 2017 1:26:03 PM by Hibernate Tools 5.2.1.Final
+
+// default package
+// Generated May 25, 2017 9:50:27 AM by Hibernate Tools 5.2.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,16 +23,12 @@ import javax.persistence.TemporalType;
 @Table(name = "time", catalog = "my_db")
 public class Time implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Iclass iclass;
+	private Instructor instructor;
 	private Room room;
 	private SessionDetail sessionDetail;
 	private Date date;
-	private Integer altInstructor;
 
 	public Time() {
 	}
@@ -41,12 +39,12 @@ public class Time implements java.io.Serializable {
 		this.date = date;
 	}
 
-	public Time(Iclass iclass, Room room, SessionDetail sessionDetail, Date date, Integer altInstructor) {
+	public Time(Iclass iclass, Instructor instructor, Room room, SessionDetail sessionDetail, Date date) {
 		this.iclass = iclass;
+		this.instructor = instructor;
 		this.room = room;
 		this.sessionDetail = sessionDetail;
 		this.date = date;
-		this.altInstructor = altInstructor;
 	}
 
 	@Id
@@ -69,6 +67,16 @@ public class Time implements java.io.Serializable {
 
 	public void setIclass(Iclass iclass) {
 		this.iclass = iclass;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "alt_instructor")
+	public Instructor getInstructor() {
+		return this.instructor;
+	}
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -99,15 +107,6 @@ public class Time implements java.io.Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	@Column(name = "alt_instructor")
-	public Integer getAltInstructor() {
-		return this.altInstructor;
-	}
-
-	public void setAltInstructor(Integer altInstructor) {
-		this.altInstructor = altInstructor;
 	}
 
 }
