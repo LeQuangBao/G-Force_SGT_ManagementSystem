@@ -1,5 +1,7 @@
 package com.isc.model;
-// Generated May 24, 2017 1:26:03 PM by Hibernate Tools 5.2.1.Final
+
+// default package
+// Generated May 25, 2017 9:50:27 AM by Hibernate Tools 5.2.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,9 +24,9 @@ import javax.persistence.Table;
 public class Timetable implements java.io.Serializable {
 
 	private Integer id;
+	private Intake intake;
 	private Session session;
 	private String timetableName;
-	private Integer intake;
 	private Set<Iclass> iclasses = new HashSet<Iclass>(0);
 
 	public Timetable() {
@@ -34,10 +36,10 @@ public class Timetable implements java.io.Serializable {
 		this.timetableName = timetableName;
 	}
 
-	public Timetable(Session session, String timetableName, Integer intake, Set<Iclass> iclasses) {
+	public Timetable(Intake intake, Session session, String timetableName, Set<Iclass> iclasses) {
+		this.intake = intake;
 		this.session = session;
 		this.timetableName = timetableName;
-		this.intake = intake;
 		this.iclasses = iclasses;
 	}
 
@@ -51,6 +53,16 @@ public class Timetable implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "intake")
+	public Intake getIntake() {
+		return this.intake;
+	}
+
+	public void setIntake(Intake intake) {
+		this.intake = intake;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -70,15 +82,6 @@ public class Timetable implements java.io.Serializable {
 
 	public void setTimetableName(String timetableName) {
 		this.timetableName = timetableName;
-	}
-
-	@Column(name = "intake")
-	public Integer getIntake() {
-		return this.intake;
-	}
-
-	public void setIntake(Integer intake) {
-		this.intake = intake;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "timetable")

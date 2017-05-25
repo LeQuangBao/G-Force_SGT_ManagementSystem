@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated May 25, 2017 9:10:17 AM by Hibernate Tools 5.2.1.Final
+// Generated May 25, 2017 9:50:27 AM by Hibernate Tools 5.2.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -35,6 +35,7 @@ public class Instructor implements java.io.Serializable {
 	private String image;
 	private String degree;
 	private boolean status;
+	private Set<Time> times = new HashSet<Time>(0);
 	private Set<Iclass> iclasses = new HashSet<Iclass>(0);
 
 	public Instructor() {
@@ -56,7 +57,8 @@ public class Instructor implements java.io.Serializable {
 	}
 
 	public Instructor(String username, String password, String firstname, String lastname, Date birthday, String email,
-			String phone, String address, String image, String degree, boolean status, Set<Iclass> iclasses) {
+			String phone, String address, String image, String degree, boolean status, Set<Time> times,
+			Set<Iclass> iclasses) {
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -68,6 +70,7 @@ public class Instructor implements java.io.Serializable {
 		this.image = image;
 		this.degree = degree;
 		this.status = status;
+		this.times = times;
 		this.iclasses = iclasses;
 	}
 
@@ -181,6 +184,15 @@ public class Instructor implements java.io.Serializable {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor")
+	public Set<Time> getTimes() {
+		return this.times;
+	}
+
+	public void setTimes(Set<Time> times) {
+		this.times = times;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor")
