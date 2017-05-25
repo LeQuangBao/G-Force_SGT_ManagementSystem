@@ -1,4 +1,4 @@
-app.controller('schoolCtrl', function($scope, $http, $filter) {
+app.controller('schoolCtrl', function($scope, $http, $filter, uiGridConstants) {
 		$scope.rowdata = {
 			     availableOptions: [
 			    	 {id: '15', name: '15'},
@@ -23,6 +23,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
 	    });
 	    }
 	    getAllSchools();
+	    
 	    // tạo dữ liệu cho table
 	    $scope.gridOptions = {
 	    		noUnselect : true,
@@ -41,7 +42,14 @@ app.controller('schoolCtrl', function($scope, $http, $filter) {
 	    		      { name: 'schoolName', displayName : 'School Name' },
 	    		      { name: 'address', displayName : 'Address '},
 	    		      { name: 'contact', visible : true },
-	    		      { name: 'active', visible : true },
+	    		      { name: 'active', displayName:'Status', visible : true, cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.active == 0 ? "Inactive" : "Active"}}</div>',
+	    		    	  filter: {
+		    		          type: uiGridConstants.filter.SELECT,
+		    		          selectOptions: [
+		    		              { value: 'true', label: 'Active' },
+		    		              { value: 'false', label: 'Inactive' }
+		    		          ]
+	    		      } },
 	    		      { name: 'Action',enableSorting: false,enableFiltering: false,
 	    		             cellTemplate:'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.editSchool(row.entity)" data-tooltip ="tooltip" title="Edit"	data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
 	    		            	 			+'<button ng-click="grid.appScope.school_delete(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'

@@ -1,5 +1,5 @@
 package com.isc.model;
-// Generated May 21, 2017 8:37:07 PM by Hibernate Tools 5.2.1.Final
+// Generated May 24, 2017 1:26:03 PM by Hibernate Tools 5.2.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,10 +21,6 @@ import javax.persistence.Table;
 @Table(name = "timetable", catalog = "my_db")
 public class Timetable implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Session session;
 	private String timetableName;

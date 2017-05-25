@@ -25,10 +25,22 @@ public class AdminController {
 		return "admin/specialization";
 	}
 	
-//	@RequestMapping(value = "/admin/subject")
-//	public String subject() {
-//		return "admin/subject";
-//	}
+	@RequestMapping(value = "/admin/session")
+	public String session() {
+		return "admin/session";
+	}
+	
+	@RequestMapping(value = "/admin/buildTimetable")
+	public String buildTimetable() {
+		return "admin/buildTimetable";
+	}
+	@RequestMapping(value = "/admin/timetable")
+	public String Timetable() {
+		return "admin/timetable";
+	}
+	
+	
+	
 	@RequestMapping(value = "/admin/course")
 	public String courses() {
 		return "admin/subject";
@@ -52,5 +64,8 @@ public class AdminController {
 		return "admin/registrar";
 	}
 
-	
+	@RequestMapping(value = "/admin/room")
+	public String room() {
+		return "admin/room";
+	}
 }
