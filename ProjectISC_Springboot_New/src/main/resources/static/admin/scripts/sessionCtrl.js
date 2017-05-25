@@ -291,6 +291,9 @@ app
 
 					$scope.editSession = function() {
 //						if (id_duplicate_Edit($scope.info.SessionId)) {
+						$scope.info.sessionDetails.timeStart=$scope.timestart;
+						$scope.info.sessionDetails.timeEnd=$scope.timeend;
+				
 							$http({
 								method : "PUT",
 								url : "/api/session",
@@ -308,19 +311,38 @@ app
 													alertFailMessage("Oops! Something went wrong, please check your input again.");
 												}
 											});
-						//}
+//						//}
 					}
-					// update relevant subjects
-					$scope.currentSubjects = [];
-					$scope.filterSubject = '';
-					$scope.callEditRelevantSubject = function(data) {
-						$scope.info_editRelevantSubject = data;
-						getAllSubjects();
-						$scope.currentSubjects = [];
-						data.subjects.forEach(function(item, index) {
-							$scope.currentSubjects.push(item);
+					$scope.callDeleteSessionDetail = function(data) {
+						deleteSessionDetail = data;
+					}
+					$scope.deteleSessionDetail=function()
+					{
+						$http({
+							method : "DELETE",
+							url : "api/detailsession/" + deleteSessionDetail.sessionDetails.id,
+							dataType : "json",
+						}).then(function(result) {
+							if (result.status == 202) {
+								$("#myModal_xoa").modal("hide");
+								getListSessions();
+								alertDeleteSucess();
+							}
+						}, function(response) {
+							alertFail();
 						});
 					}
+					// update relevant subjects
+//					$scope.currentSubjects = [];
+//					$scope.filterSubject = '';
+//					$scope.callEditRelevantSubject = function(data) {
+//						$scope.info_editRelevantSubject = data;
+//						getAllSubjects();
+//						$scope.currentSubjects = [];
+//						data.subjects.forEach(function(item, index) {
+//							$scope.currentSubjects.push(item);
+//						});
+//					}
 
 					// function getAllSubjects() {
 					// $http.get("/api/subject").then(function(response) {
