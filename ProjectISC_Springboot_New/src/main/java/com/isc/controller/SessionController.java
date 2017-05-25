@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isc.model.Session;
+import com.isc.service.SessionDetailService;
 import com.isc.service.SessionService;
 
 @RestController
 public class SessionController {
 	@Autowired
 	private SessionService service;
+	@Autowired
+	private SessionDetailService service1;
 
 	@RequestMapping(value = "/api/session", method = RequestMethod.GET)
 	public ResponseEntity<List<Session>> Sessions() {
@@ -65,5 +68,15 @@ public class SessionController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	@RequestMapping(value = "api/detailsession/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteDetailSession(@PathVariable int id) {
+		try{
+			service1.deleteSessionDetail(id);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+	
 
 }

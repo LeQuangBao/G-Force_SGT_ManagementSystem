@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isc.dao.SessionDao;
 import com.isc.model.Session;
+import com.isc.model.SessionDetail;
 
 @Service
 public class SessionServiceImpl implements SessionService{
@@ -39,4 +40,6 @@ public class SessionServiceImpl implements SessionService{
 	public void updateSession(Session session) {
 		sessionDao.updateSession(session);
 	}
+
+	
 }

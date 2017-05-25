@@ -187,6 +187,7 @@ public class Instructor implements java.io.Serializable {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor")
 	public Set<Time> getTimes() {
@@ -196,6 +197,7 @@ public class Instructor implements java.io.Serializable {
 	public void setTimes(Set<Time> times) {
 		this.times = times;
 	}
+
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor")
 	public Set<Iclass> getIclasses() {

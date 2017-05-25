@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -65,6 +66,7 @@ public class Session implements java.io.Serializable {
 		this.sessionName = sessionName;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "session")
 	public Set<SessionDetail> getSessionDetails() {
 		return this.sessionDetails;
@@ -74,6 +76,7 @@ public class Session implements java.io.Serializable {
 		this.sessionDetails = sessionDetails;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "session")
 	public Set<Timetable> getTimetables() {
 		return this.timetables;

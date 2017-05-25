@@ -208,6 +208,29 @@ app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConst
 						$scope.room= "";
 					}
 
+					$scope.myTimetable = { 
+							date: ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+							session: ["7:30 - 9:30", "9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00"] 
+						};
+					
+					$scope.Mon = "Mon";
+					$scope.Tue = "Tue";
+					$scope.Wed = "Wed";
+					$scope.Thu = "Thu";
+					$scope.Fri = "Fri";
+					$scope.Sat = "Sat";
+					$scope.Sun = "Sun";
+					$scope.cellClicked = function(date, session) {
+					}
+					function updateDay(listSevenDay) {
+						$scope.Mon = listSevenDay[0];
+						$scope.Tue = listSevenDay[1];
+						$scope.Wed = listSevenDay[2];
+						$scope.Thu = listSevenDay[3];
+						$scope.Fri = listSevenDay[4];
+						$scope.Sat = listSevenDay[5];
+						$scope.Sun = listSevenDay[6];
+					}
 				});
 // Chu thich cua nut phan action
 $(document).ready(function() {
