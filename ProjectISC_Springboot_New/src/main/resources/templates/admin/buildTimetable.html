@@ -345,7 +345,6 @@ input[type="checkbox"]:checked+i:before {
 					<form id="formThem" name="formThem" class="form-horizontal"
 						role="form" method="post">
 						<div class="form-group">
-<!-- <<<<<<< HEAD -->
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="last-name"> Name </label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
@@ -379,41 +378,6 @@ input[type="checkbox"]:checked+i:before {
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<select ng-model="room" class="form-control"
 									ng-options="x.roomId for x in listRoom" ng-required="true">
-<!-- ======= -->
-							<!-- <label class="control-label col-sm-3">Name</label> -->
-							<!-- <div class="col-sm-8"> -->
-								<!-- <input type="text" id="iclass_name_add" -->
-									<!-- name="specializationId_add" class="form-control" placeholder="" -->
-									<!-- ng-model="iclass_name_add" required="required" /> <span -->
-									<!-- ng-show="formAdd.iclass_name_add.$touched &amp;&amp; formAdd.iclass_name_add.$invalid"><p -->
-										<!-- style="color: red">This field is required</p></span> -->
-							<!-- </div> -->
-						<!-- </div> -->
-						<!-- <div class="form-group col-md-12"> -->
-							<!-- <label class="control-label">Course</label> -->
-							<!-- <div class=""> -->
-								<!-- <select ng-model="student.specialization" class="form-control" -->
-									<!-- ng-options="x.specializationName for x in list_specialization" -->
-									<!-- name="intake" id="intake" ng-required="true"> -->
-								<!-- </select> -->
-							<!-- </div> -->
-						<!-- </div> -->
-						<!-- <div class="form-group col-md-12"> -->
-							<!-- <label class="control-label">Instructor</label> -->
-							<!-- <div class=""> -->
-								<!-- <select ng-model="student.specialization" class="form-control" -->
-									<!-- ng-options="x.specializationName for x in list_specialization" -->
-									<!-- name="intake" id="intake" ng-required="true"> -->
-								<!-- </select> -->
-							<!-- </div> -->
-						<!-- </div> -->
-						<!-- <div class="form-group col-md-12"> -->
-							<!-- <label class="control-label">Room</label> -->
-							<!-- <div class=""> -->
-								<!-- <select ng-model="student.specialization" class="form-control" -->
-									<!-- ng-options="x.specializationName for x in list_specialization" -->
-									<!-- name="intake" id="intake" ng-required="true"> -->
-<!-- >>>>>>> origin/master2 -->
 								</select>
 							</div>
 						</div>
@@ -450,7 +414,7 @@ input[type="checkbox"]:checked+i:before {
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="last-name"> Name </label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="text" id="name" data-ng-model="className_edit"
+								<input type="text" id="name" data-ng-model="iclass_edit.iclassName"
 									required="required" class="form-control col-md-7 col-xs-12" name="iclassName" />
 								<div ng-messages="formThem.name.$error">
 									<div ng-message="required" ng-show="formThem.name.$touched">
@@ -462,26 +426,24 @@ input[type="checkbox"]:checked+i:before {
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Course</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<select ng-model="subject_edit.subjectName" class="form-control"
-									ng-options="x.subjectName for x in listSubject" ng-required="true">
+								<select ng-model="iclass_edit.subject" class="form-control" ng-required="true">
+									<option ng-selected="iclass_edit.subject.id==x.id" ng-repeat="x in listSubject" ng-value="x">{{x.subjectName}}</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-<!-- <<<<<<< HEAD -->
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Instructor</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<select ng-model="instructor_edit" class="form-control"
-									ng-options="x.lastname+' '+x.firstname for x in listInstructor" ng-required="true">
+								<select ng-model="iclass_edit.instructor" class="form-control" ng-required="true">
+									<option ng-selected="iclass_edit.instructor.id==x.id" ng-repeat="x in listInstructor" ng-value="x">{{x.lastname+' '+x.firstname}}</option>
 								</select>
-<!-- ======= -->
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Room</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<select ng-model="room_edit.roomId" class="form-control"
-									ng-options="x.roomId for x in listRoom" ng-required="true">
+								<select ng-model="iclass_edit.room" class="form-control" ng-required="true">
+									<option ng-selected="iclass_edit.room.id==x.id" ng-repeat="x in listRoom" ng-value="x">{{x.roomId}}</option>
 								</select>
 							</div>
 						</div>

@@ -1,5 +1,5 @@
 app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConstants) {
-	var classObj=null;
+	$scope.classObj={};
 	$scope.iclass_edit={};
 	var alertDuration = 1800;
 	var url_split=window.location.href.split("/");
@@ -90,16 +90,12 @@ app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConst
 					
 					//get class object
 					$scope.getClassObj = function(data) {
+						$scope.ResetForm_Edit();
 						$http.get("api/class/" + data.id).then(
 								function(response) {
-									$scope.className_edit = response.data;
-									$scope.subject_edit=response.data.subject;
-									$scope.instructor_edit=response.data.instructor;
-									$scope.room_edit=response.data.room;
-									console.log(response.data.subject);
+									$scope.iclass_edit = response.data;
 								});
-						//$scope.subject_edit=$scope.iclass_edit.subject.subjectName;
-						classObj = data;
+						$scope.classObj = data;
 					}
 					// update class
 					$scope.editClass = function() {
@@ -127,7 +123,7 @@ app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConst
 						$http({
 									method : "DELETE",
 									url : "api/class/"
-											+ classObj.id,
+											+ $scope.classObj.id,
 									dataType : "json",
 								}).then(function(result) {
 							if (result.status == 202) {
@@ -206,6 +202,10 @@ app.controller('buildTimetableCtrl',function($scope, $http, $filter, uiGridConst
 						$scope.subject = "";
 						$scope.instructor = "";
 						$scope.room= "";
+					}
+					// reset form edit
+					$scope.ResetForm_Edit = function() {
+						$scope.iclass_edit = "";
 					}
 
 					$scope.myTimetable = { 

@@ -51,6 +51,7 @@ public class ClassController {
 		try {
 			classService.updateIClass(iclass);
 		} catch (Exception e) {
+			System.out.print(e);
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);

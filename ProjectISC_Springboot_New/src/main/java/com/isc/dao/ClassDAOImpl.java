@@ -28,7 +28,7 @@ public class ClassDAOImpl implements ClassDAO{
 		
 	}
 	public void updateIClass(Iclass iclass) {
-	sesion.getCurrentSession().update(iclass);
+		sesion.getCurrentSession().update(iclass);
 		
 	}
 
