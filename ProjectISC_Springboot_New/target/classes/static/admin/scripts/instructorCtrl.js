@@ -312,7 +312,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter, uiGridConstants
                   	email: $scope.email,
                   	phone: $scope.phone,
                   	address: $scope.address,
-                  	image: "",
+                  	image: $scope.image,
                   	degree: $scope.degree,
                   	status: $scope.active                 	
                },
@@ -405,9 +405,6 @@ app.controller('instructorCtrl', function($scope, $http,$filter, uiGridConstants
                 	  $("#myModal_sua").modal("hide");
                 	  getAllinstructors();
                 	  editAlert();
-                		setTimeout(function() {
-                       		window.location.reload();
-                        }, 1000);
              }, function(response) {
 					alertFailMessage("Oops! Something went wrong, please check your input again");
 					setTimeout(function() {

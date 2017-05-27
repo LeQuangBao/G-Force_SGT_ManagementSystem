@@ -103,7 +103,7 @@ public class Student implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@JsonIgnore
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "entrance_exam")
 	public EntranceExam getEntranceExam() {
@@ -113,7 +113,7 @@ public class Student implements java.io.Serializable {
 	public void setEntranceExam(EntranceExam entranceExam) {
 		this.entranceExam = entranceExam;
 	}
-	@JsonIgnore
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "intake")
 	public Intake getIntake() {
@@ -123,7 +123,7 @@ public class Student implements java.io.Serializable {
 	public void setIntake(Intake intake) {
 		this.intake = intake;
 	}
-	@JsonIgnore
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school")
 	public School getSchool() {
@@ -133,7 +133,7 @@ public class Student implements java.io.Serializable {
 	public void setSchool(School school) {
 		this.school = school;
 	}
-	@JsonIgnore
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "specialization")
 	public Specialization getSpecialization() {

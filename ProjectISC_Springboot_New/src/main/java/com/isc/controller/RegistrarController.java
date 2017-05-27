@@ -51,7 +51,8 @@ public class RegistrarController {
 	@RequestMapping(value="admin/api/registrar", method=RequestMethod.POST)
 	public ResponseEntity<Void> addRegistrar(@RequestBody Registrar registrar){
 		try {
-			registrar.setImage(registrarObj.getImage());
+			if(!registrar.getImage().equals("noImage.png"))
+				registrar.setImage(registrarObj.getImage());
 			service.addRegistrar(registrar);
 			
 		} catch (Exception e) {
@@ -61,17 +62,18 @@ public class RegistrarController {
 	}
 	@RequestMapping(value="admin/api/registrar",method=RequestMethod.PUT)
 	public ResponseEntity<Void>updateRegistrar(@RequestBody Registrar registrar){
-		Registrar registrar1;
-		registrar1=service.getRegistrar(registrar.getId());
-		registrar1.setImage(registrarObj.getImage());
-		String image= registrar1.getImage();
-	    String directory = "src\\main\\resources\\static\\admin\\images";
-	    String filepath = Paths.get(directory, image).toString();
-	    File file=new File(filepath);
-	    file.delete();    
-			
-			service.updateRegistrar(registrar);
-		
+		if(!registrar.getImage().equals("noImage.png")){
+			Registrar registrar1;
+			registrar1=service.getRegistrar(registrar.getId());
+			//registrar1.setImage(registrarObj.getImage());
+			String image= registrar1.getImage();
+		    String directory = "src\\main\\resources\\static\\admin\\images";
+		    String filepath = Paths.get(directory, image).toString();
+		    File file=new File(filepath);
+		    file.delete();   
+			registrar.setImage(registrarObj.getImage());
+		}
+		service.updateRegistrar(registrar);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	@RequestMapping(value="admin/api/registrar/{id}",method=RequestMethod.DELETE)

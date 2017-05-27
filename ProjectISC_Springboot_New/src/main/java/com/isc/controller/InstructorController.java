@@ -55,7 +55,8 @@ public class InstructorController {
 	@RequestMapping(value = "admin/api/instructor", method = RequestMethod.POST)
 	public ResponseEntity<Void> addInstructor(@RequestBody Instructor instructor) {
 		try {
-			instructor.setImage(instructorObj.getImage());
+			if(!instructor.getImage().equals("noImage.png"))
+				instructor.setImage(instructorObj.getImage());
 			service.addInstructor(instructor);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -66,13 +67,16 @@ public class InstructorController {
 	@RequestMapping(value = "admin/api/instructor", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateInstructor(@RequestBody Instructor instructor) {
 		try {
-			Instructor instructor1=service.getInstructor(instructor.getId());
-			instructor1.setImage(instructorObj.getImage());
-			String image=instructor1.getImage();
-			 String directory = "src\\main\\resources\\static\\admin\\images";
-			 String filepath = Paths.get(directory, image).toString();
-			   File file=new File(filepath);
-			    file.delete();    
+			if(!instructor.getImage().equals("noImage.png")){
+				Instructor instructor1=service.getInstructor(instructor.getId());
+				//instructor1.setImage(instructorObj.getImage());
+				String image=instructor1.getImage();
+				 String directory = "src\\main\\resources\\static\\admin\\images";
+				 String filepath = Paths.get(directory, image).toString();
+				   File file=new File(filepath);
+				    file.delete();  
+				instructor.setImage(instructorObj.getImage());
+			}
 			service.updateInstructor(instructor);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

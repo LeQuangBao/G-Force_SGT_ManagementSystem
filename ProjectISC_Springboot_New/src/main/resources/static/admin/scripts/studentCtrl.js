@@ -109,7 +109,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
         $scope.listEntranceExamForEdit = [];
         $scope.list_entrance_exam
             .forEach(function(item, index) {
-                if (item.intake.id === student.intake.id) {
+                if (item.intake.id == student.intake.id) {
                     $scope.listEntranceExamForEdit
                         .push(item);
                 }
@@ -481,7 +481,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
 
 	                    listStudent
 	                        .forEach(function(item, index) {
-	                            if (item.intake.intakeId === $scope.student.intake.intakeId) {
+	                            if (item.intake.intakeId == $scope.student.intake.intakeId) {
 	                                numberOfStudent = numberOfStudent + 1;
 	                            }
 	                        });

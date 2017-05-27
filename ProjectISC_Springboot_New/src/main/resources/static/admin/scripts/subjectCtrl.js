@@ -72,9 +72,9 @@ app.controller('subjectCtrl', function($scope, $http,$filter, uiGridConstants) {
 							name : 'Action',
 							enableSorting : false,
 							enableFiltering : false,
-							cellTemplate : '<button type="button" ng-click="grid.appScope.viewRelevantSpecialization(x)"class="btn btn-success btn-sm" data-toggle="modal"data-tooltip ="tooltip" title="View specializations"data-target="#myModal_viewRelevantSpecialization" ><span class="glyphicon glyphicon-th-list"></span></button>'
-                                 +'<button type="button" ng-click="grid.appScope.editsubject(x)"class="btn btn-primary btn-sm" data-toggle="modal" data-tooltip ="tooltip" title="Edit"data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"  ></span></button>'
-                                 +'<button type="button" ng-click="grid.appScope.deletesubject(x)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete"data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"   ></span></button>'
+							cellTemplate : '<button type="button" ng-click="grid.appScope.viewRelevantSpecialization(row.entity)"class="btn btn-success btn-sm" data-toggle="modal"data-tooltip ="tooltip" title="View specializations"data-target="#myModal_viewRelevantSpecialization" ><span class="glyphicon glyphicon-th-list"></span></button>'
+                                 +'<button type="button" ng-click="grid.appScope.editsubject(row.entity)"class="btn btn-primary btn-sm" data-toggle="modal" data-tooltip ="tooltip" title="Edit"data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"  ></span></button>'
+                                 +'<button type="button" ng-click="grid.appScope.deletesubject(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete"data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"   ></span></button>'
 						} ]
 			};
 			// lọc toàn bộ dữ liệu

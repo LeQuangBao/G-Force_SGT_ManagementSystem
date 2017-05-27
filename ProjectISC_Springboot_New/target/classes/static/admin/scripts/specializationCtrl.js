@@ -1,5 +1,4 @@
 app.controller('specializationCtrl',function($scope, $http, $filter, uiGridConstants) {
-//
 //					function configMainTable() {
 //						// data get from getListSpecialiation()
 //						$scope.table_specialization = {
@@ -468,14 +467,11 @@ app.controller('specializationCtrl',function($scope, $http, $filter, uiGridConst
 					function alertFail() {
 						swal({
 							title : "",
-							text : "Opps! Something went wrong, please check your input again.",
+							text : "Opps! Your request cannot be processed.",
 							type : "error",
 							timer : alertDuration,
 							showConfirmButton : false
 						})
-						setTimeout(function() {
-							location.reload();
-						}, alertDuration);
 					}
 
 					function alertFailMessage(message) {
@@ -504,7 +500,6 @@ app.controller('specializationCtrl',function($scope, $http, $filter, uiGridConst
 						$scope.formAdd.specializationName_add.$setUntouched();
 						$scope.duplicateAlert = "";
 					}
-
 				});
 // Chu thich cua nut phan action
 $(document).ready(function() {

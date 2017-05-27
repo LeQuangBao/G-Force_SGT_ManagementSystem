@@ -71,7 +71,6 @@ public class EntranceExam implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "intake", nullable = false)
 	public Intake getIntake() {

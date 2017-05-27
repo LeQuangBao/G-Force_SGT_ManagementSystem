@@ -274,13 +274,15 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
  	// ADD REGISTRAR
 	$scope.image="";
  	 $scope.save = function (close) {
- 		uploadFile();
+ 		
  		if(usernameduplicate($scope.username)){
  	
- 		if($scope.image==="")
- 			{
+ 		if($scope.image==""){
  			$scope.image="noImage.png";
- 			}
+ 		}
+ 		else{
+ 			uploadFile();
+ 		}
  		
        $http({
             method: "POST",
@@ -294,7 +296,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
               	email: $scope.email,
               	phone: $scope.phone,
                	address: $scope.address,
-              	image: "",
+              	image: $scope.image,
                	status: $scope.active,
                
             },
@@ -342,7 +344,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
     	 $scope.frmRegistrarAdd.address.$setUntouched();
     	 document.getElementById("image").value="";
     	 document.getElementById("prev_img").src="";
-    	 $scope.prev_img="";
+    	 $scope.prev_img='';
  	 }
  	// set current date for max date - birthday
  	$scope.currentDate={value: new Date()};
@@ -418,11 +420,8 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
        })
           .then(function (result) {
            	  $("#myModal_sua").modal("hide");
-           	  // getAllRegistrars();
+           	  getAllRegistrars();
            	  editAlert();
-           	setTimeout(function() {
-           		window.location.reload();
-            }, 1000);
         }, function(response) {
 				alertFailMessage("Oops! Something went wrong, please check your input again.");
 //				setTimeout(function() {
