@@ -39,6 +39,8 @@ public class Session implements java.io.Serializable {
 		this.sessionName = sessionName;
 	}
 
+	
+	
 	public Session(String sessionName, Set<SessionDetail> sessionDetails, Set<Timetable> timetables) {
 		this.sessionName = sessionName;
 		this.sessionDetails = sessionDetails;

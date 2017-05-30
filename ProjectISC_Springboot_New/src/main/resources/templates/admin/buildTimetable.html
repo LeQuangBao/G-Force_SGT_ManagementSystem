@@ -173,11 +173,10 @@ input[type="checkbox"]:checked+i:before {
 
 							<div class="row">
 								<div class="col-md-8 col-sm-12 col-xs-12">
-									<h4 class="text-center">Pick class</h4>
+									<h4 class="text-center">Add/Remove class</h4>
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Pick</th>
 												<th>Name</th>
 												<th>Course</th>
 												<th>Instructor</th>
@@ -190,13 +189,16 @@ input[type="checkbox"]:checked+i:before {
 										</thead>
 										<tbody>
 											<tr class="clickable" ng-repeat="x in listClass">
-												<td><input type="radio" name="pickCourse" /></td>
 												<td ng-bind="x.iclassName"></td>
 												<td ng-bind="x.subject.subjectName"></td>
-												<td ng-bind="x.instructor.lastname+' '+x.instructor.firstname"></td>
+												<td
+													ng-bind="x.instructor.lastname+' '+x.instructor.firstname"></td>
 												<td ng-bind="x.room.roomId"></td>
-												<td><span data-toggle="modal" data-target="#myModal_sua" ng-click="getClassObj(x)"
-													class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span data-toggle="modal" data-target="#myModal_xoa" ng-click="getClassObj(x)"
+												<td><span data-toggle="modal"
+													data-target="#myModal_sua" ng-click="getClassObj(x)"
+													class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span
+													data-toggle="modal" data-target="#myModal_xoa"
+													ng-click="getClassObj(x)"
 													class="btn btn-danger btn-xs glyphicon glyphicon-remove"></span></td>
 											</tr>
 										</tbody>
@@ -205,10 +207,15 @@ input[type="checkbox"]:checked+i:before {
 
 								<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 									<h4>Pick action</h4>
-									<div class="container" style="margin-left: 200px">
-										<div id="demo1"></div>
-
+									<div class="row" style="margin-left:180px;margin-bottom:10px">
+									<select ng-model="pickIClass" class="col-md-5"
+											ng-options="x.iclassName for x in listClass">
+									</select>
 									</div>
+									<div class="row" style="margin-left:185px">
+										<div id="demo1"></div>
+									</div>
+								
 
 									<div class="row">
 										<div class="form-horizontal form-required">
@@ -220,47 +227,53 @@ input[type="checkbox"]:checked+i:before {
 											</label>
 
 										</div>
-										<select>
-											<option>Nguyễn Thành Nam</option>
-											<option>Quang Vũ</option>
-											<option>Trần Xuân Mai</option>
-										</select> / <select>
-											<option>101</option>
-											<option>102</option>
-											<option>201</option>
+									
+										<div class="form-horizontal" style="margin-left:100px">
+										<select ng-model="instructor" class="col-md-4"
+											ng-options="x.lastname+' '+x.firstname for x in listInstructor"
+											ng-required="true" label="Pick Instructor">
 										</select>
-								</div>
+									
+									
+										
+										<select ng-model="room" class="col-md-5"
+											ng-options="x.roomId for x in listRoom" ng-required="true" style="margin-left:10px">
+										</select>
+									</div>
+									</div>
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<h4 class="text-center">Add/Remove picked class to
 											timetable</h4>
 										<div class="row">
-											
-											<span style="float:left;margin-top:7px">Show :</span>
-											<div class="form-horizontal form-required" style="float:left">
 
-												<span> FE 1 </span>
-												<label for="check-two"> <input type="checkbox"
-													name="check-two" id="check-two" /> <i></i>
-													
+											<span style="float: left; margin-top: 7px">Show :</span>
+											<div class="form-horizontal form-required"
+												style="float: left">
+
+												<span> FE 1 </span> <label for="check-two"> <input
+													type="checkbox" name="check-two" id="check-two" /> <i></i>
+
 												</label>
 
 											</div>
-											 <div class="form-horizontal form-required" style="float:left">
+											<div class="form-horizontal form-required"
+												style="float: left">
 
-												<span>FE 2 </span>
-												<label for="check-three"> <input type="checkbox"
-													name="check-three" id="check-three" /> <i></i>
-													
+												<span>FE 2 </span> <label for="check-three"> <input
+													type="checkbox" name="check-three" id="check-three" /> <i></i>
+
 												</label>
 
-											</div> <div class="form-horizontal form-required" style="float:left">
+											</div>
+											<div class="form-horizontal form-required"
+												style="float: left">
 
-												<span> Onjob - Training </span>
-												<label for="check-four"> <input type="checkbox"
-													name="check-four" id="check-four" /> <i></i>
-													
+												<span> Onjob - Training </span> <label for="check-four">
+													<input type="checkbox" name="check-four" id="check-four" />
+													<i></i>
+
 												</label>
 
 											</div>
@@ -269,7 +282,7 @@ input[type="checkbox"]:checked+i:before {
 											<table class="table table-bordered">
 												<thead>
 													<tr>
-														<th ng-repeat="x in myTimetable.date" width="12%">{{x}}</th>														
+														<th ng-repeat="x in myTimetable.date" width="12%">{{x}}</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -291,7 +304,7 @@ input[type="checkbox"]:checked+i:before {
 							</div>
 						</div>
 						<div class="col-xs-12 text-center">
-							<p>Week
+							<p>Week</p>
 							<ul class="pagination clickable">
 								<li class="active"><a>1</a></li>
 								<li><a>2</a></li>
@@ -309,7 +322,7 @@ input[type="checkbox"]:checked+i:before {
 								<li><a>14</a></li>
 								<li><a>15</a></li>
 							</ul>
-							</p>
+
 						</div>
 
 					</div>
@@ -328,7 +341,7 @@ input[type="checkbox"]:checked+i:before {
 			<!-- /footer content -->
 		</div>
 	</div>
-	
+
 	<!-- Modal thêm -->
 	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -349,7 +362,8 @@ input[type="checkbox"]:checked+i:before {
 								for="last-name"> Name </label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<input type="text" id="name" data-ng-model="iclassName"
-									required="required" class="form-control col-md-7 col-xs-12" name="iclassName" />
+									required="required" class="form-control col-md-7 col-xs-12"
+									name="iclassName" />
 								<div ng-messages="formThem.name.$error">
 									<div ng-message="required" ng-show="formThem.name.$touched">
 										<p style="color: red">This field is required</p>
@@ -361,7 +375,8 @@ input[type="checkbox"]:checked+i:before {
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Course</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<select ng-model="subject" class="form-control"
-									ng-options="x.subjectName for x in listSubject" ng-required="true">
+									ng-options="x.subjectName for x in listSubject"
+									ng-required="true">
 								</select>
 							</div>
 						</div>
@@ -369,7 +384,8 @@ input[type="checkbox"]:checked+i:before {
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Instructor</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<select ng-model="instructor" class="form-control"
-									ng-options="x.lastname+' '+x.firstname for x in listInstructor" ng-required="true">
+									ng-options="x.lastname+' '+x.firstname for x in listInstructor"
+									ng-required="true">
 								</select>
 							</div>
 						</div>
@@ -387,7 +403,8 @@ input[type="checkbox"]:checked+i:before {
 					<button type="button" class="btn btn-primary" id="them"
 						data-ng-click="addClass(false)" ng-disabled="formThem.$invalid">Add</button>
 					<button type="button" class="btn btn-default" id="them"
-						data-ng-click="addClass(true)" ng-disabled="formThem.$invalid">Add and close</button>
+						data-ng-click="addClass(true)" ng-disabled="formThem.$invalid">Add
+						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetForm()">Close</button>
 
@@ -414,8 +431,9 @@ input[type="checkbox"]:checked+i:before {
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="last-name"> Name </label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="text" id="name" data-ng-model="iclass_edit.iclassName"
-									required="required" class="form-control col-md-7 col-xs-12" name="iclassName" />
+								<input type="text" id="name"
+									data-ng-model="iclass_edit.iclassName" required="required"
+									class="form-control col-md-7 col-xs-12" name="iclassName" />
 								<div ng-messages="formThem.name.$error">
 									<div ng-message="required" ng-show="formThem.name.$touched">
 										<p style="color: red">This field is required</p>
@@ -426,24 +444,31 @@ input[type="checkbox"]:checked+i:before {
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Course</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<select ng-model="iclass_edit.subject" class="form-control" ng-required="true">
-									<option ng-selected="iclass_edit.subject.id==x.id" ng-repeat="x in listSubject" ng-value="x">{{x.subjectName}}</option>
+								<select ng-model="iclass_edit.subject" class="form-control"
+									ng-required="true">
+									<option ng-selected="iclass_edit.subject.id==x.id"
+										ng-repeat="x in listSubject" ng-value="x">{{x.subjectName}}</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Instructor</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<select ng-model="iclass_edit.instructor" class="form-control" ng-required="true">
-									<option ng-selected="iclass_edit.instructor.id==x.id" ng-repeat="x in listInstructor" ng-value="x">{{x.lastname+' '+x.firstname}}</option>
+								<select ng-model="iclass_edit.instructor" class="form-control"
+									ng-required="true">
+									<option ng-selected="iclass_edit.instructor.id==x.id"
+										ng-repeat="x in listInstructor" ng-value="x">{{x.lastname+'
+										'+x.firstname}}</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Room</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<select ng-model="iclass_edit.room" class="form-control" ng-required="true">
-									<option ng-selected="iclass_edit.room.id==x.id" ng-repeat="x in listRoom" ng-value="x">{{x.roomId}}</option>
+								<select ng-model="iclass_edit.room" class="form-control"
+									ng-required="true">
+									<option ng-selected="iclass_edit.room.id==x.id"
+										ng-repeat="x in listRoom" ng-value="x">{{x.roomId}}</option>
 								</select>
 							</div>
 						</div>

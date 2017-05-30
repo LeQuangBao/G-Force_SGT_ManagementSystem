@@ -22,6 +22,8 @@ app
 
 					var deleteSpecialization = "";
 					var alertDuration = 1800;
+					$scope.timetable={};
+					$scope.info ={};
 
 					// get list timetable
 					function getListTimetable() {
@@ -73,20 +75,19 @@ app
 									displayName : 'Name'
 								},
 								{
-									name : 'intake',
+									name : 'intake.intakeName',
 									displayName : 'Intake'
 								},
 								{
-									name : 'session',
+									name : 'session.sessionName',
 									displayName : 'Session'
 								},
 								{
 									name : 'Action',
 									enableSorting : false,
 									enableFiltering : false,
-									cellTemplate : '<button data-toggle="modal" class="btn btn-primary btn-sm" data-target="#myModal_editSubject" data-backdrop="static"ng-click="grid.appScope.callEditRelevantSubject(row.entity)" data-tooltip ="tooltip" title="Add course(s)"><span class="glyphicon glyphicon-th-list"></button>'
-											+ '<button class="btn btn-primary btn-sm" ng-click="grid.appScope.callEditSpecialization(row.entity)" data-tooltip ="tooltip" title="Edit"data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
-											+ '<button ng-click="grid.appScope.callDeleteSpecialization(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'
+									cellTemplate :'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.callEditTiametable(row.entity)" data-tooltip ="tooltip" title="Edit"data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
+											+ '<button ng-click="grid.appScope.callDeleteTimetable(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'
 								} ]
 					};
 					// lọc toàn bộ dữ liệu
@@ -247,10 +248,13 @@ app
 
 					// add timetable
 					$scope.addTimetable = function() {
+						
 							$http({
 								method : "POST",
 								url : "/api/timetable",
-								data : $scope.timetable,
+								data : {timetableName: $scope.timetable.timetableName,
+									intake:	$scope.timetable.intake,
+									session: $scope.timetable.session},
 								dataType : "json",
 								headers : {
 									'Content-Type' : 'application/json'
@@ -279,13 +283,26 @@ app
 						$http.get("/api/timetable/" + data.id).then(
 								function(response) {
 									$scope.info = response.data;
+									console.log($scope.info);
 								});
 						SpecID = data.id;
 						$scope.duplicateAlert = "";
+						for (var i = 0; i < $scope.list_intake.length; i++) {
+		                    if (response.data.intake.intakeName == $scope.list_intake[i].intakeName) {
+		                    	$scope.info.intake = $scope.list_intake[i];
+		                        break;
+		                    }
+		                }
+						for (var i = 0; i < $scope.list_session.length; i++) {
+		                    if (response.data.intake.sessionName == $scope.list_session[i].sessionName) {
+		                    	$scope.info.session = $scope.list_session[i];
+		                        break;
+		                    }
+		                }
 					}
 
 					$scope.editTimetable = function() {
-						if (id_duplicate_Edit($scope.info.specializationId)) {
+
 							$http({
 								method : "PUT",
 								url : "/api/timetable",
@@ -294,7 +311,7 @@ app
 							})
 									.then(
 											function(response) {
-												$("#myModal_sua").modal("hide");
+												$("myModal_sua").modal("hide");
 												getListTimetable();
 												alertEditSucess();
 											},
@@ -303,7 +320,7 @@ app
 													alertFailMessage("Oops! Something went wrong, please check your input again.");
 												}
 											});
-						}
+						
 					}
 					
 					// delete timetable
@@ -420,9 +437,13 @@ app
 					// reset form add
 					$scope.ResetForm_Add = function() {
 						$scope.timetable.timetableName = "";
+						$scope.timetable.intake ="";
+						$scope.timetable.session ="";
 //						$scope.active_add = true;
 						//$scope.formAdd.specializationId_add.$setUntouched();
-						$scope.formAdd.timetable.timetableName.$setUntouched();
+						$scope.formAdd.timetableId_add.$setUntouched();
+						$scope.formAdd.intake.$setUntouched();
+						$scope.formAdd.session.$setUntouched();
 //						$scope.duplicateAlert = "";
 //					}
 
