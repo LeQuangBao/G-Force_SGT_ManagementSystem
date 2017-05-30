@@ -358,6 +358,15 @@ app.controller('instructorCtrl', function($scope, $http,$filter, uiGridConstants
               }
             });
           }
+        //Reset form Reset Password
+        $scope.ResetFormReset = function()
+        {
+        	$scope.newPassword ="";
+    		 $scope.re_newPassword="";
+    		 $scope.frmResetPassword.newPassword.$setUntouched();
+    		 $scope.frmResetPassword.re_newPassword.$setUntouched();
+        }
+        //Reset form Add
 	    $scope.ResetForm_Add=function(){
 	    	 document.getElementById("image").value="";
         	 $scope.prev_img='';
