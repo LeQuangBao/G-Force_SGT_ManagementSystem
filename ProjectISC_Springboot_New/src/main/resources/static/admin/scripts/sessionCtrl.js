@@ -58,63 +58,95 @@ app
 								})
 					}
 					// get list session detail by session id
-					$scope.list_sessiondetail=[];
+					$scope.list_sessiondetail = [];
 					function getListSessionsDetail1(id) {
 						$scope.list = [];
-						$http.get("http://localhost:8080//api/sessiondetail1/"+id).then(
-								function(response) {
-									$scope.list_sessiondetail_1 = response.data;
-									// $scope.table_session.data =
-									// response.data;
-									// .gridOptions.data = response.data;
+						$http.get(
+								"http://localhost:8080//api/sessiondetail1/"
+										+ id).then(function(response) {
+							$scope.list_sessiondetail_1 = response.data;
+							// $scope.table_session.data =
+							// response.data;
+							// .gridOptions.data = response.data;
 
-								})
+						})
 					}
-					
+
 					// add session detail
 					$scope.addSessionDetail = function() {
-						var session = 
-					        {
-					            "id": $scope.info.id,
-					            "sessionName": $scope.info.sessionName
-					        };
-						console.log(session);
-						var start_time=$scope.timestart;
-						var end_time=$scope.timeend;
-						console.log(start_time);
-						console.log(end_time);
-						var sessiondetail=
-							{
-							"timeStart": start_time,
-							"timeend": end_time,
-							"session": session
-							};
-						console.log(sessiondetail);
-							$http({
-								method : "POST",
-								url : "/api/sessiondetail1",
-								data : sessiondetail,
-								dataType : "json",
-								headers : {
-									'Content-Type' : 'application/json'
-								}
-							})
-									.then(
-											function(response) {
-												//getListSessionsDetail1($scope.info.id);
-												alertAddSucess();
-//												$scope.ResetForm_Add();
-//												if (close == true) {
-//													$("#myModal_them").modal(
-//															"hide");
-//												}
-											},
-											function(response) {
-												if (response.status == 406) {
-													alertFailMessage("Oops! Something went wrong, please check your input again.");
-												}
-											});
-////						
+						// var session =
+						// {
+						// 'id': $scope.info.id,
+						// 'sessionName': $scope.info.sessionName
+						// };
+						$http
+								.get(
+										"http://localhost:8080//api/session/"
+												+ $scope.info.id)
+								.then(
+										function(response) {
+											var session = response.data;
+											console.log(session.sessionDetails);
+											var sessiondetail = {
+												"timeStart" : $scope.timestart,
+												"timeEnd" : $scope.timeend
+											};
+											session.sessionDetails.push(sessiondetail);
+											$http({
+												method : "PUT",
+												url : "/api/session",
+												data : JSON.stringify(session),
+												dataType : "json",
+											})
+													.then(
+															function(response) {
+																$(
+																		"#myModal_sua")
+																		.modal(
+																				"hide");
+																getListSessions();
+																alertEditSucess();
+															},
+															function(response) {
+																if (response.status == 406) {
+																	alertFailMessage("Oops! Something went wrong, please check your input again.");
+																}
+															});
+
+										});
+										
+//						console.log(session);
+//						var start_time = $scope.timestart;
+//						var end_time = $scope.timeend;
+//						console.log(start_time);
+//						console.log(end_time);
+//
+//						console.log(sessiondetail);
+//						$http({
+//							method : "POST",
+//							url : "/api/sessiondetail1",
+//							data : sessiondetail,
+//							dataType : "json",
+//							headers : {
+//								'Content-Type' : 'application/json'
+//							}
+//						})
+//								.then(
+//										function(response) {
+//											// getListSessionsDetail1($scope.info.id);
+//											alertAddSucess();
+//											// $scope.ResetForm_Add();
+//											// if (close == true) {
+//											// $("#myModal_them").modal(
+//											// "hide");
+//											// }
+//										},
+//										function(response) {
+//											if (response.status == 406) {
+//												alertFailMessage("Oops! Something went wrong, please check your input again.");
+//											}
+//										});
+//						// //
 					}
 
 					getListSessions();
@@ -299,39 +331,39 @@ app
 
 					// add session
 					$scope.addSession = function(close) {
-							var sessionName = document
-									.getElementById("SessionName_add").value;
+						var sessionName = document
+								.getElementById("SessionName_add").value;
 
-							// var activeElement = $scope.active_add;
-							$http({
-								method : "POST",
-								url : "/api/session",
-								data : {
-									// sessionId : sessionId,
-									sessionName : sessionName,
-									// active : activeElement
-								},
-								dataType : "json",
-								headers : {
-									'Content-Type' : 'application/json'
-								}
-							})
-									.then(
-											function(response) {
-												getListSessions();
-												alertAddSucess();
-												$scope.ResetForm_Add();
-												if (close == true) {
-													$("#myModal_them").modal(
-															"hide");
-												}
-											},
-											function(response) {
-												if (response.status == 406) {
-													alertFailMessage("Oops! Something went wrong, please check your input again.");
-												}
-											});
-//						
+						// var activeElement = $scope.active_add;
+						$http({
+							method : "POST",
+							url : "/api/session",
+							data : {
+								// sessionId : sessionId,
+								sessionName : sessionName,
+							// active : activeElement
+							},
+							dataType : "json",
+							headers : {
+								'Content-Type' : 'application/json'
+							}
+						})
+								.then(
+										function(response) {
+											getListSessions();
+											alertAddSucess();
+											$scope.ResetForm_Add();
+											if (close == true) {
+												$("#myModal_them")
+														.modal("hide");
+											}
+										},
+										function(response) {
+											if (response.status == 406) {
+												alertFailMessage("Oops! Something went wrong, please check your input again.");
+											}
+										});
+						//						
 					}
 
 					// update session
@@ -340,69 +372,71 @@ app
 								function(response) {
 									$scope.info = response.data;
 								});
-						$http.get("http://localhost:8080//api/sessiondetail1/"+data.id).then(
-								function(response) {
-									$scope.list_sessiondetail_1 = response.data;
-									// $scope.table_session.data =
-									// response.data;
-									// .gridOptions.data = response.data;
+						$http.get(
+								"http://localhost:8080//api/sessiondetail1/"
+										+ data.id).then(function(response) {
+							$scope.list_sessiondetail_1 = response.data;
+							// $scope.table_session.data =
+							// response.data;
+							// .gridOptions.data = response.data;
 
-								})
+						})
 						// SpecID = data.sessionId;
 						$scope.duplicateAlert = "";
 					}
 
 					$scope.editSession = function() {
-							$http({
-								method : "PUT",
-								url : "/api/session",
-								data : JSON.stringify($scope.info),
-								dataType : "json",
-							})
-									.then(
-											function(response) {
-												$("#myModal_sua").modal("hide");
-												getListSessions();
-												alertEditSucess();
-											},
-											function(response) {
-												if (response.status == 406) {
-													alertFailMessage("Oops! Something went wrong, please check your input again.");
-												}
-											});s
-// //}
+						$http({
+							method : "PUT",
+							url : "/api/session",
+							data : JSON.stringify($scope.info),
+							dataType : "json",
+						})
+								.then(
+										function(response) {
+											$("#myModal_sua").modal("hide");
+											getListSessions();
+											alertEditSucess();
+										},
+										function(response) {
+											if (response.status == 406) {
+												alertFailMessage("Oops! Something went wrong, please check your input again.");
+											}
+										});
+						// //}
 					}
 					$scope.callDeleteSessionDetail = function(data) {
 						deleteSessionDetail = data;
 					}
-					$scope.deteleSessionDetail=function()
-					{
-						
-						$http({
-							method : "DELETE",
-							url : "/api/sessiondetail/" + deleteSessionDetail.id,
-							dataType : "json",
-						}).then(function(result) {
+					$scope.deteleSessionDetail = function() {
+
+						$http(
+								{
+									method : "DELETE",
+									url : "/api/sessiondetail/"
+											+ deleteSessionDetail.id,
+									dataType : "json",
+								}).then(function(result) {
 							if (result.status == 202) {
 								$("#myModal_xoachitiet").modal("hide");
 								getListSessionsDetail1($scope.info.id);
 								alertDeleteSucess();
 							}
 						}, function(response) {
-							//alertFail();
+							// alertFail();
 						});
 					}
 					// update relevant subjects
-// $scope.currentSubjects = [];
-// $scope.filterSubject = '';
-// $scope.callEditRelevantSubject = function(data) {
-// $scope.info_editRelevantSubject = data;
-// getAllSubjects();
-// $scope.currentSubjects = [];
-// data.subjects.forEach(function(item, index) {
-// $scope.currentSubjects.push(item);
-// });
-// }
+					// $scope.currentSubjects = [];
+					// $scope.filterSubject = '';
+					// $scope.callEditRelevantSubject = function(data) {
+					// $scope.info_editRelevantSubject = data;
+					// getAllSubjects();
+					// $scope.currentSubjects = [];
+					// data.subjects.forEach(function(item, index) {
+					// $scope.currentSubjects.push(item);
+					// });
+					// }
 
 					// function getAllSubjects() {
 					// $http.get("/api/subject").then(function(response) {
@@ -573,14 +607,13 @@ app
 					}
 					// reset form add
 					$scope.ResetForm_Add = function() {
-						 // $scope.SessionId_add = "";
-						 $scope.SessionName_add = "";
-						 // $scope.formAdd.SessionId_add.$setUntouched();
-						 $scope.formAdd.SessionName_add.$setUntouched();
-						 $scope.duplicateAlert = "";
+						// $scope.SessionId_add = "";
+						$scope.SessionName_add = "";
+						// $scope.formAdd.SessionId_add.$setUntouched();
+						$scope.formAdd.SessionName_add.$setUntouched();
+						$scope.duplicateAlert = "";
 					}
 					// reset form edit
-				
 
 				});
 // Chu thich cua nut phan action
