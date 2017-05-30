@@ -321,6 +321,16 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
 			});
  		}
      }
+ 	 //Reset form reset password
+ 	 $scope.ResetFormReset = function()
+ 	 {
+ 		
+ 		 $scope.newPassword ="";
+ 		 $scope.reNewPassword="";
+ 		 $scope.frmReset.newPassword.$setUntouched();
+ 		 $scope.frmReset.reNewPassword.$setUntouched();
+ 	 }
+ 	 //Reset form add
  	 $scope.ResetForm_Add=function(){
     	 $scope.username="";
     	 $scope.password="";

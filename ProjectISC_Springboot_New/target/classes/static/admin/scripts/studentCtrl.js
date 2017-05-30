@@ -749,6 +749,14 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     $scope.resetpasword = function() {
         $scope.list_temp_inf_reset = $scope.list_temp_inf_edit;
     }
+    //Reset form Reset Password
+    $scope.resetpasword = function()
+    {
+    	$scope.newPassword ="";
+		 $scope.reNewPassword="";
+		 $scope.frmReset.newPassword.$setUntouched();
+		 $scope.frmReset.reNewPassword.$setUntouched();
+    }
     // kiểm tra retype password
     $scope.kiemtra = function() {
         // console.log($scope.password);
