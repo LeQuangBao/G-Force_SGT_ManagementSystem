@@ -245,7 +245,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
             });
         };
         reader.readAsDataURL(photofile);
-        //$scope.image=photofile.name;
+        $scope.image=photofile.name;
        
 	};
 	
@@ -305,7 +305,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
        })
    .then(function (result) {	
        if (result.status == 201) {
-    	   if(close=true){
+    	   if(close==true){
       		  $('#myModal').modal('hide');
       	  }
     	   getAllRegistrars();
@@ -332,7 +332,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
     	 $scope.phone="";
     	 $scope.address="";
     	 $scope.birthday="";
-    	 
+    	 $scope.image="";
     	 $scope.active=true;
     	 $scope.frmRegistrarAdd.username.$setUntouched();
     	 $scope.frmRegistrarAdd.lastName.$setUntouched();
@@ -406,7 +406,7 @@ app.controller('registrarCtrl', function($scope, $http,$filter, uiGridConstants)
  	$scope.edit = [];
 	 // edit registrar
 	$scope.update = function () {
-		uploadFile_Edit();
+			uploadFile_Edit();
    	var dataRegistrar={id:registrarID,username:$scope.edit.username,lastname:$scope.edit.lastname,
    			firstname:$scope.edit.firstname,birthday:$scope.edit.birthday,email:$scope.edit.email,
    			phone:$scope.edit.phone,address:$scope.edit.address,image:$scope.edit.image,

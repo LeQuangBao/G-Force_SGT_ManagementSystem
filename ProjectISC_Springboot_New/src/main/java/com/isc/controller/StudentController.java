@@ -80,7 +80,8 @@ public class StudentController {
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.POST)
 	public ResponseEntity<Void> addStudent(@RequestBody Student Student) {
 		try {
-			Student.setImage(studentObj.getImage());
+			if(!Student.getImage().equals("noImage.png"))
+				Student.setImage(studentObj.getImage());
 			service.addStudent(Student);
 
 		}
@@ -105,15 +106,21 @@ public class StudentController {
 	@RequestMapping(value = "admin/api/Student", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateStudent(@RequestBody Student Student) {
 		try {
-
-			Student student1;
-			student1 = service.getStudent(Student.getId());
-			student1.setImage(studentObj.getImage());
-			String image = student1.getImage();
-			String directory = "src\\main\\resources\\static\\admin\\images";
-			String filepath = Paths.get(directory, image).toString();
-			File file = new File(filepath);
-			file.delete();
+			if(!Student.getImage().equals("noImage.png")){
+				Student student1;
+				student1 = service.getStudent(Student.getId());
+				//student1.setImage(studentObj.getImage());
+				String image = student1.getImage();
+				if(!image.equals(Student.getImage())){
+					if(!image.equals("noImage.png")){
+						String directory = "src\\main\\resources\\static\\admin\\images";
+						String filepath = Paths.get(directory, image).toString();
+						File file = new File(filepath);
+						file.delete();
+					}
+					Student.setImage(studentObj.getImage());
+				}
+			}
 			service.updateStudent(Student);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

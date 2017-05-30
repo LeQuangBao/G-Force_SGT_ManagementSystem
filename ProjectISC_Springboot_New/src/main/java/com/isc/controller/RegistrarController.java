@@ -67,11 +67,15 @@ public class RegistrarController {
 			registrar1=service.getRegistrar(registrar.getId());
 			//registrar1.setImage(registrarObj.getImage());
 			String image= registrar1.getImage();
-		    String directory = "src\\main\\resources\\static\\admin\\images";
-		    String filepath = Paths.get(directory, image).toString();
-		    File file=new File(filepath);
-		    file.delete();   
-			registrar.setImage(registrarObj.getImage());
+			if(!image.equals(registrar.getImage())){
+				if(!image.equals("noImage.png")){
+				    String directory = "src\\main\\resources\\static\\a6dmin\\images";
+				    String filepath = Paths.get(directory, image).toString();
+				    File file=new File(filepath);
+				    file.delete();   
+				}
+				registrar.setImage(registrarObj.getImage());
+			}
 		}
 		service.updateRegistrar(registrar);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);

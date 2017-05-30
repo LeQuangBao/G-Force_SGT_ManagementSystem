@@ -462,10 +462,13 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     // thêm student
     $scope.them = function(close) {
 
-        uploadFile();
         if ($scope.image1 === "") {
             $scope.image1 = "noImage.png";
         }
+        else{
+     		uploadFile();
+        }
+        	
         if ( $scope.student.username==null)
         	{
         		$scope.student.username ="";

@@ -48,7 +48,8 @@ app.controller('instructorCtrl', function($scope, $http,$filter, uiGridConstants
 	    		      { name: 'email', visible : false },
 	    		      { name: 'phone', visible : false },
 	    		      { name: 'address', visible : false },
-	    		      { name: 'status', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.active == 0 ? "Inactive" : "Active"}}</div>', filter: {
+	    		      { name: 'degree', visible : false },
+	    		      { name: 'status', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.status == 0 ? "Inactive" : "Active"}}</div>', filter: {
 	    		          type: uiGridConstants.filter.SELECT,
 	    		          selectOptions: [
 	    		              { value: 'true', label: 'Active' },
@@ -373,6 +374,7 @@ app.controller('instructorCtrl', function($scope, $http,$filter, uiGridConstants
         	 $scope.birthday="";
         	 $scope.active=true;
         	 $scope.degree="College";
+        	 $scope.image="";
         	 $scope.frmInstructor.username.$setUntouched();
         	 $scope.frmInstructor.lastName.$setUntouched();
         	 $scope.frmInstructor.firstName.$setUntouched();

@@ -71,11 +71,15 @@ public class InstructorController {
 				Instructor instructor1=service.getInstructor(instructor.getId());
 				//instructor1.setImage(instructorObj.getImage());
 				String image=instructor1.getImage();
-				 String directory = "src\\main\\resources\\static\\admin\\images";
-				 String filepath = Paths.get(directory, image).toString();
-				   File file=new File(filepath);
-				    file.delete();  
-				instructor.setImage(instructorObj.getImage());
+				if(!image.equals(instructor.getImage())){
+					if(!image.equals("noImage.png")){
+						String directory = "src\\main\\resources\\static\\admin\\images";
+						String filepath = Paths.get(directory, image).toString();
+						File file=new File(filepath);
+					    file.delete();  
+					}
+					instructor.setImage(instructorObj.getImage());
+				}
 			}
 			service.updateInstructor(instructor);
 		} catch (Exception ex) {
