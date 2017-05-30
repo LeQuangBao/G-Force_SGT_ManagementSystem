@@ -181,8 +181,9 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     		      { name: 'status', filter: {
     		          type: uiGridConstants.filter.SELECT,
     		          selectOptions: [
-    		              { value: 'true', label: 'Active' },
-    		              { value: 'false', label: 'Inactive' }
+    		              { value: 'Studying', label: 'Studying' },
+    		              { value: 'Dropped', label: 'Dropped' },
+    		              { value: 'Graduated',label: 'Graduated'}
     		          ]
     		      }},
     		      { name: 'Action',enableSorting: false,enableFiltering: false,
@@ -613,6 +614,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
         if( $scope.list_temp_inf_edit.username== null)
     	{
     	$scope.list_temp_inf_edit.username = "";
+    	
     	}
     else
     	{
@@ -626,7 +628,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
             url: "/admin/api/Student",
             data: $scope.list_temp_inf_edit
         }).then(function mySucces(response) {
-            $('#editModal').modal('hide');
+            $('#myModal_sua').modal('hide');
             GetListStudent();
             editAlert();
 
