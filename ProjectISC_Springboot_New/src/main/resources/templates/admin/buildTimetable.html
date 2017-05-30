@@ -173,11 +173,10 @@ input[type="checkbox"]:checked+i:before {
 
 							<div class="row">
 								<div class="col-md-8 col-sm-12 col-xs-12">
-									<h4 class="text-center">Pick class</h4>
+									<h4 class="text-center">Add/Remove class</h4>
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Pick</th>
 												<th>Name</th>
 												<th>Course</th>
 												<th>Instructor</th>
@@ -190,7 +189,6 @@ input[type="checkbox"]:checked+i:before {
 										</thead>
 										<tbody>
 											<tr class="clickable" ng-repeat="x in listClass">
-												<td><input type="radio" name="pickCourse" /></td>
 												<td ng-bind="x.iclassName"></td>
 												<td ng-bind="x.subject.subjectName"></td>
 												<td
