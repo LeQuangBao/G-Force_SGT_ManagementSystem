@@ -60,7 +60,7 @@ public class Timetable implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@JsonIgnore
+	@JsonIgnoreProperties
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "intake")
 	public Intake getIntake() {
@@ -70,7 +70,7 @@ public class Timetable implements java.io.Serializable {
 	public void setIntake(Intake intake) {
 		this.intake = intake;
 	}
-	@JsonIgnore
+	@JsonIgnoreProperties
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "session")
 	public Session getSession() {
