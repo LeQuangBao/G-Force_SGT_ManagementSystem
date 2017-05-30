@@ -227,6 +227,7 @@ app
 					$scope.Sun = "Sun";
 					$scope.listCurrentSession = [ "7:30 - 9:30",
 							"9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00" ];
+					
 
 					$scope.myTimetable = {
 						date : [ "", $scope.Mon, $scope.Tue, $scope.Wed,
@@ -234,14 +235,16 @@ app
 						session : $scope.listCurrentSession
 					};
 
-					$scope.cellClicked = function(date, session) {
+					$scope.cellClicked = function(date, sessionDetail) {
+						console.log(time);
 						var time = {
-							iclass : "",
-							instructor : "",
-							room : "",
-							sessionDetail : session,
-							date : date
+							iclass : $scope.pickIClass,
+							instructor : $scope.pickIClass.instructor,
+							room : $scope.pickIClass.room,
+							sessionDetail : {"id":1,"timeStart":"03:05:00","timeEnd":"11:10:00"},
+							date : new Date()
 						};
+						console.log(time);
 						$http({
 							method : "POST",
 							url : "/api/time",
