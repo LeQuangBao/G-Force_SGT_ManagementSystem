@@ -89,7 +89,7 @@ public class SessionDetail implements java.io.Serializable {
 	public void setTimeEnd(Date timeEnd) {
 		this.timeEnd = timeEnd;
 	}
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sessionDetail")
 	public Set<Time> getTimes() {
 		return this.times;

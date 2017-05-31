@@ -68,7 +68,7 @@ public class Session implements java.io.Serializable {
 		this.sessionName = sessionName;
 	}
 
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "session")
 	public Set<SessionDetail> getSessionDetails() {
 		return this.sessionDetails;

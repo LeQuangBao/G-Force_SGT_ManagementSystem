@@ -9,6 +9,8 @@ public interface ClassService {
 
 	public Iclass getIClass(int id);
 
+	public List<Iclass> getIClassByTimetableID(int timetableId);
+
 	public void addIClass(Iclass iclass);
 
 	public void deleteIClass(int id);
