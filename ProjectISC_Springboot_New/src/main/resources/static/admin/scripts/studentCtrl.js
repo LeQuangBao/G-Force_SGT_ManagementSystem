@@ -614,18 +614,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     // sửa student
     $scope.edit = function edit() {
         uploadFile_Edit();
-        if( $scope.list_temp_inf_edit.username== null)
-    	{
-    	$scope.list_temp_inf_edit.username = "";
-    	
-    	}
-    else
-    	{
-    	if(usernameduplicate($scope.list_temp_inf_edit.username)==false)
-    		{
-    		$scope.list_temp_inf_edit.username = null;
-    		}
-    	}
+        
         $http({
             method: "PUT",
             url: "/admin/api/Student",
