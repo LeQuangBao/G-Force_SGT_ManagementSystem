@@ -282,7 +282,7 @@ input[type="checkbox"]:checked+i:before {
 											<table class="table table-bordered">
 												<thead>
 													<tr>
-														<th ng-repeat="x in myTimetable.date" width="12%">{{x}}</th>
+														<th ng-repeat="x in myTimetable.date" width="12%">{{x | date: 'EEE MM-dd-yyyy'}}</th>
 													</tr>
 												</thead>
 												<tbody>

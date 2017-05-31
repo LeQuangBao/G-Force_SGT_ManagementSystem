@@ -610,11 +610,10 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
         	}
         }
     };
-
     // sửa student
     $scope.edit = function edit() {
-        uploadFile_Edit();
-        
+       // uploadFile_Edit();  
+    	uploadFile() ;
         $http({
             method: "PUT",
             url: "/admin/api/Student",
@@ -641,18 +640,18 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
         $scope.chitiet =  data;
     }
     // reset password
-    $scope.reset = function(data) {
-        $scope.list_temp_inf_reset.password = $scope.newPassword;
-        $http({
-            method: "PUT",
-            url: "http://localhost:8080/admin/api/Student_Reset",
-            data: $scope.list_temp_inf_reset
-        }).then(function mySucces(response) {
-            $('#myModal_confirmReset').modal('hide');
-            GetListStudent();
-            resetAlert();
-        });
-    }
+//    $scope.reset = function(data) {
+//        $scope.list_temp_inf_reset.password = $scope.newPassword;
+//        $http({
+//            method: "PUT",
+//            url: "http://localhost:8080/admin/api/Student_Reset",
+//            data: $scope.list_temp_inf_reset
+//        }).then(function mySucces(response) {
+//            $('#myModal_confirmReset').modal('hide');
+//            GetListStudent();
+//            resetAlert();
+//        });
+//    }
     // xóa student
     $scope.deleteStudent = function xoa() {
         console.log($scope.list_temp_inf_delete.id);
@@ -760,7 +759,7 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     function uploadFile_Edit() {
         $
             .ajax({
-                url: "uploadFile",
+                url: "/admin/student/uploadFile",
                 type: "POST",
                 data: new FormData(
                     $("#upload-file-form-edit")[0]),
@@ -783,10 +782,12 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     }
     $scope.ResetPassword = function() {
         $scope.list_temp_inf_edit.password = $scope.newPassword;
+        console.log( $scope.list_temp_inf_edit.password);
         $http({
             method: "PUT",
-            url: "admin/api/Student_Reset",
-            data: $scope.list_temp_inf_edit,
+            url: "http://localhost:8080/admin/api/Student_Reset",
+            data: JSON
+            .stringify($scope.list_temp_inf_edit),
             dataType: "json"
         }).then(function(result) {
             $("#myModal_confirmReset").modal("hide");
