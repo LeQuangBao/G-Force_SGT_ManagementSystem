@@ -18,6 +18,7 @@ app.controller('buildTimetableCtrl',
                     });
                     console.log("Current timetable: ");
                     console.log($scope.timetable);
+                    updateDay($scope.timetable.intake.startDate);
                 })
         }
         // get list subjects
@@ -228,13 +229,13 @@ app.controller('buildTimetableCtrl',
             $scope.iclass_edit = "";
         }
 
-        $scope.Mon = "2016-05-04";
-        $scope.Tue = "Tue";
-        $scope.Wed = "Wed";
-        $scope.Thu = "Thu";
-        $scope.Fri = "Fri";
-        $scope.Sat = "Sat";
-        $scope.Sun = "Sun";
+//        $scope.Mon = "2016-05-04";
+//        $scope.Tue = "Tue";
+//        $scope.Wed = "Wed";
+//        $scope.Thu = "Thu";
+//        $scope.Fri = "Fri";
+//        $scope.Sat = "Sat";
+//        $scope.Sun = "Sun";
         // $scope.listCurrentSession = [ "7:30 - 9:30",
         // "9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00" ];
 
@@ -249,9 +250,9 @@ app.controller('buildTimetableCtrl',
             var t = {
                 iclass: $scope.pickIClass,
                 sessionDetail: sessionDetail,
-                date: new Date()
-            
+                date: new Date()            
             };
+            console.log(t);
             $http({
                 method: "POST",
                 url: "/api/time",
@@ -281,14 +282,21 @@ app.controller('buildTimetableCtrl',
             updateTimetable();
         }
 
-        function updateDay(listSevenDay) {
-            $scope.Mon = listSevenDay[0];
-            $scope.Tue = listSevenDay[1];
-            $scope.Wed = listSevenDay[2];
-            $scope.Thu = listSevenDay[3];
-            $scope.Fri = listSevenDay[4];
-            $scope.Sat = listSevenDay[5];
-            $scope.Sun = listSevenDay[6];
+        function updateDay(firstDay) {
+        	var d = new Date(firstDay);
+            $scope.Mon = new Date(d);
+            d.setDate(d.getDate() + 1)
+            $scope.Tue = new Date(d);
+            d.setDate(d.getDate() + 1)
+            $scope.Wed = new Date(d);
+            d.setDate(d.getDate() + 1)
+            $scope.Thu = new Date(d);
+            d.setDate(d.getDate() + 1)
+            $scope.Fri = new Date(d);
+            d.setDate(d.getDate() + 1)
+            $scope.Sat = new Date(d);
+            d.setDate(d.getDate() + 1)
+            $scope.Sun = new Date(d);
             updateTimetable();
         }
 
