@@ -214,6 +214,9 @@ app.controller('intakeCtrl', function($scope, $http, $filter, $resource, uiGridC
                     if(close==true){
                     	$('#myModal_them').modal('hide');
                     }
+                    else{
+                    	$scope.ResetForm_Add();
+                    }
                 }, function(response) {
                     alertFailMessage(failMessage);
                 });
