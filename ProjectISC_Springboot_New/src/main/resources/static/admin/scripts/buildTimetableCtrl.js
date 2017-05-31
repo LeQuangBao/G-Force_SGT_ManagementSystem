@@ -10,11 +10,16 @@ app
 					// get timetable
 					function getTimetableObj() {
 						$scope.timetable = {};
-						$http.get(
-								"http://localhost:8080/api/timetable/"
-										+ idTimetable).then(function(response) {
-							$scope.timetable = response.data;
-						})
+						$http
+								.get(
+										"http://localhost:8080/api/timetable/"
+												+ idTimetable)
+								.then(
+										function(response) {
+											$scope.timetable = response.data;
+											updateSession($scope.timetable.session.sessionDetails);
+											console.log($scope.timetable);
+										})
 					}
 					// get list subjects
 					function getListSubjects() {
@@ -225,9 +230,8 @@ app
 					$scope.Fri = "Fri";
 					$scope.Sat = "Sat";
 					$scope.Sun = "Sun";
-					$scope.listCurrentSession = [ "7:30 - 9:30",
-							"9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00" ];
-					
+					// $scope.listCurrentSession = [ "7:30 - 9:30",
+					// "9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00" ];
 
 					$scope.myTimetable = {
 						date : [ "", $scope.Mon, $scope.Tue, $scope.Wed,
@@ -236,12 +240,12 @@ app
 					};
 
 					$scope.cellClicked = function(date, sessionDetail) {
-						console.log(time);
+						console.log($scope.pickIClass);
 						var time = {
 							iclass : $scope.pickIClass,
 							instructor : $scope.pickIClass.instructor,
 							room : $scope.pickIClass.room,
-							sessionDetail : {"id":1,"timeStart":"03:05:00","timeEnd":"11:10:00"},
+							sessionDetail : sessionDetail,
 							date : new Date()
 						};
 						console.log(time);
@@ -250,11 +254,12 @@ app
 							url : "/api/time",
 							data : time,
 							dataType : "json",
-							headers : {	'Content-Type' : 'application/json'	}
+							headers : {
+								'Content-Type' : 'application/json'
+							}
 						}).then(function(response) {
 							updateTimetable();
-						},
-						function(response) {
+						}, function(response) {
 						});
 					}
 
@@ -270,12 +275,7 @@ app
 					function updateTimetable(listSevenDay, listSession) {
 						updateDay(listSevenDay);
 						updateSession(listSession);
-						$scope.myTimetable = {
-							date : [ "", $scope.Mon, $scope.Tue, $scope.Wed,
-									$scope.Thu, $scope.Fri, $scope.Sat,
-									$scope.Sun ],
-							session : $scope.listCurrentSession
-						};
+						updateTimetable();
 					}
 
 					function updateDay(listSevenDay) {
@@ -286,10 +286,21 @@ app
 						$scope.Fri = listSevenDay[4];
 						$scope.Sat = listSevenDay[5];
 						$scope.Sun = listSevenDay[6];
+						updateTimetable();
 					}
 
 					function updateSession(listSession) {
 						$scope.listCurrentSession = listSession;
+						updateTimetable();
+					}
+
+					function updateTimetable() {
+						$scope.myTimetable = {
+							date : [ "", $scope.Mon, $scope.Tue, $scope.Wed,
+									$scope.Thu, $scope.Fri, $scope.Sat,
+									$scope.Sun ],
+							session : $scope.listCurrentSession
+						};
 					}
 				});
 // Chu thich cua nut phan action
