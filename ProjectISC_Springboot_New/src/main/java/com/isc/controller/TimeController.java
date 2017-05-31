@@ -37,6 +37,7 @@ public class TimeController {
 
 	@RequestMapping(value = "api/time", method = RequestMethod.POST)
 	public ResponseEntity<Void> addTime(@RequestBody Time time) {
+		Time t = time;
 		try {
 			service.addTime(time);
 		} catch (Exception e) {

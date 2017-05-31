@@ -11,8 +11,13 @@ app.controller('buildTimetableCtrl',
             $http.get("http://localhost:8080/api/timetable/" + idTimetable)
                 .then(function(response) {
                     $scope.timetable = response.data;
-                    console.log("Current timetable: "
-                        $scope.timetable);
+                    $http.get("http://localhost:8080/api/sessiondetail1/" + $scope.timetable.session.id)
+                    .then(function(response) {
+                        updateSession(response.data)
+                        
+                    });
+                    console.log("Current timetable: ");
+                    console.log($scope.timetable);
                 })
         }
         // get list subjects
@@ -60,23 +65,18 @@ app.controller('buildTimetableCtrl',
         }
 
         function getListSessionDetail() {
-            var listSessionDetail = [];
-            $http.get("http://localhost:8080/api/sessiondetail1/")
-                .then(function(response) {
-                    list_class = response.data;
-                    list_class.forEach(function(iclass, index) {
-                        if (iclass.timetable.id == idTimetable) {
-                            $scope.listClass
-                                .push(iclass);
-                        }
-                    });
-                });
+//            $http.get("http://localhost:8080/api/sessiondetail1/" + $scope.timetable.session.id)
+//                .then(function(response) {
+//                    updateSession(response.data)
+//                    
+//                });
         }
         getTimetableObj();
         getListSubjects();
         getListInstructors();
         getListRooms();
         getListClasses();
+        getListSessionDetail();
 
         // add class
         $scope.addClass = function(close) {
@@ -246,19 +246,16 @@ app.controller('buildTimetableCtrl',
         };
 
         $scope.cellClicked = function(date, sessionDetail) {
-            console.log("Pick IClass: " + $scope.pickIClass);
-            var time = {
+            var t = {
                 iclass: $scope.pickIClass,
-                instructor: $scope.pickIClass.instructor,
-                room: $scope.pickIClass.room,
                 sessionDetail: sessionDetail,
                 date: new Date()
+            
             };
-            console.log("Time: " + time);
             $http({
                 method: "POST",
                 url: "/api/time",
-                data: time,
+                data: t,
                 dataType: "json",
                 headers: {
                     'Content-Type': 'application/json'
