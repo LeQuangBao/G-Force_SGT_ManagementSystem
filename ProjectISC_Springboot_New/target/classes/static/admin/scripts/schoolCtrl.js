@@ -324,12 +324,17 @@ app.controller('schoolCtrl', function($scope, $http, $filter, uiGridConstants) {
           });
         	$scope.duplicateAlert="";
         };
+        // get data for delete
+        $scope.schooldelete = [];
+        $scope.school_delete = function (data) {
+            $scope.schooldelete = data;
+        }; 
         // delete school
          $scope.delete=function()
         {
             $http({
                method: "DELETE",
-              url: "/api/school/" + $scope.school_delete.id,
+              url: "/api/school/" + $scope.schooldelete.id,
               dataType: "json",
             })
                .then(function (result) {
@@ -340,14 +345,13 @@ app.controller('schoolCtrl', function($scope, $http, $filter, uiGridConstants) {
                 	  $("#myModal_xoa").modal("hide");
                 	  getAllSchools();
                 	  deleteAlert();
-                  } 
+                  }
+                  }, function(response) {
+						alertFail();
              });
+        
         }
-        // get data for delete
-        $scope.school_delete = [];
-        $scope.deleteSchool = function (data) {
-            $scope.school_delete = data;
-        }; 
+       
         
      // Sort and filter
 		$scope.sortType = 'schoolName';
@@ -408,6 +412,15 @@ app.controller('schoolCtrl', function($scope, $http, $filter, uiGridConstants) {
     		  	  showConfirmButton: false
     		  	});
     	  }
+    	  function alertFail() {
+				swal({
+					title : "",
+					text : "Opps! Your request cannot be processed.",
+					type : "error",
+					timer : alertDuration,
+					showConfirmButton : false
+				})
+			}
     	  function alertFailMessage(message) {
 				swal({
 					title : "",
@@ -417,6 +430,7 @@ app.controller('schoolCtrl', function($scope, $http, $filter, uiGridConstants) {
 					showConfirmButton : false
 				});
 			}
+    	  
        
 	});
 //Chu thich cua nut phan action

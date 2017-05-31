@@ -42,9 +42,4 @@ private ClassDAO classDao;
 		
 	}
 
-	@Override
-	public List<Iclass> getIClassByTimetableID(int timetableId) {
-		return classDao.getIClassByTimetableID(timetableId);
-	}
-
 }

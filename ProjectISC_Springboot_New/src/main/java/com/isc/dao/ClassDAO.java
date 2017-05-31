@@ -7,8 +7,6 @@ public interface ClassDAO {
 	public List<Iclass> getAllClass();
 
 	public Iclass getIClass(int id);
-	
-	public List<Iclass> getIClassByTimetableID(int timetableId);
 
 	public void addIClass(Iclass iclass);
 
