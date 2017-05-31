@@ -246,9 +246,11 @@ app.controller('buildTimetableCtrl',
         };
 
         $scope.cellClicked = function(date, sessionDetail) {
+        	var time_start=new Date(date+'T'+sessionDetail.timeStart);
+        	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
             var t = {
                 iclass: $scope.pickIClass,
-                sessionDetail: sessionDetail,
+                sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
                 date: new Date()
             
             };

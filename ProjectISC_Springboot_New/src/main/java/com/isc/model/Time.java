@@ -63,7 +63,6 @@ public class Time implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "iclass", nullable = false)
 	public Iclass getIclass() {
@@ -74,7 +73,6 @@ public class Time implements java.io.Serializable {
 		this.iclass = iclass;
 	}
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "alt_instructor")
 	public Instructor getInstructor() {
@@ -85,7 +83,6 @@ public class Time implements java.io.Serializable {
 		this.instructor = instructor;
 	}
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "alt_room")
 	public Room getRoom() {
@@ -96,7 +93,6 @@ public class Time implements java.io.Serializable {
 		this.room = room;
 	}
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "session_detail", nullable = false)
 	public SessionDetail getSessionDetail() {
