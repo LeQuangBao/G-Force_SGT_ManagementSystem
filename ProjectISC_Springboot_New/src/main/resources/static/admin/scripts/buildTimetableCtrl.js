@@ -9,6 +9,7 @@ app.controller('buildTimetableCtrl',
         var start_date=null; 
         var end_date=null;
         $scope.week=[];
+        $scope.currentWeek=0;
         // get timetable
         function getTimetableObj() {
             $scope.timetable = {};
@@ -23,11 +24,15 @@ app.controller('buildTimetableCtrl',
                     start_date=new Date($scope.timetable.intake.startDate);
                     end_date=new Date($scope.timetable.intake.endDate);
                     numberWeek=(end_date-start_date)/86400000/7;
+
                     //console.log(numberWeek);
                 	for(var i=0;i<numberWeek;i++) {
                 		$scope.week.push(i);
                 	}
                 	//console.log($scope.week);
+
+               
+
                 })
         }
         // get list subjects
@@ -374,6 +379,7 @@ app.controller('buildTimetableCtrl',
             };
         }
         $scope.callWeek=function(i){
+        	$scope.currentWeek=i;
         	var date=new Date(start_date);
         	date.setDate(date.getDate()+(i*7));
         	//console.log(date);
@@ -381,20 +387,38 @@ app.controller('buildTimetableCtrl',
         	updateDay(date);
         }
         
-        /*function getWeek(){
-        	var numberWeek=0;
-        	var start=new Date(start_date);
-        	var end=new Date();
-        	start.setDate(start_date.getDate());
-        	end.setDate(end_date.getDate());
-        	console.log(start);
-        	numberWeek=(end_date.getMonth()-start_date.getMonth())*4;
-        	for(var i=0;i<numberWeek;i++) {
-        		$scope.week.push(i);
+        $scope.copyTimetable=function(){
+        	var result = [];
+        	var startDate=new Date(start_date);
+        	var end_date=new Date(start_date);
+        	end_date.setDate(startDate.getDate()+7);
+        	listTime.forEach(function (time, index){
+        		var date=new Date(time.date);
+        		if(startDate<=date && date<end_date){
+        			result.push(time);
         		}
-        	console.log($scope.week);
+        	});
+        	result.forEach(function (time, index){
+        		time.sessionDetail.timeStart=new Date(time.date+'T'+time.sessionDetail.timeStart);
+        		time.sessionDetail.timeEnd=new Date(time.date+'T'+time.sessionDetail.timeEnd);
+        		var nextdate=new Date(time.date);
+        		nextdate.setDate(nextdate.getDate()+7);
+        		time.date=nextdate;
+        		
+        	});
+                $http({
+                    method: "POST",
+                    url: "/api/time/list",
+                    data: JSON.stringify(result),
+                    dataType: "json",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function(response) {
+                	updateTimetable();
+                }, function(response) {});
+        	console.log(result);
         }
-        getWeek();*/
     });
 // Chu thich cua nut phan action
 $(document).ready(function() {
