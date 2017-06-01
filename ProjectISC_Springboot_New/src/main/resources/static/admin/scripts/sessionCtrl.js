@@ -86,26 +86,34 @@ app
 								.then(
 										function(response) {
 											var session = response.data;
-											console.log(session.sessionDetails);
-											var sessiondetail = {
-												"timeStart" : $scope.timestart,
-												"timeEnd" : $scope.timeend
-											};
-											session.sessionDetails.push(sessiondetail);
+											//console.log(session.sessionDetails);
+//											var sessiondetail = {
+//												"timeStart" : $scope.timestart,
+//												"timeEnd" : $scope.timeend
+//											};
+											//session.sessionDetails.push(sessiondetail);
 											$http({
-												method : "PUT",
-												url : "/api/session",
-												data : JSON.stringify(session),
+												method : "POST",
+												url : "http://localhost:8080//api/sessiondetail1",
+												data : {
+													"timeStart" : $scope.timestart,
+													"timeEnd" :$scope.timeend,
+													"session" : {
+														"id" : session.id
+													},
+													"times" : [{"id" : 1}]
+												},
 												dataType : "json",
 											})
 													.then(
 															function(response) {
-																$(
-																		"#myModal_sua")
-																		.modal(
-																				"hide");
-																getListSessions();
-																alertEditSucess();
+//																$(
+//																		"#myModal_sua")
+//																		.modal(
+//																				"hide");
+																//getListSessions();
+																getListSessionsDetail1(session.id);
+																alertAddSucess();
 															},
 															function(response) {
 																if (response.status == 406) {
@@ -176,8 +184,8 @@ app
 									name : 'Action',
 									enableSorting : false,
 									enableFiltering : false,
-									cellTemplate : '<button data-toggle="modal" class="btn btn-primary btn-sm" data-target="#myModal_editSubject" data-backdrop="static"ng-click="grid.appScope.callEditRelevantSubject(row.entity)" data-tooltip ="tooltip" title="Add session detail(s)"><span class="glyphicon glyphicon-th-list"></button>'
-											+ '<button class="btn btn-primary btn-sm" ng-click="grid.appScope.callEditSession(row.entity)" data-tooltip ="tooltip" title="Edit"data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
+									cellTemplate : 
+											'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.callEditSession(row.entity)" data-tooltip ="tooltip" title="Edit"data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
 											+ '<button ng-click="grid.appScope.callDeleteSession(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'
 								} ]
 					};
