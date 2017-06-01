@@ -4,10 +4,17 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-
+import com.isc.model.Instructor;
 import com.isc.model.Registrar;
 import com.isc.model.Student;
 import com.isc.service.RegistrarService;
@@ -129,4 +137,42 @@ public class RegistrarController {
 	    
 	    return new ResponseEntity<>(HttpStatus.OK);
 	  } // method uploadFile
+	@RequestMapping(value = "admin/api/registrar/export", method = RequestMethod.GET)
+	public ModelAndView getMyData(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		Map<String, Object> model = new HashMap<String, Object>();
+		// get data from student
+		List<Registrar> registrar = service.getAllRegistrars();
+		// Sheet Name
+		model.put("sheetname", "TestSheetName");
+		// Headers List
+		List<String> headers = new ArrayList<String>();
+		headers.add("Username");
+		headers.add("First Name");
+		headers.add("Last Name");
+		headers.add("Phone");
+		headers.add("Email");
+		headers.add("Birthday");
+		headers.add("Address");
+		model.put("headers", headers);
+		// Results Table (List<Object[]>)
+		List<List<String>> results = new ArrayList<List<String>>();
+		// for loop each student
+		for (Registrar s : registrar) {
+			List<String> elements = new ArrayList<>();
+			elements.add(s.getUsername());
+			elements.add(s.getFirstname());
+			elements.add(s.getLastname());
+			elements.add(s.getPhone());
+			
+			elements.add(s.getEmail());
+			elements.add(s.getBirthday().toString());
+			elements.add(s.getAddress());
+			results.add(elements);
+		}
+
+		model.put("results", results);
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-disposition", "attachment; filename=RegistrarList.xls");
+		return new ModelAndView(new MyExcelView(), model);
+	}
 }

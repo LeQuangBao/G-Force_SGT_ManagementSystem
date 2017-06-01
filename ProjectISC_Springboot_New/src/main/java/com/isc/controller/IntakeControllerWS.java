@@ -1,6 +1,13 @@
 package com.isc.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.isc.model.Instructor;
 import com.isc.model.Intake;
 import com.isc.service.IntakeService;
 
@@ -64,6 +73,37 @@ public class IntakeControllerWS {
 			// new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		//}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+	@RequestMapping(value = "admin/api/intake/export", method = RequestMethod.GET)
+	public ModelAndView getMyData(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		Map<String, Object> model = new HashMap<String, Object>();
+		// get data from student
+		List<Intake> intake = service.getAllIntakes();
+		// Sheet Name
+		model.put("sheetname", "TestSheetName");
+		// Headers List
+		List<String> headers = new ArrayList<String>();
+		headers.add("Intake ID");
+		headers.add("Intake Name");
+		headers.add("Start Date");
+		headers.add("End Date");
+		model.put("headers", headers);
+		// Results Table (List<Object[]>)
+		List<List<String>> results = new ArrayList<List<String>>();
+		// for loop each student
+		for (Intake s : intake) {
+			List<String> elements = new ArrayList<>();
+			elements.add(s.getIntakeId());
+			elements.add(s.getIntakeName());
+			elements.add((s.getStartDate().toString()));
+			elements.add(s.getEndDate().toString());
+			results.add(elements);
+		}
+
+		model.put("results", results);
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-disposition", "attachment; filename=IntakeList.xls");
+		return new ModelAndView(new MyExcelView(), model);
 	}
 
 }
