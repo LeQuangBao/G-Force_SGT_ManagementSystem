@@ -62,7 +62,7 @@ public class TimeController {
 	}
 
 	
-	@RequestMapping(value = "api/time/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/time/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteTime(@PathVariable int id) {
 		try{
 			service.deleteTime(id);

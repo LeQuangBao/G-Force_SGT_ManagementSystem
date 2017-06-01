@@ -23,11 +23,11 @@ app.controller('buildTimetableCtrl',
                     start_date=new Date($scope.timetable.intake.startDate);
                     end_date=new Date($scope.timetable.intake.endDate);
                     numberWeek=(end_date-start_date)/86400000/7;
-                    console.log(numberWeek);
+                    //console.log(numberWeek);
                 	for(var i=0;i<numberWeek;i++) {
                 		$scope.week.push(i);
                 	}
-                	console.log($scope.week);
+                	//console.log($scope.week);
                 })
         }
         // get list subjects
@@ -255,28 +255,58 @@ app.controller('buildTimetableCtrl',
         };
 
         $scope.cellClicked = function(date, sessionDetail) {
+        	
         	var time_start=new Date(date+'T'+sessionDetail.timeStart);
         	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
-            var t = {
-                iclass: $scope.pickIClass,
-                sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
-                date: new Date(date)
-            };
-            $http({
-                method: "POST",
-                url: "/api/time",
-                data: t,
-                dataType: "json",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(function(response) {
-            	updateTimetable();
-            }, function(response) {});
+//            var t = {
+//                iclass: $scope.pickIClass,
+//                sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
+//                date: new Date(date)
+//            };
+//            $http({
+//                method: "POST",
+//                url: "/api/time",
+//                data: t,
+//                dataType: "json",
+//                headers: {
+//                    'Content-Type': 'application/json'
+//                }
+//            }).then(function(response) {
+//            	updateTimetable();
+//            }, function(response) {});
             
             // gọi 2 lần mới thực sự cập nhật được
+            
+//            console.log($scope.pickIClass.id);
+//            console.log(sessionDetail.id);
+//            console.log(date);
+           
+            //console.log(listTime);
+
+            // xóa lớp trên thời khóa biểu
+            //$scope.time=1;
+        	//$scope.time={};
+            for (var i = 0; i < listTime.length; i++) {
+                if (listTime[i].iclass.id == $scope.pickIClass.id &&listTime[i].sessionDetail.id==sessionDetail.id) {
+                    //$scope.time = $scope.listTime[i].id;
+                	var id=listTime[i].id;
+                    break;
+                }
+            }
+           $http({
+              method: "DELETE",
+              url: "/api/time/"+id,
+              dataType: "json",
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          }).then(function(response) {
+          	updateTimetable();
+          }, function(response) {});
+           
+           	getListTime();
             getListTime();
-            getListTime();
+            
         }
 
         function updateTimetable() {
@@ -321,7 +351,7 @@ app.controller('buildTimetableCtrl',
         		var d2 = new Date(time.date);
         		if (time.sessionDetail.id === sessionDetail.id) {        				
         			if (d.getTime() == d2.getTime()) {
-        				console.log(time.iclass);
+        				//console.log(time.iclass);
         				result = result +  time.iclass.iclassName + ", ";
         			}
         		}
@@ -346,7 +376,7 @@ app.controller('buildTimetableCtrl',
         $scope.callWeek=function(i){
         	var date=new Date(start_date);
         	date.setDate(date.getDate()+(i*7));
-        	console.log(date);
+        	//console.log(date);
         	
         	updateDay(date);
         }
