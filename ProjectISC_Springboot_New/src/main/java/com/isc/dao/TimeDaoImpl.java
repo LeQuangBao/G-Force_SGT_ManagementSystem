@@ -54,4 +54,11 @@ public class TimeDaoImpl implements TimeDao {
 				.setDate("date", date).setInteger("sessionDetailId", sessionDetail.getId()).list();
 	}
 
+	@Override
+	public List<Time> getTimeByTimeTableId(int timetableId) {
+
+		return session.getCurrentSession().createQuery("from Time t where t.iclass.timetable.id = :id")
+				.setInteger("id", timetableId).list();
+	}
+
 }
