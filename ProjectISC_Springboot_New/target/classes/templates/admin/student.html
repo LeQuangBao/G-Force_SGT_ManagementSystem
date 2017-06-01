@@ -78,6 +78,12 @@
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
 									</ul></li>
+								<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/intake">Timetable of intructor</a></li>
+										<li><a href="/admin/school">Timetable of intake</a></li>
+									</ul></li>
 							</ul>
 						</div>
 					</div>
@@ -174,9 +180,15 @@
 										ng-change="c()">
 									</select> -->
 									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
-										
-										<button class="btn btn-primary" style="margin-top:5px"><a href="http://localhost:8080/admin/api/student/export" style="color:white">Export</a></button>
+										<div id="grid" ui-grid="gridOptions"
+											ui-grid-selection="ui-grid-selection"
+											ui-grid-resize-columns="ui-grid-resize-columns"
+											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+
+										<button class="btn btn-primary" style="margin-top: 5px">
+											<a href="http://localhost:8080/admin/api/student/export"
+												style="color: white">Export</a>
+										</button>
 									</div>
 									<!-- <div class='pull-right'>
 										<uib-pagination
@@ -572,15 +584,15 @@
 							<!-- Text input-->
 							<div class="form-group">
 								<label class=" control-label" for="birthday">Address</label>
-									<textarea id="adress" name="address" rows="6"
-										class="form-control input-md" type="text" ng-required="true"
-										ng-model="list_temp_inf_edit.address" ></textarea>
-									<div ng-messages="editForm.address.$error">
-										<div ng-message="required">
-											<p style="color: red">This field is required</p>
-										</div>
-
+								<textarea id="adress" name="address" rows="6"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="list_temp_inf_edit.address"></textarea>
+								<div ng-messages="editForm.address.$error">
+									<div ng-message="required">
+										<p style="color: red">This field is required</p>
 									</div>
+
+								</div>
 							</div>
 
 
@@ -779,7 +791,7 @@
 								<div class="">
 									<textarea id="adress" name="address" placeholder="" rows="5"
 										class="form-control input-md" type="text"
-										ng-model="chitiet.address" readonly="readonly" ></textarea>
+										ng-model="chitiet.address" readonly="readonly"></textarea>
 									<!-- <p>{{chitiet.address}}</p> -->
 								</div>
 							</div>
@@ -813,8 +825,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" >Entrance
-									exam</label>
+								<label class="control-label">Entrance exam</label>
 								<div class="col-md-12">
 									<select id="selectbasic" name="selectbasic"
 										class="form-control" readonly="readonly">
@@ -825,7 +836,7 @@
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="control-label" >Specialization</label>
+								<label class="control-label">Specialization</label>
 								<div class="col-md-12">
 									<select id="selectbasic" name="selectbasic"
 										class="form-control" readonly="readonly">
