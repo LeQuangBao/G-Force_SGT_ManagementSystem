@@ -60,7 +60,18 @@ public class TimeController {
 		}
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-
+	@RequestMapping(value = "api/time/list", method = RequestMethod.POST)
+	public ResponseEntity<Void> addTime(@RequestBody List<Time> listTime) {
+		try {
+			for(Time time : listTime){
+				service.addTime(time);
+			}
+		} catch (Exception e) {
+			System.out.println("ERROR" + e.getMessage());
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
 	
 	@RequestMapping(value = "api/time/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteTime(@PathVariable int id) {

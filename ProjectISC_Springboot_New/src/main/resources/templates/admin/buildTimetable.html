@@ -253,7 +253,7 @@ input[type="checkbox"]:checked+i:before {
 												style="float: left">
 
 												<span> FE 1 </span> <label for="check-two"> <input
-													type="checkbox" name="check-two" id="check-two" /> <i></i>
+													type="checkbox" name="check-two" id="check-two" ng-click="copyTimetable()"/> <i></i>
 
 												</label>
 
@@ -304,9 +304,9 @@ input[type="checkbox"]:checked+i:before {
 							</div>
 						</div>
 						<div class="col-xs-12 text-center">
-							<p>Week</p>
+							<p>Week {{currentWeek+1}}</p>
 							<ul class="pagination clickable">
-								<li ng-repeat="i in week"><a ng-click="callWeek(i)">{{i+1}}</a></li>
+								<li ng-repeat="i in week" ng-class="(currentWeek==i) ? 'active' : ''"><a ng-click="callWeek(i)">{{i+1}}</a></li>
 								<!-- <li ng-click="callWeek(0)" class="active"><a >1</a></li>
 								<li><a ng-click="callWeek(1)">2</a></li>
 								<li><a>3</a></li>
