@@ -85,10 +85,21 @@ app
 									name : 'Action',
 									enableSorting : false,
 									enableFiltering : false,
-									cellTemplate :'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.callEditTiametable(row.entity)" data-tooltip ="tooltip" title="Edit"data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
+									cellTemplate :'<button class="btn btn-success btn-sm" ng-click="grid.appScope.buildtimetable(row.entity)" data-tooltip ="tooltip" title="Build time table" ><span class="glyphicon glyphicon-list-alt"></span></button>'
+											+'<button class="btn btn-primary btn-sm" ng-click="grid.appScope.callEditTiametable(row.entity)" data-tooltip ="tooltip" title="Edit"data-toggle="modal" data-target="#myModal_sua"><span class="glyphicon glyphicon-edit"></span></button>'
 											+ '<button ng-click="grid.appScope.callDeleteTimetable(row.entity)" data-toggle="modal" class="btn btn-danger btn-sm" data-tooltip ="tooltip" title="Delete" data-target="#myModal_xoa"><span class="glyphicon glyphicon-remove"></span></button>'
+											 
 								} ]
 					};
+					
+					$scope.buildtimetable = function(data)
+					{
+						//$scope.idtimetable=respone.data
+						//return "admin/buildTimetable/"+data.id;
+						var id = data.id;
+						console.log(data.id);
+						window.location.href = 'buildTimetable/' +id;
+					}
 					// lọc toàn bộ dữ liệu
 					$scope.refreshData = function(termObj) {
 						$scope.gridOptions.data = $scope.list;
