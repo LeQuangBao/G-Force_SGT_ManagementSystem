@@ -288,7 +288,7 @@ input[type="checkbox"]:checked+i:before {
 												<tbody>
 													<tr ng-repeat="x in myTimetable.session">
 														<td ng-bind="x.timeStart + ' - ' + x.timeEnd"></td>
-														<td ng-click="cellClicked(Mon, x)" class="clickable" ng-bind="getCellValue(Mon, x)"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable">{{getCellValue(Mon, x)}}</td>
 														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind="getCellValue(Tue, x)"></td>
 														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind="getCellValue(Wed, x)"></td>
 														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind="getCellValue(Thu, x)"></td>
