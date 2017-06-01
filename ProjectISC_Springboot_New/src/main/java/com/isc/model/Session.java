@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "session", catalog = "my_db")
+@Proxy(lazy = false)
 public class Session implements java.io.Serializable {
 
 	/**
@@ -69,7 +72,7 @@ public class Session implements java.io.Serializable {
 	}
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "session")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "session")
 	public Set<SessionDetail> getSessionDetails() {
 		return this.sessionDetails;
 	}
