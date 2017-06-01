@@ -20,5 +20,7 @@ public interface TimeDao {
 	public void updateTime(Time time);
 
 	public List<Time> getTimeByDateAndSession(Date date, SessionDetail sessionDetail);
+	
+	public List<Time> getTimeByTimeTableId(int timetableId);
 
 }

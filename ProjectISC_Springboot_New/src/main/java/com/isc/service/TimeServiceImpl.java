@@ -51,4 +51,9 @@ public class TimeServiceImpl implements TimeService{
 	public List<Time> getTimeByDateAndSession(Date date, SessionDetail sessionDetail) {
 		return timeDao.getTimeByDateAndSession(date, sessionDetail);
 	}
+
+	@Transactional
+	public List<Time> getTimeByTimeTableId(int timetableId) {
+		return timeDao.getTimeByTimeTableId(timetableId);
+	}
 }
