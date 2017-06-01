@@ -5,6 +5,7 @@ app.controller('buildTimetableCtrl',
         var alertDuration = 1800;
         var url_split = window.location.href.split("/");
         var idTimetable = url_split[url_split.length - 1];
+        var listTime = [];
         // get timetable
         function getTimetableObj() {
             $scope.timetable = {};
@@ -13,8 +14,7 @@ app.controller('buildTimetableCtrl',
                     $scope.timetable = response.data;
                     $http.get("http://localhost:8080/api/sessiondetail1/" + $scope.timetable.session.id)
                     .then(function(response) {
-                        updateSession(response.data)
-                        
+                        updateSession(response.data);
                     });
                     console.log("Current timetable: ");
                     console.log($scope.timetable);
@@ -302,6 +302,10 @@ app.controller('buildTimetableCtrl',
             updateTimetable();
         }
 
+        function getCellValue(date, session) {
+        	
+        }
+        
         function updateSession(listSession) {
             $scope.listCurrentSession = listSession;
             updateTimetable();

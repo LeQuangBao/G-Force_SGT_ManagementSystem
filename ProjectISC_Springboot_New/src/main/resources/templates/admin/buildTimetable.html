@@ -288,13 +288,13 @@ input[type="checkbox"]:checked+i:before {
 												<tbody>
 													<tr ng-repeat="x in myTimetable.session">
 														<td ng-bind="x.timeStart + ' - ' + x.timeEnd"></td>
-														<td ng-click="cellClicked(Mon, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Tue, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Wed, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Thu, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Fri, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Sat, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Sun, x)" class="clickable"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable" ng-bind="getCellValue(Mon, x)"></td>
+														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind="getCellValue(Tue, x)"></td>
+														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind="getCellValue(Wed, x)"></td>
+														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind="getCellValue(Thu, x)"></td>
+														<td ng-click="cellClicked(Fri, x)" class="clickable" ng-bind="getCellValue(Fri, x)"></td>
+														<td ng-click="cellClicked(Sat, x)" class="clickable" ng-bind="getCellValue(Sat, x)"></td>
+														<td ng-click="cellClicked(Sun, x)" class="clickable" ng-bind="getCellValue(Sun, x)"></td>
 													</tr>
 												</tbody>
 											</table>
