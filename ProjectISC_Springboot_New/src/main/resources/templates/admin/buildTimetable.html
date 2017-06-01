@@ -207,11 +207,11 @@ input[type="checkbox"]:checked+i:before {
 
 								<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 									<h4>Pick action</h4>
-									<div class="row" style="margin-left:180px;margin-bottom:10px">
-									<select ng-model="pickIClass" class="col-md-5"
+									
+									<select ng-model="pickIClass" class="form-control"
 											ng-options="x.iclassName for x in listClass">
 									</select>
-									</div>
+									
 									<div class="row" style="margin-left:185px">
 										<div id="demo1"></div>
 									</div>
@@ -248,7 +248,7 @@ input[type="checkbox"]:checked+i:before {
 											timetable</h4>
 										<div class="row">
 
-											<span style="float: left; margin-top: 7px">Show :</span>
+											<span style="float: left; margin-top: 7px">Show: </span>
 											<div class="form-horizontal form-required"
 												style="float: left">
 
@@ -282,19 +282,19 @@ input[type="checkbox"]:checked+i:before {
 											<table class="table table-bordered">
 												<thead>
 													<tr>
-														<th ng-repeat="x in myTimetable.date" width="12%">{{x}}</th>
+														<th ng-repeat="x in myTimetable.date" width="12%">{{x | date: 'EEE MM-dd-yyyy'}}</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr ng-repeat="x in myTimetable.session">
-														<td ng-bind="x"></td>
-														<td ng-click="cellClicked(Mon, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Tue, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Wed, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Thu, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Fri, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Sat, x)" class="clickable"></td>
-														<td ng-click="cellClicked(Sun, x)" class="clickable"></td>
+														<td ng-bind="x.timeStart + ' - ' + x.timeEnd"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable" ng-bind="getCellValue(Mon, x)"></td>
+														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind="getCellValue(Tue, x)"></td>
+														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind="getCellValue(Wed, x)"></td>
+														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind="getCellValue(Thu, x)"></td>
+														<td ng-click="cellClicked(Fri, x)" class="clickable" ng-bind="getCellValue(Fri, x)"></td>
+														<td ng-click="cellClicked(Sat, x)" class="clickable" ng-bind="getCellValue(Sat, x)"></td>
+														<td ng-click="cellClicked(Sun, x)" class="clickable" ng-bind="getCellValue(Sun, x)"></td>
 													</tr>
 												</tbody>
 											</table>

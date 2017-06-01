@@ -118,7 +118,7 @@ public class StudentController {
 						File file = new File(filepath);
 						file.delete();
 					}
-					Student.setImage(studentObj.getImage());
+				Student.setImage(studentObj.getImage());
 				}
 			}
 			service.updateStudent(Student);

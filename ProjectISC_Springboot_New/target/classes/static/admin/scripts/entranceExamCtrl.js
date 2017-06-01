@@ -433,7 +433,7 @@ app.controller('entranceExamCtrl', function($scope, $http, $filter, $resource, u
 		})
 	}
 	
-	function alertWithCongirm(message) {
+	function alertWithConfirm(message) {
 		swal({
 			title : "",
 			text : message,

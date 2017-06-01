@@ -139,7 +139,7 @@
 					<div class="clearfix"></div>
 
 					<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<!-- <div class="x_title">
 									<div class="clearfix"></div>
@@ -179,9 +179,13 @@
 										ng-change="c()">
 									</select> -->
 									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
-										
-										<a href="http://localhost:8080/admin/api/student/export">Export excel list</a>
+										<div id="grid" ui-grid="gridOptions"
+											ui-grid-selection="ui-grid-selection"
+											ui-grid-resize-columns="ui-grid-resize-columns"
+											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+
+										<a href="http://localhost:8080/admin/api/student/export">Export
+											excel list</a>
 									</div>
 									<!-- <div class='pull-right'>
 										<uib-pagination
@@ -385,21 +389,21 @@
 								</div>
 							</div>
 							<!-- Text input-->
-						<div class="form-group">
-							<label class="col-md-2 control-label" for="birthday">Address</label>
-							<div class="col-md-12">
-								<textarea id="address" name="address" rows="6"
-									class="form-control input-md" type="text" required="required"
-									ng-model="address"></textarea>
-								<div ng-messages="frmInstructor.address.$error">
-									<div ng-message="required"
-										ng-show="frmInstructor.address.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="birthday">Address</label>
+								<div class="col-md-12">
+									<textarea id="address" name="address" rows="6"
+										class="form-control input-md" type="text" required="required"
+										ng-model="address"></textarea>
+									<div ng-messages="frmInstructor.address.$error">
+										<div ng-message="required"
+											ng-show="frmInstructor.address.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
 
+									</div>
 								</div>
 							</div>
-						</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="status">Status</label>
 								<div class="col-md-12">
@@ -553,20 +557,20 @@
 								</div>
 							</div>
 							<div class="form-group">
-									<label class="col-md-2 control-label" for="address">Address</label>
-									<div class="col-md-12">
-										<textarea id="adress" name="address" placeholder="" rows="6"
-											class="form-control input-md" type="text" ng-required="true"
-											ng-model="instructor_edit.address"></textarea>
-										<div ng-messages="frmInstructor_edit.address.$error">
-											<div ng-message="required"
-												ng-show="frmInstructor_edit.address.$touched">
-												<p style="color: red">This field is required</p>
-											</div>
-
+								<label class="col-md-2 control-label" for="address">Address</label>
+								<div class="col-md-12">
+									<textarea id="adress" name="address" placeholder="" rows="6"
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="instructor_edit.address"></textarea>
+									<div ng-messages="frmInstructor_edit.address.$error">
+										<div ng-message="required"
+											ng-show="frmInstructor_edit.address.$touched">
+											<p style="color: red">This field is required</p>
 										</div>
+
 									</div>
 								</div>
+							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="status">Status</label>
 
@@ -582,13 +586,13 @@
 
 							</div>
 						</div>
-								
+
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="pull-left btn btn-danger"
-						data-toggle="modal" data-target="#myModal_confirmReset" ng-click="ResetFormReset()">Reset
-						password</button>
+						data-toggle="modal" data-target="#myModal_confirmReset"
+						ng-click="ResetFormReset()">Reset password</button>
 					<button type="button" class="btn btn-primary" ng-click="update()"
 						ng-disabled="frmInstructor_edit.$invalid">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -697,23 +701,18 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-md-2 control-label" for="birthday">Address</label>
+							<div class="col-md-12">
+								<textarea id="adress" name="address" rows="6"
+									class="form-control input-md" type="text" ng-required="true"
+									ng-model="view.address" readonly="readonly"></textarea>
+
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-md-12 control-label" for="status">Status</label>
 							<p class="col-md-4" ng-bind="view.active ? 'Active' : 'Inactive'"></p>
 
-						</div>
-					</div>
-				</div>
-				<div class="modal-body row">
-					<div class="col-md-12">
-						<!-- Text input-->
-						<div class="form-group">
-							<label class=" control-label" for="birthday">Address</label>
-							<div class="">
-								<input id="adress" name="address" placeholder=""
-									class="form-control input-md" type="text"
-									ng-model="view.address" readonly="readonly" />
-
-							</div>
 						</div>
 					</div>
 				</div>

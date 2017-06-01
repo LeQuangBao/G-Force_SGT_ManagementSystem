@@ -24,6 +24,10 @@ public class TimeDaoImpl implements TimeDao{
 		return session.getCurrentSession().load(Time.class, id);
 	}
 	
+	public List<Time> getTimeByClassId(int classId) {
+		return session.getCurrentSession().createQuery("from Time t where t.iclass.id = :id").setInteger("id", classId).list();
+	}
+	
 	@Override
 	public void addTime(Time time) {
 		session.getCurrentSession().save(time);
