@@ -77,6 +77,12 @@
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
 									</ul></li>
+								<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/intake">Timetable of intructor</a></li>
+										<li><a href="/admin/school">Timetable of intake</a></li>
+									</ul></li>
 							</ul>
 						</div>
 
@@ -245,8 +251,7 @@
 							<label class="control-label col-sm-3">Intake</label>
 							<div class="col-sm-8">
 								<div class="">
-									<select ng-model="timetable.intake"
-										class="form-control"
+									<select ng-model="timetable.intake" class="form-control"
 										ng-options="x.intakeId for x in list_intake" name="intake"
 										id="intake" ng-required="true">
 									</select>
@@ -297,8 +302,9 @@
 							<label class="control-label col-sm-3">Name</label>
 							<div class="col-sm-8">
 								<input type="text" id="timetableName_edit"
-									name="timetableName_edit" ng-model="timetable_edit.timetableName"
-									class="form-control" placeholder="" required="required" /><span
+									name="timetableName_edit"
+									ng-model="timetable_edit.timetableName" class="form-control"
+									placeholder="" required="required" /><span
 									ng-show="editForm1.timetableName_edit.$touched &amp;&amp; editForm1.timetableName_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
 							</div>

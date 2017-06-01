@@ -78,6 +78,12 @@
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
 									</ul></li>
+								<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/intake">Timetable of intructor</a></li>
+										<li><a href="/admin/school">Timetable of intake</a></li>
+									</ul></li>
 
 
 							</ul>
@@ -138,7 +144,7 @@
 					<div class="clearfix"></div>
 
 					<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<!-- <div class="x_title">
 									<div class="clearfix"></div>
@@ -178,9 +184,15 @@
 										ng-change="c()">
 									</select> -->
 									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
-										
-										<button class="btn btn-primary" style="margin-top:5px"><a href="http://localhost:8080/admin/api/registrar/export" style="color:white">Export</a></button>
+										<div id="grid" ui-grid="gridOptions"
+											ui-grid-selection="ui-grid-selection"
+											ui-grid-resize-columns="ui-grid-resize-columns"
+											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+
+										<button class="btn btn-primary" style="margin-top: 5px">
+											<a href="http://localhost:8080/admin/api/registrar/export"
+												style="color: white">Export</a>
+										</button>
 									</div>
 									<!-- <div class='pull-right'>
 										<uib-pagination
@@ -371,22 +383,22 @@
 									max="{{currentDate.value | date: 'yyyy-MM-dd'}}" />
 
 							</div>
-						<!-- Text input-->
-						<div class="form-group">
-							<label class="control-label" for="birthday">Address</label>
-							<div class="">
-								<textarea id="adress" name="address" rows="6"
-									class="form-control input-md" type="text" ng-required="true"
-									ng-model="address" ></textarea>
-								<div ng-messages="frmRegistrarAdd.address.$error">
-									<div ng-message="required"
-										ng-show="frmRegistrarAdd.address.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="control-label" for="birthday">Address</label>
+								<div class="">
+									<textarea id="adress" name="address" rows="6"
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="address"></textarea>
+									<div ng-messages="frmRegistrarAdd.address.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarAdd.address.$touched">
+											<p style="color: red">This field is required</p>
+										</div>
 
+									</div>
 								</div>
 							</div>
-						</div>
 							<div class="form-group">
 								<label class="control-label" for="status">Status</label>
 								<div class="checkbox">
@@ -400,7 +412,7 @@
 						</div>
 					</form>
 				</div>
-						
+
 				<div class="modal-footer">
 					<!-- <button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save()" ng-disabled="frmRegistrarAdd.username.$error.required || frmRegistrarAdd.lastName.$error.required || frmRegistrarAdd.firstName.$error.required|| frmRegistrarAdd.birthday.$error.required || frmRegistrarAdd.address.$error.required|| frmRegistrarAdd.phone.$error.required|| frmRegistrarAdd.email.$error.required|| frmRegistrarAdd.password.$error.required|| frmRegistrarAdd.re_password.$error.required">Add</button> -->
@@ -527,23 +539,23 @@
 									onchange="angular.element(this).scope().getImage_Edit(this)" />
 							</div>
 
-								<!-- Textarea-->
-								<div class="form-group">
-									<label class=" control-label" for="address">Address</label>
-									<div class="">
-										<textarea id="adress" name="address" rows="6"
-											class="form-control input-md" type="text" ng-required="true"
-											ng-model="edit.address" ></textarea>
-										<div ng-messages="frmRegistrarEdit.address.$error">
-											<div ng-message="required"
-												ng-show="frmRegistrarEdit.address.$touched">
-												<p style="color: red">This field is required</p>
-											</div>
-
+							<!-- Textarea-->
+							<div class="form-group">
+								<label class=" control-label" for="address">Address</label>
+								<div class="">
+									<textarea id="adress" name="address" rows="6"
+										class="form-control input-md" type="text" ng-required="true"
+										ng-model="edit.address"></textarea>
+									<div ng-messages="frmRegistrarEdit.address.$error">
+										<div ng-message="required"
+											ng-show="frmRegistrarEdit.address.$touched">
+											<p style="color: red">This field is required</p>
 										</div>
+
 									</div>
 								</div>
-								<!-- Multiple Radios -->
+							</div>
+							<!-- Multiple Radios -->
 
 
 
@@ -560,13 +572,13 @@
 
 							</div>
 						</div>
-						
+
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="pull-left btn btn-danger"
-						data-toggle="modal" data-target="#myModal_confirmReset" ng-click="ResetFormReset()">Reset
-						password</button>
+						data-toggle="modal" data-target="#myModal_confirmReset"
+						ng-click="ResetFormReset()">Reset password</button>
 					<button type="button" class="btn btn-primary" ng-click="update()"
 						ng-disabled="frmRegistrarEdit.username.$error.required || frmRegistrarEdit.lastName.$error.required || frmRegistrarEdit.firstName.$error.required|| frmRegistrarEdit.email.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.phone.$error.required || frmRegistrarEdit.address.$error.required">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -689,7 +701,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="modal-footer">
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
