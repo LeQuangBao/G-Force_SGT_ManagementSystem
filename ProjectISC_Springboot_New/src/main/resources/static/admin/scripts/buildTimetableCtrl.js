@@ -9,6 +9,7 @@ app.controller('buildTimetableCtrl',
         var start_date=null; 
         var end_date=null;
         $scope.week=[];
+        $scope.currentWeek=0;
         // get timetable
         function getTimetableObj() {
             $scope.timetable = {};
@@ -277,6 +278,7 @@ app.controller('buildTimetableCtrl',
         }
         
         $scope.cellClicked = function(date, sessionDetail) {
+        	
         	var time_start=new Date(date+'T'+sessionDetail.timeStart);
         	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
             var t = {
@@ -300,10 +302,55 @@ app.controller('buildTimetableCtrl',
 	                }, function(response) {});
         		}
             
+//            var t = {
+//                iclass: $scope.pickIClass,
+//                sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
+//                date: new Date(date)
+//            };
+//            $http({
+//                method: "POST",
+//                url: "/api/time",
+//                data: t,
+//                dataType: "json",
+//                headers: {
+//                    'Content-Type': 'application/json'
+//                }
+//            }).then(function(response) {
+//            	updateTimetable();
+//            }, function(response) {});
             
             // gọi 2 lần mới thực sự cập nhật được
+            
+//            console.log($scope.pickIClass.id);
+//            console.log(sessionDetail.id);
+//            console.log(date);
+           
+            //console.log(listTime);
+
+            // xóa lớp trên thời khóa biểu
+            //$scope.time=1;
+        	//$scope.time={};
+            for (var i = 0; i < listTime.length; i++) {
+                if (listTime[i].iclass.id == $scope.pickIClass.id &&listTime[i].sessionDetail.id==sessionDetail.id) {
+                    //$scope.time = $scope.listTime[i].id;
+                	var id=listTime[i].id;
+                    break;
+                }
+            }
+           $http({
+              method: "DELETE",
+              url: "/api/time/"+id,
+              dataType: "json",
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          }).then(function(response) {
+          	updateTimetable();
+          }, function(response) {});
+           
+           	getListTime();
             getListTime();
-            getListTime();
+            
         }
 
         function updateTimetable() {
@@ -371,6 +418,7 @@ app.controller('buildTimetableCtrl',
             };
         }
         $scope.callWeek=function(i){
+        	$scope.currentWeek=i;
         	var date=new Date(start_date);
         	date.setDate(date.getDate()+(i*7));
         	//console.log(date);
@@ -378,20 +426,38 @@ app.controller('buildTimetableCtrl',
         	updateDay(date);
         }
         
-        /*function getWeek(){
-        	var numberWeek=0;
-        	var start=new Date(start_date);
-        	var end=new Date();
-        	start.setDate(start_date.getDate());
-        	end.setDate(end_date.getDate());
-        	console.log(start);
-        	numberWeek=(end_date.getMonth()-start_date.getMonth())*4;
-        	for(var i=0;i<numberWeek;i++) {
-        		$scope.week.push(i);
+        $scope.copyTimetable=function(){
+        	var result = [];
+        	var startDate=new Date(start_date);
+        	var end_date=new Date(start_date);
+        	end_date.setDate(startDate.getDate()+7);
+        	listTime.forEach(function (time, index){
+        		var date=new Date(time.date);
+        		if(startDate<=date && date<end_date){
+        			result.push(time);
         		}
-        	console.log($scope.week);
+        	});
+        	result.forEach(function (time, index){
+        		time.sessionDetail.timeStart=new Date(time.date+'T'+time.sessionDetail.timeStart);
+        		time.sessionDetail.timeEnd=new Date(time.date+'T'+time.sessionDetail.timeEnd);
+        		var nextdate=new Date(time.date);
+        		nextdate.setDate(nextdate.getDate()+7);
+        		time.date=nextdate;
+        		
+        	});
+                $http({
+                    method: "POST",
+                    url: "/api/time/list",
+                    data: JSON.stringify(result),
+                    dataType: "json",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function(response) {
+                	updateTimetable();
+                }, function(response) {});
+        	console.log(result);
         }
-        getWeek();*/
     });
 // Chu thich cua nut phan action
 $(document).ready(function() {
