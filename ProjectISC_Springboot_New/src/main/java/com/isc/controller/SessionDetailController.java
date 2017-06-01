@@ -42,6 +42,8 @@ public class SessionDetailController {
 		}
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
+	
+	//get list sessionDetail by session id
 	@RequestMapping(value = "/api/sessiondetail1/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<SessionDetail>> getSessionDetail1(@PathVariable int id) {
 		List<SessionDetail> sessiondetail=new ArrayList<>();
