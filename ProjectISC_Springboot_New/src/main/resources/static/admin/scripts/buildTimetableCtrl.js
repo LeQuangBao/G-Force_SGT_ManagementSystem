@@ -19,8 +19,6 @@ app.controller('buildTimetableCtrl',
                     .then(function(response) {
                         updateSession(response.data);
                     });
-                    console.log("Current timetable: ");
-                    console.log($scope.timetable);
                     updateDay($scope.timetable.intake.startDate);
                     start_date=new Date($scope.timetable.intake.startDate);
                     end_date=new Date($scope.timetable.intake.endDate);
@@ -249,16 +247,6 @@ app.controller('buildTimetableCtrl',
             $scope.iclass_edit = "";
         }
 
-//        $scope.Mon = "2016-05-04";
-//        $scope.Tue = "Tue";
-//        $scope.Wed = "Wed";
-//        $scope.Thu = "Thu";
-//        $scope.Fri = "Fri";
-//        $scope.Sat = "Sat";
-//        $scope.Sun = "Sun";
-        // $scope.listCurrentSession = [ "7:30 - 9:30",
-        // "9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00" ];
-
         $scope.myTimetable = {
             date: ["", $scope.Mon, $scope.Tue, $scope.Wed,
                 $scope.Thu, $scope.Fri, $scope.Sat, $scope.Sun
@@ -283,9 +271,11 @@ app.controller('buildTimetableCtrl',
                     'Content-Type': 'application/json'
                 }
             }).then(function(response) {
-                updateTimetable();
+            	updateTimetable();
             }, function(response) {});
             
+            // gọi 2 lần mới thực sự cập nhật được
+            getListTime();
             getListTime();
         }
 
