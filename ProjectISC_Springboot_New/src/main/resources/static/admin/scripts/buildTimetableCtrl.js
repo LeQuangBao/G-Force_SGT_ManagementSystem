@@ -425,7 +425,7 @@ app.controller('buildTimetableCtrl',
         	
         	updateDay(date);
         }
-        
+//        alert($("#demo1").getState());
         $scope.copyTimetable=function(){
         	var result = [];
         	var startDate=new Date(start_date);
