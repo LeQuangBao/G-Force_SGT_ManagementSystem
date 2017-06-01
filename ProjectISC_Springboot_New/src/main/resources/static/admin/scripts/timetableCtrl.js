@@ -292,8 +292,7 @@ app
 							$http({
 								method : "PUT",
 								url : "/api/timetable",
-								data : JSON.stringify($scope.timetable_edit),
-								dataType : "json",
+								data : $scope.timetable_edit,
 							})
 									.then(
 											function(response) {
