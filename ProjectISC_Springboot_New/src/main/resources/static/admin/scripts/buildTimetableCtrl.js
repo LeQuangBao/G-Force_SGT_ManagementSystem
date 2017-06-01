@@ -72,12 +72,21 @@ app.controller('buildTimetableCtrl',
 //                    
 //                });
         }
+        
+        function getListTime() {
+        	$http.get("http://localhost:8080/api/time")
+        	.then(function(response){
+        		listTime = response.data;
+        	});
+        }
+        
         getTimetableObj();
         getListSubjects();
         getListInstructors();
         getListRooms();
         getListClasses();
         getListSessionDetail();
+        getListTime();
 
         // add class
         $scope.addClass = function(close) {
@@ -252,9 +261,8 @@ app.controller('buildTimetableCtrl',
             var t = {
                 iclass: $scope.pickIClass,
                 sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
-                date: new Date()
+                date: new Date(date)
             };
-            console.log(t);
             $http({
                 method: "POST",
                 url: "/api/time",
@@ -266,6 +274,8 @@ app.controller('buildTimetableCtrl',
             }).then(function(response) {
                 updateTimetable();
             }, function(response) {});
+            
+            getListTime();
         }
 
         function updateTimetable() {
@@ -302,8 +312,20 @@ app.controller('buildTimetableCtrl',
             updateTimetable();
         }
 
-        function getCellValue(date, session) {
-        	
+        
+        $scope.getCellValue = function(date, sessionDetail) {
+        	var result = "";
+        	listTime.forEach(function (time, index){
+        		var d = new Date(date);
+        		var d2 = new Date(time.date);
+        		if (time.sessionDetail.id === sessionDetail.id) {        				
+        			if (d.getTime() == d2.getTime()) {
+        				console.log(time.iclass);
+        				result = result +  time.iclass.iclassName + ", ";
+        			}
+        		}
+        	})
+        	return result.substring(0, result.length - 2);
         }
         
         function updateSession(listSession) {

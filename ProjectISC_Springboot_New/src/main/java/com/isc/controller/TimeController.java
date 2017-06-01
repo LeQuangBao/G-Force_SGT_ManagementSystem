@@ -1,5 +1,6 @@
 package com.isc.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isc.model.SessionDetail;
 import com.isc.model.Time;
 import com.isc.service.TimeService;
 
@@ -30,6 +32,17 @@ public class TimeController {
 		try {
 			time = service.getTime(id);
 		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(time, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/api/timeByClassId/{date}/{sessionDetail}", method = RequestMethod.GET)
+	public ResponseEntity<List<Time>> getTimeByClassId(@PathVariable Date date,@PathVariable SessionDetail sessionDetail) {
+		List<Time> time;
+		try {
+			time = service.getTimeByDateAndSession(date, sessionDetail);
+		} catch (Exception e) {
+			System.out.println("ErrorMessage" + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(time, HttpStatus.OK);
