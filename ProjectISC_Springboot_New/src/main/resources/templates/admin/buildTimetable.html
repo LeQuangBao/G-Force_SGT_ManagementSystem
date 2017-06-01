@@ -248,39 +248,11 @@ input[type="checkbox"]:checked+i:before {
 											timetable</h4>
 
 										<div class="row">
-
-											<span style="float: left; margin-top: 7px">Show: </span>
-											<div class="form-horizontal form-required"
-												style="float: left">
-
-												<span> FE 1 </span> <label for="check-two"> <input
-													type="checkbox" name="check-two" id="check-two" ng-click="copyTimetable()"/> <i></i>
-
-												</label>
-
-											</div>
-											<div class="form-horizontal form-required"
-												style="float: left">
-
-												<span>FE 2 </span> <label for="check-three"> <input
-													type="checkbox" name="check-three" id="check-three" /> <i></i>
-
-												</label>
-
-											</div>
-											<div class="form-horizontal form-required"
-												style="float: left">
-
-												<span> Onjob - Training </span> <label for="check-four">
-													<input type="checkbox" name="check-four" id="check-four" />
-													<i></i>
-
-												</label>
-
-											</div>
+											<button type="button" class="btn btn-primary" ng-click="copyTimetable(currentStartDate)">Copy to next week</button> |
+											<button type="button" class="btn btn-primary" ng-click="copyAllTimetable(currentStartDate)">Copy to all week</button>  
 										</div>
 
-										<div class="table-responsive">
+										<div class="row table-responsive">
 											<table class="table table-bordered">
 												<thead>
 													<tr>

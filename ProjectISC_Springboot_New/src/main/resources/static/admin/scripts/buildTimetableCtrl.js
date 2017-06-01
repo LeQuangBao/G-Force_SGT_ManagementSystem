@@ -8,8 +8,10 @@ app.controller('buildTimetableCtrl',
         var listTime = [];
         var start_date=null; 
         var end_date=null;
+        $scope.currentStartDate=null;
         $scope.week=[];
         $scope.currentWeek=0;
+        var numberWeek=0;
         // get timetable
         function getTimetableObj() {
             $scope.timetable = {};
@@ -30,8 +32,7 @@ app.controller('buildTimetableCtrl',
                 		$scope.week.push(i);
                 	}
                 	//console.log($scope.week);
-
-               
+                	$scope.currentStartDate=start_date;
 
                 })
         }
@@ -263,22 +264,22 @@ app.controller('buildTimetableCtrl',
         	
         	var time_start=new Date(date+'T'+sessionDetail.timeStart);
         	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
-//            var t = {
-//                iclass: $scope.pickIClass,
-//                sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
-//                date: new Date(date)
-//            };
-//            $http({
-//                method: "POST",
-//                url: "/api/time",
-//                data: t,
-//                dataType: "json",
-//                headers: {
-//                    'Content-Type': 'application/json'
-//                }
-//            }).then(function(response) {
-//            	updateTimetable();
-//            }, function(response) {});
+            var t = {
+                iclass: $scope.pickIClass,
+                sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
+                date: new Date(date)
+            };
+            $http({
+                method: "POST",
+                url: "/api/time",
+                data: t,
+                dataType: "json",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function(response) {
+            	updateTimetable();
+            }, function(response) {});
             
             // gọi 2 lần mới thực sự cập nhật được
             
@@ -291,7 +292,7 @@ app.controller('buildTimetableCtrl',
             // xóa lớp trên thời khóa biểu
             //$scope.time=1;
         	//$scope.time={};
-            for (var i = 0; i < listTime.length; i++) {
+            /*for (var i = 0; i < listTime.length; i++) {
                 if (listTime[i].iclass.id == $scope.pickIClass.id &&listTime[i].sessionDetail.id==sessionDetail.id) {
                     //$scope.time = $scope.listTime[i].id;
                 	var id=listTime[i].id;
@@ -307,7 +308,7 @@ app.controller('buildTimetableCtrl',
               }
           }).then(function(response) {
           	updateTimetable();
-          }, function(response) {});
+          }, function(response) {});*/
            
            	getListTime();
             getListTime();
@@ -380,17 +381,23 @@ app.controller('buildTimetableCtrl',
         }
         $scope.callWeek=function(i){
         	$scope.currentWeek=i;
-        	var date=new Date(start_date);
-        	date.setDate(date.getDate()+(i*7));
+        	$scope.currentStartDate=new Date(start_date);
+        	$scope.currentStartDate.setDate($scope.currentStartDate.getDate()+(i*7));
         	//console.log(date);
         	
-        	updateDay(date);
+        	updateDay($scope.currentStartDate);
         }
-        
-        $scope.copyTimetable=function(){
+        $scope.copyAllTimetable=function(currentStartDate){
+        	var currentdate=currentStartDate;
+        	for(var i=$scope.currentWeek;i<numberWeek;i++) {
+        		currentdate.setDate(currentdate.getDate() + 7);
+        		$scope.copyTimetable(currentdate);
+        	}
+        }
+        $scope.copyTimetable=function(currentStartDate){
         	var result = [];
-        	var startDate=new Date(start_date);
-        	var end_date=new Date(start_date);
+        	var startDate=new Date(currentStartDate);
+        	var end_date=new Date(startDate);
         	end_date.setDate(startDate.getDate()+7);
         	listTime.forEach(function (time, index){
         		var date=new Date(time.date);
@@ -415,9 +422,8 @@ app.controller('buildTimetableCtrl',
                         'Content-Type': 'application/json'
                     }
                 }).then(function(response) {
-                	updateTimetable();
+                	getListTime();
                 }, function(response) {});
-        	console.log(result);
         }
     });
 // Chu thich cua nut phan action
