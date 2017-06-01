@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
@@ -293,7 +293,7 @@ CREATE TABLE `session` (
 
 INSERT INTO `session` (`id`, `session_name`) VALUES
 (1, 'session01'),
-(2, 'session01'),
+(2, 'session02'),
 (3, 'session03'),
 (4, 'session04');
 

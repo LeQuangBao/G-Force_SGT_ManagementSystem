@@ -163,7 +163,7 @@ if(jQuery.fn.jquery < "2.0") {
             OffValue: false,
             OnCallback: null,
             OffCallback: null,
-            ToggleState: false,
+            ToggleState: true,
             ConfirmChanges: false,
             ConfirmText: 'Are you sure?',
             HiddenInputId: false

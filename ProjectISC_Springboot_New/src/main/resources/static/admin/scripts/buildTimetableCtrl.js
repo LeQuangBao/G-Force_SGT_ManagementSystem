@@ -6,6 +6,9 @@ app.controller('buildTimetableCtrl',
         var url_split = window.location.href.split("/");
         var idTimetable = url_split[url_split.length - 1];
         var listTime = [];
+        var start_date=null; 
+        var end_date=null;
+        $scope.week=[];
         // get timetable
         function getTimetableObj() {
             $scope.timetable = {};
@@ -17,6 +20,14 @@ app.controller('buildTimetableCtrl',
                         updateSession(response.data);
                     });
                     updateDay($scope.timetable.intake.startDate);
+                    start_date=new Date($scope.timetable.intake.startDate);
+                    end_date=new Date($scope.timetable.intake.endDate);
+                    numberWeek=(end_date-start_date)/86400000/7;
+                    console.log(numberWeek);
+                	for(var i=0;i<numberWeek;i++) {
+                		$scope.week.push(i);
+                	}
+                	console.log($scope.week);
                 })
         }
         // get list subjects
@@ -332,6 +343,28 @@ app.controller('buildTimetableCtrl',
                 session: $scope.listCurrentSession
             };
         }
+        $scope.callWeek=function(i){
+        	var date=new Date(start_date);
+        	date.setDate(date.getDate()+(i*7));
+        	console.log(date);
+        	
+        	updateDay(date);
+        }
+        
+        /*function getWeek(){
+        	var numberWeek=0;
+        	var start=new Date(start_date);
+        	var end=new Date();
+        	start.setDate(start_date.getDate());
+        	end.setDate(end_date.getDate());
+        	console.log(start);
+        	numberWeek=(end_date.getMonth()-start_date.getMonth())*4;
+        	for(var i=0;i<numberWeek;i++) {
+        		$scope.week.push(i);
+        		}
+        	console.log($scope.week);
+        }
+        getWeek();*/
     });
 // Chu thich cua nut phan action
 $(document).ready(function() {
