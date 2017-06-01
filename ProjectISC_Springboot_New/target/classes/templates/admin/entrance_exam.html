@@ -182,9 +182,12 @@
 										ng-change="c()">
 									</select> -->
 									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
-										
-										<a href="http://localhost:8080/admin/api/student/export">Export excel list</a>
+										<div id="grid" ui-grid="gridOptions"
+											ui-grid-selection="ui-grid-selection"
+											ui-grid-resize-columns="ui-grid-resize-columns"
+											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+
+										<button class="btn btn-primary" style="margin-top:5px"><a href="http://localhost:8080/admin/api/entranceExam/export" style="color:white">Export</a></button>
 									</div>
 									<!-- <div class='pull-right'>
 										<uib-pagination
@@ -234,8 +237,9 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="entranceExamName">Name</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input id="entranceExamName" name="entranceExamName" ng-keyup="hideDuplicateAlert()"
-									placeholder="" class="form-control input-md" type="text"
+								<input id="entranceExamName" name="entranceExamName"
+									ng-keyup="hideDuplicateAlert()" placeholder=""
+									class="form-control input-md" type="text"
 									ng-model="exam.entranceExamName" ng-required="true" />
 								<div ng-messages="addForm.entranceExamName.$error">
 									<div ng-message="required"
@@ -244,7 +248,8 @@
 									</div>
 
 								</div>
-								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+									style="color: red"></p>
 							</div>
 						</div>
 
@@ -288,9 +293,14 @@
 								for="description">Description</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<input id="description" name="description" placeholder=""
-									class="form-control input-md" type="text"
+									class="form-control input-md" type="text" required="required"
 									ng-model="exam.description" />
-
+								<div ng-messages="addForm.description.$error">
+									<div ng-message="required"
+										ng-show="addForm.description.$touched">
+										<p style="color: red">This field is required</p>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -329,15 +339,18 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="entranceExamName">Name</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input id="entranceExamName" name="entranceExamName" ng-keyup="hideDuplicateAlert()"
-									placeholder="" class="form-control input-md" type="text"
+								<input id="entranceExamName" name="entranceExamName"
+									ng-keyup="hideDuplicateAlert()" placeholder=""
+									class="form-control input-md" type="text"
 									ng-model="exam.entranceExamName" ng-required="true" />
 								<div ng-messages="editForm.entranceExamName.$error">
 									<div ng-message="required">
 										<p style="color: red">This field is required</p>
-									</div>
 
-								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+
+										<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+											style="color: red"></p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -517,7 +530,7 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-<script src="js/ui-grid.js"></script>
+	<script src="js/ui-grid.js"></script>
 
 
 </body>

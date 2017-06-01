@@ -297,7 +297,7 @@
 							<label class="control-label col-sm-3">Name</label>
 							<div class="col-sm-8">
 								<input type="text" id="timetableName_edit"
-									name="timetableName_edit" ng-model="info.timetableName"
+									name="timetableName_edit" ng-model="timetable_edit.timetableName"
 									class="form-control" placeholder="" required="required" /><span
 									ng-show="editForm1.timetableName_edit.$touched &amp;&amp; editForm1.timetableName_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
@@ -305,26 +305,23 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-3">Intake</label>
-							<div class="col-sm-8">
-								<div class="">
-									<select ng-model="info.intake"
-										class="form-control"
-										ng-options="x.intakeId for x in list_intake" name="intake"
-										id="intake" ng-required="true">
-									</select>
-								</div>
+							<div class="col-md-8 col-sm-8 col-xs-12">
+								<select ng-model="timetable_edit.intake" class="form-control"
+									ng-required="true">
+									<option ng-selected="timetable_edit.intake.id==x.id"
+										ng-repeat="x in list_intake" ng-value="x">{{x.intakeName}}</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="control-label col-sm-3 col-md-3">Session</label>
-							<div class="col-sm-8">
-								<div class="">
-									<select ng-model="info.session" class="form-control"
-										ng-options="x.sessionName for x in list_session"
-										name="session" id="session" ng-required="true">
-									</select>
-								</div>
+							<div class="col-md-8 col-sm-8 col-xs-12">
+								<select ng-model="timetable_edit.session" class="form-control"
+									ng-required="true">
+									<option ng-selected="timetable_edit.session.id==x.id"
+										ng-repeat="x in list_session" ng-value="x">{{x.sessionName}}</option>
+								</select>
 							</div>
 
 						</div>

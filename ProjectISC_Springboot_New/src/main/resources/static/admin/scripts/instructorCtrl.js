@@ -48,7 +48,15 @@ app.controller('instructorCtrl', function($scope, $http,$filter, uiGridConstants
 	    		      { name: 'email', visible : false },
 	    		      { name: 'phone', visible : false },
 	    		      { name: 'address', visible : false },
-	    		      { name: 'degree', visible : false },
+	    		      { name: 'degree', visible : false, 
+	    		    	filter:{
+	    		    		type: uiGridConstants.filter.SELECT,
+	    		    		selectOptions:[
+	    		    			{value:'Doctor', label:'Doctor'},
+	    		    			{value:'Master', label:'Master'},
+	    		    			{value:'University', label:'University'},
+	    		    			]
+	    		    	}},
 	    		      { name: 'status', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.status == 0 ? "Inactive" : "Active"}}</div>', filter: {
 	    		          type: uiGridConstants.filter.SELECT,
 	    		          selectOptions: [

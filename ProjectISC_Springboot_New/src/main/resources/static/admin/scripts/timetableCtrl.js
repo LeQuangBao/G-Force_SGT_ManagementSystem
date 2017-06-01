@@ -24,7 +24,7 @@ app
 					var alertDuration = 1800;
 					$scope.timetable={};
 					$scope.info ={};
-
+					$scope.timetable_edit=[];
 					// get list timetable
 					function getListTimetable() {
 						$scope.list = [];
@@ -41,7 +41,7 @@ app
 						$http.get("http://localhost:8080/api/intake").then(
 								function(response) {
 									$scope.list_intake = response.data;
-
+									console.log($scope.list_intake);
 								})
 					}
 					// get list session
@@ -291,25 +291,12 @@ app
 
 					// update timetable
 					$scope.callEditTiametable = function(data) {
+						$scope.ResetForm_Edit();
 						$http.get("/api/timetable/" + data.id).then(
 								function(response) {
-									$scope.info = response.data;
-									console.log($scope.info);
+									$scope.timetable_edit = response.data;
+									console.log($scope.timetable_edit);
 								});
-						SpecID = data.id;
-						$scope.duplicateAlert = "";
-						for (var i = 0; i < $scope.list_intake.length; i++) {
-		                    if (response.data.intake.intakeName == $scope.list_intake[i].intakeName) {
-		                    	$scope.info.intake = $scope.list_intake[i];
-		                        break;
-		                    }
-		                }
-						for (var i = 0; i < $scope.list_session.length; i++) {
-		                    if (response.data.intake.sessionName == $scope.list_session[i].sessionName) {
-		                    	$scope.info.session = $scope.list_session[i];
-		                        break;
-		                    }
-		                }
 					}
 
 					$scope.editTimetable = function() {
@@ -459,11 +446,15 @@ app
 //					}
 
 				}
+					// reset form edit
+			        $scope.ResetForm_Edit = function() {
+			            $scope.timetable_edit = "";
+			        }
+				});
 //// Chu thich cua nut phan action
 $(document).ready(function() {
 	$('body').tooltip({
 		selector : "[data-tooltip=tooltip]",
 		container : "body"
 	});
-});
 });

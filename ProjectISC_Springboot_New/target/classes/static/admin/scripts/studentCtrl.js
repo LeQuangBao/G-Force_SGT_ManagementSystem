@@ -612,8 +612,8 @@ app.controller('studentCtrl', function($scope, $http, $filter, $resource,uiGridC
     };
     // sửa student
     $scope.edit = function edit() {
-       // uploadFile_Edit();  
-    	uploadFile() ;
+       uploadFile_Edit();  
+    	//uploadFile() ;
         $http({
             method: "PUT",
             url: "/admin/api/Student",
