@@ -23,11 +23,11 @@ app.controller('buildTimetableCtrl',
                     start_date=new Date($scope.timetable.intake.startDate);
                     end_date=new Date($scope.timetable.intake.endDate);
                     numberWeek=(end_date-start_date)/86400000/7;
-                    console.log(numberWeek);
+                    //console.log(numberWeek);
                 	for(var i=0;i<numberWeek;i++) {
                 		$scope.week.push(i);
                 	}
-                	console.log($scope.week);
+                	//console.log($scope.week);
                 })
         }
         // get list subjects
@@ -253,7 +253,29 @@ app.controller('buildTimetableCtrl',
             ],
             session: $scope.listCurrentSession
         };
+        //check trung
+        function checkduplicate (t,listTime)
+        {
+        	var check = true;
+            listTime.forEach(function (time, index){
+            	var d= t.date;
+            	var d2= new Date (time.date);
+            	if (time.sessionDetail.id ===t.sessionDetail.id)
+            		{
+            			if (d2.getTime()==d.getTime())
+            				{
+            					if(time.iclass.id=== t.iclass.id)
+            						{
+            						check = false;
+            							alert ('trung cmnrs');
+            						}
+            				}
 
+            		}
+        	})
+        	return check;
+        }
+        
         $scope.cellClicked = function(date, sessionDetail) {
         	var time_start=new Date(date+'T'+sessionDetail.timeStart);
         	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
@@ -262,17 +284,22 @@ app.controller('buildTimetableCtrl',
                 sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
                 date: new Date(date)
             };
-            $http({
-                method: "POST",
-                url: "/api/time",
-                data: t,
-                dataType: "json",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(function(response) {
-            	updateTimetable();
-            }, function(response) {});
+            
+        	if (checkduplicate(t,listTime) == true)
+        		{
+	        		$http({
+	                    method: "POST",
+	                    url: "/api/time",
+	                    data: t,
+	                    dataType: "json",
+	                    headers: {
+	                        'Content-Type': 'application/json'
+	                    }
+	                }).then(function(response) {
+	                	updateTimetable();
+	                }, function(response) {});
+        		}
+            
             
             // gọi 2 lần mới thực sự cập nhật được
             getListTime();
@@ -321,7 +348,7 @@ app.controller('buildTimetableCtrl',
         		var d2 = new Date(time.date);
         		if (time.sessionDetail.id === sessionDetail.id) {        				
         			if (d.getTime() == d2.getTime()) {
-        				console.log(time.iclass);
+        				//console.log(time.iclass);
         				result = result +  time.iclass.iclassName + ", ";
         			}
         		}
@@ -346,7 +373,7 @@ app.controller('buildTimetableCtrl',
         $scope.callWeek=function(i){
         	var date=new Date(start_date);
         	date.setDate(date.getDate()+(i*7));
-        	console.log(date);
+        	//console.log(date);
         	
         	updateDay(date);
         }
