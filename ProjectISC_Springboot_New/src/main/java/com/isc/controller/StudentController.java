@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Convert;
 //import javax.servlet.RequestDispatcher;
 //import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -195,10 +196,18 @@ public class StudentController {
 		// Headers List
 		List<String> headers = new ArrayList<String>();
 		headers.add("Id");
+		headers.add("UserName");
 		headers.add("First Name");
 		headers.add("Last Name");
+		
+		headers.add("Birthday");
 		headers.add("Email");
-
+		headers.add("Phone");
+		headers.add("Address");
+		headers.add("School");
+		headers.add("Intake");
+		headers.add("Specialization");
+		
 		model.put("headers", headers);
 		// Results Table (List<Object[]>)
 		List<List<String>> results = new ArrayList<List<String>>();
@@ -206,15 +215,22 @@ public class StudentController {
 		for (Student s : students) {
 			List<String> elements = new ArrayList<>();
 			elements.add(s.getStudentId());
+			elements.add(s.getUsername());
 			elements.add(s.getFirstname());
 			elements.add(s.getLastname());
+			elements.add(s.getBirthday().toString());
 			elements.add(s.getEmail());
+			elements.add(s.getPhone());
+			elements.add(s.getAddress());
+			elements.add(s.getSchool().getSchoolName());
+			elements.add(s.getIntake().getIntakeName());
+			elements.add(s.getSpecialization().getSpecializationName());
 			results.add(elements);
 		}
 
 		model.put("results", results);
 		response.setContentType("application/ms-excel");
-		response.setHeader("Content-disposition", "attachment; filename=myfile.xls");
+		response.setHeader("Content-disposition", "attachment; filename=studentList.xls");
 		return new ModelAndView(new MyExcelView(), model);
 	}
 

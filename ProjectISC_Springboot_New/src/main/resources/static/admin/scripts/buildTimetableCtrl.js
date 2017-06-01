@@ -16,8 +16,6 @@ app.controller('buildTimetableCtrl',
                     .then(function(response) {
                         updateSession(response.data);
                     });
-                    console.log("Current timetable: ");
-                    console.log($scope.timetable);
                     updateDay($scope.timetable.intake.startDate);
                 })
         }
@@ -72,12 +70,21 @@ app.controller('buildTimetableCtrl',
 //                    
 //                });
         }
+        
+        function getListTime() {
+        	$http.get("http://localhost:8080/api/time")
+        	.then(function(response){
+        		listTime = response.data;
+        	});
+        }
+        
         getTimetableObj();
         getListSubjects();
         getListInstructors();
         getListRooms();
         getListClasses();
         getListSessionDetail();
+        getListTime();
 
         // add class
         $scope.addClass = function(close) {
@@ -229,16 +236,6 @@ app.controller('buildTimetableCtrl',
             $scope.iclass_edit = "";
         }
 
-//        $scope.Mon = "2016-05-04";
-//        $scope.Tue = "Tue";
-//        $scope.Wed = "Wed";
-//        $scope.Thu = "Thu";
-//        $scope.Fri = "Fri";
-//        $scope.Sat = "Sat";
-//        $scope.Sun = "Sun";
-        // $scope.listCurrentSession = [ "7:30 - 9:30",
-        // "9:30 - 11:30", "13:00 - 15:00", "15:00 - 17:00" ];
-
         $scope.myTimetable = {
             date: ["", $scope.Mon, $scope.Tue, $scope.Wed,
                 $scope.Thu, $scope.Fri, $scope.Sat, $scope.Sun
@@ -252,9 +249,8 @@ app.controller('buildTimetableCtrl',
             var t = {
                 iclass: $scope.pickIClass,
                 sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
-                date: new Date()
+                date: new Date(date)
             };
-            console.log(t);
             $http({
                 method: "POST",
                 url: "/api/time",
@@ -264,8 +260,12 @@ app.controller('buildTimetableCtrl',
                     'Content-Type': 'application/json'
                 }
             }).then(function(response) {
-                updateTimetable();
+            	updateTimetable();
             }, function(response) {});
+            
+            // gọi 2 lần mới thực sự cập nhật được
+            getListTime();
+            getListTime();
         }
 
         function updateTimetable() {
@@ -302,8 +302,20 @@ app.controller('buildTimetableCtrl',
             updateTimetable();
         }
 
-        function getCellValue(date, session) {
-        	
+        
+        $scope.getCellValue = function(date, sessionDetail) {
+        	var result = "";
+        	listTime.forEach(function (time, index){
+        		var d = new Date(date);
+        		var d2 = new Date(time.date);
+        		if (time.sessionDetail.id === sessionDetail.id) {        				
+        			if (d.getTime() == d2.getTime()) {
+        				console.log(time.iclass);
+        				result = result +  time.iclass.iclassName + ", ";
+        			}
+        		}
+        	})
+        	return result.substring(0, result.length - 2);
         }
         
         function updateSession(listSession) {

@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: ProjectISC_Springboot
 Implementation-Version: 1.0.0
-Built-By: Me
+Built-By: Administrator
 Implementation-Vendor-Id: com.isc
-Build-Jdk: 1.8.0_121
+Build-Jdk: 1.8.0_102
 Implementation-URL: http://projects.spring.io/spring-boot/demo/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.

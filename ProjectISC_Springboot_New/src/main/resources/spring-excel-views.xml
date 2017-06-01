@@ -6,4 +6,10 @@
  	<bean id="StudentListView"
 	   	class="com.isc.controller.StudentListView">
 	</bean>
+	<bean  id="InstructorListView" class="com.isc.controller.InstructorListView"></bean>
+	<bean id="IntakeListView" class="com.isc.controller.IntakeListView"></bean>
+	<bean id="SchoolListView" class="com.isc.controller.SchoolListView"></bean>
+	<bean id="SpecializationListView" class="com.isc.controller.SpecializationListView"></bean>
+	<bean id="RegistrarListView" class="com.isc.controller.RegistrarListView"></bean>
+	<bean id="EntranceExamListView" class="com.isc.controller.EntranceExamListView"></bean>
 </beans>
