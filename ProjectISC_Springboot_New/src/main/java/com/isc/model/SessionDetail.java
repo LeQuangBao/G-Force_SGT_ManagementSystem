@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -24,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "session_detail", catalog = "my_db")
+@Proxy(lazy = false)
 public class SessionDetail implements java.io.Serializable {
 
 	private Integer id;
@@ -59,8 +62,8 @@ public class SessionDetail implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "session", nullable = false)
 	public Session getSession() {
 		return this.session;
@@ -90,7 +93,7 @@ public class SessionDetail implements java.io.Serializable {
 		this.timeEnd = timeEnd;
 	}
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sessionDetail")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sessionDetail")
 	public Set<Time> getTimes() {
 		return this.times;
 	}
