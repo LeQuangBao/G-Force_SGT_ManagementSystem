@@ -212,8 +212,8 @@ input[type="checkbox"]:checked+i:before {
 											ng-options="x.iclassName for x in listClass">
 									</select>
 									
-									<div class="row" style="margin-left:185px">
-										<div id="demo1"></div>
+									<div class="row">
+										<div id="demo1" style="margin-left:30%; margin-top:5px"></div>
 									</div>
 								
 
@@ -306,8 +306,9 @@ input[type="checkbox"]:checked+i:before {
 						<div class="col-xs-12 text-center">
 							<p>Week</p>
 							<ul class="pagination clickable">
-								<li class="active"><a>1</a></li>
-								<li><a>2</a></li>
+								<li ng-repeat="i in week"><a ng-click="callWeek(i)">{{i+1}}</a></li>
+								<!-- <li ng-click="callWeek(0)" class="active"><a >1</a></li>
+								<li><a ng-click="callWeek(1)">2</a></li>
 								<li><a>3</a></li>
 								<li><a>4</a></li>
 								<li><a>5</a></li>
@@ -320,7 +321,7 @@ input[type="checkbox"]:checked+i:before {
 								<li><a>12</a></li>
 								<li><a>13</a></li>
 								<li><a>14</a></li>
-								<li><a>15</a></li>
+								<li><a>15</a></li> -->
 							</ul>
 
 						</div>
