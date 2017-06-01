@@ -23,7 +23,6 @@ app
 					var deleteSpecialization = "";
 					var alertDuration = 1800;
 					$scope.timetable={};
-					$scope.info ={};
 					$scope.timetable_edit=[];
 					// get list timetable
 					function getListTimetable() {
@@ -293,7 +292,7 @@ app
 							$http({
 								method : "PUT",
 								url : "/api/timetable",
-								data : JSON.stringify($scope.info),
+								data : JSON.stringify($scope.timetable_edit),
 								dataType : "json",
 							})
 									.then(
@@ -310,6 +309,11 @@ app
 						
 					}
 					
+					// reset form edit
+			        $scope.ResetForm_Edit = function() {
+			            $scope.timetable_edit = "";
+			        }
+			        
 					// delete timetable
 					$scope.callDeleteTimetable = function(data) {
 						deleteTimetable = data;
@@ -435,10 +439,7 @@ app
 //					}
 
 				}
-					// reset form edit
-			        $scope.ResetForm_Edit = function() {
-			            $scope.timetable_edit = "";
-			        }
+					
 				});
 //// Chu thich cua nut phan action
 $(document).ready(function() {
