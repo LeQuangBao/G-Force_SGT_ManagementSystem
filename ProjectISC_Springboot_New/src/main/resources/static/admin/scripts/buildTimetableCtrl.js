@@ -11,6 +11,7 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
     $scope.week = [];
     $scope.currentWeek = 0;
     var numberWeek = 0;
+    
     // get timetable
     function getTimetableObj() {
         $scope.timetable = {};
@@ -87,7 +88,7 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
     }
 
     function getListTime() {
-        $http.get("http://localhost:8080/api/time")
+        $http.get("http://localhost:8080/api/timeByTimetableId/" + idTimetable)
             .then(function(response) {
                 listTime = response.data;
                 updateTimetable();

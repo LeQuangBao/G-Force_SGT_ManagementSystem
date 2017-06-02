@@ -69,4 +69,11 @@ public class AdminController {
 	public String room() {
 		return "admin/room";
 	}
+	
+	public String reportInstructor() {
+		return "admin/reportInstructor";
+	}
+	public String reportIntake() {
+		return "admin/reportIntake";
+	}
 }

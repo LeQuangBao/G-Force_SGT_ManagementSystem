@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Intake management</title>
+<title>Build timetable</title>
 
 <base href="http://localhost:8080/admin/" />
 
@@ -42,9 +42,48 @@
 <link href="build/css/style.css" rel="stylesheet" />
 <link href="css/ui-grid.css" rel="stylesheet" />
 <link href="js/sweetalert.css" rel="stylesheet" />
+<style class="cp-pen-styles">
+label i {
+	display: inline-block;
+	height: 25px;
+	position: relative;
+	top: 3px;
+	font-style: normal;
+	color: #ccc;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	display: none;
+}
+
+input[type="radio"]+i:before, input[type="checkbox"]+i:before {
+	font-family: 'FontAwesome';
+	font-size: 20px;
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+}
+
+input[type="radio"]+i:before {
+	content: "\f10c";
+}
+
+input[type="checkbox"]+i:before {
+	content: "\f096";
+}
+
+input[type="checkbox"]:checked+i:before {
+	content: "\f046";
+}
+
+input[type="checkbox"]:checked+i:before {
+	color: rgba(0, 128, 0, 0.5);
+}
+</style>
 </head>
 
-<body data-ng-app="myApp" data-ng-controller="intakeCtrl" class="nav-md">
+<body data-ng-app="myApp" data-ng-controller="buildTimetableCtrl"
+	class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -53,10 +92,8 @@
 						<a href="/admin/intake" class="site_title"><i
 							class="fa fa-paw"></i> <span>Administration</span></a>
 					</div>
-
 					<div class="clearfix"></div>
-
-
+					<br />
 					<!-- sidebar menu -->
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
@@ -78,11 +115,12 @@
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
 									</ul></li>
-								<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+									
+									<li><a><i class="fa fa-bar-chart-o"></i>Report <span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="/admin/reportinstructor">Timetable of intructor</a></li>
-										<li><a href="/admin/reportintake">Timetable of intake</a></li>
+										<li><a href="/admin/intake">Timetable of intructor</a></li>
+										<li><a href="/admin/school">Timetable of intake</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -131,37 +169,131 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Intake management</h3>
-						</div>
+							<h3>Build timetable</h3>
 
-						<div class="title_right">
-							<div class=" pull-right top_search">
-								<button data-toggle="modal" data-target="#myModal_them"
-									type="button" class="btn btn-primary btn-lg"
-									ng-click="ResetForm_Add()">Add</button>
-							</div>
 						</div>
 					</div>
-
 					<div class="clearfix"></div>
+					<div class="x_panel">
+						<div class="x_content">
 
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="x_panel">
-								<div class="x_content">
-									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions"
-											ui-grid-selection="ui-grid-selection"
-											ui-grid-resize-columns="ui-grid-resize-columns"
-											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+							<div class="row">
+								<div class="col-md-8 col-sm-12 col-xs-12">
+									<h4 class="text-center">Add/Remove class</h4>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Course</th>
+												<th>Instructor</th>
+												<th>Room</th>
+												<th style="padding-bottom: 1px;"><span
+													data-toggle="modal" data-target="#myModal_them"
+													ng-click="ResetForm_Add()"
+													class="btn btn-primary btn-xs glyphicon glyphicon-plus"></span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="clickable" ng-repeat="x in listClass">
+												<td ng-bind="x.iclassName"></td>
+												<td ng-bind="x.subject.subjectName"></td>
+												<td
+													ng-bind="x.instructor.lastname+' '+x.instructor.firstname"></td>
+												<td ng-bind="x.room.roomId"></td>
+												<td><span data-toggle="modal"
+													data-target="#myModal_sua" ng-click="getClassObj(x)"
+													class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span
+													data-toggle="modal" data-target="#myModal_xoa"
+													ng-click="getClassObj(x)"
+													class="btn btn-danger btn-xs glyphicon glyphicon-remove"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 
-										<button class="btn btn-primary" style="margin-top: 5px">
-											<a href="http://localhost:8080/admin/api/intake/export"
-												style="color: white">Export</a>
-										</button>
+								<div class="col-md-4 col-sm-12 col-xs-12 text-center">
+									<h4>Pick action</h4>
+									
+									<select ng-model="pickIClass" class="form-control"
+											ng-options="x.iclassName for x in listClass">
+									</select>
+									
+									<div class="row" style=" margin-top:10px">
+										<!-- <div id="demo1" style="margin-left:30%; margin-top:5px"></div> -->
+										<button type="button" class="btn" ng-class="{false: 'btn-default', true: 'btn-primary'}[isAdd]" ng-click="toggleAddAndRemove()">Add</button>
+										<button type="button" class="btn" ng-class="{false: 'btn-danger', true: 'btn-default'}[isAdd]" ng-click="toggleAddAndRemove()">Remove</button>
+									</div>
+								
+
+<!-- 									<div class="row"> -->
+<!-- 										<div class="form-horizontal form-required"> -->
+
+<!-- 											<span>Use alternate:</span><label for="check-one"> <input -->
+<!-- 												type="checkbox" name="check-one" id="check-one" -->
+<!-- 												value="checkone" /> <i></i> -->
+
+<!-- 											</label> -->
+
+<!-- 										</div> -->
+									
+<!-- 										<div class="form-horizontal" style="margin-left:100px"> -->
+<!-- 										<select ng-model="instructor" class="col-md-4" -->
+<!-- 											ng-options="x.lastname+' '+x.firstname for x in listInstructor" -->
+<!-- 											ng-required="true" label="Pick Instructor"> -->
+<!-- 										</select> -->
+									
+									
+										
+<!-- 										<select ng-model="room" class="col-md-5" -->
+<!-- 											ng-options="x.roomId for x in listRoom" ng-required="true" style="margin-left:10px"> -->
+<!-- 										</select> -->
+<!-- 									</div> -->
+<!-- 									</div> -->
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<h4 class="text-center">Add/Remove picked class to
+											timetable</h4>
+
+										<div class="row">
+											<button type="button" class="btn btn-primary" ng-click="copyTimetable(currentStartDate)">Copy to next week</button> |
+											<button type="button" class="btn btn-primary" ng-click="copyAllTimetable(currentStartDate)">Copy to all week</button>  
+										</div>
+
+										<div class="row table-responsive">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th ng-repeat="x in myTimetable.date" width="12%">{{x | date: 'EEE MM-dd-yyyy'}}</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="x in myTimetable.session">
+														<td ng-bind="x.timeStart + ' - ' + x.timeEnd"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable">{{getCellValue(Mon, x)}}</td>
+														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind="getCellValue(Tue, x)"></td>
+														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind="getCellValue(Wed, x)"></td>
+														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind="getCellValue(Thu, x)"></td>
+														<td ng-click="cellClicked(Fri, x)" class="clickable" ng-bind="getCellValue(Fri, x)"></td>
+														<td ng-click="cellClicked(Sat, x)" class="clickable" ng-bind="getCellValue(Sat, x)"></td>
+														<td ng-click="cellClicked(Sun, x)" class="clickable" ng-bind="getCellValue(Sun, x)"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="col-xs-12 text-center">
+							<p>Week {{currentWeek+1}}</p>
+							<ul class="pagination clickable">
+								<li ng-repeat="i in week" ng-class="(currentWeek==i) ? 'active' : ''"><a ng-click="callWeek(i)">{{i+1}}</a></li>
+								<!-- <li ng-click="callWeek(0)" class="active"><a >1</a></li>
+								<li><a ng-click="callWeek(1)">2</a></li>
+								 -->
+							</ul>
+
 						</div>
 
 					</div>
@@ -180,6 +312,7 @@
 			<!-- /footer content -->
 		</div>
 	</div>
+
 	<!-- Modal thêm -->
 	<div class="modal fade" id="myModal_them" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -190,35 +323,18 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Add intake</h4>
+					<h4 class="modal-title" id="myModalLabel">Add class</h4>
 				</div>
 				<div class="modal-body">
 					<form id="formThem" name="formThem" class="form-horizontal"
 						role="form" method="post">
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">
-								ID </label>
-							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="text" id="intakeid" name="intakeid"
-									data-ng-model="intakeid" required="required"
-									ng-click="ResetValidation1_Add()"
-									class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formThem.intakeid.$error">
-									<div ng-message="required" ng-show="formThem.intakeid.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">Duplicate ID</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="last-name"> Name </label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="text" id="name" name="name" data-ng-model="name"
-									required="required" class="form-control col-md-7 col-xs-12" />
+								<input type="text" id="name" data-ng-model="iclassName"
+									required="required" class="form-control col-md-7 col-xs-12"
+									name="iclassName" />
 								<div ng-messages="formThem.name.$error">
 									<div ng-message="required" ng-show="formThem.name.$touched">
 										<p style="color: red">This field is required</p>
@@ -227,59 +343,38 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name">Start Date</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Course</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="date" id="startdate" name="startdate"
-									data-ng-model="startdate" required="required"
-									class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formThem.startdate.$error">
-									<div ng-message="required"
-										ng-show="formThem.startdate.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-								</div>
+								<select ng-model="subject" class="form-control"
+									ng-options="x.subjectName for x in listSubject"
+									ng-required="true">
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> End Date </label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Instructor</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="date" id="enddate" name="enddate"
-									data-ng-model="enddate" required="required"
-									ng-click="ResetValidation2_Add()"
-									class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formThem.enddate.$error">
-									<div ng-message="required" ng-show="formThem.enddate.$touched">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">The End date must be greater than
-											the Start date</p>
-									</div>
-								</div>
+								<select ng-model="instructor" class="form-control"
+									ng-options="x.lastname+' '+x.firstname for x in listInstructor"
+									ng-required="true">
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name">Status</label>
-							<div class="col-md-8" style="padding: 6px">
-								<input type="radio" ng-model="active" ng-value="true"
-									ng-checked="true" /> Active <input type="radio"
-									ng-model="active" ng-value="false" /> Inactive
-
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Room</label>
+							<div class="col-md-8 col-sm-8 col-xs-12">
+								<select ng-model="room" class="form-control"
+									ng-options="x.roomId for x in listRoom" ng-required="true">
+								</select>
 							</div>
-
 						</div>
-
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="them"
-						data-ng-click="Them(false)" ng-disabled="formThem.$invalid">Add</button>
+						data-ng-click="addClass(false)" ng-disabled="formThem.$invalid">Add</button>
 					<button type="button" class="btn btn-default" id="them"
-						data-ng-click="Them(true)" ng-disabled="formThem.$invalid">Add
+						data-ng-click="addClass(true)" ng-disabled="formThem.$invalid">Add
 						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetForm()">Close</button>
@@ -298,129 +393,110 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Edit intake</h4>
+					<h4 class="modal-title" id="myModalLabel">Edit class</h4>
 				</div>
 				<div class="modal-body">
 					<form id="formSua" name="formSua" class="form-horizontal"
 						role="form" method="post">
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> ID </label>
-							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="text" id="id" name="_id" data-ng-model="_id"
-									required="required" ng-click="ResetValidation1_Edit()"
-									class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._id.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">Duplicate ID</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="last-name"> Name </label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="text" id="name" name="_name" data-ng-model="_name"
-									required="required" class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._name.$error">
-									<div ng-message="required">
+								<input type="text" id="name"
+									data-ng-model="iclass_edit.iclassName" required="required"
+									class="form-control col-md-7 col-xs-12" name="iclassName" />
+								<div ng-messages="formThem.name.$error">
+									<div ng-message="required" ng-show="formThem.name.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> Start Date </label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Course</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="date" id="startdate" name="_startdate"
-									data-ng-model="_startdate" required="required"
-									class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._startdate.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
-								</div>
+								<select ng-model="iclass_edit.subject" class="form-control"
+									ng-required="true">
+									<option ng-selected="iclass_edit.subject.id==x.id"
+										ng-repeat="x in listSubject" ng-value="x">{{x.subjectName}}</option>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="last-name"> End Date </label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Instructor</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
-								<input type="date" id="enddate" name="_enddate"
-									data-ng-model="_enddate" required="required"
-									ng-click="ResetValidation2_Edit()"
-									class="form-control col-md-7 col-xs-12" />
-								<div ng-messages="formSua._enddate.$error">
-									<div ng-message="required">
-										<p style="color: red">This field is required</p>
-									</div>
-									<div ng-message="validationError">
-										<p style="color: red">The End date must be greater than
-											the Start date</p>
-									</div>
-								</div>
+								<select ng-model="iclass_edit.instructor" class="form-control"
+									ng-required="true">
+									<option ng-selected="iclass_edit.instructor.id==x.id"
+										ng-repeat="x in listInstructor" ng-value="x">{{x.lastname+'
+										'+x.firstname}}</option>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
-							<div class="col-md-8" style="padding: 6px">
-								<input type="radio" ng-model="_active" ng-value="true" />
-								Active <input type="radio" ng-model="_active" ng-value="false" />
-								Inactive
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Room</label>
+							<div class="col-md-8 col-sm-8 col-xs-12">
+								<select ng-model="iclass_edit.room" class="form-control"
+									ng-required="true">
+									<option ng-selected="iclass_edit.room.id==x.id"
+										ng-repeat="x in listRoom" ng-value="x">{{x.roomId}}</option>
+								</select>
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="sua"
-						data-ng-click="Sua()" ng-disabled="formSua.$invalid">Save</button>
+					<button type="button" class="btn btn-primary" id="them"
+						data-ng-click="editClass(false)" ng-disabled="formSua.$invalid">Edit</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
-						data-ng-click="ResetValidation_Edit()">Close</button>
+						data-ng-click="ResetForm()">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<!-- Modal xóa -->
 	<div class="modal fade" id="myModal_xoa" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog">
 			<div class="modal-content">
+
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
 				</div>
+
 				<div class="modal-body">
+					<!-- 					<input type="hidden" ng-model="specialization_delete.id"></input> -->
 					<p>Are you sure you want to delete this?</p>
 				</div>
+
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-ng-click="Xoa()"
-						data-dismiss="modal">Yes</button>
+					<a class="btn btn-danger btn-ok" ng-click="deleteClass()">Yes</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+
+
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
 	<script src="js/angular-ui.min.js"></script>
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
+	<!-- Sweet alert -->
+
+	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
-	<script type="text/javascript" src="scripts/intakeCtrl.js"></script>
+	<script type="text/javascript" src="scripts/buildTimetableCtrl.js"></script>
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
