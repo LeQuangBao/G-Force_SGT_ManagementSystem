@@ -1,4 +1,4 @@
-app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridConstants) {
+app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridConstants, $timeout) {
     $scope.classObj = {};
     $scope.iclass_edit = {};
     var alertDuration = 1800;
@@ -416,12 +416,53 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
         updateDay($scope.currentStartDate);
     }
     $scope.copyAllTimetable = function(currentStartDate) {
-        var currentdate = currentStartDate;
-        for (var i = $scope.currentWeek; i < numberWeek; i++) {
-            currentdate.setDate(currentdate.getDate() + 7);
-            $scope.copyTimetable(currentdate);
-        }
+    	swal({
+            title: "Please wait...",
+            timer: numberWeek*2700,
+            showConfirmButton: false
+        })
+    	$scope.currentValue = [];
+    	var startDate=new Date(currentStartDate);
+    	var end_date=new Date(startDate);
+    	end_date.setDate(startDate.getDate()+7);
+    	listTime.forEach(function (time, index){
+    		var date=new Date(time.date);
+    		if(startDate<=date && date<end_date){
+    			$scope.currentValue.push(time);
+    		}
+    	});
+    	$scope.index=$scope.currentWeek;
+    	PostListTime();
+    	$timeout(function(){
+    		alertMessage("Done");
+    		window.location.reload()
+    	},numberWeek*2700);
+    	
     }
+    function PostListTime(){
+    	$scope.currentValue.forEach(function (time, index){
+    		time.sessionDetail.timeStart=new Date(time.date+'T'+time.sessionDetail.timeStart);
+    		time.sessionDetail.timeEnd=new Date(time.date+'T'+time.sessionDetail.timeEnd);
+    		var nextdate=new Date(time.date);
+    		nextdate.setDate(nextdate.getDate()+7);
+    		time.date=nextdate;
+		});
+		
+		$http({
+                method: "POST",
+                url: "/api/time/list",
+                data: JSON.stringify($scope.currentValue),
+                dataType: "json",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function(response) {
+            	if($scope.index<numberWeek-1){
+            		$scope.index++;
+            		$timeout(function(){PostListTime()},1000);
+            	}
+            }, function(response) {});
+	}
     $scope.copyTimetable = function(currentStartDate) {
         var result = [];
         var startDate = new Date(currentStartDate);
