@@ -280,7 +280,7 @@ app.controller('buildTimetableCtrl',
         	return check;
         }
         
-        $scope.cellClicked = function(date, sessionDetail) {
+       /* $scope.cellClicked = function(date, sessionDetail) {
         	
         	var time_start=new Date(date+'T'+sessionDetail.timeStart);
         	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
@@ -333,7 +333,7 @@ app.controller('buildTimetableCtrl',
             // xóa lớp trên thời khóa biểu
             //$scope.time=1;
         	//$scope.time={};
-            /*for (var i = 0; i < listTime.length; i++) {
+            for (var i = 0; i < listTime.length; i++) {
                 if (listTime[i].iclass.id == $scope.pickIClass.id &&listTime[i].sessionDetail.id==sessionDetail.id) {
                     //$scope.time = $scope.listTime[i].id;
                 	var id=listTime[i].id;
@@ -349,12 +349,12 @@ app.controller('buildTimetableCtrl',
               }
           }).then(function(response) {
           	updateTimetable();
-          }, function(response) {});*/
+          }, function(response) {});
            
            	getListTime();
             getListTime();
             
-        }
+        }*/
 
         function updateTimetable() {
             $scope.myTimetable = {
@@ -466,6 +466,85 @@ app.controller('buildTimetableCtrl',
                 	getListTime();
                 }, function(response) {});
         }
+        
+        
+        $scope.isActive = false;
+        	//nút Add
+        $scope.toggleActive = function() {
+          $scope.isActive = false;
+          $scope.cellClicked = function(date, sessionDetail) {
+          	
+          	var time_start=new Date(date+'T'+sessionDetail.timeStart);
+          	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
+              var t = {
+                  iclass: $scope.pickIClass,
+                  sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
+                  date: new Date(date)
+              };
+              
+          	if (checkduplicate(t,listTime) == true)
+          		{
+  	        		$http({
+  	                    method: "POST",
+  	                    url: "/api/time",
+  	                    data: t,
+  	                    dataType: "json",
+  	                    headers: {
+  	                        'Content-Type': 'application/json'
+  	                    }
+  	                }).then(function(response) {
+  	                	updateTimetable();
+  	                }, function(response) {});
+          		}
+              
+
+             
+             	getListTime();
+              getListTime();
+              
+          }
+          
+        };
+        //nút Remove
+        $scope.toggleDeActive = function() {
+            $scope.isActive = true;
+            $scope.cellClicked = function(date, sessionDetail) {
+            	//console.log('remove');
+            	var time_start=new Date(date+'T'+sessionDetail.timeStart);
+            	var time_end=new Date(date+'T'+sessionDetail.timeEnd);
+                var t = {
+                    iclass: $scope.pickIClass,
+                    sessionDetail: {id:sessionDetail.id,timeStart:time_start,timeEnd:time_end},
+                    date: new Date(date)
+                };
+                
+                // xóa lớp trên thời khóa biểu
+                //$scope.time=1;
+            	//$scope.time={};
+                for (var i = 0; i < listTime.length; i++) {
+                    if (listTime[i].iclass.id == $scope.pickIClass.id &&listTime[i].sessionDetail.id==sessionDetail.id) {
+                        //$scope.time = $scope.listTime[i].id;
+                    	var id=listTime[i].id;
+                        break;
+                    }
+                }
+               $http({
+                  method: "DELETE",
+                  url: "/api/time/"+id,
+                  dataType: "json",
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+              }).then(function(response) {
+              	updateTimetable();
+              }, function(response) {});
+               
+               	getListTime();
+                getListTime();
+                
+            }
+          };
+       
     });
 // Chu thich cua nut phan action
 $(document).ready(function() {
