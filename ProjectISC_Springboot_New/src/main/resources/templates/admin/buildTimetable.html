@@ -220,35 +220,35 @@ input[type="checkbox"]:checked+i:before {
 									
 									<div class="row" style=" margin-top:10px">
 										<!-- <div id="demo1" style="margin-left:30%; margin-top:5px"></div> -->
-										<button type="button" class="btn" ng-class="{true: 'btn-default', false: 'btn-primary'}[isActive]" ng-click="toggleActive()">Add</button>
-										<button type="button" class="btn" ng-class="{true: 'btn-danger', false: 'btn-default'}[isActive]" ng-click="toggleDeActive()">Remove</button>
+										<button type="button" class="btn" ng-class="{false: 'btn-default', true: 'btn-primary'}[isAdd]" ng-click="toggleAddAndRemove()">Add</button>
+										<button type="button" class="btn" ng-class="{false: 'btn-danger', true: 'btn-default'}[isAdd]" ng-click="toggleAddAndRemove()">Remove</button>
 									</div>
 								
 
-									<div class="row">
-										<div class="form-horizontal form-required">
+<!-- 									<div class="row"> -->
+<!-- 										<div class="form-horizontal form-required"> -->
 
-											<span>Use alternate:</span><label for="check-one"> <input
-												type="checkbox" name="check-one" id="check-one"
-												value="checkone" /> <i></i>
+<!-- 											<span>Use alternate:</span><label for="check-one"> <input -->
+<!-- 												type="checkbox" name="check-one" id="check-one" -->
+<!-- 												value="checkone" /> <i></i> -->
 
-											</label>
+<!-- 											</label> -->
 
-										</div>
+<!-- 										</div> -->
 									
-										<div class="form-horizontal" style="margin-left:100px">
-										<select ng-model="instructor" class="col-md-4"
-											ng-options="x.lastname+' '+x.firstname for x in listInstructor"
-											ng-required="true" label="Pick Instructor">
-										</select>
+<!-- 										<div class="form-horizontal" style="margin-left:100px"> -->
+<!-- 										<select ng-model="instructor" class="col-md-4" -->
+<!-- 											ng-options="x.lastname+' '+x.firstname for x in listInstructor" -->
+<!-- 											ng-required="true" label="Pick Instructor"> -->
+<!-- 										</select> -->
 									
 									
 										
-										<select ng-model="room" class="col-md-5"
-											ng-options="x.roomId for x in listRoom" ng-required="true" style="margin-left:10px">
-										</select>
-									</div>
-									</div>
+<!-- 										<select ng-model="room" class="col-md-5" -->
+<!-- 											ng-options="x.roomId for x in listRoom" ng-required="true" style="margin-left:10px"> -->
+<!-- 										</select> -->
+<!-- 									</div> -->
+<!-- 									</div> -->
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<div class="col-md-12 col-sm-12 col-xs-12">
@@ -482,9 +482,7 @@ input[type="checkbox"]:checked+i:before {
 
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-	<script>
-		$('#demo1').btnSwitch();
-	</script>
+
 
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
