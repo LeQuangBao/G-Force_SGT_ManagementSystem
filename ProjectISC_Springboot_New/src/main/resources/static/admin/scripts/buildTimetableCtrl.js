@@ -386,7 +386,7 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
             if (time.sessionDetail.id === sessionDetail.id) {
                 if (d.getTime() == d2.getTime()) {
                     // console.log(time.iclass);
-                    result = result + time.iclass.iclassName + ", ";
+                    result = result + "<strong>" + time.iclass.iclassName + "</strong>" + ", ";
                 }
             }
         })
