@@ -103,7 +103,8 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
     var currentClass = {};
     $scope.setClassView = function(classView) {
     	currentClass = classView;
-    	getTimetableObj(classView.timetable.id);
+    	idTimetable = classView.timetable.id;
+    	getTimetableObj();
     }
 
     $scope.myTimetable = {
