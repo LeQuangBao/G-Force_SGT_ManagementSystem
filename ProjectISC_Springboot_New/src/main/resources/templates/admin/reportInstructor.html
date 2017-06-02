@@ -171,13 +171,14 @@ input[type="checkbox"]:checked+i:before {
 					<div class="page-title">
 						<div class="title_left">
 							<h3>Report Instructor</h3>
-
+							<select ng-change="setTimetable()" 
+							class="form-control" ng-options="(item.lastname + ' ' + item.firstname) for item in listInstructor" ng-model="selectedInstructor"></select>
 						</div>
 					</div>
 					<div class="clearfix"></div>
 					<div class="x_panel">
 						<div class="x_content">
-
+							
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<table class="table">
@@ -185,27 +186,21 @@ input[type="checkbox"]:checked+i:before {
 											<tr>
 												<th>Name</th>
 												<th>Course</th>
-												<th>Instructor</th>
 												<th>Room</th>
-												<th style="padding-bottom: 1px;"><span
-													data-toggle="modal" data-target="#myModal_them"
-													ng-click="ResetForm_Add()"
-													class="btn btn-primary btn-xs glyphicon glyphicon-plus"></span></th>
+												<th>Timetable</th>
+												<th>Intake</th>
+												<th>Show detail</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="clickable" ng-repeat="x in listClass">
+											<tr ng-repeat="x in listClass" ng-show="x.instructor.id == selectedInstructor.id">
 												<td ng-bind="x.iclassName"></td>
 												<td ng-bind="x.subject.subjectName"></td>
-												<td
-													ng-bind="x.instructor.lastname+' '+x.instructor.firstname"></td>
 												<td ng-bind="x.room.roomId"></td>
-												<td><span data-toggle="modal"
-													data-target="#myModal_sua" ng-click="getClassObj(x)"
-													class="btn btn-primary btn-xs glyphicon glyphicon-edit"></span><span
-													data-toggle="modal" data-target="#myModal_xoa"
-													ng-click="getClassObj(x)"
-													class="btn btn-danger btn-xs glyphicon glyphicon-remove"></span></td>
+												<td ng-bind="x.timetable.timetableName"></td>
+												<td ng-bind="x.timetable.intake.intakeName"></td>
+												<td><span ng-click="setClassView(x)"
+													class="btn btn-success btn-xs glyphicon glyphicon-calendar"></span></td>
 											</tr>
 										</tbody>
 									</table>
@@ -226,20 +221,19 @@ input[type="checkbox"]:checked+i:before {
 												<tbody>
 													<tr ng-repeat="x in myTimetable.session">
 														<td ng-bind="x.timeStart + ' - ' + x.timeEnd"></td>
-														<td ng-click="cellClicked(Mon, x)" class="clickable">{{getCellValue(Mon,
-															x)}}</td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable" ng-bind-html="getCellValue(Tue, x)"></td>
 														<td ng-click="cellClicked(Tue, x)" class="clickable"
-															ng-bind="getCellValue(Tue, x)"></td>
+															ng-bind-html="getCellValue(Tue, x)"></td>
 														<td ng-click="cellClicked(Wed, x)" class="clickable"
-															ng-bind="getCellValue(Wed, x)"></td>
+															ng-bind-html="getCellValue(Wed, x)"></td>
 														<td ng-click="cellClicked(Thu, x)" class="clickable"
-															ng-bind="getCellValue(Thu, x)"></td>
+															ng-bind-html="getCellValue(Thu, x)"></td>
 														<td ng-click="cellClicked(Fri, x)" class="clickable"
-															ng-bind="getCellValue(Fri, x)"></td>
+															ng-bind-html="getCellValue(Fri, x)"></td>
 														<td ng-click="cellClicked(Sat, x)" class="clickable"
-															ng-bind="getCellValue(Sat, x)"></td>
+															ng-bind-html="getCellValue(Sat, x)"></td>
 														<td ng-click="cellClicked(Sun, x)" class="clickable"
-															ng-bind="getCellValue(Sun, x)"></td>
+															ng-bind-html="getCellValue(Sun, x)"></td>
 													</tr>
 												</tbody>
 											</table>
@@ -358,6 +352,7 @@ input[type="checkbox"]:checked+i:before {
 	<script src="js/angular-ui.min.js"></script>
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>
+	<script src="js/angular-sanitize.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
 	<!-- Sweet alert -->
 

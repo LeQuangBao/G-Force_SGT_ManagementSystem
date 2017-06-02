@@ -1,6 +1,5 @@
 app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resource, uiGridConstants) {
     var alertDuration = 1800;
-    var idTimetable = 1;
     var listTime = [];
     var start_date = null;
     var end_date = null;
@@ -8,10 +7,25 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
     $scope.week = [];
     $scope.currentWeek = 0;
     var numberWeek = 0;
-    function GetListClass() {
-        $scope.listClass = [];
-       
+    var idTimetable = 1;
+    
+    // initialize
+    getTimetableObj();
+    getListSubjects();
+    getListInstructors();
+    getListRooms();
+    getListClass();
+    getListSessionDetail();
+    getListTime();
 
+    // get all timetable
+    
+    function getListTimetable() {
+    	$scope.listTimetable = [];
+    	$http.get("http://localhost:8080/api/timetable")
+    	.then(function(response){
+    		$scope.listTimetable = response.data;
+    	})
     }
     
     // get timetable
@@ -61,23 +75,12 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
             })
     }
     // get list classes with timetable id
-    function getListClasses() {
-        $scope.listClass = [];
-        var list_class = [];
-        $http
-            .get("http://localhost:8080/admin/api/class")
-            .then(
-                function(response) {
-                    list_class = response.data;
-                    list_class
-                        .forEach(function(iclass,
-                            index) {
-                            if (iclass.timetable.id == idTimetable) {
-                                $scope.listClass
-                                    .push(iclass);
-                            }
-                        });
-                });
+    function getListClass() {
+    	$scope.listClass = [];
+        $http.get("http://localhost:8080/admin/api/class")
+            .then(function(response) {
+            	$scope.listClass = response.data;
+            });
     }
 
     function getListSessionDetail() {
@@ -96,16 +99,12 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
                 updateTimetable();
             });
     }
-
-    getTimetableObj();
-    getListSubjects();
-    getListInstructors();
-    getListRooms();
-    getListClasses();
-    getListSessionDetail();
-    getListTime();
-
-
+    
+    var currentClass = {};
+    $scope.setClassView = function(classView) {
+    	currentClass = classView;
+    	getTimetableObj(classView.timetable.id);
+    }
 
     $scope.myTimetable = {
         date: ["", $scope.Mon, $scope.Tue, $scope.Wed,
@@ -157,8 +156,13 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
             var d2 = new Date(time.date);
             if (time.sessionDetail.id === sessionDetail.id) {
                 if (d.getTime() == d2.getTime()) {
-                    // console.log(time.iclass);
+                    if (time.iclass.iclassName == currentClass.iclassName ) {
+                    	result = result + "<span class='btn btn-xs btn-primary'>"+time.iclass.iclassName + "</span>, ";
+                    	
+                    } else {
+                    	
                     result = result + time.iclass.iclassName + ", ";
+                    }
                 }
             }
         })
