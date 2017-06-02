@@ -6,8 +6,10 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
     $scope.currentStartDate = null;
     $scope.week = [];
     $scope.currentWeek = 0;
+    var tuan=0;
     var numberWeek = 0;
     var idTimetable = 1;
+    var id_iclass=1;
     
     // initialize
     getTimetableObj();
@@ -29,11 +31,13 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
     }
     
     // get timetable
+   
     function getTimetableObj() {
         $scope.timetable = {};
         $http.get("http://localhost:8080/api/timetable/" + idTimetable)
             .then(function(response) {
                 $scope.timetable = response.data;
+                timetable1=response.data;
                 $http.get("http://localhost:8080/api/sessiondetail1/" + $scope.timetable.session.id)
                     .then(function(response) {
                         updateSession(response.data);
@@ -41,12 +45,23 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
                 updateDay($scope.timetable.intake.startDate);
                 start_date = new Date($scope.timetable.intake.startDate);
                 end_date = new Date($scope.timetable.intake.endDate);
-                numberWeek = (end_date - start_date) / 86400000 / 7;
-                // console.log(numberWeek);
-                for (var i = 0; i < numberWeek; i++) {
-                    $scope.week.push(i);
+                console.log(id_iclass);
+                for(var i=0;i<listTime.length;i++)
+                {
+                	if(listTime[i].iclass.id==id_iclass)
+                	{
+                		tuan=(listTime[i].date-$scope.timetable.intake.startDate)/7+1;
+                		console.log(tuan);
+                		$scope.week.push(tuan);
+                		numberWeek++;
+                	}
                 }
-                // console.log($scope.week);
+                //numberWeek = (end_date - start_date) / 86400000 / 7;
+                console.log(numberWeek);
+//                for (var i = 0; i < numberWeek; i++) {
+//                    $scope.week.push(i);
+//                }
+                 console.log($scope.week);
                 $scope.currentStartDate = start_date;
             })
     }
@@ -104,6 +119,7 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
     $scope.setClassView = function(classView) {
     	currentClass = classView;
     	idTimetable = classView.timetable.id;
+    	id_iclass=classView.id;
     	getTimetableObj();
     }
 
