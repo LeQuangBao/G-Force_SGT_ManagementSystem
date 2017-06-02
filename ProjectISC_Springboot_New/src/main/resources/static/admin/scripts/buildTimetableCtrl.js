@@ -259,7 +259,7 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
         ],
         session: $scope.listCurrentSession
     };
-    // check trung
+    // check trung class
     function checkduplicate(t, listTime) {
         var check = true;
         listTime.forEach(function(time, index) {
@@ -269,7 +269,7 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
                 if (d2.getTime() == d.getTime()) {
                     if (time.iclass.id === t.iclass.id) {
                         check = false;
-                        alert('trung cmnrs');
+                        alertDuplicate();
                     }
                 }
 
@@ -310,6 +310,9 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
 	            }).then(function(response) {
 	            	getListTime();
 	            }, function(response) {});
+	        }
+	        else {
+	        	
 	        }
         } else {
 	        for (var i = 0; i < listTime.length; i++) {
@@ -452,10 +455,19 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
     }
 
 
-   
-
-
+	  function alertDuplicate(message) {
+			swal({
+				title : "",
+				text : "Class duplicated",
+				type : "error",
+				timer : alertDuration,
+				showConfirmButton : false
+			});
+		}
+ 
 });
+
+
 // Chu thich cua nut phan action
 $(document).ready(function() {
     $('body').tooltip({
