@@ -270,13 +270,13 @@ input[type="checkbox"]:checked+i:before {
 												<tbody>
 													<tr ng-repeat="x in myTimetable.session">
 														<td ng-bind="x.timeStart + ' - ' + x.timeEnd"></td>
-														<td ng-click="cellClicked(Mon, x)" class="clickable">{{getCellValue(Mon, x)}}</td>
-														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind="getCellValue(Tue, x)"></td>
-														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind="getCellValue(Wed, x)"></td>
-														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind="getCellValue(Thu, x)"></td>
-														<td ng-click="cellClicked(Fri, x)" class="clickable" ng-bind="getCellValue(Fri, x)"></td>
-														<td ng-click="cellClicked(Sat, x)" class="clickable" ng-bind="getCellValue(Sat, x)"></td>
-														<td ng-click="cellClicked(Sun, x)" class="clickable" ng-bind="getCellValue(Sun, x)"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable" ng-bind-html="getCellValue(Mon, x)"></td>
+														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind-html="getCellValue(Tue, x)"></td>
+														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind-html="getCellValue(Wed, x)"></td>
+														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind-html="getCellValue(Thu, x)"></td>
+														<td ng-click="cellClicked(Fri, x)" class="clickable" ng-bind-html="getCellValue(Fri, x)"></td>
+														<td ng-click="cellClicked(Sat, x)" class="clickable" ng-bind-html="getCellValue(Sat, x)"></td>
+														<td ng-click="cellClicked(Sun, x)" class="clickable" ng-bind-html="getCellValue(Sun, x)"></td>
 													</tr>
 												</tbody>
 											</table>
@@ -489,6 +489,7 @@ input[type="checkbox"]:checked+i:before {
 	<script src="js/angular-ui.min.js"></script>
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>
+	<script src="js/angular-sanitize.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
 	<!-- Sweet alert -->
 

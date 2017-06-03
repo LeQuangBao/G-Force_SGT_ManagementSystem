@@ -257,7 +257,7 @@ app
 					// }
 
 					// add timetable
-					$scope.addTimetable = function() {
+					$scope.addTimetable = function(close) {
 						
 							$http({
 								method : "POST",
@@ -272,6 +272,9 @@ app
 							})
 									.then(
 											function(response) {
+												if (close) {
+													$("#myModal_them").modal("hide");
+												}
 												getListTimetable();
 												alertAddSucess();
 												$scope.ResetForm_Add();
