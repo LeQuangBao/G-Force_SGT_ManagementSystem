@@ -45,11 +45,33 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
                 updateDay($scope.timetable.intake.startDate);
                 start_date = new Date($scope.timetable.intake.startDate);
                 end_date = new Date($scope.timetable.intake.endDate);
-                numberWeek = (end_date - start_date) / 86400000 / 7;
-                for (var i = 0; i < numberWeek; i++) {
-                    $scope.week.push(i);
+                //
+                $scope.week = [];
+            	var tuan = 0;
+                for(var i = 0; i < listTime.length; i++)
+                {
+                	if(listTime[i].iclass.id==currentClass.id)
+                	{
+                		var date1=new Date(listTime[i].date);
+                		var date2=new Date($scope.timetable.intake.startDate);
+                		var tuan=Math.floor((date1-date2)/86400000/7 + 1) - 1;
+                		var tempCheck = true;
+                		$scope.week.forEach(function(w, index){
+                			if (w == tuan) {
+                				tempCheck = false;
+                			}
+                		})
+                		if (tempCheck) {	
+                			$scope.week.push(tuan);
+                		}
+                	}
                 }
+                $scope.week.sort();
+                start_date = $scope.timetable.intake.startDate;
+            	$scope.callWeek($scope.week[0]);
+            	//
                 $scope.currentStartDate = start_date;
+                getListTime();
             })
     }
     // get list subjects
@@ -104,14 +126,13 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
     
     var currentClass = {};
     $scope.setClassView = function(classView) {
-    	currentClass = classView;
-    	idTimetable = classView.timetable.id;
-    	id_iclass=classView.id;
-    	getTimetableObj();
-    	getListTime();
-    	$scope.week = [];
+    	setClassView2(classView);
+    	setTimeout(function(){
+    		setClassView2(classView);
+    	}, 400);
+//    	$scope.week = [];
 //    	var tuan = 0;
-//        for(var i=0;i<listTime.length;i++)
+//        for(var i = 0; i < listTime.length; i++)
 //        {
 //        	if(listTime[i].iclass.id==currentClass.id)
 //        	{
@@ -129,9 +150,17 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
 //        		}
 //        	}
 //        }
-        $scope.week.sort();
-        start_date = classView.timetable.intake.startDate;
-    	$scope.callWeek(0);
+//        $scope.week.sort();
+//        start_date = classView.timetable.intake.startDate;
+//    	$scope.callWeek($scope.week[0]);
+    }
+    
+    function setClassView2(classView) {
+    	currentClass = classView;
+    	idTimetable = classView.timetable.id;
+    	id_iclass=classView.id;
+    	getTimetableObj();
+        
     }
 
     $scope.myTimetable = {
