@@ -78,6 +78,12 @@
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
 									</ul></li>
+								<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/reportinstructor">Timetable of intructor</a></li>
+										<li><a href="/admin/reportintake">Timetable of intake</a></li>
+									</ul></li>
 							</ul>
 						</div>
 
@@ -144,9 +150,15 @@
 							<div class="x_panel">
 								<div class="x_content">
 									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
-										
-										<button class="btn btn-primary" style="margin-top:5px"><a href="http://localhost:8080/admin/api/intake/export" style="color:white">Export</a></button>
+										<div id="grid" ui-grid="gridOptions"
+											ui-grid-selection="ui-grid-selection"
+											ui-grid-resize-columns="ui-grid-resize-columns"
+											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+
+										<button class="btn btn-primary" style="margin-top: 5px">
+											<a href="http://localhost:8080/admin/api/intake/export"
+												style="color: white">Export</a>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -196,7 +208,7 @@
 										<p style="color: red">This field is required</p>
 									</div>
 									<div ng-message="validationError">
-										<p style="color:red">Duplicate ID</p>
+										<p style="color: red">Duplicate ID</p>
 									</div>
 								</div>
 							</div>
@@ -267,7 +279,8 @@
 					<button type="button" class="btn btn-primary" id="them"
 						data-ng-click="Them(false)" ng-disabled="formThem.$invalid">Add</button>
 					<button type="button" class="btn btn-default" id="them"
-						data-ng-click="Them(true)" ng-disabled="formThem.$invalid">Add and close</button>
+						data-ng-click="Them(true)" ng-disabled="formThem.$invalid">Add
+						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						data-ng-click="ResetForm()">Close</button>
 
@@ -302,7 +315,7 @@
 										<p style="color: red">This field is required</p>
 									</div>
 									<div ng-message="validationError">
-										<p style="color:red">Duplicate ID</p>
+										<p style="color: red">Duplicate ID</p>
 									</div>
 								</div>
 							</div>
@@ -356,8 +369,8 @@
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
 							<div class="col-md-8" style="padding: 6px">
-								<input type="radio" ng-model="_active" ng-value="true" /> Active
-								<input type="radio" ng-model="_active" ng-value="false" />
+								<input type="radio" ng-model="_active" ng-value="true" />
+								Active <input type="radio" ng-model="_active" ng-value="false" />
 								Inactive
 							</div>
 						</div>
@@ -403,11 +416,13 @@
 	<script src="js/angular-ui.min.js"></script>
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>
+	<script src="js/angular-sanitize.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/myApp.js"></script>
 	<script type="text/javascript" src="scripts/intakeCtrl.js"></script>
+	
 	<!-- FastClick -->
 	<script src="vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
@@ -440,6 +455,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-<script src="js/ui-grid.js"></script>
+	<script src="js/ui-grid.js"></script>
 </body>
 </html>

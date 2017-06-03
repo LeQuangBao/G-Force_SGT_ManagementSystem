@@ -69,4 +69,13 @@ public class AdminController {
 	public String room() {
 		return "admin/room";
 	}
+	
+	@RequestMapping(value = "/admin/reportinstructor")
+	public String reportInstructor() {
+		return "admin/reportInstructor";
+	}
+	@RequestMapping(value = "/admin/reportintake")
+	public String reportIntake() {
+		return "admin/reportIntake";
+	}
 }

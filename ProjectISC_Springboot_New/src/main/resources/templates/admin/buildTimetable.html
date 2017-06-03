@@ -41,7 +41,6 @@
 <link href="build/css/custom.min.css" rel="stylesheet" />
 <link href="build/css/style.css" rel="stylesheet" />
 <link href="css/ui-grid.css" rel="stylesheet" />
-<link href="css/jquery.btnswitch.css" rel="stylesheet" />
 <link href="js/sweetalert.css" rel="stylesheet" />
 <style class="cp-pen-styles">
 label i {
@@ -115,6 +114,13 @@ input[type="checkbox"]:checked+i:before {
 										<li><a href="/admin/timetable">Timetable</a></li>
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
+									</ul></li>
+									
+									<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/reportinstructor">Timetable of intructor</a></li>
+										<li><a href="/admin/reportintake">Timetable of intake</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -212,73 +218,49 @@ input[type="checkbox"]:checked+i:before {
 											ng-options="x.iclassName for x in listClass">
 									</select>
 									
-									<div class="row">
-										<div id="demo1" style="margin-left:30%; margin-top:5px"></div>
+									<div class="row" style=" margin-top:10px">
+										<!-- <div id="demo1" style="margin-left:30%; margin-top:5px"></div> -->
+										<button type="button" class="btn" ng-class="{false: 'btn-default', true: 'btn-primary'}[isAdd]" ng-click="toggleAddAndRemove()">Add</button>
+										<button type="button" class="btn" ng-class="{false: 'btn-danger', true: 'btn-default'}[isAdd]" ng-click="toggleAddAndRemove()">Remove</button>
 									</div>
 								
 
-									<div class="row">
-										<div class="form-horizontal form-required">
+<!-- 									<div class="row"> -->
+<!-- 										<div class="form-horizontal form-required"> -->
 
-											<span>Use alternate:</span><label for="check-one"> <input
-												type="checkbox" name="check-one" id="check-one"
-												value="checkone" /> <i></i>
+<!-- 											<span>Use alternate:</span><label for="check-one"> <input -->
+<!-- 												type="checkbox" name="check-one" id="check-one" -->
+<!-- 												value="checkone" /> <i></i> -->
 
-											</label>
+<!-- 											</label> -->
 
-										</div>
+<!-- 										</div> -->
 									
-										<div class="form-horizontal" style="margin-left:100px">
-										<select ng-model="instructor" class="col-md-4"
-											ng-options="x.lastname+' '+x.firstname for x in listInstructor"
-											ng-required="true" label="Pick Instructor">
-										</select>
+<!-- 										<div class="form-horizontal" style="margin-left:100px"> -->
+<!-- 										<select ng-model="instructor" class="col-md-4" -->
+<!-- 											ng-options="x.lastname+' '+x.firstname for x in listInstructor" -->
+<!-- 											ng-required="true" label="Pick Instructor"> -->
+<!-- 										</select> -->
 									
 									
 										
-										<select ng-model="room" class="col-md-5"
-											ng-options="x.roomId for x in listRoom" ng-required="true" style="margin-left:10px">
-										</select>
-									</div>
-									</div>
+<!-- 										<select ng-model="room" class="col-md-5" -->
+<!-- 											ng-options="x.roomId for x in listRoom" ng-required="true" style="margin-left:10px"> -->
+<!-- 										</select> -->
+<!-- 									</div> -->
+<!-- 									</div> -->
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<h4 class="text-center">Add/Remove picked class to
 											timetable</h4>
+
 										<div class="row">
-
-											<span style="float: left; margin-top: 7px">Show: </span>
-											<div class="form-horizontal form-required"
-												style="float: left">
-
-												<span> FE 1 </span> <label for="check-two"> <input
-													type="checkbox" name="check-two" id="check-two" /> <i></i>
-
-												</label>
-
-											</div>
-											<div class="form-horizontal form-required"
-												style="float: left">
-
-												<span>FE 2 </span> <label for="check-three"> <input
-													type="checkbox" name="check-three" id="check-three" /> <i></i>
-
-												</label>
-
-											</div>
-											<div class="form-horizontal form-required"
-												style="float: left">
-
-												<span> Onjob - Training </span> <label for="check-four">
-													<input type="checkbox" name="check-four" id="check-four" />
-													<i></i>
-
-												</label>
-
-											</div>
+											<button type="button" class="btn btn-primary" ng-click="copyTimetable(currentStartDate)">Copy to next week</button> |
+											<button type="button" class="btn btn-primary" ng-click="copyAllTimetable(currentStartDate)">Copy to all week</button>  
 										</div>
-										<div class="table-responsive">
+
+										<div class="row table-responsive">
 											<table class="table table-bordered">
 												<thead>
 													<tr>
@@ -288,13 +270,13 @@ input[type="checkbox"]:checked+i:before {
 												<tbody>
 													<tr ng-repeat="x in myTimetable.session">
 														<td ng-bind="x.timeStart + ' - ' + x.timeEnd"></td>
-														<td ng-click="cellClicked(Mon, x)" class="clickable">{{getCellValue(Mon, x)}}</td>
-														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind="getCellValue(Tue, x)"></td>
-														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind="getCellValue(Wed, x)"></td>
-														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind="getCellValue(Thu, x)"></td>
-														<td ng-click="cellClicked(Fri, x)" class="clickable" ng-bind="getCellValue(Fri, x)"></td>
-														<td ng-click="cellClicked(Sat, x)" class="clickable" ng-bind="getCellValue(Sat, x)"></td>
-														<td ng-click="cellClicked(Sun, x)" class="clickable" ng-bind="getCellValue(Sun, x)"></td>
+														<td ng-click="cellClicked(Mon, x)" class="clickable" ng-bind-html="getCellValue(Mon, x)"></td>
+														<td ng-click="cellClicked(Tue, x)" class="clickable" ng-bind-html="getCellValue(Tue, x)"></td>
+														<td ng-click="cellClicked(Wed, x)" class="clickable" ng-bind-html="getCellValue(Wed, x)"></td>
+														<td ng-click="cellClicked(Thu, x)" class="clickable" ng-bind-html="getCellValue(Thu, x)"></td>
+														<td ng-click="cellClicked(Fri, x)" class="clickable" ng-bind-html="getCellValue(Fri, x)"></td>
+														<td ng-click="cellClicked(Sat, x)" class="clickable" ng-bind-html="getCellValue(Sat, x)"></td>
+														<td ng-click="cellClicked(Sun, x)" class="clickable" ng-bind-html="getCellValue(Sun, x)"></td>
 													</tr>
 												</tbody>
 											</table>
@@ -304,24 +286,12 @@ input[type="checkbox"]:checked+i:before {
 							</div>
 						</div>
 						<div class="col-xs-12 text-center">
-							<p>Week</p>
+							<p>Week {{currentWeek+1}}</p>
 							<ul class="pagination clickable">
-								<li ng-repeat="i in week"><a ng-click="callWeek(i)">{{i+1}}</a></li>
+								<li ng-repeat="i in week" ng-class="(currentWeek==i) ? 'active' : ''"><a ng-click="callWeek(i)">{{i+1}}</a></li>
 								<!-- <li ng-click="callWeek(0)" class="active"><a >1</a></li>
 								<li><a ng-click="callWeek(1)">2</a></li>
-								<li><a>3</a></li>
-								<li><a>4</a></li>
-								<li><a>5</a></li>
-								<li><a>6</a></li>
-								<li><a>7</a></li>
-								<li><a>8</a></li>
-								<li><a>9</a></li>
-								<li><a>10</a></li>
-								<li><a>11</a></li>
-								<li><a>12</a></li>
-								<li><a>13</a></li>
-								<li><a>14</a></li>
-								<li><a>15</a></li> -->
+								 -->
 							</ul>
 
 						</div>
@@ -512,16 +482,14 @@ input[type="checkbox"]:checked+i:before {
 
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-	<script src="js/jquery.btnswitch.js"></script>
-	<script>
-		$('#demo1').btnSwitch();
-	</script>
+
 
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script src="js/angular-ui.min.js"></script>
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>
+	<script src="js/angular-sanitize.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
 	<!-- Sweet alert -->
 

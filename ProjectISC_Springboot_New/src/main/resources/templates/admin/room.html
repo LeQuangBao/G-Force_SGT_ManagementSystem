@@ -44,8 +44,7 @@
 <link href="js/sweetalert.css" rel="stylesheet" />
 </head>
 
-<body data-ng-app="myApp" data-ng-controller="roomCtrl"
-	class="nav-md">
+<body data-ng-app="myApp" data-ng-controller="roomCtrl" class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -76,6 +75,12 @@
 										<li><a href="/admin/timetable">Timetable</a></li>
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
+									</ul></li>
+								<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/intake">Timetable of intructor</a></li>
+										<li><a href="/admin/school">Timetable of intake</a></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -141,9 +146,12 @@
 							<div class="x_panel">
 								<div class="x_content">
 									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
-										
-										
+										<div id="grid" ui-grid="gridOptions"
+											ui-grid-selection="ui-grid-selection"
+											ui-grid-resize-columns="ui-grid-resize-columns"
+											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+
+
 									</div>
 								</div>
 							</div>
@@ -182,12 +190,14 @@
 						<div class="form-group">
 							<label class="control-label col-sm-3">Name</label>
 							<div class="col-sm-8">
-								<input type="text" id="roomId_add"
-									name="roomId_add" class="form-control" placeholder="" ng-keyup="hideDuplicateAlert()"
-									ng-model="roomId_add" required="required" /> <span
+								<input type="text" id="roomId_add" name="roomId_add"
+									class="form-control" placeholder=""
+									ng-keyup="hideDuplicateAlert()" ng-model="roomId_add"
+									required="required" /> <span
 									ng-show="formAdd.roomId_add.$touched &amp;&amp; formAdd.roomId_add.$invalid"><p
 										style="color: red">This field is required</p></span>
-								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+									style="color: red"></p>
 							</div>
 						</div>
 					</form>
@@ -196,8 +206,8 @@
 					<button class="btn btn-primary" ng-click="addRoom(false)"
 						ng-disabled="formAdd.roomId_add.$error.required">Add</button>
 					<button class="btn btn-default" ng-click="addRoom(true)"
-						ng-disabled="formAdd.roomId_add.$error.required">Add
-						and close</button>
+						ng-disabled="formAdd.roomId_add.$error.required">Add and
+						close</button>
 					<button class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -221,12 +231,14 @@
 						<div class="form-group">
 							<label class="control-label col-sm-3">Name</label>
 							<div class="col-sm-8">
-								<input type="text" id="roomId_edit" ng-keyup="hideDuplicateAlert()"
-									name="roomId_edit" ng-model="info.roomId"
-									class="form-control" placeholder="" required="required" /><span
+								<input type="text" id="roomId_edit"
+									ng-keyup="hideDuplicateAlert()" name="roomId_edit"
+									ng-model="info.roomId" class="form-control" placeholder=""
+									required="required" /><span
 									ng-show="editForm1.roomId_edit.$touched &amp;&amp; editForm1.roomId_edit.$invalid"><p
 										style="color: red">This field is required</p></span>
-								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+									style="color: red"></p>
 							</div>
 						</div>
 					</form>
@@ -271,6 +283,7 @@
 	<script src="js/angular-ui.min.js"></script>
 	<script src="js/angular-resource.min.js"></script>
 	<script src="js/angular-messages.min.js"></script>
+	<script src="js/angular-sanitize.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
 	<!-- Sweet alert -->
 
@@ -311,6 +324,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-<script src="js/ui-grid.js"></script>
+	<script src="js/ui-grid.js"></script>
 </body>
 </html>

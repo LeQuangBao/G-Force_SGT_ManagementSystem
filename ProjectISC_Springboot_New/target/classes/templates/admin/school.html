@@ -39,7 +39,8 @@
 
 
 <!-- Custom Theme Style -->
-<link href="build/css/custom.min.css" rel="stylesheet" /><link href="build/css/style.css" rel="stylesheet" />
+<link href="build/css/custom.min.css" rel="stylesheet" />
+<link href="build/css/style.css" rel="stylesheet" />
 <link href="js/sweetalert.css" rel="stylesheet" />
 <link href="css/ui-grid.css" rel="stylesheet" />
 </head>
@@ -81,7 +82,12 @@
 										<li><a href="/admin/session">Session</a></li>
 										<li><a href="/admin/room">Room</a></li>
 									</ul></li>
-
+								<li><a><i class="fa fa-bar-chart-o"></i>Report <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="/admin/intake">Timetable of intructor</a></li>
+										<li><a href="/admin/school">Timetable of intake</a></li>
+									</ul></li>
 
 							</ul>
 						</div>
@@ -181,9 +187,15 @@
 										ng-change="c()">
 									</select> -->
 									<div class="table-responsive">
-										<div id="grid" ui-grid="gridOptions" ui-grid-selection="ui-grid-selection" ui-grid-resize-columns="ui-grid-resize-columns" ui-grid-pagination="ui-grid-pagination" class="grid"></div>
-										
-										<button class="btn btn-primary" style="margin-top:5px"><a href="http://localhost:8080/admin/api/school/export" style="color:white">Export</a></button>
+										<div id="grid" ui-grid="gridOptions"
+											ui-grid-selection="ui-grid-selection"
+											ui-grid-resize-columns="ui-grid-resize-columns"
+											ui-grid-pagination="ui-grid-pagination" class="grid"></div>
+
+										<button class="btn btn-primary" style="margin-top: 5px">
+											<a href="http://localhost:8080/admin/api/school/export"
+												style="color: white">Export</a>
+										</button>
 									</div>
 									<!-- <div class='pull-right'>
 										<uib-pagination
@@ -232,16 +244,17 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="schoolID"> ID</label>
 							<div class="col-md-8">
-								<input id="schoolID" name="schoolID" placeholder="" ng-keyup="hideDuplicateAlert()"
-									class="form-control input-md" type="text" ng-model="schoolId"
-									ng-required="true" />
+								<input id="schoolID" name="schoolID" placeholder=""
+									ng-keyup="hideDuplicateAlert()" class="form-control input-md"
+									type="text" ng-model="schoolId" ng-required="true" />
 								<div ng-messages="frmSchoolAdd.schoolID.$error">
 									<div ng-message="required"
 										ng-show="frmSchoolAdd.schoolID.$touched">
 										<p style="color: red">This field is required</p>
 									</div>
 								</div>
-								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+									style="color: red"></p>
 							</div>
 						</div>
 
@@ -304,11 +317,10 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="status">Status</label>
 							<div class="col-md-8" style="padding: 6px">
-								<input type="radio" ng-model="active"
-									ng-value="true" ng-checked="true" /> Active
-								<input type="radio" ng-model="active"
-									ng-value="false" /> Inactive
-								
+								<input type="radio" ng-model="active" ng-value="true"
+									ng-checked="true" /> Active <input type="radio"
+									ng-model="active" ng-value="false" /> Inactive
+
 							</div>
 						</div>
 					</form>
@@ -317,9 +329,10 @@
 					<button id="btnSave" name="btnSave" class="btn btn-primary"
 						ng-click="save(false)"
 						ng-disabled="frmSchoolAdd.schoolID.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Add</button>
-						<button id="btnSave" name="btnSave" class="btn btn-default"
+					<button id="btnSave" name="btnSave" class="btn btn-default"
 						ng-click="save(true)"
-						ng-disabled="frmSchoolAdd.schoolID.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Add and close</button>
+						ng-disabled="frmSchoolAdd.schoolID.$error.required || frmSchoolAdd.schoolName.$error.required || frmSchoolAdd.address.$error.required|| frmSchoolAdd.contact.$error.required">Add
+						and close</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
@@ -348,13 +361,14 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="schoolID"> ID</label>
 							<div class="col-md-8">
-								<input id="schoolId" name="schoolId" placeholder="" ng-keyup="hideDuplicateAlert()"
-									class="form-control input-md" type="text"
-									ng-model="school_edit.schoolId" ng-required="true" /> <span
-									id="helpBlock" style="color: red" class="help-block"
+								<input id="schoolId" name="schoolId" placeholder=""
+									ng-keyup="hideDuplicateAlert()" class="form-control input-md"
+									type="text" ng-model="school_edit.schoolId" ng-required="true" />
+								<span id="helpBlock" style="color: red" class="help-block"
 									ng-show="frmSchool.schoolId.$error.required">This field
 									is required</span>
-									<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert" style="color: red" ></p>
+								<p ng-show="duplicateAlert != ''" ng-bind="duplicateAlert"
+									style="color: red"></p>
 							</div>
 						</div>
 
@@ -402,9 +416,8 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="status">Status</label>
 							<div class="col-md-8" style="padding: 6px">
-								<input type="radio"
-									ng-model="school_edit.active" ng-value="true" /> Active
-								<input type="radio"
+								<input type="radio" ng-model="school_edit.active"
+									ng-value="true" /> Active <input type="radio"
 									ng-model="school_edit.active" ng-value="false" /> Inactive
 							</div>
 						</div>
@@ -452,6 +465,7 @@
 	<script type="text/javascript" src="js/angular-messages.min.js"></script>
 	<script type="text/javascript" src="js/angular-resource.min.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
+	<script src="js/angular-sanitize.js"></script>
 	<!-- Sweet alert -->
 
 	<script type="text/javascript" src="js/sweetalert-dev.js"></script>
@@ -494,7 +508,7 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
-<script src="js/ui-grid.js"></script>
+	<script src="js/ui-grid.js"></script>
 
 
 </body>
