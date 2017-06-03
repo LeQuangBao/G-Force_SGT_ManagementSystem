@@ -310,7 +310,7 @@ app
 							})
 									.then(
 											function(response) {
-												$("myModal_sua").modal("hide");
+												$("#myModal_sua").modal("hide");
 												getListTimetable();
 												alertEditSucess();
 											},
@@ -339,11 +339,9 @@ app
 											+ deleteTimetable.id,
 									dataType : "json",
 								}).then(function(result) {
-							if (result.status == 202) {
 								$("#myModal_xoa").modal("hide");
-								getListTimetables();
+								getListTimetable();
 								alertDeleteSucess();
-							}
 						}, function(response) {
 							alertFail();
 						});

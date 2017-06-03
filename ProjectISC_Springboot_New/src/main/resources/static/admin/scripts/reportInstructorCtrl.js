@@ -66,7 +66,7 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
                 		}
                 	}
                 }
-                $scope.week.sort();
+                $scope.week.sort(function(a,b){return a - b});
                 start_date = $scope.timetable.intake.startDate;
             	$scope.callWeek($scope.week[0]);
             	//

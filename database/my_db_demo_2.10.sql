@@ -623,9 +623,9 @@ CREATE TABLE `timetable` (
 
 INSERT INTO `timetable` (`id`, `timetable_name`, `intake`, `session`) VALUES
 (1, 'timetable01', 1, 1),
-(2, 'timetable02', 1, 2),
-(3, 'timetable03', 1, 3),
-(4, 'timetable04', 1, 4);
+(2, 'timetable02', 2, 2),
+(3, 'timetable03', 3, 3),
+(4, 'timetable04', 4, 4);
 
 --
 -- Indexes for dumped tables
