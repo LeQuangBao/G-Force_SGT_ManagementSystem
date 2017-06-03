@@ -186,9 +186,9 @@ input[type="checkbox"]:checked+i:before {
 											<tr>
 												<th>Name</th>
 												<th>Course</th>
+												<th>Instructor</th>
 												<th>Room</th>
 												<th>Timetable</th>
-												<th>Intake</th>
 												<th>Show detail</th>
 											</tr>
 										</thead>
@@ -196,9 +196,10 @@ input[type="checkbox"]:checked+i:before {
 											<tr ng-repeat="x in listClass" ng-show="x.timetable.intake.id == selectedIntake.id">
 												<td ng-bind="x.iclassName"></td>
 												<td ng-bind="x.subject.subjectName"></td>
+												<td
+													ng-bind="x.instructor.lastname+' '+x.instructor.firstname"></td>
 												<td ng-bind="x.room.roomId"></td>
 												<td ng-bind="x.timetable.timetableName"></td>
-												<td ng-bind="x.timetable.intake.intakeName"></td>
 												<td><span ng-click="setClassView(x)"
 													class="btn btn-success btn-xs glyphicon glyphicon-calendar"></span></td>
 											</tr>
