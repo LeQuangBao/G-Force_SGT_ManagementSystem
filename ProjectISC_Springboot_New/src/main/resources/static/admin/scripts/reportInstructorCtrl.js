@@ -46,17 +46,9 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
                 start_date = new Date($scope.timetable.intake.startDate);
                 end_date = new Date($scope.timetable.intake.endDate);
                 numberWeek = (end_date - start_date) / 86400000 / 7;
-                
-                // console.log(numberWeek);
                 for (var i = 0; i < numberWeek; i++) {
                     $scope.week.push(i);
                 }
-                //numberWeek = (end_date - start_date) / 86400000 / 7;
-                console.log(numberWeek);
-//                for (var i = 0; i < numberWeek; i++) {
-//                    $scope.week.push(i);
-//                }
-                 console.log($scope.week);
                 $scope.currentStartDate = start_date;
             })
     }
@@ -118,25 +110,26 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
     	getTimetableObj();
     	getListTime();
     	$scope.week = [];
-    	var tuan = 0;
-        for(var i=0;i<listTime.length;i++)
-        {
-        	if(listTime[i].iclass.id==currentClass.id)
-        	{
-        		var date1=new Date(listTime[i].date);
-        		var date2=new Date(classView.timetable.intake.startDate);
-        		var tuan=Math.floor((date1-date2)/86400000/7 + 1) - 1;
-        		var tempCheck = true;
-        		$scope.week.forEach(function(week, index){
-        			if (week == tuan) {
-        				tempCheck = false;
-        			}
-        		})
-        		if (tempCheck) {	
-        			$scope.week.push(tuan);
-        		}
-        	}
-        }
+//    	var tuan = 0;
+//        for(var i=0;i<listTime.length;i++)
+//        {
+//        	if(listTime[i].iclass.id==currentClass.id)
+//        	{
+//        		var date1=new Date(listTime[i].date);
+//        		var date2=new Date(classView.timetable.intake.startDate);
+//        		var tuan=Math.floor((date1-date2)/86400000/7 + 1) - 1;
+//        		var tempCheck = true;
+//        		$scope.week.forEach(function(week, index){
+//        			if (week == tuan) {
+//        				tempCheck = false;
+//        			}
+//        		})
+//        		if (tempCheck) {	
+//        			$scope.week.push(tuan);
+//        		}
+//        	}
+//        }
+        $scope.week.sort();
         start_date = classView.timetable.intake.startDate;
     	$scope.callWeek(0);
     }
@@ -152,8 +145,6 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
         $scope.currentWeek = i;
         $scope.currentStartDate = new Date(start_date);
         $scope.currentStartDate.setDate($scope.currentStartDate.getDate() + (i * 7));
-        // console.log(date);
-
         updateDay($scope.currentStartDate);
     }
 
