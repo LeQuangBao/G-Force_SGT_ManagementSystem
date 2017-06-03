@@ -91,17 +91,41 @@ CREATE TABLE `iclass` (
 
 INSERT INTO `iclass` (`id`, `iclass_name`, `subject`, `timetable`, `instructor`, `room`) VALUES
 (1, 'Working Process', 1, 1, 1, 1),
-(2, 'Critical Thinking', 2, 2, 2, 2),
-(3, 'Professional Speaking', 3, 3, 3, 3),
-(4, 'Technical Writing', 4, 4, 4, 4),
+(2, 'Critical Thinking', 2, 1, 2, 2),
+(3, 'Professional Speaking', 3, 1, 3, 3),
+(4, 'Technical Writing', 4, 1, 4, 4),
 (5, 'Software Testing Process', 5, 1, 5, 5),
-(6, 'Database Management Systems', 6, 2, 6, 6),
-(7, 'Front End', 7, 3, 7, 7),
-(8, 'Java Back-End', 9, 4, 8, 8),
+(6, 'Database Management Systems', 6, 1, 6, 6),
+(7, 'Front End', 7, 1, 7, 7),
+(8, 'Java Back-End', 9, 1, 8, 8),
 (9, 'On-job Training', 19, 1, 9, 9),
-(10, 'On-job Training', 19, 2, 9, 9),
-(11, 'On-job Training', 19, 3, 9, 9),
-(12, 'On-job Training', 19, 4, 9, 9);
+(10, 'Working Process', 1, 2, 1, 1),
+(11, 'Critical Thinking', 2, 2, 2, 2),
+(12, 'Professional Speaking', 3, 2, 3, 3),
+(13, 'Technical Writing', 4, 2, 4, 4),
+(14, 'Software Testing Process', 5, 2, 5, 5),
+(15, 'Database Management Systems', 6, 2, 6, 6),
+(16, 'Front End', 7, 2, 7, 7),
+(17, '.NET Back-End', 8, 2, 8, 8),
+(18, 'On-job Training', 19, 2, 9, 9),
+(19, 'Working Process', 1, 3, 1, 1),
+(20, 'Critical Thinking', 2, 3, 2, 2),
+(21, 'Professional Speaking', 3, 3, 3, 3),
+(22, 'Technical Writing', 4, 3, 4, 4),
+(23, 'Software Testing Process', 5, 3, 5, 5),
+(24, 'Database Management Systems', 6, 3, 6, 6),
+(25, 'Front End', 7, 3, 7, 7),
+(26, 'Node.js Back-End', 10, 3, 8, 8),
+(27, 'On-job Training', 19, 3, 9, 9),
+(28, 'Working Process', 1, 4, 1, 1),
+(29, 'Critical Thinking', 2, 4, 2, 2),
+(30, 'Professional Speaking', 3, 4, 3, 3),
+(31, 'Technical Writing', 4, 4, 4, 4),
+(32, 'Software Testing Process', 5, 4, 5, 5),
+(33, 'Database Management Systems', 6, 4, 6, 6),
+(34, 'Front End', 7, 4, 7, 7),
+(35, 'PHP Back-End', 11, 4, 8, 8),
+(36, 'On-job Training', 19, 4, 9, 9);
 
 -- --------------------------------------------------------
 
@@ -315,10 +339,22 @@ CREATE TABLE `session_detail` (
 --
 
 INSERT INTO `session_detail` (`id`, `session`, `time_start`, `time_end`) VALUES
-(1, 1, '07:30:00', '09:30:00'),
-(2, 2, '09:30:00', '11:30:00'),
-(3, 3, '13:00:00', '15:00:00'),
-(4, 4, '15:00:00', '17:00:00');
+(1, 1, '07:30:SA', '09:30:SA'),
+(2, 1, '09:30:SA', '11:30:SA'),
+(3, 1, '01:00:CH', '03:00:CH'),
+(4, 1, '03:00:CH', '05:00:CH'),
+(5, 2, '07:30:SA', '09:30:SA'),
+(6, 2, '09:30:SA', '11:30:SA'),
+(7, 2, '01:00:CH', '03:00:CH'),
+(8, 2, '03:00:CH', '05:00:CH'),
+(9, 3, '07:30:SA', '09:30:SA'),
+(10, 3, '09:30:SA', '11:30:SA'),
+(11, 3, '01:00:CH', '03:00:CH'),
+(12, 3, '03:00:CH', '05:00:CH'),
+(13, 4, '07:30:SA', '09:30:SA'),
+(14, 4, '09:30:SA', '11:30:SA'),
+(15, 4, '01:00:CH', '03:00:CH'),
+(16, 4, '03:00:CH', '05:00:CH');
 
 -- --------------------------------------------------------
 
@@ -538,7 +574,7 @@ INSERT INTO `subject` (`id`, `subject_id`, `subject_name`, `credit`, `hour`, `de
 (8, 'N01', '.NET Back-End', 3, 36, 'This course provides .NET knowledge to build server-side interactive and web-based systems.', 1),
 (9, 'J01', 'Java Back-End', 3, 36, 'The course provides Java-based knowledge to handle website requests on the server side', 1),
 (10, 'S01', 'Node.js Back-End', 3, 36, 'The subject provides knowledge on Node.js as well as libraries for writing server side processing.', 1),
-(11, 'P01', ' PHP Back-End', 3, 36, 'The subject provides PHP knowledge to handle website requests on the server side.', 1),
+(11, 'P01', 'PHP Back-End', 3, 36, 'The subject provides PHP knowledge to handle website requests on the server side.', 1),
 (12, 'R01', 'Ruby on Rails Back-End', 3, 36, 'This course guides learners in designing and building a Web application that uses a complete Rails database', 1),
 (13, 'A01', 'Basic Android Programming', 3, 36, 'The course provides students with basic knowledge of application programming running on Android devices.', 1),
 (14, 'A02', 'Advanced Android Programming', 4, 48, 'The course provides students with advanced knowledge of Android programming.', 1),
@@ -567,19 +603,6 @@ CREATE TABLE `time` (
 -- Dumping data for table `time`
 --
 
-INSERT INTO `time` (`id`, `iclass`, `date`, `session_detail`, `alt_instructor`, `alt_room`) VALUES
-(1, 1, '2017-05-22', 1, 2, 2),
-(2, 2, '2017-05-22', 2, 3, 3),
-(3, 3, '2017-05-22', 3, 4, 4),
-(4, 4, '2017-05-22', 4, 5, 5),
-(5, 5, '2017-05-24', 1, 6, 6),
-(6, 6, '2017-05-24', 2, 7, 7),
-(7, 7, '2017-05-24', 3, 8, 8),
-(8, 8, '2017-05-24', 4, 9, 9),
-(9, 9, '2017-05-26', 1, 10, 10),
-(10, 10, '2017-05-26', 2, 10, 10),
-(11, 11, '2017-05-26', 3, 10, 10),
-(12, 12, '2017-05-26', 4, 10, 10);
 
 -- --------------------------------------------------------
 
@@ -739,7 +762,7 @@ ALTER TABLE `entrance_exam`
 -- AUTO_INCREMENT for table `iclass`
 --
 ALTER TABLE `iclass`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `instructor`
 --
@@ -774,7 +797,7 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT for table `session_detail`
 --
 ALTER TABLE `session_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `specialization`
 --
@@ -794,7 +817,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `time`
 --
 ALTER TABLE `time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `timetable`
 --
