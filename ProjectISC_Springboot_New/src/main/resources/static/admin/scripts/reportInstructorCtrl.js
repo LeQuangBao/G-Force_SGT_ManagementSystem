@@ -125,19 +125,19 @@ app.controller('reportInstructorCtrl', function($scope, $http, $filter, $resourc
         	{
         		var date1=new Date(listTime[i].date);
         		var date2=new Date(classView.timetable.intake.startDate);
-        		var tuan=Math.floor((date1-date2)/86400000/7 + 1);
+        		var tuan=Math.floor((date1-date2)/86400000/7 + 1) - 1;
         		var tempCheck = true;
         		$scope.week.forEach(function(week, index){
         			if (week == tuan) {
         				tempCheck = false;
         			}
         		})
-        		if (tempCheck) {	 
+        		if (tempCheck) {	
         			$scope.week.push(tuan);
         		}
-        		numberWeek++;
         	}
         }
+        start_date = classView.timetable.intake.startDate;
     	$scope.callWeek(0);
     }
 

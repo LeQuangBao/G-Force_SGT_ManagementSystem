@@ -26,7 +26,7 @@ app.controller('buildTimetableCtrl', function($scope, $http, $filter, uiGridCons
                 start_date = new Date($scope.timetable.intake.startDate);
                 end_date = new Date($scope.timetable.intake.endDate);
                 numberWeek = (end_date - start_date) / 86400000 / 7;
-                // console.log(numberWeek);
+                // 	(numberWeek);
                 for (var i = 0; i < numberWeek; i++) {
                     $scope.week.push(i);
                 }
